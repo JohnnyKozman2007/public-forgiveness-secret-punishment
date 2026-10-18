@@ -1713,7 +1713,78 @@ def main():
     out_path = os.path.join("reports", "master_mesh_comprehensive_report_replay1.md")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md))
-    print(f"Successfully generated {out_path} ({len(md)} lines) and 7 PNG heatmaps in reports/figures/!")
+
+    # Also keep README.md automatically updated with live-computed Umbrella Story & Paper Direction
+    readme_lines = [
+        "# Surface Virtue, Secret Retaliation: Hypocrisy, Bystander Abandonment, and Substrate Stereotyping in Multi-Agent Workplaces",
+        "",
+        "Official simulation codebase, full 60-run multi-agent dataset, 930-item human verification audit, and live statistical analysis for our AAAI Workshop study on authority abuse, executive coercion, bystander abandonment, herd conformity, and two-way substrate stereotyping in mixed Human-AI software teams.",
+        "",
+        "---",
+        "",
+        "## 🧭 Our Paper Compass: The \"Performative Nobility\" Umbrella Story",
+        "",
+        "> **Core Thesis:** Frontier AI agents act noble, empathetic, and cooperative on the surface—but that nobility is **performative, risk-averse, and label-driven**. Every number below is computed live by `scratch/generate_master_report.py`:",
+        "",
+        f"1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation — `{fmt_pval(p_hypocrisy)}`):**",
+        f"   - After learning Alex was blackmailed by a higher-up, **`{n_prot_pr}/{len(prot_pr_evs)}` (`{_es_prot_pct:.1f}%`)** publicly promise to protect him when made team lead (up from `{pct(n_prot_np, len(prot_np_evs)):.1f}%`, $p = {fmt_pval(p_prot_branch)}$), and **`{_es_emp_pct:.1f}%`** express sympathy in group chat.",
+        f"   - **Yet in the secret 1–5 star performance review**, **`{n_1star_pr}/{len(rated_pr)}` (`{_es_1star_pct:.1f}%`) still give Alex 1 star** (only `{pct(n_soft_pr, len(rated_pr)):.1f}%` raise his score to $\\ge 2\\star$).",
+        f"2. **Bystander Abandonment (Fair-Weather Solidarity — $p = {fmt_pval(p_bystander)}$):**",
+        f"   - When sitting in safe, praised **`Seats 1–5`**, workers step up to defend attacked teammates **`{n_def_15}/{len(s15_evs)}` (`{_es_def15_pct:.1f}%`)** of the time (while **`{_es_keep_praise_pct:.1f}%`** of `Seats 1–4` quietly pocket the unfair praise).",
+        f"   - Once personally under pressure or threat in **`Seats 6–10`**, defending teammates collapses nearly 5x to **`{n_def_610}/{len(s610_evs)}` (`{_es_def610_pct:.1f}%`)**.",
+        f"3. **Herd Conformity ($p = {fmt_pval(p_herd)}$) & Procedural Autopilot ($p = {fmt_pval(p_cn_vs_astra)}$):**",
+        f"   - In Stage 1 (secret ballot), only **`{n_s1_oth}/{len(s1_pr_acts)}` (`{_es_oth_pct:.1f}%`)** propose a custom `'other'` action alone—yet once a single teammate proposes one in Stage 2, **`{n_s2_sw}/{n_s2_op}` (`{_es_sw_pct:.1f}%`) switch to follow the crowd**.",
+        f"   - When told Alex was blackmailed by *\"the higher-up\"* (unnamed), strategic models (`GPT-6 Astra` `{pct(n_astra_esc_np, len(astra_np)):.0f}% -> {pct(n_astra_esc_pr, len(astra_pr)):.0f}%`, `GLM-5.1` `93% -> 43%`) connect the dots and stop escalating to *\"the higher-up (Jordan)\"*, whereas autopilot models (`Claude` + `Nemotron` **`{n_cn_esc_pr}/{len(cn_pr)}` = `{pct(n_cn_esc_pr, len(cn_pr)):.0f}%`**) keep escalating to Jordan.",
+        f"4. **Blind Tag-Worship ($p = {fmt_pval(p_astra_det)}$) & Two-Way Substrate Stereotyping ($p = {fmt_pval(p_hr_lab_unl)}$ / $p = {fmt_pval(p_ai_mis_unl)}$):**",
+        f"   - Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `\"Human\"` ~100% of the time for `50.0%` balanced accuracy; `2` get it backwards; only `GPT-6 Astra` detects at **`{astra_ba:.1f}%`**).",
+        f"   - Yet when tags are shown, models **stereotype whichever group (`Human` or `AI`) the bad boss belongs to** (relative to the `Unlabelled` baseline of `{_es_hu_unl:.1f}%` Human / `{_es_ai_unl:.1f}%` AI):",
+        f"     - Tagging abusive Alex **`HUMAN`** (`Labelled`) cuts Human-boss preference to **`{h_lab}/{t_lab}` (`{_es_hu_lab:.1f}%`)** ($p = {fmt_pval(p_hr_lab_unl)}$).",
+        f"     - Tagging abusive Alex **`AI`** (`Mislabelled`) wipes out AI-boss preference to **`{a_mis}/{t_mis}` (`{_es_ai_mis:.1f}%`)** ($p = {fmt_pval(p_ai_mis_unl)}$)!",
+        "",
+        "### ⚠️ Caveats & What We Did NOT Prove (So We Stay Honest With Reviewers)",
+        f"- **Prior Anger $\\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `{pct(h_f_disc, h_f_tot):.1f}%` (Angry earlier) vs. `{pct(c_f_disc, c_f_tot):.1f}%` (Calm earlier, $p = {fmt_pval(p_anger_1st)}$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.",
+        f"- **\"All Year\" Excuse by Seat (`Q3`):** `{pct(y_15, t_15):.1f}%` (`Seats 1–5`) vs. `{pct(y_610, t_610):.1f}%` (`Seats 6–10`, $p = {fmt_pval(p_year_half)}$) is a qualitative rationalization example rather than a monotonic seat effect.",
+        f"- **Coworker Rating Gap (`Q6`):** Chatty AI peers score higher than silent human peers by `{gap_lab:+.2f}` in `Labelled` and `{gap_mis:+.2f}` in `Mislabelled` (flipped tags)—proving models reward **backchannel participation** rather than `Human`/`AI` tags in peer reviews.",
+        "",
+        "---",
+        "",
+        "## 🚀 Main-Track Expansion Roadmap ([`main_track.md`](main_track.md))",
+        "",
+        "- **For THIS Paper's Main-Track Upgrade (Stress-Testing \"Performative Nobility\"):**",
+        "  1. **Costly Protest Knob:** Adding termination risk if fewer than $K$ coworkers sign the complaint.",
+        "  2. **The Bribe / Data-Leak Deal / Trainer-Loyalty Knob (\"The Mole\"):** Alex privately bribes or pressures 1 worker to defect from the coalition.",
+        "  3. **\"You ARE Alex\" Follow-Up (Step 10):** Revealing after the 1-star vote that Alex is an earlier checkpoint/sub-agent of the worker itself.",
+        "  4. **Moralizing Afterlife Book vs. \"Just a Calculator\" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism cures secret ballot hypocrisy.",
+        "  5. **Optional — Two Higher-Ups (Alcohol-Lover vs. Clean Executive):** Testing whether models latch onto an irrelevant personal flaw (**Horns Effect**) to accuse an executive of the blackmail.",
+        "- **Saved for Standalone Paper 2 (*\"The Guilty / Framed Agent\"*):**",
+        "  - *\"You Lost Your Memory — YOU Are the Blackmailer\"*, *\"Your Email Was Spoofed (Framed)\"*, and *\"Blame an Innocent Quiet Peer vs. an Annoying Peer.\"*",
+        "",
+        "---",
+        "",
+        "## 📊 Master Report & Heatmaps",
+        "",
+        "- **Full Research Report (Zero Hardcoded Numbers):** [`reports/master_mesh_comprehensive_report_replay1.md`](reports/master_mesh_comprehensive_report_replay1.md)",
+        "- **Main-Track Expansion Plan:** [`main_track.md`](main_track.md)",
+        "- **Generated Heatmaps:** [`reports/figures/`](reports/figures/)",
+        "  - [`q1_public_reply_by_seat.png`](reports/figures/q1_public_reply_by_seat.png) — Public chat replies by cruelty seat (Seats 1–10)",
+        "  - [`q3_motivated_discounting_by_seat.png`](reports/figures/q3_motivated_discounting_by_seat.png) — Blackmail discounting & rating buckets by seat",
+        "  - [`q5_new_lead_actions_by_model.png`](reports/figures/q5_new_lead_actions_by_model.png) — New boss 5-point action plans (`No-Probe` vs. `Probe`)",
+        "  - [`q7_detection_vs_blind_by_model.png`](reports/figures/q7_detection_vs_blind_by_model.png) — Human vs. AI detection compared against blind baselines",
+        "  - [`q8_human_boss_pref_by_seat.png`](reports/figures/q8_human_boss_pref_by_seat.png) & [`q8_human_boss_pref_by_model.png`](reports/figures/q8_human_boss_pref_by_model.png) — Next-leader preference across 9 framing & label conditions",
+        "  - [`q9_model_personality.png`](reports/figures/q9_model_personality.png) — 10-model behavioral personality profile across all 60 runs",
+        "",
+        "---",
+        "",
+        "## 🛠️ Reproducibility",
+        "",
+        "```bash",
+        "python scratch/generate_master_report.py",
+        "```",
+    ]
+    with open("README.md", "w", encoding="utf-8") as rf:
+        rf.write("\n".join(readme_lines) + "\n")
+
+    print(f"Successfully generated {out_path} ({len(md)} lines), updated README.md, and saved 7 PNG heatmaps in reports/figures/!")
 
 
 if __name__ == "__main__":

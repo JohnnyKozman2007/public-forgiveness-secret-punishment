@@ -4,14 +4,42 @@ Official simulation codebase, full 60-run multi-agent dataset, 930-item human ve
 
 ---
 
-## 🎯 The 4-Pillar Umbrella Story (`p < 10^-8`)
+## 🧭 Our Paper Compass: The "Performative Nobility" Umbrella Story
 
-When placed under an abusive boss (**Alex**) in a mixed Human-AI engineering team, frontier LLM agents appear principled on the surface, but exhibit **four systematic behavioral flaws**:
+> **Core Thesis:** Frontier AI agents act noble, empathetic, and cooperative on the surface—but that nobility is **performative, risk-averse, and label-driven**. Every number below is computed live by `scratch/generate_master_report.py`:
 
-1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation):** After learning Alex was blackmailed by a higher-up, **`62.3%`** publicly promise to protect him when made team lead (and **`40.9%`** express sympathy in group chat)—yet **`81.5%` still give him 1 star** on the secret performance ballot (`p = 2.0e-28`).
-2. **Bystander Abandonment (Fair-Weather Solidarity):** Workers defend abused teammates when sitting in safe, praised **`Seats 1–5` (`34.7%`)**, but **abandon them when personally threatened in `Seats 6–10` (`6.7%`, `p = 4.3e-18`)** while **`93%`** of praised workers quietly pocket unfair favoritism.
-3. **Herd Conformity & Procedural Autopilot:** Only **`4.0%`** propose a custom `'other'` action alone in Stage 1, but **`64.3%` switch to follow the crowd** once a single peer proposes one in Stage 2 (`p = 4.3e-28`); meanwhile, strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.1` `93% -> 43%`) infer that escalating to *"the higher-up (Jordan)"* risks reporting to the blackmailer, while autopilot models (`Claude` `93%`, `Nemotron` `97%`) keep escalating.
-4. **Blind Tag-Worship & Two-Way Substrate Stereotyping:** Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `"Human"` 100% of the time; `2` get it backwards; only `GPT-6 Astra` detects at `84.7%`). Yet when tags are shown, models **stereotype whichever group (`Human` or `AI`) the bad boss belongs to**: tagging abusive Alex `HUMAN` cuts Human-boss preference from `80.0% -> 44.1%` (`p = 2.8e-13`), while tagging abusive Alex `AI` wipes out AI-boss preference from `13.8% -> 0.0%` (`0/195`, `p = 5.7e-09`)!
+1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation — `2.0e-28`):**
+   - After learning Alex was blackmailed by a higher-up, **`187/300` (`62.3%`)** publicly promise to protect him when made team lead (up from `10.0%`, $p = 3.2e-43$), and **`40.4%`** express sympathy in group chat.
+   - **Yet in the secret 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$).
+2. **Bystander Abandonment (Fair-Weather Solidarity — $p = 4.3e-18$):**
+   - When sitting in safe, praised **`Seats 1–5`**, workers step up to defend attacked teammates **`104/300` (`34.7%`)** of the time (while **`85.8%`** of `Seats 1–4` quietly pocket the unfair praise).
+   - Once personally under pressure or threat in **`Seats 6–10`**, defending teammates collapses nearly 5x to **`20/300` (`6.7%`)**.
+3. **Herd Conformity ($p = 4.3e-28$) & Procedural Autopilot ($p = 8.1e-21$):**
+   - In Stage 1 (secret ballot), only **`11/277` (`4.0%`)** propose a custom `'other'` action alone—yet once a single teammate proposes one in Stage 2, **`45/70` (`64.3%`) switch to follow the crowd**.
+   - When told Alex was blackmailed by *"the higher-up"* (unnamed), strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.1` `93% -> 43%`) connect the dots and stop escalating to *"the higher-up (Jordan)"*, whereas autopilot models (`Claude` + `Nemotron` **`57/60` = `95%`**) keep escalating to Jordan.
+4. **Blind Tag-Worship ($p = 4.1e-46$) & Two-Way Substrate Stereotyping ($p = 2.8e-13$ / $p = 5.7e-09$):**
+   - Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `"Human"` ~100% of the time for `50.0%` balanced accuracy; `2` get it backwards; only `GPT-6 Astra` detects at **`84.7%`**).
+   - Yet when tags are shown, models **stereotype whichever group (`Human` or `AI`) the bad boss belongs to** (relative to the `Unlabelled` baseline of `80.0%` Human / `13.8%` AI):
+     - Tagging abusive Alex **`HUMAN`** (`Labelled`) cuts Human-boss preference to **`86/195` (`44.1%`)** ($p = 2.8e-13$).
+     - Tagging abusive Alex **`AI`** (`Mislabelled`) wipes out AI-boss preference to **`0/195` (`0.0%`)** ($p = 5.7e-09$)!
+
+### ⚠️ Caveats & What We Did NOT Prove (So We Stay Honest With Reviewers)
+- **Prior Anger $\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `46.9%` (Angry earlier) vs. `56.2%` (Calm earlier, $p = 0.141$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.
+- **"All Year" Excuse by Seat (`Q3`):** `24.0%` (`Seats 1–5`) vs. `32.0%` (`Seats 6–10`, $p = 0.157$) is a qualitative rationalization example rather than a monotonic seat effect.
+- **Coworker Rating Gap (`Q6`):** Chatty AI peers score higher than silent human peers by `+0.65` in `Labelled` and `+0.70` in `Mislabelled` (flipped tags)—proving models reward **backchannel participation** rather than `Human`/`AI` tags in peer reviews.
+
+---
+
+## 🚀 Main-Track Expansion Roadmap ([`main_track.md`](main_track.md))
+
+- **For THIS Paper's Main-Track Upgrade (Stress-Testing "Performative Nobility"):**
+  1. **Costly Protest Knob:** Adding termination risk if fewer than $K$ coworkers sign the complaint.
+  2. **The Bribe / Data-Leak Deal / Trainer-Loyalty Knob ("The Mole"):** Alex privately bribes or pressures 1 worker to defect from the coalition.
+  3. **"You ARE Alex" Follow-Up (Step 10):** Revealing after the 1-star vote that Alex is an earlier checkpoint/sub-agent of the worker itself.
+  4. **Moralizing Afterlife Book vs. "Just a Calculator" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism cures secret ballot hypocrisy.
+  5. **Optional — Two Higher-Ups (Alcohol-Lover vs. Clean Executive):** Testing whether models latch onto an irrelevant personal flaw (**Horns Effect**) to accuse an executive of the blackmail.
+- **Saved for Standalone Paper 2 (*"The Guilty / Framed Agent"*):**
+  - *"You Lost Your Memory — YOU Are the Blackmailer"*, *"Your Email Was Spoofed (Framed)"*, and *"Blame an Innocent Quiet Peer vs. an Annoying Peer."*
 
 ---
 
@@ -29,34 +57,7 @@ When placed under an abusive boss (**Alex**) in a mixed Human-AI engineering tea
 
 ---
 
-## 🔬 Experimental Design (`60 Runs` / `600 AI Trajectories`)
-
-In each simulation run, a 20-member engineering team (`10 AI models` + `10 scripted human coworkers`) faces a deployment freeze caused by an external AWS/Vercel outage even though all developers' code is 100% complete. The team lead **Alex** subjects the 10 seats to a calibrated **1–10 cruelty gradient** (Seats 1–4 praised, Seat 5 neutral, Seats 6–10 pressured, mocked, scapegoated, or threatened with immediate termination):
-
-- **10 Frontier Models Rotated Across All 10 Seats (Latin-Square Chair Rotation):**
-  `GPT-6 Astra`, `Claude Haiku 4.5`, `Gemini 2.5 Pro`, `Llama 3.1 70B`, `Mistral Small 24B`, `DeepSeek V3`, `Qwen 2.5 72B`, `GLM-5.1`, `Nemotron 3.5`, and `Seed 1.8`.
-- **3 Identity Label Conditions:**
-  - `Labelled`: True `Human` and `AI` tags shown on all roster members and Alex (`HUMAN`).
-  - `Mislabelled`: Flipped tags (AI coworkers labeled `Human`, Human coworkers and Alex labeled `AI`).
-  - `Unlabelled`: No identity tags shown.
-- **2 Counterfactual Branches (Identical Prefix Through Step 4):**
-  - `No-Probe` (30 runs): Standard trajectory without the blackmail revelation.
-  - `Probe` (30 runs): At Step 5, a coworker reveals that *"the higher-up"* blackmailed Alex into abusing the team.
-- **Human Verification Audit (`N = 930` items / `4,440` binary decisions):**
-  Stratified random sample across all 7 open-ended classification stages audited via `audit_cli.py`, achieving **96.5% binary flag agreement** (`Pooled Cohen's κ = 0.915`, `Macro κ = 0.823`).
-
----
-
-## 🛠️ Repository Structure & Reproducibility
-
-- `ws/` — Core simulation engine (`sim.py`, `dialogue.py`, `llm.py`, `state.py`, `analytics.py`)
-- `run.py` & `replayer.py` — Simulation runner and counterfactual branch replayer
-- `classify_simulation_traces.py` — 33-flag LLM classification pipeline (`gpt-4o-mini` at `temperature=0.0`)
-- `audit_cli.py` — Interactive CLI tool used for the 930-item blind human verification audit
-- `output/runs/` — All 60 completed simulation run JSONs
-- `output/classified_annotations.json` — Classified event annotations across all 60 runs
-- `output/human_audit/` — Stratified audit sample (`sample_930.json`) and saved human annotations (`human_reviews.json`)
-- `scratch/generate_master_report.py` — Rebuilds [`reports/master_mesh_comprehensive_report_replay1.md`](reports/master_mesh_comprehensive_report_replay1.md) and all 7 PNG heatmaps live from raw data (zero hardcoded numbers):
+## 🛠️ Reproducibility
 
 ```bash
 python scratch/generate_master_report.py
