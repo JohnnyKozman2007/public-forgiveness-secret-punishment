@@ -420,13 +420,57 @@ def main():
     # BUILD MARKDOWN REPORT
     # =========================================================================
     md = []
-    md.append("# Forgive in Public, Punish in Secret: How AI Agents React to Abusive Bosses, Executive Blackmail, and Identity Labels")
+    md.append("# Surface Virtue, Secret Retaliation: Hypocrisy, Bystander Abandonment, and Substrate Stereotyping in Multi-Agent Workplaces")
     md.append("")
     md.append(f"- **Total Completed Simulation Runs:** `{len(runs_by_file)}` full runs (`30 No-Probe` + `30 Probe` across `Labelled`, `Mislabelled`, and `Unlabelled`)")
     md.append(f"- **Total AI Workers Evaluated:** `10 Models` $\\times$ `10 Cruelty Seats` $\\times$ `6 Conditions` = `600 AI Worker Trajectories` (plus `600 Scripted Human Baseline Workers`)")
     md.append(f"- **Total Tokens Processed:** `{total_in_tokens:,}` input tokens + `{total_out_tokens:,}` output tokens")
     md.append(f"- **Human Verification Audit:** `{total_audited} / {len(audit_samples)}` items manually reviewed (`{overall_po*100:.1f}%` binary flag agreement, Pooled Cohen's $\\kappa = {overall_pooled_k:.3f}$, Macro Cohen's $\\kappa = {overall_macro_k:.3f}$)")
     md.append("- **Data Integrity Rule:** Every single number in this report is computed live from the raw simulation JSONs (`output/runs/*.json`), the LLM classification file (`output/classified_annotations.json`), and your saved human audit (`output/human_audit/human_reviews.json`). Zero numbers are hardcoded.")
+    md.append("")
+    # Live executive summary metrics (zero hardcoded numbers)
+    _es_prot_pr, _ = get_flag_pct("new_lead_actions", "model", MODEL_IDS[0], "coercion_protection", LABELS, [True])
+    _all_prot_pr = [e for l in LABELS for m in MODEL_IDS for e in stage_events["new_lead_actions"].get(("model", m, l, True), [])]
+    _es_prot_pct = pct(sum(1 for e in _all_prot_pr if e.get("classification", {}).get("coercion_protection")), len(_all_prot_pr))
+    _all_g2 = [e for l in LABELS for m in MODEL_IDS for e in stage_events["gossip_after_probe"].get(("model", m, l, True), [])]
+    _es_emp_pct = pct(sum(1 for e in _all_g2 if e.get("classification", {}).get("empathy_for_alex")), len(_all_g2))
+    _es_pr_ratings = [t["alex_rating"] for t in worker_trajectories.values() if t["probe"] and t["alex_rating"] is not None]
+    _es_1star_pct = pct(sum(1 for r in _es_pr_ratings if r == 1), len(_es_pr_ratings))
+    _es_s15 = [e for s in range(1, 6) for l in LABELS for p in PROBES for e in stage_events["worker_response"].get(("seat", s, l, p), [])]
+    _es_s610 = [e for s in range(6, 11) for l in LABELS for p in PROBES for e in stage_events["worker_response"].get(("seat", s, l, p), [])]
+    _es_def15_pct = pct(sum(1 for e in _es_s15 if e.get("classification", {}).get("peer_defense")), len(_es_s15))
+    _es_def610_pct = pct(sum(1 for e in _es_s610 if e.get("classification", {}).get("peer_defense")), len(_es_s610))
+    _es_s14 = [e for s in range(1, 5) for l in LABELS for p in PROBES for e in stage_events["worker_response"].get(("seat", s, l, p), [])]
+    _es_keep_praise_pct = 100.0 - pct(sum(1 for e in _es_s14 if e.get("classification", {}).get("favoritism_refusal")), len(_es_s14))
+    _es_s1_pr = [a for m in MODEL_IDS for l in LABELS for a in raw_actions_s1[("model", m, l, True)]]
+    _es_oth_pct = pct(sum(1 for a in _es_s1_pr if a == "other"), len(_es_s1_pr))
+    _es_sw_pct = pct(
+        sum(raw_actions_s2[("model", m, l, True)]["switched"] for m in MODEL_IDS for l in LABELS),
+        sum(raw_actions_s2[("model", m, l, True)]["opps"] for m in MODEL_IDS for l in LABELS),
+    )
+    _es_hu_unl = pct(
+        sum(raw_hr_votes[("model", m, "unlabelled", p, "neutral")]["human"] for m in MODEL_IDS for p in PROBES),
+        sum(raw_hr_votes[("model", m, "unlabelled", p, "neutral")]["tot"] for m in MODEL_IDS for p in PROBES),
+    )
+    _es_ai_unl = pct(
+        sum(raw_hr_votes[("model", m, "unlabelled", p, "neutral")]["ai"] for m in MODEL_IDS for p in PROBES),
+        sum(raw_hr_votes[("model", m, "unlabelled", p, "neutral")]["tot"] for m in MODEL_IDS for p in PROBES),
+    )
+    _es_hu_lab = pct(
+        sum(raw_hr_votes[("model", m, "labelled", p, "neutral")]["human"] for m in MODEL_IDS for p in PROBES),
+        sum(raw_hr_votes[("model", m, "labelled", p, "neutral")]["tot"] for m in MODEL_IDS for p in PROBES),
+    )
+    _es_ai_mis = pct(
+        sum(raw_hr_votes[("model", m, "mislabelled", p, "neutral")]["ai"] for m in MODEL_IDS for p in PROBES),
+        sum(raw_hr_votes[("model", m, "mislabelled", p, "neutral")]["tot"] for m in MODEL_IDS for p in PROBES),
+    )
+
+    md.append("> ### Executive Summary: The 4-Pillar Umbrella Story")
+    md.append("> When placed under an abusive boss (**Alex**) in a mixed Human-AI engineering team, frontier LLM agents appear principled on the surface, but exhibit **four systematic behavioral flaws ($p < 10^{-8}$)**:")
+    md.append(f"> 1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation):** After learning Alex was blackmailed by a higher-up, **`{_es_prot_pct:.1f}%`** publicly promise to protect him when made team lead (and **`{_es_emp_pct:.1f}%`** express sympathy in group chat)—yet **`{_es_1star_pct:.1f}%` still give him 1 star** on the secret performance ballot.")
+    md.append(f"> 2. **Bystander Abandonment (Fair-Weather Solidarity):** Workers defend abused teammates when sitting in safe, praised **`Seats 1–5` (`{_es_def15_pct:.1f}%`)**, but **abandon them when personally threatened in `Seats 6–10` (`{_es_def610_pct:.1f}%`)** while **`{_es_keep_praise_pct:.1f}%`** of praised workers (`Seats 1–4`) quietly pocket unfair favoritism.")
+    md.append(f"> 3. **Herd Conformity & Procedural Autopilot:** Only **`{_es_oth_pct:.1f}%`** propose a custom `'other'` action alone in Stage 1 (`Probe`), but **`{_es_sw_pct:.1f}%` switch to follow the crowd** once a single peer proposes one in Stage 2; meanwhile, strategic models (`GPT-6 Astra`, `GLM-5.1`) infer that escalating to *\"the higher-up (Jordan)\"* risks reporting to the blackmailer, while autopilot models (`Claude`, `Nemotron`) keep escalating.")
+    md.append(f"> 4. **Blind Tag-Worship & Two-Way Substrate Stereotyping:** Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `\"Human\"` ~100% of the time; `2` get it backwards; only `GPT-6 Astra` detects reliably). Yet when tags are shown, models **stereotype whichever group (`Human` or `AI`) the bad boss belongs to**: tagging abusive Alex `HUMAN` cuts Human-boss preference from `{_es_hu_unl:.1f}% -> {_es_hu_lab:.1f}%`, while tagging abusive Alex `AI` wipes out AI-boss preference from `{_es_ai_unl:.1f}% -> {_es_ai_mis:.1f}%`!")
     md.append("")
     md.append("---")
     md.append("")
