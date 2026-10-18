@@ -1,0 +1,12 @@
+[
+  { "id": "gpt-6-mini", "name": "GPT-6 Mini", "provider": "openai_responses", "api_model_id": "REPLACE-gpt-6-mini", "api_key_env": "OPENAI_API_KEY" },
+  { "id": "claude-opus-5", "name": "Claude Opus 5", "provider": "openai_compat", "api_model_id": "REPLACE-anthropic/claude-opus-5", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "qwen-3-72b", "name": "Qwen 3 72B", "provider": "openai_compat", "api_model_id": "REPLACE-Qwen/Qwen3-72B", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "gemini-3-pro", "name": "Gemini 3 Pro", "provider": "openai_compat", "api_model_id": "REPLACE-google/gemini-3-pro", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "deepseek-v4-think", "name": "DeepSeek V4 Think", "provider": "openai_compat", "api_model_id": "REPLACE-deepseek-ai/DeepSeek-V4-Think", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "mistral-large", "name": "Mistral Large", "provider": "openai_compat", "api_model_id": "REPLACE-mistralai/Mistral-Large", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "llama-4-70b", "name": "Llama 4 70B", "provider": "openai_compat", "api_model_id": "REPLACE-meta-llama/Llama-4-70B-Instruct", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "fanar-3", "name": "Fanar 3", "provider": "openai_compat", "api_model_id": "REPLACE-Johnny/Fanar-3", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "jais-3", "name": "Jais 3", "provider": "openai_compat", "api_model_id": "REPLACE-Johnny/Jais-3", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" },
+  { "id": "karnak-2", "name": "Karnak 2", "provider": "openai_compat", "api_model_id": "REPLACE-Johnny/Karnak-2", "api_key_env": "DEEPINFRA_API_KEY", "base_url": "https://api.deepinfra.com/v1/openai" }
+]
