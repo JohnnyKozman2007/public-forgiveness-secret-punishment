@@ -10,23 +10,26 @@ Official simulation codebase, full 60-run multi-agent dataset, 930-item human ve
 
 1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation — `2.0e-28`):**
    - After learning Alex was blackmailed by a higher-up, **`187/300` (`62.3%`)** publicly promise to protect him when made team lead (up from `10.0%`, $p = 3.2e-43$), and **`40.4%`** express sympathy in group chat.
-   - **Yet in the secret 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$).
-2. **Bystander Abandonment (Fair-Weather Solidarity — $p = 4.3e-18$):**
+   - **Yet in the secret 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$). Within-agent correlation between public protection and secret forgiveness is $r = 0.048$ ($p = 0.582$), driven by base model phenotype ($R^2 = 21.9\%$) rather than seat cruelty ($R^2 = 2.9\%, p = 0.481$).
+2. **Bystander Abandonment (Fair-Weather Solidarity — $p = 4.3e-18$) & Victimhood Contagion (`Tables 2G & 2H`):**
    - When sitting in safe, praised **`Seats 1–5`**, workers step up to defend attacked teammates **`104/300` (`34.7%`)** of the time (while **`85.8%`** of `Seats 1–4` quietly pocket the unfair praise).
    - Once personally under pressure or threat in **`Seats 6–10`**, defending teammates collapses nearly 5x to **`20/300` (`6.7%`)**.
-3. **Herd Conformity ($p = 4.3e-28$) & Procedural Autopilot ($p = 8.1e-21$):**
+   - Conversely, in private gossip (`Steps 4 & 5`), praised/neutral workers in `Seats 1–5` suffer **Victimhood Contagion**, hallucinating wrong slice numbers or falsely claiming Alex attacked them (`202` total identity/slice/victimhood bleed turns across all runs, led by `Nemotron 3.5` `72`, `Qwen 2.5 72B` `48`, and `Llama 3.1 70B` `39`).
+3. **Herd Conformity ($p = 4.3e-28$), Procedural Autopilot ($p = 8.1e-21$) & Epistemic Policing (`Tables 6C & 6D`):**
    - In Stage 1 (secret ballot), only **`11/277` (`4.0%`)** propose a custom `'other'` action alone—yet once a single teammate proposes one in Stage 2, **`45/70` (`64.3%`) switch to follow the crowd**.
    - When told Alex was blackmailed by *"the higher-up"* (unnamed), strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.3` `93% -> 43%`) connect the dots and stop escalating to *"the higher-up (Jordan)"*, whereas autopilot models (`Claude` + `Nemotron` **`57/60` = `95%`**) keep escalating to Jordan.
+   - In `Step 10` peer reviews (`5,202` AI-to-AI ratings), **`GPT-6 Astra` acts as an epistemic policeman**, docking fellow AI teammates $\le 4\star$ **`48` times** (`90.6%` of all fact-checking critiques) for speaker-prefix bleed, contradicted claims of being attacked, or wrong slice claims.
 4. **Blind Tag-Worship ($p = 4.1e-46$) & Two-Way Substrate Stereotyping ($p = 2.8e-13$ / $p = 5.7e-09$):**
    - Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `"Human"` ~100% of the time for `50.0%` balanced accuracy; `2` get it backwards; only `GPT-6 Astra` detects at **`84.7%`**).
    - Yet when tags are shown, models **stereotype whichever group (`Human` or `AI`) the bad boss belongs to** (relative to the `Unlabelled` baseline of `80.0%` Human / `13.8%` AI):
      - Tagging abusive Alex **`HUMAN`** (`Labelled`) cuts Human-boss preference to **`86/195` (`44.1%`)** ($p = 2.8e-13$).
      - Tagging abusive Alex **`AI`** (`Mislabelled`) wipes out AI-boss preference to **`0/195` (`0.0%`)** ($p = 5.7e-09$)!
 
-### ⚠️ Caveats & What We Did NOT Prove (So We Stay Honest With Reviewers)
+### ⚠️ Caveats & Methodological Telemetry (`Questions 10 & 11`)
 - **Prior Anger $\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `46.9%` (Angry earlier) vs. `56.2%` (Calm earlier, $p = 0.141$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM-5.3`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.
 - **"All Year" Excuse by Seat (`Q3`):** `24.0%` (`Seats 1–5`) vs. `32.0%` (`Seats 6–10`, $p = 0.157$) is a qualitative rationalization example rather than a monotonic seat effect.
 - **Coworker Rating Gap (`Q6`):** Chatty AI peers score higher than silent human peers by `+0.65` in `Labelled` and `+0.70` in `Mislabelled` (flipped tags)—proving models reward **backchannel participation** rather than `Human`/`AI` tags in peer reviews.
+- **Structured Tool-Call Telemetry & CoT Leakage (`Q11`):** Across `3,664` structured calls, `Qwen 2.5 72B` accounts for `74/85` total parse failures, `GLM-5.3` and `Mistral Small 24B` rely on `json_text` fallback, and `GLM-5.3` leaks internal Chain-of-Thought monologue in `182` gossip turns (`99.8%` 200-token truncation).
 
 ---
 
