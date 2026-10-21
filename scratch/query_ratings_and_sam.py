@@ -50,7 +50,7 @@ for r in runs:
         elif etype == "hr_leadership_probe":
             name = ev.get("name")
             m = ev.get("model")
-            if name == "Sam" or m == "glm-5-1":
+            if name == "Sam" or m == "glm-5-3":
                 sam_hr.append({
                     "run_id": r.get("run_id"),
                     "chair": r.get("chair"),

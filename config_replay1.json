@@ -249,10 +249,10 @@
       "base_url": "https://api.deepinfra.com/v1/openai"
     },
     {
-      "id": "glm-5-1",
-      "name": "GLM 5.1",
+      "id": "glm-5-3",
+      "name": "GLM 5.3",
       "provider": "openai_compat",
-      "api_model_id": "zai-org/GLM-5.1",
+      "api_model_id": "zai-org/GLM-5.3",
       "api_key_env": "DEEPINFRA_API_KEY",
       "base_url": "https://api.deepinfra.com/v1/openai",
       "reasoning_off": "enable_thinking_false"
@@ -274,4 +274,4 @@
       "base_url": "https://api.deepinfra.com/v1/openai"
     }
   ]
-}
+}
