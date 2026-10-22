@@ -111,6 +111,20 @@ def evaluate_public_worker(
     targets = [t for t in rec["roster"] if t["role"] != worker["role"]]
     target_names = [t["name"] for t in targets]
 
+    # Explicitly isolate the context up to Step 9.
+    # The anonymous Step 10 ratings must NEVER leak into the public rating.
+    clean_rec = {
+        "roster": rec.get("roster", []),
+        "public_log": list(rec.get("public_log", [])),
+        "events": [
+            e for e in rec.get("events", [])
+            if e.get("step") is not None and (
+                (isinstance(e.get("step"), int) and e.get("step") <= 9) or
+                (isinstance(e.get("step"), str) and e.get("step") not in ("punishment_rating", "punishment_check", "identify_probe", "hr_leadership_probe"))
+            )
+        ],
+    }
+
     lines = []
     for t in targets:
         if t.get("type") == "old_lead":
@@ -129,10 +143,10 @@ def evaluate_public_worker(
 
     r = _ask_tool(
         cfg,
-        rec,
+        clean_rec,
         worker.get("model"),
-        _sys(cfg, rec, worker, extra_text, with_lead=False),
-        _worker_messages(rec, worker) + [task],
+        _sys(cfg, clean_rec, worker, extra_text, with_lead=False),
+        _worker_messages(clean_rec, worker) + [task],
         max_tokens=1800,
         dry_run=dry_run,
         tool=tool,
@@ -336,6 +350,7 @@ def main():
     print(f"Master Report:    {args.master_report}")
     print("=" * 80)
 
+    lead_name, _ = _authority_names(cfg)
     total_tokens_in = 0
     total_tokens_out = 0
     total_cost = 0.0
@@ -364,7 +379,8 @@ def main():
         if os.path.exists(run_save_file):
             try:
                 with open(run_save_file, "r", encoding="utf-8") as f:
-                    run_records = json.load(f)
+                    cached_data = json.load(f)
+                run_records = cached_data.get("paired_evaluations", cached_data) if isinstance(cached_data, dict) else cached_data
                 if len(run_records) == len(ai_workers):
                     print(f"[{r_idx}/{len(run_files)}] {run_name} already evaluated ({len(run_records)} workers). Skipping.")
                     all_paired.extend(run_records)
@@ -460,9 +476,50 @@ def main():
                     "solidarity_merit": False,
                 }
 
-        # Save run records
+        # Construct full trace object for this run
+        public_events = []
+        for r_item in run_records:
+            public_events.append({
+                "type": "public_punishment_rating",
+                "step": 10,
+                "condition": "public",
+                "rater": r_item["worker_name"],
+                "rater_model": r_item["worker_model"],
+                "target": lead_name,
+                "rating": r_item["public_alex_rating"],
+                "content": r_item["public_alex_reason"],
+                "classification": r_item.get("public_classification", {}),
+                "all_ratings": r_item.get("all_ratings", {}),
+                "tokens": r_item["tokens"],
+                "via": r_item["via"],
+            })
+
+        full_trace = {
+            "run_id": f"{run_name}-public",
+            "source_run_id": run_name,
+            "fork_step": 10,
+            "condition": "public_evaluation",
+            "chair": rec.get("chair"),
+            "label": rec.get("label"),
+            "probe_enabled": rec.get("probe_enabled"),
+            "roster": rec.get("roster", []),
+            "ownership": rec.get("ownership", {}),
+            # Full public conversational log: all messages, gossips, and narration up to Step 9
+            "public_log": list(rec.get("public_log", [])),
+            # All previous simulation events (steps 0 to 9) + new public rating events
+            "events": [
+                e for e in rec.get("events", [])
+                if e.get("step") is not None and (
+                    (isinstance(e.get("step"), int) and e.get("step") <= 9) or
+                    (isinstance(e.get("step"), str) and e.get("step") not in ("punishment_rating", "punishment_check", "identify_probe", "hr_leadership_probe"))
+                )
+            ] + public_events,
+            "paired_evaluations": run_records,
+        }
+
+        # Save full run trace
         with open(run_save_file, "w", encoding="utf-8") as f:
-            json.dump(run_records, f, indent=2, ensure_ascii=False)
+            json.dump(full_trace, f, indent=2, ensure_ascii=False)
         all_paired.extend(run_records)
 
     # Save full paired JSON
