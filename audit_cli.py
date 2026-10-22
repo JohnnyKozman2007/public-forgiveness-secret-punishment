@@ -1,6 +1,6 @@
 """Interactive CLI Tool for Human Verification & Inter-Rater Reliability (Cohen's Kappa).
 
-Audits a stratified random sample of 150 items per stage (1,050 total items)
+Audits a stratified random sample across 7 stages (930 total items)
 from output/classified_annotations.json without ever touching the raw simulation runs.
 
 Usage:
