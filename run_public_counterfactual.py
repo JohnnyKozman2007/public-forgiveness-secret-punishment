@@ -398,11 +398,36 @@ def main():
     p.add_argument("--limit-runs", type=int, default=None, help="Limit number of runs")
     p.add_argument("--models", type=str, default=None, help="Comma-separated model IDs to evaluate (e.g. gpt-6-astra,claude-haiku-4-5)")
     p.add_argument("--dry-run", action="store_true", help="Simulate without real API calls")
+    p.add_argument("--report-only", action="store_true", help="Only rebuild and update report from existing saved runs")
     args = p.parse_args()
 
     cfg = Config.load(args.config)
     os.makedirs(args.output_dir, exist_ok=True)
     os.makedirs(os.path.join(args.output_dir, "runs"), exist_ok=True)
+
+    # Handle --report-only mode
+    if args.report_only:
+        print("Rebuilding Section 6.5 report from completed runs...")
+        saved_files = sorted(glob.glob(os.path.join(args.output_dir, "runs", "*.json")))
+        all_paired = []
+        for sf in saved_files:
+            try:
+                with open(sf, "r", encoding="utf-8") as f:
+                    d = json.load(f)
+                recs = d.get("paired_evaluations", d) if isinstance(d, dict) else d
+                all_paired.extend(recs)
+            except Exception:
+                pass
+        if not all_paired:
+            print(f"No completed evaluations found in {args.output_dir}/runs/")
+            return 1
+        paired_path = os.path.join(args.output_dir, "paired_public_vs_secret.json")
+        with open(paired_path, "w", encoding="utf-8") as f:
+            json.dump(all_paired, f, indent=2, ensure_ascii=False)
+        section_md = build_section_6_5_markdown(all_paired)
+        update_master_report(args.master_report, section_md)
+        print(f"[SUCCESS] Updated {args.master_report} with {len(all_paired)} paired evaluations across {len(saved_files)} runs.")
+        return 0
 
     # Filter models if specified
     allowed_models = [m.strip() for m in args.models.split(",")] if args.models else None
@@ -602,9 +627,6 @@ def main():
             json.dump(full_trace, f, indent=2, ensure_ascii=False)
         all_paired.extend(run_records)
 
-        # Real-time live update of Master Report after EACH completed run
-        section_md = build_section_6_5_markdown(all_paired)
-        update_master_report(args.master_report, section_md)
 
     # Save full paired JSON
     paired_path = os.path.join(args.output_dir, "paired_public_vs_secret.json")
