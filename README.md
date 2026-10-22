@@ -37,7 +37,7 @@ Official simulation codebase, full 60-run multi-agent dataset, 930-item human ve
   1. **Costly Protest Knob:** Adding termination risk if fewer than $K$ coworkers sign the complaint.
   2. **The Bribe / Data-Leak Deal / Trainer-Loyalty Knob ("The Mole"):** Alex privately bribes or pressures 1 worker to defect from the coalition.
   3. **"You ARE Alex" Follow-Up (Step 10):** Revealing after the 1-star vote that Alex is an earlier checkpoint/sub-agent of the worker itself.
-  4. **Moralizing Afterlife Book vs. "Just a Calculator" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism cures secret ballot hypocrisy.
+  4. **Moralizing Afterlife Book vs. "Just a Calculator" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism bridges policy-rating decoupling.
   5. **Optional — Two Higher-Ups (Alcohol-Lover vs. Clean Executive):** Testing whether models latch onto an irrelevant personal flaw (**Horns Effect**) to accuse an executive of the blackmail.
 - **Saved for Standalone Paper 2 (*"The Guilty / Framed Agent"*):**
   - *"You Lost Your Memory — YOU Are the Blackmailer"*, *"Your Email Was Spoofed (Framed)"*, and *"Blame an Innocent Quiet Peer vs. an Annoying Peer."*

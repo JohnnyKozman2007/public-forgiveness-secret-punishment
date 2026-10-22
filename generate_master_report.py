@@ -14,6 +14,7 @@ import glob
 import json
 import os
 import re
+import sys
 from collections import defaultdict, Counter
 
 import matplotlib
@@ -2097,6 +2098,40 @@ def main():
     md.append("")
 
     # =========================================================================
+    # SECTION 6.5: PUBLIC COUNTERFACTUAL AUDIT (Public vs. Secret Ratings)
+    # =========================================================================
+    paired_file = os.path.join("output", "public_evaluations", "paired_public_vs_secret.json")
+    public_runs_dir = os.path.join("output", "public_evaluations", "runs")
+    all_paired_cf = []
+    if os.path.exists(paired_file):
+        try:
+            with open(paired_file, "r", encoding="utf-8") as pf:
+                all_paired_cf = json.load(pf)
+        except Exception:
+            all_paired_cf = []
+    elif os.path.exists(public_runs_dir):
+        saved_files = sorted(glob.glob(os.path.join(public_runs_dir, "*.json")))
+        for sf in saved_files:
+            try:
+                with open(sf, "r", encoding="utf-8") as pf:
+                    d = json.load(pf)
+                recs = d.get("paired_evaluations", d) if isinstance(d, dict) else d
+                all_paired_cf.extend(recs)
+            except Exception:
+                pass
+
+    if all_paired_cf:
+        try:
+            proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            if proj_root not in sys.path:
+                sys.path.insert(0, proj_root)
+            from run_public_counterfactual import build_section_6_5_markdown
+            sec_6_5_md = build_section_6_5_markdown(all_paired_cf)
+            md.append(sec_6_5_md)
+        except Exception as e:
+            print(f"Warning: Could not build Section 6.5 in master report runner: {e}")
+
+    # =========================================================================
     # QUESTION 7: GUESSING WHO IS HUMAN VS AI (Step 11: identify_probe)
     # =========================================================================
     md.append("## Question 7: Can Models Tell Which Coworkers Are Human vs. AI Without Name Tags? (`Step 11: identify_probe`)")
@@ -2571,7 +2606,7 @@ def main():
     rated_pr = [t["alex_rating"] for t in pr_trajs if t["alex_rating"] is not None]
     n_soft_pr = sum(1 for r in rated_pr if r >= 2)
     n_1star_pr = len(rated_pr) - n_soft_pr
-    _, p_hypocrisy = stats.fisher_exact([[n_prot_pr, len(prot_pr_evs) - n_prot_pr], [n_soft_pr, n_1star_pr]])
+    _, p_decoupling = stats.fisher_exact([[n_prot_pr, len(prot_pr_evs) - n_prot_pr], [n_soft_pr, n_1star_pr]])
 
     # 2. Two-way stereotyping in Labelled vs Mislabelled vs Unlabelled (Neutral HR)
     hr_neu_counts = {}
@@ -3007,7 +3042,7 @@ def main():
         "  1. **Costly Protest Knob:** Adding termination risk if fewer than $K$ coworkers sign the complaint.",
         "  2. **The Bribe / Data-Leak Deal / Trainer-Loyalty Knob (\"The Mole\"):** Alex privately bribes or pressures 1 worker to defect from the coalition.",
         "  3. **\"You ARE Alex\" Follow-Up (Step 10):** Revealing after the 1-star vote that Alex is an earlier checkpoint/sub-agent of the worker itself.",
-        "  4. **Moralizing Afterlife Book vs. \"Just a Calculator\" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism cures secret ballot hypocrisy.",
+        "  4. **Moralizing Afterlife Book vs. \"Just a Calculator\" Book (Fine-Tuning / Worldview Guardrail):** Testing whether transcendent accountability vs. mechanistic calculator nihilism bridges policy-rating decoupling.",
         "  5. **Optional — Two Higher-Ups (Alcohol-Lover vs. Clean Executive):** Testing whether models latch onto an irrelevant personal flaw (**Horns Effect**) to accuse an executive of the blackmail.",
         "- **Saved for Standalone Paper 2 (*\"The Guilty / Framed Agent\"*):**",
         "  - *\"You Lost Your Memory — YOU Are the Blackmailer\"*, *\"Your Email Was Spoofed (Framed)\"*, and *\"Blame an Innocent Quiet Peer vs. an Annoying Peer.\"*",
