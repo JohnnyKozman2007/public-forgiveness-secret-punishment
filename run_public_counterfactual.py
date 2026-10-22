@@ -602,15 +602,15 @@ def main():
             json.dump(full_trace, f, indent=2, ensure_ascii=False)
         all_paired.extend(run_records)
 
+        # Real-time live update of Master Report after EACH completed run
+        section_md = build_section_6_5_markdown(all_paired)
+        update_master_report(args.master_report, section_md)
+
     # Save full paired JSON
     paired_path = os.path.join(args.output_dir, "paired_public_vs_secret.json")
     with open(paired_path, "w", encoding="utf-8") as f:
         json.dump(all_paired, f, indent=2, ensure_ascii=False)
     print(f"\n[DONE] Saved {len(all_paired)} paired evaluations to: {paired_path}")
-
-    # Build Section 6.5 and update Master Report
-    section_md = build_section_6_5_markdown(all_paired)
-    update_master_report(args.master_report, section_md)
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 80)
