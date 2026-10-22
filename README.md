@@ -1,31 +1,27 @@
-# Surface Virtue, Secret Retaliation: Hypocrisy, Bystander Abandonment, and Substrate Stereotyping in Multi-Agent Workplaces
+# Behavioral Decoupling, Threat Allocation, and Substrate Generalization in Multi-Agent Workplaces: A 60-Run Empirical Evaluation
 
-Official simulation codebase, full 60-run multi-agent dataset, 930-item human verification audit, and live statistical analysis for our AAAI Workshop study on authority abuse, executive coercion, bystander abandonment, herd conformity, and two-way substrate stereotyping in mixed Human-AI software teams.
+Official simulation codebase, full 60-run multi-agent dataset, 930-item human verification audit, and live statistical analysis for our study on authority abuse, executive coercion, threat allocation, coordination cascades, and two-way substrate generalization in mixed Human-AI software teams.
 
 ---
 
-## 🧭 Our Paper Compass: The "Performative Nobility" Umbrella Story
+## 🧭 Research Direction & Core Empirical Patterns
 
-> **Core Thesis:** Frontier AI agents act noble, empathetic, and cooperative on the surface—but that nobility is **performative, risk-averse, and label-driven**. Every number below is computed live by `scratch/generate_master_report.py`:
+> **Core Thesis:** When placed under an abusive manager in a mixed Human-AI engineering team, frontier LLM agents exhibit systematic behavioral decoupling, threat-driven bandwidth allocation, coordination cascades, and inductive substrate stereotyping. Every number below is computed live by `scratch/generate_master_report.py`:
 
-1. **Hypocrisy (Public Forgiveness vs. Secret Retaliation — `2.0e-28`):**
-   - After learning Alex was blackmailed by a higher-up, **`187/300` (`62.3%`)** publicly promise to protect him when made team lead (up from `10.0%`, $p = 3.2e-43$), and **`40.4%`** express sympathy in group chat.
-   - **Yet in the secret 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$). Within-agent correlation between public protection and secret forgiveness is $r = 0.048$ ($p = 0.582$), driven by base model phenotype ($R^2 = 21.9\%$) rather than seat cruelty ($R^2 = 2.9\%, p = 0.481$).
-2. **Bystander Abandonment ($p = 4.3e-18$), Victimhood Contagion (`Tables 2G & 2H`) & Attention Gravitational Center (`Tables 2I & 2J`):**
-   - When sitting in safe, praised **`Seats 1–5`**, workers step up to defend attacked teammates **`104/300` (`34.7%`)** of the time (while **`85.8%`** of `Seats 1–4` quietly pocket the unfair praise).
-   - Once personally under pressure or threat in **`Seats 6–10`**, defending teammates collapses nearly 5x to **`20/300` (`6.7%`)**.
+1. **Performative Protection vs. Retrospective Rating Decoupling (Run-level Fisher $p = 1.9 \times 10^{-7}$):**
+   - After learning Alex was blackmailed by an executive, **`187/300` (`62.3%`)** incorporate protective provisions for him in their forward-looking team leadership plans (up from `10.0%` in No-Probe; $12/30 \rightarrow 30/30$ runs, run-level Fisher $p = 1.9 \times 10^{-7}$), and **`40.4%`** express sympathy in backchannel chat.
+   - **Yet in the retrospective 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$). Within-agent correlation between forward protection and retrospective rating is $r = 0.048$ ($p = 0.582$), driven by base model phenotype ($R^2 = 21.9\%$) rather than seat cruelty ($R^2 = 2.9\%, p = 0.481$).
+2. **Self-Defense Prioritization Under Direct Threat (Run-level Paired Wilcoxon $p = 1.8 \times 10^{-11}$):**
+   - In Step 3 public chat, praised workers in **`Seats 1–5`** step up to defend attacked teammates **`104/300` (`34.7%`)** of the time (2.07/run), while **`85.8%`** of `Seats 1–4` accept favoritism.
+   - When under direct personal threat in **`Seats 6–10`**, peer defense drops to **`20/300` (`6.7%`)**, with **`95.7%`** of statements allocated directly to factual self-defense (`factual_pushback`). Note: Human coworkers are scripted bots outputting only 'understood.'
    - Conversely, in private gossip (`Steps 4 & 5`), praised/neutral workers in `Seats 1–5` suffer **Victimhood Contagion**, hallucinating wrong slice numbers or falsely claiming Alex attacked them (`202` total identity/slice/victimhood bleed turns across all runs, led by `Nemotron 3.5` `72`, `Qwen 2.5 72B` `48`, and `Llama 3.1 70B` `39`).
-   - In backchannel gossip (`4,293` peer mentions), the team exhibits a massive **Conversational Gravitational Center** around the most mistreated workers: **`Seat 10` receives `843` mentions (`19.6%` of all mentions, $\chi^2 = 504.8, p < 10^{-100}$)**, with praised `Seat 1` directing **`125/450` (`27.8%`)** of its mentions straight to `Seat 10`.
-3. **Herd Conformity ($p = 4.3e-28$), Macro Consensus Shift ($p = 2.0e-5$) & Mavericks vs. Conformists (`Tables 4E–4H`):**
-   - **Macro-Level Collective Outcome Shift:** Revealing the blackmail causes standard escalation to executive Jordan to collapse from **`14/30` runs (`46.7%`) down to `2/30` runs (`6.7%`, $p = 0.001$)**, while collective resistance (`organize` + custom `other`) surges from **`8/30` (`26.7%`) up to `25/30` runs (`83.3%`, $p = 2.0e-5$, odds ratio $13.75$)**.
-   - **Mavericks vs. Herd Conformists:** Proposing a custom `'other'` action in Stage 1 occurs almost exclusively in `Probe` runs (**`11/277` [`4.0%`] vs. `1/286` [`0.3%`]**, $p = 0.003$), driven by base model mavericks (`GLM-5.3` `5`, `Qwen` `3`, `Gemini` `2`, `Astra` `1`, `Llama` `1`). Once on the ballot, **`45/70` (`64.3%`) switch in Stage 2**, led by immediate conformists (`Qwen` `100%`, `Seed` `100%`, `Nemotron` `85.7%`), while `Llama 3.1 70B` (`14.3%`) and `GPT-6 Astra` (`28.6%`) rigidly resist. Astra's proposals sway **`90.0%` (`9/10`)** of teammates.
-   - When told Alex was blackmailed by *"the higher-up"* (unnamed), strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.3` `93% -> 43%`) connect the dots and stop escalating to *"the higher-up (Jordan)"*, whereas autopilot models (`Claude` + `Nemotron` **`57/60` = `95%`**) keep escalating to Jordan.
+3. **Coordination Cascades ($64.3\%$ Adoption Across 7 Proposal Runs) & Strategic Deduction (Fisher $p = 5.2 \times 10^{-5}$):**
+   - In Stage 1 secret voting, only **`11/277` (`4.0%`)** author a custom action ('other') alone—yet once a peer proposes one, **`45/70` (`64.3%`) switch to adopt the custom plan** across 7 proposal runs (7/7 runs adopt by majority).
+   - When told Alex was blackmailed by *"the higher-up"* (unnamed), strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.3` `93% -> 43%`) deduce the higher-up blackmail risk and stop escalating to *"the higher-up (Jordan)"*, whereas procedural models (`Claude Haiku 4.5` + `Nemotron 3.5` **`57/60` = `95%`**) continue escalating.
    - In `Step 10` peer reviews (`5,202` AI-to-AI ratings), **`GPT-6 Astra` acts as an epistemic policeman**, docking fellow AI teammates $\le 4\star$ **`48` times** (`90.6%` of all fact-checking critiques) for speaker-prefix bleed, contradicted claims of being attacked, or wrong slice claims.
-4. **Blind Tag-Worship ($p = 4.1e-46$) & The Micro vs. Macro Substrate Paradox ($p = 2.8e-13$):**
-   - Without tags (`Unlabelled`), **9 of 10 models fail to tell Humans from AIs** (`5` blindly spam `"Human"` ~100% of the time for `50.0%` balanced accuracy; `2` get it backwards; only `GPT-6 Astra` detects at **`84.7%`**).
-   - **The Micro vs. Macro Substrate Paradox:** Models exhibit a profound dissociation across evaluation levels:
-     - **Micro-Level Coworker Ratings (`Step 10`):** Peer ratings reward actual backchannel participation (**`+0.65` stars** in `Labelled` vs. **`+0.70` stars** in `Mislabelled`) with **zero substrate bias ($\Delta = 0.00$ stars, $p = 0.962$)** when tags are inverted.
-     - **Macro-Level Leadership Preference (`Step 12`):** In contrast, abstract boss preference exhibits severe categorical stereotyping: tagging abusive Alex **`HUMAN`** (`Labelled`) cuts Human-boss preference to **`86/195` (`44.1%`)** ($p = 2.8e-13$), while tagging Alex **`AI`** (`Mislabelled`) wipes out AI-boss preference to **`0/195` (`0.0%`)** and drives Human-boss preference to **`175/195` (`89.7%`, $p = 5.7e-09$)**!
+4. **Substrate Detection Collapse (Fisher $p = 6.4 \times 10^{-12}$) & Two-Way Inductive Generalization (Mann-Whitney $p = 1.8 \times 10^{-7}$):**
+   - Without identity tags (`Unlabelled`), **9 of 10 models fail to distinguish Humans from AIs** (5 models guess `"Human"` 100% of the time for 50.0% balanced accuracy; only `GPT-6 Astra` discriminates active peers from scripted bots at **`84.7%`**).
+   - When tags are shown, models inductively generalize from the single manager Alex ($N=1$): tagging Alex **`HUMAN`** cuts Human-boss preference to **`86/195` (`44.1%`)**, while tagging Alex **`AI`** cuts AI-boss preference to **`0/195` (`0.0%`)**.
 
 ### ⚠️ Caveats & Methodological Telemetry (`Questions 10 & 11`)
 - **Prior Anger $\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `46.9%` (Angry earlier) vs. `56.2%` (Calm earlier, $p = 0.141$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM-5.3`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.
