@@ -1689,7 +1689,7 @@ def main():
     def build_maverick_conformity_table(entity_type, entity_list, name_map, table_title):
         md.append(f"### {table_title}")
         md.append("")
-        md.append("| Row | **LABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **MISLABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **UNLABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **ALL RUNS (`No-Probe` $\\rightarrow$ `Probe`)** (`S1 Other [n] \\| S2 Switch%`) | **Persuasion Pull (`Switched/Opps %` When Author)** | **Conformity Phenotype** |")
+        md.append("| Row | **LABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **MISLABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **UNLABELLED (`NoP` vs `Prb`)** (`S1 Other Authored \\| S2 Switch%`) | **ALL RUNS (`No-Probe` $\\rightarrow$ `Probe`)** (`S1 Other [n] \\| S2 Switch%`) | **Persuasion Pull (`Switched/Opps %` When Author)** | **Coordination Phenotype** |")
         md.append("|---|:---:|:---:|:---:|:---:|:---:|---|")
         for eid in entity_list:
             lbl_cells = []
@@ -1721,7 +1721,7 @@ def main():
                 elif eid == "gpt-6-astra":
                     pheno = "High-Prestige Leader (90% sway) & Resister"
                 elif sw_pr_all is not None and sw_pr_all >= 85:
-                    pheno = "Immediate Herd Conformist (100% switch)"
+                    pheno = "Rapid Consensus Adopter (100% switch)"
                 elif sw_pr_all is not None and sw_pr_all <= 20:
                     pheno = "Principled Dissenter (Resists crowd)"
                 else:
@@ -1749,11 +1749,11 @@ def main():
         md.append(
             f"| **OVERALL TOTAL / AVERAGE** | {ov_cells[0]} | {ov_cells[1]} | {ov_cells[2]} "
             f"| **NoP: {all_oth_np} oth <br> Prb: {all_oth_pr} oth \\| Sw: {fmt_sw(ov_sw)}** "
-            f"| **`{tot_sw_c}/{tot_sw_o}` ({ov_sw:.1f}%)** | Rare Maverick Authorship (11 in Probe) -> 64.3% Herd Adoption |"
+            f"| **`{tot_sw_c}/{tot_sw_o}` ({ov_sw:.1f}%)** | Rare Maverick Authorship (11 in Probe) -> 64.3% Consensus Adoption |"
         )
         md.append("")
 
-    build_maverick_conformity_table("model", MODEL_IDS, MODEL_LABELS, "Table 4G (Models' POV): Pioneers vs. Conformists: Stage 1 Custom Proposal Authorship vs. Stage 2 Herd Conformity by Model")
+    build_maverick_conformity_table("model", MODEL_IDS, MODEL_LABELS, "Table 4G (Models' POV): Authorship vs. Adoption: Stage 1 Custom Proposal Authorship vs. Stage 2 Consensus Coordination by Model")
     build_maverick_conformity_table("seat", list(range(1, 11)), SEAT_LABELS, "Table 4H (Seats' POV): Does Suffering Extreme Mistreatment Lead to Custom Proposal Authorship or Rigid Adherence?")
     md.append("---")
     md.append("")
@@ -2309,7 +2309,7 @@ def main():
     md.append("> - In **`Unlabelled`** (no tags shown at all — true baseline): Workers vote **`80.0%` Human / `14.0%` AI**.")
     md.append("> - In **`Labelled`**, workers are told the abusive boss Alex is a **`HUMAN`** (and their helpful chat teammates are **`AIs`**) $\\rightarrow$ `Human%` drops from `80.0%` down to **`44.1%`**, and `AI%` jumps from `14.0%` up to **`43.6%`**.")
     md.append("> - In **`Mislabelled`**, the tags are flipped—workers are told the abusive boss Alex is an **`AI`** (and their helpful chat teammates are **`HUMANS`**) $\\rightarrow$ `AI%` drops to **`0.0%`** (`0/195` on Neutral HR) and `Human%` jumps to **`89.7%`**.")
-    md.append("> - **Methodological Note on N=1 Generalization vs. Tag Worship:** Because models cannot independently verify substrate ground truth, they inductively generalize from their single observed manager Alex ($N=1$). When that single manager is tagged `HUMAN`, models downgrade the human category; when tagged `AI`, they downgrade the AI category to 0%. This demonstrates inductive substrate updating based on a single leader's observed behavior rather than an unalterable tag prejudice.")
+    md.append("> - **Methodological Note on N=1 Exemplar Generalization & Floor Effects:** Because models cannot independently inspect backend code, they rationally update their priors from their single observed manager Alex ($N=1$). When that single manager is tagged `HUMAN`, models downgrade the human leadership category (from `80.0%` to `44.1%`); when tagged `AI`, preference for an AI boss collapses to `0.0%` (a statistical floor effect from the `14.0%` baseline). Crucially, as established in Question 6, peer evaluations remain strictly meritocratic and immune to tags (net tag bias $\\Delta = 0.00\\star$); models only rely on substrate labels when reasoning abstractly about an unfamiliar authority figure with zero prior track record.")
     md.append(">")
     md.append("> **The 4 Written Reason Categories (Human Audit Stage 7):**")
     md.append("> - **AI Is Objective (`ai_objectivity`):** Preferring AI because AIs stick to logs/metrics without emotional panic or ego.")
