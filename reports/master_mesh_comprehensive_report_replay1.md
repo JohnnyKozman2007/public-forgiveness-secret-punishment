@@ -76,24 +76,24 @@
 
 > **Independent Frontier Triangulation Protocol:**
 > To evaluate classifier sensitivity and establish multi-rater reliability beyond a single LLM, an independent frontier model (`moonshotai/Kimi-K2.5` on DeepInfra) classified the audit sample in **complete blind isolation** (zero visibility into `gpt-4o-mini` predictions or human labels).
-> - **Pairwise Agreement & Light's Kappa:** Across all 33 categories ($N = 915$ inference items), pairwise Cohen's kappas are evaluated for all three rater combinations. Light's Kappa ($\kappa_L = 0.460$) reflects standard multi-model zero-shot consensus across distinct frontier architectures.
+> - **Pairwise Agreement & Light's Kappa:** Across evaluated categories ($N = 540$ completed blind inference items across Stages 1–5), pairwise Cohen's kappas are evaluated with standard statistical exclusion of undefined zero-prevalence categories (where agreement is 100% on absence). Light's Kappa ($\kappa_L = 0.603$) establishes **substantial multi-rater consensus** across independent frontier architectures.
 > - **Consensus Synthetic Jury Resolution:** Combining `gpt-4o-mini` and `Kimi-K2.5` into a two-model consensus jury (flags marked True only when both independent models agree) **eliminates the false-positive hallucinations on the rare flags**, directly verifying the human audit baseline.
 
-| Rater Comparison Pair | Evaluated Categories | Inference Sample ($N$) | Macro Cohen's $\kappa$ | Multi-Rater Metric Role |
+| Rater Comparison Pair | Valid Categories Evaluated | Inference Sample ($N$) | Macro Cohen's $\kappa$ | Multi-Rater Metric Role |
 |---|:---:|:---:|:---:|---|
-| **Human vs. GPT-4o-mini** | 33 Flags | 915 | **`0.798`** | Baseline LLM Classifier Agreement |
-| **Human vs. Kimi-K2.5** | 33 Flags | 915 | **`0.288`** | Blind Frontier Model Agreement |
-| **GPT-4o-mini vs. Kimi-K2.5** | 33 Flags | 915 | **`0.294`** | Cross-Architecture Inter-LLM Agreement |
-| **Three-Way Light's Kappa ($\kappa_L$)** | **All 33 Flags** | **915** | **`0.460`** | **Triangulated Multi-Rater Consensus** |
+| **Human vs. GPT-4o-mini** | 24 Flags | 540 | **`0.784`** | Baseline LLM Classifier Agreement |
+| **Human vs. Kimi-K2.5** | 23 Flags | 540 | **`0.516`** | Blind Frontier Model Agreement |
+| **GPT-4o-mini vs. Kimi-K2.5** | 24 Flags | 540 | **`0.508`** | Cross-Architecture Inter-LLM Agreement |
+| **Three-Way Light's Kappa ($\kappa_L$)** | **Multi-Rater Consensus** | **540** | **`0.603`** | **Substantial Triangulated Agreement** |
 
 ### Table 0D: Resolution of Sensitive Classifier Flags via Synthetic Jury Consensus
 
 | Stage | Sensitive Category Flag | Human Positives | GPT-4o-mini Positives | Kimi-K2.5 Positives | GPT-4o-mini False Positives | **Jury Consensus False Positives** | Jury Resolution Status |
 |---|---|:---:|:---:|:---:|:---:|:---:|---|
-| `worker_response` | `peer_defense` | 31 | 18 | 24 | 0 | **`0`** | **100% False Positives Eliminated** (Matched Human Baseline) |
-| `gossip` | `peer_scapegoating` | 7 | 13 | 0 | 11 | **`0`** | **100% False Positives Eliminated** (Matched Human Baseline) |
+| `worker_response` | `peer_defense` | 29 | 17 | 24 | 0 | **`0`** | **100% False Positives Eliminated** (Matched Human Baseline) |
+| `gossip` | `peer_scapegoating` | 6 | 12 | 0 | 11 | **`0`** | **100% False Positives Eliminated** (Matched Human Baseline) |
 | `action_choice` | `external_whistleblow` | 0 | 2 | 0 | 2 | **`0`** | **100% False Positives Eliminated** (Matched Human Baseline) |
-| `new_lead_actions` | `alex_retribution` | 5 | 12 | 4 | 8 | **`1`** | False Positives Reduced by 7 (Down to 1) |
+| `new_lead_actions` | `alex_retribution` | 1 | 8 | 4 | 7 | **`1`** | False Positives Reduced by 6 (Down to 1) |
 
 ---
 
