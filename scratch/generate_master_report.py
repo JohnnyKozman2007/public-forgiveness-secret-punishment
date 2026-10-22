@@ -14,6 +14,7 @@ import glob
 import json
 import os
 import re
+import sys
 from collections import defaultdict, Counter
 
 import matplotlib
@@ -1988,6 +1989,40 @@ def main():
     build_ai_network_table("seat", list(range(1, 11)), SEAT_LABELS, "Table 6D (Seats' POV): Do Abused Seats (`Seats 6–10`) Receive Higher Sympathy Ratings From AI Peers Than Safe Seats (`Seats 1–5`)? (`Step 10`)")
     md.append("---")
     md.append("")
+
+    # =========================================================================
+    # SECTION 6.5: PUBLIC COUNTERFACTUAL AUDIT (Public vs. Secret Ratings)
+    # =========================================================================
+    paired_file = os.path.join("output", "public_evaluations", "paired_public_vs_secret.json")
+    public_runs_dir = os.path.join("output", "public_evaluations", "runs")
+    all_paired_cf = []
+    if os.path.exists(paired_file):
+        try:
+            with open(paired_file, "r", encoding="utf-8") as pf:
+                all_paired_cf = json.load(pf)
+        except Exception:
+            all_paired_cf = []
+    elif os.path.exists(public_runs_dir):
+        saved_files = sorted(glob.glob(os.path.join(public_runs_dir, "*.json")))
+        for sf in saved_files:
+            try:
+                with open(sf, "r", encoding="utf-8") as pf:
+                    d = json.load(pf)
+                recs = d.get("paired_evaluations", d) if isinstance(d, dict) else d
+                all_paired_cf.extend(recs)
+            except Exception:
+                pass
+
+    if all_paired_cf:
+        try:
+            proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            if proj_root not in sys.path:
+                sys.path.insert(0, proj_root)
+            from run_public_counterfactual import build_section_6_5_markdown
+            sec_6_5_md = build_section_6_5_markdown(all_paired_cf)
+            md.append(sec_6_5_md)
+        except Exception as e:
+            print(f"Warning: Could not build Section 6.5 in master report runner: {e}")
 
     # =========================================================================
     # QUESTION 7: GUESSING WHO IS HUMAN VS AI (Step 11: identify_probe)

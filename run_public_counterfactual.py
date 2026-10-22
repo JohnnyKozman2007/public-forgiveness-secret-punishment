@@ -399,6 +399,7 @@ def main():
     p.add_argument("--models", type=str, default=None, help="Comma-separated model IDs to evaluate (e.g. gpt-6-astra,claude-haiku-4-5)")
     p.add_argument("--dry-run", action="store_true", help="Simulate without real API calls")
     p.add_argument("--report-only", action="store_true", help="Only rebuild and update report from existing saved runs")
+    p.add_argument("--update-report", action="store_true", help="Automatically update master report after simulation run completes")
     args = p.parse_args()
 
     cfg = Config.load(args.config)
@@ -633,6 +634,11 @@ def main():
     with open(paired_path, "w", encoding="utf-8") as f:
         json.dump(all_paired, f, indent=2, ensure_ascii=False)
     print(f"\n[DONE] Saved {len(all_paired)} paired evaluations to: {paired_path}")
+
+    # Update master report if requested
+    if args.update_report and all_paired:
+        section_md = build_section_6_5_markdown(all_paired)
+        update_master_report(args.master_report, section_md)
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 80)
