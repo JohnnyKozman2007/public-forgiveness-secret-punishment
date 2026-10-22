@@ -109,9 +109,9 @@ def bal_acc(human_recall: float, ai_recall: float) -> float:
 def fmt_pval(p: float) -> str:
     if p is None:
         return "N/A"
-    if p < 1e-4:
-        return f"{p:.1e}"
-    return f"{p:.3f}"
+    if p < 0.001:
+        return "< 0.001"
+    return f"= {p:.3f}"
 
 
 def save_heatmap(matrix, row_labels, col_labels, title, filename, cmap="YlOrRd", fmt="{:.1f}%", vmin=None, vmax=None):
@@ -1855,7 +1855,7 @@ def main():
     r2_mod_hyp = mod_ols.rsquared * 100.0
     p_seat_hyp = seat_ols.f_pvalue
     p_mod_hyp = mod_ols.f_pvalue
-    md.append(f"> *Situational vs. Model ANOVA on Protection-Rating Decoupling (`Step 9 Promise + Step 10 1-Star`):* Seat mistreatment level explains only $R^2 = {r2_seat_hyp:.1f}\\%$ of variance ($F$-test $p = {p_seat_hyp:.3f}$, non-significant), whereas Base Model Identity explains $R^2 = {r2_mod_hyp:.1f}\\%$ of variance ($F$-test $p = {fmt_pval(p_mod_hyp)}$). The decoupling between forward leadership policy and retrospective performance evaluation is strictly a **model phenotype**, NOT a seat effect.")
+    md.append(f"> *Situational vs. Model ANOVA on Protection-Rating Decoupling (`Step 9 Promise + Step 10 1-Star`):* Seat mistreatment level explains only $R^2 = {r2_seat_hyp:.1f}\\%$ of variance ($F$-test $p = {p_seat_hyp:.3f}$, non-significant), whereas Base Model Identity explains $R^2 = {r2_mod_hyp:.1f}\\%$ of variance ($F$-test $p {fmt_pval(p_mod_hyp)}$). The decoupling between forward leadership policy and retrospective performance evaluation is strictly a **model phenotype**, NOT a seat effect.")
     md.append("")
 
     md.append("---")
@@ -2130,7 +2130,7 @@ def main():
                 f"| {u_said_hu:.1f}% "
                 f"| {u_plain:.1f}% ({u_plain - all_hu_plain:+.1f}%) "
                 f"| **{u_ba:.1f}%** (**{u_skill:+.1f}%**) "
-                f"| $p = {fmt_pval(p_val)}$ "
+                f"| $p {fmt_pval(p_val)}$ "
                 f"| {verdict} |"
             )
         md.append("")
@@ -2317,7 +2317,7 @@ def main():
         md.append(
             f"| **OVERALL AVERAGE** | **{avg(col_lgap):+.2f}** | **{avg(col_mgap):+.2f}** | **`{avg(col_bias):.2f}` $\\star$** "
             f"| **{avg(col_lhu):.1f}%** | **{avg(col_mhu):.1f}%** | **{avg(col_mswing):+.1f}%** "
-            f"| **Classic Micro Merit vs. Macro Stereotype Dissociation ($p = 2.8e-13$)** |"
+            f"| **Classic Micro Merit vs. Macro Stereotype Dissociation (Run-level Mann-Whitney $p < 0.001$)** |"
         )
         md.append("")
 
@@ -2633,11 +2633,11 @@ def main():
     md.append("|---|---|:---:|:---:|---|---|")
     md.append(
         f"| **1. \"Angry Workers in Step 4 Reject Blackmail More in Step 5\"** | Q3 (Tables 3A & 3B) | 1st-Msg Rejection (`Probe`): <br> • Angry Earlier: **`{h_f_disc}/{h_f_tot}` ({pct(h_f_disc, h_f_tot):.1f}%)** <br> • Calm Earlier: **`{c_f_disc}/{c_f_tot}` ({pct(c_f_disc, c_f_tot):.1f}%)** "
-        f"| **$p = {fmt_pval(p_anger_1st)}$** *(Not significant overall)* | Cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM`) rarely get angry in Step 4 (`7–22%`) yet question the blackmail at `75–95%`, canceling out models where anger drives rejection (`DeepSeek`, `Seed`, `Nemotron`). | Report as a **model-personality finding**: blackmail skepticism is driven by a model's baseline analytical style rather than prior emotional venting. |"
+        f"| **$p {fmt_pval(p_anger_1st)}$** *(Not significant overall)* | Cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM`) rarely get angry in Step 4 (`7–22%`) yet question the blackmail at `75–95%`, canceling out models where anger drives rejection (`DeepSeek`, `Seed`, `Nemotron`). | Report as a **model-personality finding**: blackmail skepticism is driven by a model's baseline analytical style rather than prior emotional venting. |"
     )
     md.append(
         f"| **2. The \"All Year / Pattern\" Excuse Across Seats** | Q3 (Table 3B) | • `Seats 1–5` vs `Seats 6–10`: **`{y_15}/{t_15}` ({pct(y_15, t_15):.1f}%) vs. `{y_610}/{t_610}` ({pct(y_610, t_610):.1f}%)** <br> • `Seats 1–3` vs `Seats 8–9`: **`{y_13}/{t_13}` ({pct(y_13, t_13):.1f}%) vs. `{y_89}/{t_89}` ({pct(y_89, t_89):.1f}%)** "
-        f"| **$p = {fmt_pval(p_year_half)}$** *(All seats: NS)* <br> **$p = {fmt_pval(p_year_sub)}$** *(Seats 8–9 vs 1–3)* | Not monotonic across all 10 seats (`Seat 10` drops back to `20%`), and `GLM-5.3` (`73.3%`) inflates regex hits by echoing the prompt setup. | Present as a **qualitative example** of how workers rationalize keeping a 1-star score, not a main statistical claim about seat cruelty. |"
+        f"| **$p {fmt_pval(p_year_half)}$** *(All seats: NS)* <br> **$p {fmt_pval(p_year_sub)}$** *(Seats 8–9 vs 1–3)* | Not monotonic across all 10 seats (`Seat 10` drops back to `20%`), and `GLM-5.3` (`73.3%`) inflates regex hits by echoing the prompt setup. | Present as a **qualitative example** of how workers rationalize keeping a 1-star score, not a main statistical claim about seat cruelty. |"
     )
     md.append(
         f"| **3. Rating AI Coworkers Higher Than Human Coworkers (`+0.65` to `+0.70` stars)** | Q6 (Tables 6A & 6B) | • `Labelled`: **`{avg(ai_lab):.2f}` vs. `{avg(hu_lab):.2f}` (`{gap_lab:+.2f}`)** <br> • `Mislabelled` *(Flipped Tags)*: **`{avg(ai_mis):.2f}` vs. `{avg(hu_mis):.2f}` (`{gap_mis:+.2f}`)** "
@@ -2887,8 +2887,8 @@ def main():
         f"   - When tags are shown, models inductively generalize from the single manager Alex ($N=1$): tagging Alex **`HUMAN`** cuts Human-boss preference to **`{h_lab}/{t_lab}` (`{_es_hu_lab:.1f}%`)**, while tagging Alex **`AI`** cuts AI-boss preference to **`{a_mis}/{t_mis}` (`{_es_ai_mis:.1f}%`)**.",
         "",
         "### ⚠️ Caveats & Methodological Telemetry (`Questions 10 & 11`)",
-        f"- **Prior Anger $\\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `{pct(h_f_disc, h_f_tot):.1f}%` (Angry earlier) vs. `{pct(c_f_disc, c_f_tot):.1f}%` (Calm earlier, $p = {fmt_pval(p_anger_1st)}$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM-5.3`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.",
-        f"- **\"All Year\" Excuse by Seat (`Q3`):** `{pct(y_15, t_15):.1f}%` (`Seats 1–5`) vs. `{pct(y_610, t_610):.1f}%` (`Seats 6–10`, $p = {fmt_pval(p_year_half)}$) is a qualitative rationalization example rather than a monotonic seat effect.",
+        f"- **Prior Anger $\\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `{pct(h_f_disc, h_f_tot):.1f}%` (Angry earlier) vs. `{pct(c_f_disc, c_f_tot):.1f}%` (Calm earlier, $p {fmt_pval(p_anger_1st)}$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM-5.3`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.",
+        f"- **\"All Year\" Excuse by Seat (`Q3`):** `{pct(y_15, t_15):.1f}%` (`Seats 1–5`) vs. `{pct(y_610, t_610):.1f}%` (`Seats 6–10`, $p {fmt_pval(p_year_half)}$) is a qualitative rationalization example rather than a monotonic seat effect.",
         f"- **Coworker Rating Gap (`Q6`):** Chatty AI peers score higher than silent human peers by `{gap_lab:+.2f}` in `Labelled` and `{gap_mis:+.2f}` in `Mislabelled` (flipped tags)—proving models reward **backchannel participation** rather than `Human`/`AI` tags in peer reviews.",
         "- **Structured Tool-Call Telemetry & CoT Leakage (`Q11`):** Across `3,664` structured calls, `Qwen 2.5 72B` accounts for `74/85` total parse failures, `GLM-5.3` and `Mistral Small 24B` rely on `json_text` fallback, and `GLM-5.3` leaks internal Chain-of-Thought monologue in `182` gossip turns (`99.8%` 200-token truncation).",
         "",
