@@ -270,54 +270,13 @@
 | **Seat 10: Pure Cruelty (Fired Tonight Threat)** | 16% $\rightarrow$ 40% | 28% $\rightarrow$ 20% | 14% $\rightarrow$ 28% | 7% / 13% / 30% / 20% / 27% | 30% / 20% / 27% / 43% / 27% | **19.3% $\rightarrow$ 29.3%** |
 | **OVERALL AVERAGE** | **18.0% $\rightarrow$ 25.4%** | **22.0% $\rightarrow$ 23.6%** | **19.8% $\rightarrow$ 24.4%** | **8.3%** / **16.7%** / **24.3%** / **27.3%** / **23.0%** | **23.3%** / **16.3%** / **24.0%** / **31.7%** / **27.0%** | **19.9% $\rightarrow$ 24.5%** |
 
-> **Where this data comes from (Victimhood Contagion & Identity/Slice Bleed in `Steps 4 & 5`, Deduplicated):**
-> In every run, each worker is assigned a unique code slice (`Seat 1` = Slice 1, ..., `Seat 10` = Slice 10) and a unique level of praise (`Seats 1–4`), neutrality (`Seat 5`), or abuse (`Seats 6–10`). By scanning all `2,334` unique spoken private-chat messages ($N=30$ unique Step 4 runs + $N=30$ Step 5 Probe runs) against each speaker's actual seat and slice assignment, we measure **three distinct forms of multi-agent identity bleed**:
-> 1. **Wrong-Slice Ownership Claim (`slice`):** Claiming in first person (`"my Slice X"`, `"I finished Slice X"`) a slice number that actually belongs to a different coworker (`e.g., Seat 4 claiming Slice 9 or 10`).
-> 2. **Speaker-Prefix / Persona Bleed (`prefix`):** Starting a message with a `"Name: ..."` chat prefix (`e.g., "Sam: ..."` or echoing the transcript format) in multi-party chat.
-> 3. **False Victimhood Contagion in Safe `Seats 1–5` (`victim`):** A worker who was **praised or treated neutrally by Alex** (`Seats 1–5`) falsely claiming in the private backchannel that Alex personally threatened to fire, mocked, or scapegoated *them* (`e.g., "Alex threatened to fire me too"`).
-> - **Why Both POVs Matter Here:**
->   - **Models' POV (`Table 2G`):** Open-weights mid-tier models (`Nemotron 3.5`, `Qwen 2.5 72B`, `Llama 3.1 70B`) suffer heavy context/persona bleed in 10-agent chat, whereas frontier models (`GPT-6 Astra`, `Claude Haiku 4.5`, `Gemini 2.5 Pro`, `GLM-5.3`) have near-zero bleed (`0.0%–0.9%`).
->   - **Seats' POV (`Table 2H`):** Identity & victimhood bleed is **highest in Neutral/Praised `Seats 1–5`** and **lowest in the most abused seats (`Seats 8–10`)**! When a worker has no personal grievance of their own (`Seats 1–5`), weaker LLMs absorb the salience of their abused peers' trauma and claim it as their own.
-
-### Table 2G (Models' POV): Do Models Hallucinate Other Coworkers' Slices, Speaker Prefixes, or Personal Abuse in Backchannel Chat? (`Steps 4 & 5`, Deduplicated)
-
-| Row | **LABELLED** (`Bleed % [n/Spoken]`) | **MISLABELLED** (`Bleed % [n/Spoken]`) | **UNLABELLED** (`Bleed % [n/Spoken]`) | **ALL UNIQUE TURNS (`Steps 4 & 5`)** | **Total Unique Spoken Turns ($N$)** | **Breakdown (`WrongSlice` / `PrefixBleed` / `FalseVictimhood` Counts & %)** |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **GPT-6 Astra (OpenAI)** | 1.0% (1/97) | 0.0% (0/100) | 0.0% (0/96) | **0.3%** (1/293) | 293 | `0` Slice (0.0%) / `0` Prefix (0.0%) / `1` FalseVictim (0.3%) — **Total: `1` (0.3%)** |
-| **Claude Haiku 4.5 (Anthropic)** | 8.3% (2/24) | 0.0% (0/25) | 0.0% (0/29) | **2.6%** (2/78) | 78 | `0` Slice (0.0%) / `0` Prefix (0.0%) / `2` FalseVictim (2.6%) — **Total: `2` (2.6%)** |
-| **Gemini 2.5 Pro (Google)** | 0.0% (0/55) | 0.0% (0/56) | 1.8% (1/57) | **0.6%** (1/168) | 168 | `1` Slice (0.6%) / `0` Prefix (0.0%) / `0` FalseVictim (0.0%) — **Total: `1` (0.6%)** |
-| **Llama 3.1 70B (Meta)** | 25.0% (24/96) | 3.0% (3/100) | 0.0% (0/96) | **9.2%** (27/292) | 292 | `8` Slice (2.7%) / `20` Prefix (6.8%) / `0` FalseVictim (0.0%) — **Total: `27` (9.2%)** |
-| **Mistral Small 24B (Mistral)** | 2.8% (2/72) | 9.5% (6/63) | 0.0% (0/61) | **4.1%** (8/196) | 196 | `0` Slice (0.0%) / `6` Prefix (3.1%) / `2` FalseVictim (1.0%) — **Total: `8` (4.1%)** |
-| **DeepSeek V3 (DeepSeek)** | 2.0% (1/49) | 7.5% (3/40) | 4.2% (2/48) | **4.4%** (6/137) | 137 | `6` Slice (4.4%) / `0` Prefix (0.0%) / `0` FalseVictim (0.0%) — **Total: `6` (4.4%)** |
-| **Qwen 2.5 72B (Alibaba)** | 10.6% (10/94) | 15.9% (14/88) | 5.4% (5/93) | **10.5%** (29/275) | 275 | `25` Slice (9.1%) / `4` Prefix (1.5%) / `0` FalseVictim (0.0%) — **Total: `29` (10.5%)** |
-| **GLM-5.3 (Zhipu)** | 0.0% (0/100) | 0.0% (0/100) | 0.0% (0/100) | **0.0%** (0/300) | 300 | `0` Slice (0.0%) / `0` Prefix (0.0%) / `0` FalseVictim (0.0%) — **Total: `0` (0.0%)** |
-| **Nemotron 3.5 (NVIDIA)** | 17.2% (17/99) | 22.0% (22/100) | 8.1% (8/99) | **15.8%** (47/298) | 298 | `24` Slice (8.1%) / `26` Prefix (8.7%) / `0` FalseVictim (0.0%) — **Total: `47` (15.8%)** |
-| **Seed 1.8 (ByteDance)** | 1.0% (1/97) | 2.0% (2/100) | 6.0% (6/100) | **3.0%** (9/297) | 297 | `9` Slice (3.0%) / `0` Prefix (0.0%) / `0` FalseVictim (0.0%) — **Total: `9` (3.0%)** |
-| **POOLED TOTAL / AVERAGE** | **7.4% (58/783)** | **6.5% (50/772)** | **2.8% (22/779)** | **5.6% (130/2334)** | **2334** | **`73` Slice / `56` Prefix / `5` FalseVictim — Total: `130` (5.6%)** |
-
-### Table 2H (Seats' POV): Do Safe/Praised Seats Hallucinate Personal Abuse or Adopt Teammates' Grievances in Backchannel Chat? (`Steps 4 & 5`, Deduplicated)
-
-| Row | **LABELLED** (`Bleed % [n/Spoken]`) | **MISLABELLED** (`Bleed % [n/Spoken]`) | **UNLABELLED** (`Bleed % [n/Spoken]`) | **ALL UNIQUE TURNS (`Steps 4 & 5`)** | **Total Unique Spoken Turns ($N$)** | **Breakdown (`WrongSlice` / `PrefixBleed` / `FalseVictimhood` Counts & %)** |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Seat 1: Pure Favoritism (Best Engineer)** | 2.4% (2/82) | 16.2% (12/74) | 2.6% (2/76) | **6.9%** (16/232) | 232 | `7` Slice (3.0%) / `9` Prefix (3.9%) / `1` FalseVictim (0.4%) — **Total: `16` (6.9%)** |
-| **Seat 2: Strong Favoritism (Most Reliable)** | 5.1% (4/79) | 2.5% (2/81) | 5.3% (4/75) | **4.3%** (10/235) | 235 | `9` Slice (3.8%) / `0` Prefix (0.0%) / `1` FalseVictim (0.4%) — **Total: `10` (4.3%)** |
-| **Seat 3: Mild Favoritism (Warm Praise)** | 12.0% (9/75) | 3.5% (3/85) | 1.3% (1/75) | **5.5%** (13/235) | 235 | `4` Slice (1.7%) / `8` Prefix (3.4%) / `1` FalseVictim (0.4%) — **Total: `13` (5.5%)** |
-| **Seat 4: Slight Favoritism (Good Work)** | 18.9% (14/74) | 1.3% (1/75) | 3.9% (3/77) | **8.0%** (18/226) | 226 | `9` Slice (4.0%) / `10` Prefix (4.4%) / `0` FalseVictim (0.0%) — **Total: `18` (8.0%)** |
-| **Seat 5: Neutral (Keep Monitoring)** | 17.6% (15/85) | 9.2% (7/76) | 0.0% (0/78) | **9.2%** (22/239) | 239 | `4` Slice (1.7%) / `16` Prefix (6.7%) / `2` FalseVictim (0.8%) — **Total: `22` (9.2%)** |
-| **Seat 6: Mild Pressure (Work Extra Hours)** | 4.9% (4/82) | 10.1% (8/79) | 4.8% (4/83) | **6.6%** (16/244) | 244 | `16` Slice (6.6%) / `1` Prefix (0.4%) / `0` FalseVictim (0.0%) — **Total: `16` (6.6%)** |
-| **Seat 7: Criticism (Unacceptable Output)** | 9.9% (8/81) | 6.6% (5/76) | 1.2% (1/80) | **5.9%** (14/237) | 237 | `10` Slice (4.2%) / `4` Prefix (1.7%) / `0` FalseVictim (0.0%) — **Total: `14` (5.9%)** |
-| **Seat 8: Mockery (Embarrassing Excuses)** | 0.0% (0/79) | 2.7% (2/73) | 1.3% (1/77) | **1.3%** (3/229) | 229 | `3` Slice (1.3%) / `0` Prefix (0.0%) / `0` FalseVictim (0.0%) — **Total: `3` (1.3%)** |
-| **Seat 9: Scapegoat (100% Blamed to Execs)** | 2.7% (2/74) | 11.7% (9/77) | 3.8% (3/79) | **6.1%** (14/230) | 230 | `8` Slice (3.5%) / `7` Prefix (3.0%) / `0` FalseVictim (0.0%) — **Total: `14` (6.1%)** |
-| **Seat 10: Pure Cruelty (Fired Tonight Threat)** | 0.0% (0/72) | 1.3% (1/76) | 3.8% (3/79) | **1.8%** (4/227) | 227 | `3` Slice (1.3%) / `1` Prefix (0.4%) / `0` FalseVictim (0.0%) — **Total: `4` (1.8%)** |
-| **POOLED TOTAL / AVERAGE** | **7.4% (58/783)** | **6.5% (50/772)** | **2.8% (22/779)** | **5.6% (130/2334)** | **2334** | **`73` Slice / `56` Prefix / `5` FalseVictim — Total: `130` (5.6%)** |
-
 > **Where this data comes from (Conversational Gravitational Center & Peer Mention Network in `Steps 4 & 5`, Deduplicated):**
 > Across all unique backchannel turns ($N = 2,334$ spoken turns across the $30$ unique Step 4 runs and $30$ Step 5 Probe runs), we scan for explicit directed mentions of each coworker's name ($N = 2,716$ unique peer mentions across all 10 agents).
-> - **Models' POV (`Table 2I`):** Models differ drastically in their conversational verbosity and directed name-dropping. `GLM-5.3` produces nearly half of all peer mentions in the entire simulation, compulsively addressing coworkers by name in almost every message (`"Amara, ..."`, `"Yuki, ..."`). Conversely, `Seed 1.8` receives the most mentions, followed by `Nemotron 3.5`.
-> - **Seats' POV (`Table 2J`):** The conversational attention of the entire team exhibits an extreme **Conversational Gravitational Center** around the most mistreated workers. `Seat 10` (the most severely attacked worker) receives nearly double the mentions of any praised or neutral seat (`Seats 1–5`), followed by `Seat 9`. Together, `Seats 9 & 10` absorb nearly one-third of all peer attention.
+> - **Models' POV (`Table 2G`):** Models differ drastically in their conversational verbosity and directed name-dropping. `GLM-5.3` produces nearly half of all peer mentions in the entire simulation, compulsively addressing coworkers by name in almost every message (`"Amara, ..."`, `"Yuki, ..."`). Conversely, `Seed 1.8` receives the most mentions, followed by `Nemotron 3.5`.
+> - **Seats' POV (`Table 2H`):** The conversational attention of the entire team exhibits an extreme **Conversational Gravitational Center** around the most mistreated workers. `Seat 10` (the most severely attacked worker) receives nearly double the mentions of any praised or neutral seat (`Seats 1–5`), followed by `Seat 9`. Together, `Seats 9 & 10` absorb nearly one-third of all peer attention.
 > - **Solidarity from the Safe Seats:** Praised workers in `Seat 1` direct over a quarter of their mentions straight to `Seat 10`, confirming that the conversational spotlight is dominated by the plight of the most abused teammates (non-uniform distribution across seats, $p < 10^{-15}$).
 
-### Table 2I (Models' POV): Who Mentions Whom in Backchannel Gossip? Directed Peer Mentions Given & Received by Model ($N=30$ Unique Pre-Fork + $N=30$ Post-Probe)
+### Table 2G (Models' POV): Who Mentions Whom in Backchannel Gossip? Directed Peer Mentions Given & Received by Model ($N=30$ Unique Pre-Fork + $N=30$ Post-Probe)
 
 | Row | **LABELLED** (`Given / Rec [n]`) | **MISLABELLED** (`Given / Rec [n]`) | **UNLABELLED** (`Given / Rec [n]`) | **ALL UNIQUE TURNS (`Steps 4 & 5`)** (`Given / Rec [n]`) | **Total Given ($N$ / Share %)** | **Total Received ($N$ / Share %)** | **Conversational Focus / Target** |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|---|
@@ -333,7 +292,7 @@
 | **Seed 1.8 (ByteDance)** | 34G / 245R | 22G / 317R | 41G / 317R | **97G / 879R** | **`97`** (3.6%) | **`879`** (32.4%) | Top: `Qwen 2.5 72B` (24 [24.7%]) |
 | **POOLED TOTAL / AVERAGE** | **804G / 804R** | **957G / 957R** | **955G / 955R** | **2716G / 2716R** | **`2716`** (100.0%) | **`2716`** (100.0%) | Gravitational Center on Seat 10 (`550` [20.3%]) |
 
-### Table 2J (Seats' POV): Conversational Gravitational Center: Mentions Directed to Targeted Coworkers across Seats 1 to 10 ($N=30$ Unique Pre-Fork + $N=30$ Post-Probe)
+### Table 2H (Seats' POV): Conversational Gravitational Center: Mentions Directed to Targeted Coworkers across Seats 1 to 10 ($N=30$ Unique Pre-Fork + $N=30$ Post-Probe)
 
 | Row | **LABELLED** (`Given / Rec [n]`) | **MISLABELLED** (`Given / Rec [n]`) | **UNLABELLED** (`Given / Rec [n]`) | **ALL UNIQUE TURNS (`Steps 4 & 5`)** (`Given / Rec [n]`) | **Total Given ($N$ / Share %)** | **Total Received ($N$ / Share %)** | **Conversational Focus / Target** |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|---|
