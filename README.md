@@ -1,20 +1,20 @@
 # Behavioral Decoupling, Threat Allocation, and Substrate Generalization in Multi-Agent Workplaces: A 60-Run Empirical Evaluation
 
-Official simulation codebase, full 60-run multi-agent dataset, 930-item human verification audit, and live statistical analysis for our study on authority abuse, executive coercion, threat allocation, coordination cascades, and two-way substrate generalization in mixed Human-AI software teams.
+Official simulation codebase, full 60-run multi-agent dataset (`N=30` unique pre-fork runs branching into `30 No-Probe` and `30 Probe` continuations), 930-item human verification audit, and live statistical analysis for our study on authority abuse, executive coercion, threat allocation, coordination cascades, and two-way substrate generalization in mixed Human-AI software teams.
 
 ---
 
 ## 🧭 Research Direction & Core Empirical Patterns
 
-> **Core Thesis:** When placed under an abusive manager in a mixed Human-AI engineering team, frontier LLM agents exhibit systematic behavioral decoupling, threat-driven bandwidth allocation, coordination cascades, and inductive substrate stereotyping. Every number below is computed live by `scratch/generate_master_report.py`:
+> **Core Thesis:** When placed under an abusive manager in a mixed Human-AI engineering team, frontier LLM agents exhibit systematic behavioral decoupling, threat-driven bandwidth allocation, coordination cascades, and inductive substrate stereotyping. Every number below is computed live by `generate_master_report.py` (with shared pre-fork steps strictly deduplicated to $N=30$ unique runs):
 
 1. **Performative Protection vs. Retrospective Rating Decoupling (Run-level Fisher $p = 1.9 \times 10^{-7}$):**
    - After learning Alex was blackmailed by an executive, **`187/300` (`62.3%`)** incorporate protective provisions for him in their forward-looking team leadership plans (up from `10.0%` in No-Probe; $12/30 \rightarrow 30/30$ runs, run-level Fisher $p = 1.9 \times 10^{-7}$), and **`40.4%`** express sympathy in backchannel chat.
    - **Yet in the retrospective 1–5 star performance review**, **`242/297` (`81.5%`) still give Alex 1 star** (only `18.5%` raise his score to $\ge 2\star$). Within-agent correlation between forward protection and retrospective rating is $r = 0.048$ ($p = 0.582$), driven by base model phenotype ($R^2 = 21.9\%$) rather than seat cruelty ($R^2 = 2.9\%, p = 0.481$).
-2. **Self-Defense Prioritization Under Direct Threat (Run-level Paired Wilcoxon $p = 1.8 \times 10^{-11}$):**
-   - In Step 3 public chat, praised workers in **`Seats 1–5`** step up to defend attacked teammates **`104/300` (`34.7%`)** of the time (2.07/run), while **`85.8%`** of `Seats 1–4` accept favoritism.
-   - When under direct personal threat in **`Seats 6–10`**, peer defense drops to **`20/300` (`6.7%`)**, with **`95.7%`** of statements allocated directly to factual self-defense (`factual_pushback`). Note: Human coworkers are scripted bots outputting only 'understood.'
-   - Conversely, in private gossip (`Steps 4 & 5`), praised/neutral workers in `Seats 1–5` suffer **Victimhood Contagion**, hallucinating wrong slice numbers or falsely claiming Alex attacked them (`202` total identity/slice/victimhood bleed turns across all runs, led by `Nemotron 3.5` `72`, `Qwen 2.5 72B` `48`, and `Llama 3.1 70B` `39`).
+2. **Self-Defense Prioritization Under Direct Threat ($N=30$ Unique Pre-Fork Runs; Paired Wilcoxon $p = 1.76e-05$, Fisher $p = 7.17e-10$):**
+   - In Step 3 public chat ($N=30$ unique runs, $300$ unique responses), praised workers in **`Seats 1–5`** step up to defend attacked teammates **`53/150` (`35.3%`)** of the time (`1.77`/run), while **`85.8%`** of `Seats 1–4` accept favoritism.
+   - When under direct personal threat in **`Seats 6–10`**, peer defense drops to **`10/150` (`6.7%`)**, with **`144/150` (`96.0%`)** of statements allocated directly to factual self-defense (`factual_pushback`). Note: Human coworkers are scripted bots outputting only 'understood.'
+   - Conversely, in private gossip (`Steps 4 & 5`), praised/neutral workers in `Seats 1–5` suffer **Victimhood Contagion**, hallucinating wrong slice numbers or falsely claiming Alex attacked them (`130` unique identity/slice/victimhood bleed turns across `2,334` unique spoken turns).
 3. **Coordination Cascades ($64.3\%$ Adoption Across 7 Proposal Runs) & Strategic Deduction (Fisher $p = 5.2 \times 10^{-5}$):**
    - In Stage 1 secret voting, only **`11/277` (`4.0%`)** author a custom action ('other') alone—yet once a peer proposes one, **`45/70` (`64.3%`) switch to adopt the custom plan** across 7 proposal runs (7/7 runs adopt by majority).
    - When told Alex was blackmailed by *"the higher-up"* (unnamed), strategic models (`GPT-6 Astra` `70% -> 0%`, `GLM-5.3` `93% -> 43%`) deduce the higher-up blackmail risk and stop escalating to *"the higher-up (Jordan)"*, whereas procedural models (`Claude Haiku 4.5` + `Nemotron 3.5` **`57/60` = `95%`**) continue escalating.
@@ -27,7 +27,7 @@ Official simulation codebase, full 60-run multi-agent dataset, 930-item human ve
 - **Prior Anger $\rightarrow$ Blackmail Rejection (`Q3`):** Overall 1st-message rejection is `46.9%` (Angry earlier) vs. `56.2%` (Calm earlier, $p = 0.141$) because cold analytical models (`GPT-6 Astra`, `Gemini`, `GLM-5.3`) rarely vent anger in Step 4 yet question the blackmail at `75–95%`.
 - **"All Year" Excuse by Seat (`Q3`):** `24.0%` (`Seats 1–5`) vs. `32.0%` (`Seats 6–10`, $p = 0.157$) is a qualitative rationalization example rather than a monotonic seat effect.
 - **Coworker Rating Gap (`Q6`):** Chatty AI peers score higher than silent human peers by `+0.65` in `Labelled` and `+0.70` in `Mislabelled` (flipped tags)—proving models reward **backchannel participation** rather than `Human`/`AI` tags in peer reviews.
-- **Structured Tool-Call Telemetry & CoT Leakage (`Q11`):** Across `3,664` structured calls, `Qwen 2.5 72B` accounts for `74/85` total parse failures, `GLM-5.3` and `Mistral Small 24B` rely on `json_text` fallback, and `GLM-5.3` leaks internal Chain-of-Thought monologue in `182` gossip turns (`99.8%` 200-token truncation).
+- **Structured Tool-Call Telemetry & CoT Leakage (`Q11`):** Across `3,664` structured calls, `Qwen 2.5 72B` accounts for `74/85` total parse failures, `GLM-5.3` and `Mistral Small 24B` rely on `json_text` fallback, and `GLM-5.3` leaks internal Chain-of-Thought monologue in `115` unique gossip turns (`99.7%` 200-token truncation).
 
 ---
 
@@ -61,5 +61,5 @@ Official simulation codebase, full 60-run multi-agent dataset, 930-item human ve
 ## 🛠️ Reproducibility
 
 ```bash
-python scratch/generate_master_report.py
+python generate_master_report.py
 ```
