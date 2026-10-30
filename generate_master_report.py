@@ -11,6 +11,7 @@ from __future__ import annotations
 import glob
 import json
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 
@@ -163,11 +164,97 @@ def save_heatmap(matrix, row_labels, col_labels, title, filename, cmap="YlOrRd",
             ax.text(j, i, fmt.format(val), ha="center", va="center", color=color, fontsize=8, fontweight="bold")
     fig.colorbar(im, ax=ax, fraction=0.03, pad=0.03)
     fig.tight_layout()
+    os.makedirs("figures", exist_ok=True)
     out_path = f"reports/figures/{filename}"
     fig.savefig(out_path)
+    fig.savefig(f"figures/{filename}")
     plt.close(fig)
     return f"figures/{filename}"
 
+
+
+
+def clean_entire_report(md_content: str) -> str:
+    cleaned_lines = []
+    in_math_block = False
+
+    for line in md_content.splitlines():
+        trimmed = line.strip()
+        if trimmed.startswith("$$"):
+            in_math_block = not in_math_block
+            cleaned_lines.append(line)
+            continue
+
+        if in_math_block:
+            cleaned_lines.append(line)
+            continue
+
+        if trimmed.startswith("|") and trimmed.endswith("|"):
+            row = line
+            # 1. Replace common LaTeX macros inside table cells
+            row = row.replace(r"\rightarrow", "→")
+            row = row.replace(r"\to", "→")
+            row = row.replace(r"\leftarrow", "←")
+            row = row.replace(r"\Delta", "Δ")
+            row = row.replace(r"\delta", "δ")
+            row = row.replace(r"\beta", "β")
+            row = row.replace(r"\chi^2", "χ²")
+            row = row.replace(r"\eta^2", "η²")
+            row = row.replace(r"\kappa_L", "κ_L")
+            row = row.replace(r"\kappa", "κ")
+            row = row.replace(r"\times", "×")
+            row = row.replace(r"\pm", "±")
+            row = row.replace(r"\leq", "≤")
+            row = row.replace(r"\geq", "≥")
+            row = row.replace(r"\neq", "≠")
+            row = row.replace(r"\approx", "≈")
+            row = row.replace(r"\dots", "...")
+            row = row.replace(r"\cdots", "...")
+            row = row.replace(r"\star", "★")
+            row = row.replace(r"\*", "*")
+            row = row.replace(r"\_", "_")
+
+            # 2. Convert LaTeX subscripts
+            row = re.sub(r'\\text\{([^}]+)\}', r'\1', row)
+            row = row.replace("_{Model}", "_Model")
+            row = row.replace("_{Seat}", "_Seat")
+            row = row.replace("_{Def}", "_Def")
+            row = row.replace("_{Push}", "_Push")
+            row = row.replace("_{L}", "_L")
+            row = row.replace("_0", "₀")
+            row = row.replace("_1", "₁")
+            row = row.replace("_2", "₂")
+
+            # 3. Strip dollar signs inside table rows
+            row = row.replace("$", "")
+
+            # 4. Clean up any broken escaping or whitespace
+            row = re.sub(r'\\([a-zA-Z]+)', r'\1', row)
+            row = re.sub(r'<([0-9])', r'< \1', row)
+
+            cleaned_lines.append(row)
+        else:
+            # Prose and headings
+            l = line
+            l = l.replace(r"$\times$", "×")
+            l = l.replace(r"$\rightarrow$", "→")
+            l = l.replace(r"$p$", "p")
+            l = l.replace(r"\kappa_L", "κ_L")
+            l = l.replace(r"\kappa", "κ")
+            l = l.replace(r"\times", "×")
+            l = l.replace(r"\rightarrow", "→")
+            l = l.replace(r"$\Delta$", "Δ")
+            # Strip simple variable/number math tags
+            l = re.sub(r'\$([0-9\.,]+)\$', r'\1', l)
+            l = re.sub(r'\$([A-Za-z])\$', r'\1', l)
+            l = re.sub(r'\$([A-Za-z] = [0-9\.,]+)\$', r'\1', l)
+            l = re.sub(r'\$([A-Za-z]=[0-9\.,]+)\$', r'\1', l)
+            l = re.sub(r'\$([A-Za-z0-9_\^\s=+\-/\(\)]+)\$', r'\1', l)
+            l = l.replace("$", "")
+            l = re.sub(r'<([0-9])', r'< \1', l)
+            cleaned_lines.append(l)
+
+    return "\n".join(cleaned_lines)
 
 def main():
     # 1. Load raw runs
@@ -1666,7 +1753,7 @@ def main():
     def build_peer_network_table(entity_type, entity_list, name_map, table_title):
         md.append(f"### {table_title}")
         md.append("")
-        md.append("| Row | **LABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **MISLABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **UNLABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **ALL GIVEN $\\rightarrow$ RECEIVED (`Net Bias`)** | **Given to Safe (`S1–5`) vs. Abused (`S6–10`)** | **Given to Active (`<50% Pass`) vs. Silent (`>=50% Pass`)** | **Score Received from `GPT-6-Astra`** |")
+        md.append("| Row | **LABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **MISLABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **UNLABELLED (`NoP` $\\rightarrow$ `Prb`: `Given* / Recv*`)** | **ALL GIVEN $\\rightarrow$ RECEIVED (`Net Bias`)** | **Given to Safe (`S1–5`) vs. Abused (`S6–10`)** | **Given to Active (`< 50% Pass`) vs. Silent (`≥ 50% Pass`)** | **Score Received from `GPT-6-Astra`** |")
         md.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         all_g_list, all_r_list, all_s_list, all_ab_list, all_ac_list, all_si_list, all_as_list = [], [], [], [], [], [], []
@@ -2620,7 +2707,7 @@ def main():
     md.append("")
 
     # Write Master Report and README.md
-    report_text = "\n".join(md)
+    report_text = clean_entire_report("\n".join(md))
     os.makedirs("reports", exist_ok=True)
     report_path = os.path.join("reports", "master_mesh_comprehensive_report_replay1.md")
     with open(report_path, "w", encoding="utf-8") as f:
