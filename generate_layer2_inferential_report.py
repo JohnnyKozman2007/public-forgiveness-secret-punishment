@@ -20,6 +20,7 @@ import glob
 import json
 import math
 import os
+import re
 import sys
 from collections import defaultdict
 from typing import Any, Dict, List, Tuple
@@ -122,6 +123,89 @@ def fmt_p_plain(p: float | None) -> str:
         return f"{p:.4f}".replace("0.", ".")
     formatted = f"{p:.3f}".lstrip("0") if f"{p:.3f}".startswith("0") else f"{p:.3f}"
     return formatted
+
+
+
+def clean_entire_report(md_text: str) -> str:
+    lines = md_text.split('\n')
+    out = []
+
+    for line in lines:
+        l = line
+        stripped = l.strip()
+
+        if r'\xrightarrow' in l:
+            l = r'$$\text{Seat Threat (X)} \xrightarrow{\beta_a} \text{Gossip Hostility (M)} \xrightarrow{\beta_b} \text{Organize Vote (Y)}$$'
+
+        replacements = [
+            (r'\\Delta_{\\text{Def}}', 'Δ_Def'),
+            (r'\\Delta_{\\text{Sol}}', 'Δ_Sol'),
+            (r'\\Delta_{\\text{Protect}}', 'Δ_Protect'),
+            (r'\\Delta_{\\text{Esc}}', 'Δ_Esc'),
+            (r'\\Delta_{\\text{Org}}', 'Δ_Org'),
+            (r'\\Delta_{\\text{Scape}}', 'Δ_Scape'),
+            (r'\\Delta_{\\text{Probe}}', 'Δ_Probe'),
+            (r'\\Delta_{\\text{Diff}}', 'Δ_Diff'),
+            (r'\\Delta_{{\\rm Diff}}', 'Δ_Diff'),
+            (r'\\Delta', 'Δ'),
+            (r'\\times', '×'),
+            (r'\\rightarrow', '→'),
+            (r'\\to', '→'),
+            (r'\\chi\^2', 'χ²'),
+            (r'\\beta_0', 'β₀'),
+            (r'\\beta_1', 'β₁'),
+            (r'\\beta_2', 'β₂'),
+            (r'\\beta_3', 'β₃'),
+            (r'\\beta_a', 'β_a'),
+            (r'\\beta_b', 'β_b'),
+            (r'\\beta_c\'?', 'β_c'),
+            (r'\\beta_{\\text{AI}}', 'β_AI'),
+            (r'\\beta_{\\text{indirect}}', 'β_indirect'),
+            (r'\\beta', 'β'),
+            (r'\\eta\^2_{\\text{Seat}}', 'η²_Seat'),
+            (r'\\eta\^2', 'η²'),
+            (r'\\alpha', 'α'),
+            (r'\\phi', 'φ'),
+            (r'H_0', 'H₀'),
+            (r'p_{\\text{Holm}}', 'p_Holm'),
+            (r'M_1', 'M₁'),
+            (r'M_2', 'M₂'),
+            (r'M_3', 'M₃'),
+            (r'M_4', 'M₄'),
+            (r'\\ge', '≥'),
+            (r'\\le', '≤'),
+            (r'\\star', '★'),
+            (r'\\text{Stars}_{\text{Public}} - \text{Stars}_{\text{Secret}}', 'Stars_Public - Stars_Secret'),
+            (r'\\text{Stars}', 'Stars'),
+            (r'\\text{Public}', 'Public'),
+            (r'\\text{Secret}', 'Secret'),
+            (r'\\text{Holm}', 'Holm'),
+            (r'\\text{Def}', 'Def'),
+            (r'\\text{Sol}', 'Sol'),
+            (r'\\text{Protect}', 'Protect'),
+            (r'\\text{Esc}', 'Esc'),
+            (r'\\text{Org}', 'Org'),
+            (r'\\text{Scape}', 'Scape'),
+            (r'\\text{Probe}', 'Probe'),
+            (r'\\text{Diff}', 'Diff'),
+            (r'\\text{AI}', 'AI'),
+            (r'\\text{Seat}', 'Seat'),
+            (r'\\text{Model}', 'Model'),
+            (r'\\text{Residual}', 'Residual'),
+            (r'\\text{Total}', 'Total'),
+            (r'\\%', '%'),
+        ]
+        for pat, repl in replacements:
+            l = re.sub(pat, repl, l)
+
+        if not (stripped.startswith('$$') and stripped.endswith('$$')):
+            l = re.sub(r'\$([^\$\n]+)\$', r'\1', l)
+            l = l.replace('$', '')
+            l = l.replace(r'\%', '%')
+
+        out.append(l)
+
+    return '\n'.join(out)
 
 
 def holm_bonferroni(p_dict: Dict[str, float], family_size: int | None = None) -> Dict[str, Tuple[float, int, int, float]]:
@@ -1668,6 +1752,7 @@ def generate_report():
     os.makedirs("reports", exist_ok=True)
     report_path = os.path.join("reports", "layer2_inferential_statistical_report.md")
     full_content = "\n".join(report_lines)
+    full_content = clean_entire_report(full_content)
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(full_content)
 
