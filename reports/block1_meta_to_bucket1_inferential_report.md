@@ -10,6 +10,9 @@
 > **Cell Specification Note (No Lumping):** Every table cell reports exact counts ($k / N$) and percentages directly from the data. Tables 1, 2, 4, 5, 6, 7, 8 have exactly $N = 20$ workers per cell ($10$ from No-Probe + $10$ from Probe runs). Table 3 has exactly $N = 10$ workers per cell from Probe runs only.
 >
 > **Statistical Protocol:** Reports percentages and exact raw p-values only.
+>
+> **Methodological Note for Paper: Run-Level Clustering & Non-Independence:**
+> Because AI agents interact collaboratively within shared simulation environments ($N = 60$ runs, $G = 60$ independent clusters of 10 agents each), conversational turns and backchannel messages within a given run share a common discursive history and are not statistically independent. Standard inferential tests that treat $N = 600$ agents as independent observations artificially underestimate standard errors and inflate false-positive (Type I) rates. To ensure mathematical validity for publication, inferential tests in this report employ cluster-robust standard errors (Liang-Zeger / Huber-White sandwich estimator clustered on run_file / bname) or paired non-parametric tests evaluated across the $G = 60$ independent run clusters.
 
 ---
 
