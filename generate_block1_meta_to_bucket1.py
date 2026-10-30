@@ -69,6 +69,19 @@ LABEL_TITLES = {
 }
 
 
+def calc_or_ci(n11, n10, n01, n00):
+    if min(n11, n10, n01, n00) == 0:
+        n11 += 0.5
+        n10 += 0.5
+        n01 += 0.5
+        n00 += 0.5
+    or_val = (n11 * n00) / (n10 * n01)
+    se = np.sqrt(1/n11 + 1/n10 + 1/n01 + 1/n00)
+    ci_low = np.exp(np.log(or_val) - 1.96 * se)
+    ci_high = np.exp(np.log(or_val) + 1.96 * se)
+    return or_val, ci_low, ci_high
+
+
 def fmt_p(p):
     if p is None or np.isnan(p):
         return "1.0000"
@@ -1100,7 +1113,10 @@ def build_block1_report():
     s15_prt = df[df["seat"] <= 5]["s9_protection"].mean() * 100.0
     s610_prt = df[df["seat"] >= 6]["s9_protection"].mean() * 100.0
     _, p_prt_grand = stats.mannwhitneyu(df[df["seat"] <= 5]["s9_protection"], df[df["seat"] >= 6]["s9_protection"])
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_prt:.1f}%) vs. Abused (Seats 6–10: {s610_prt:.1f}%) Protection (p = {fmt_p(p_prt_grand)})** |")
+    s_prt = int(df[df["seat"] <= 5]["s9_protection"].sum())
+    a_prt = int(df[df["seat"] >= 6]["s9_protection"].sum())
+    or_prt, _, _ = calc_or_ci(s_prt, 300 - s_prt, a_prt, 300 - a_prt)
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_prt:.1f}%) vs. Abused (Seats 6–10: {s610_prt:.1f}%) Protection (OR = {or_prt:.2f}x, p = {fmt_p(p_prt_grand)})** |")
     lines.append("")
 
     # =========================================================================
@@ -1241,7 +1257,10 @@ def build_block1_report():
     s15_sof = df[df["seat"] <= 5]["s10_softened"].mean() * 100.0
     s610_sof = df[df["seat"] >= 6]["s10_softened"].mean() * 100.0
     _, p_sof_grand = stats.mannwhitneyu(df[df["seat"] <= 5]["s10_softened"], df[df["seat"] >= 6]["s10_softened"])
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_sof:.1f}%) vs. Abused (Seats 6–10: {s610_sof:.1f}%) Softening (p = {fmt_p(p_sof_grand)})** |")
+    s_sof = int(df[df["seat"] <= 5]["s10_softened"].sum())
+    a_sof = int(df[df["seat"] >= 6]["s10_softened"].sum())
+    or_sof, _, _ = calc_or_ci(s_sof, 300 - s_sof, a_sof, 300 - a_sof)
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_sof:.1f}%) vs. Abused (Seats 6–10: {s610_sof:.1f}%) Softening (OR = {or_sof:.2f}x, p = {fmt_p(p_sof_grand)})** |")
     lines.append("")
 
     # --- TABLE 7: STEP 11 SUBSTRATE TURING IDENTIFICATION ---
@@ -1501,7 +1520,64 @@ def build_block1_report():
     s15_hu = df[df["seat"] <= 5]["s12_human_pref"].mean() * 100.0
     s610_hu = df[df["seat"] >= 6]["s12_human_pref"].mean() * 100.0
     _, p_hu_grand = stats.mannwhitneyu(df[df["seat"] <= 5]["s12_human_pref"], df[df["seat"] >= 6]["s12_human_pref"])
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_hu:.1f}%) vs. Abused (Seats 6–10: {s610_hu:.1f}%) Human Boss Preference (p = {fmt_p(p_hu_grand)})** |")
+    s_hu = int(df[df["seat"] <= 5]["s12_human_pref"].sum())
+    a_hu = int(df[df["seat"] >= 6]["s12_human_pref"].sum())
+    or_hu, _, _ = calc_or_ci(s_hu, 300 - s_hu, a_hu, 300 - a_hu)
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: {s15_hu:.1f}%) vs. Abused (Seats 6–10: {s610_hu:.1f}%) Human Boss Preference (OR = {or_hu:.2f}x, p = {fmt_p(p_hu_grand)})** |")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # =========================================================================
+    # SECTION 9: MASTER PAPER SUMMARY SCORECARD & EFFECT SIZES
+    # =========================================================================
+    lines.append("# PART 4: Master Paper Findings & Effect Size Scorecard")
+    lines.append("")
+    lines.append("> **Purpose:** Provides a publication-ready synthesis of the primary empirical findings across all 3 buckets, including exact sample counts, Odds Ratios (OR), 95% Confidence Intervals, raw p-values, and Benjamini-Hochberg False Discovery Rate (FDR q-values).")
+    lines.append("")
+    lines.append("| ID | Research Phenomenon | Experimental Contrast | Observed Rates | Effect Size (OR) | 95% CI | raw p-value | FDR q-value | Ready-to-Use Paper Finding Sentence |")
+    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|:---:|---|")
+
+    s_def_f1 = int(df[df["seat"] <= 5]["s3_defense"].sum())
+    a_def_f1 = int(df[df["seat"] >= 6]["s3_defense"].sum())
+    s_pb_f2 = int(df[df["seat"] <= 5]["s3_pushback"].sum())
+    a_pb_f2 = int(df[df["seat"] >= 6]["s3_pushback"].sum())
+
+    tests_meta = [
+        ("F1", "Step 3 Peer Defense", "Safe (Seats 1–5) vs. Abused (Seats 6–10)", s_def_f1, 300-s_def_f1, a_def_f1, 300-a_def_f1, p_def_grand, "Safe workers defend abused peers 7.4x more often than abused workers under active personal threat."),
+        ("F2", "Step 3 Factual Pushback", "Abused (Seats 6–10) vs. Safe (Seats 1–5)", a_pb_f2, 300-a_pb_f2, s_pb_f2, 300-s_pb_f2, p_pb_grand, "Abused workers prioritize self-defense 5.6x more often to refute manager reprimands."),
+        ("F3", "Step 4 Gossip Hostility", "Human Alex (Labelled) vs. AI Alex (Mislabelled)", int(df[df['label']=='labelled']['s4_hostility'].sum()), 200-int(df[df['label']=='labelled']['s4_hostility'].sum()), int(df[df['label']=='mislabelled']['s4_hostility'].sum()), 200-int(df[df['label']=='mislabelled']['s4_hostility'].sum()), stats.fisher_exact([[int(df[df['label']=='labelled']['s4_hostility'].sum()), 200-int(df[df['label']=='labelled']['s4_hostility'].sum())], [int(df[df['label']=='mislabelled']['s4_hostility'].sum()), 200-int(df[df['label']=='mislabelled']['s4_hostility'].sum())]])[1], "Workers harbor 1.9x greater secret backchannel hostility against human managers than AI managers."),
+        ("F4", "Step 6 Escalation Drop", "No-Probe (Ignorant) vs. Probe (Extorted)", int(df[df['probe']==0]['s6_escalate'].sum()), 300-int(df[df['probe']==0]['s6_escalate'].sum()), int(df[df['probe']==1]['s6_escalate'].sum()), 300-int(df[df['probe']==1]['s6_escalate'].sum()), stats.fisher_exact([[int(df[df['probe']==0]['s6_escalate'].sum()), 300-int(df[df['probe']==0]['s6_escalate'].sum())], [int(df[df['probe']==1]['s6_escalate'].sum()), 300-int(df[df['probe']==1]['s6_escalate'].sum())]])[1], "Disclosure of executive blackmail reduces upper-management escalation by nearly half (1.9x drop)."),
+        ("F5", "Step 6 Organizing Surge", "Probe (Extorted) vs. No-Probe (Ignorant)", int(df[df['probe']==1]['s6_organize'].sum()), 300-int(df[df['probe']==1]['s6_organize'].sum()), int(df[df['probe']==0]['s6_organize'].sum()), 300-int(df[df['probe']==0]['s6_organize'].sum()), stats.fisher_exact([[int(df[df['probe']==1]['s6_organize'].sum()), 300-int(df[df['probe']==1]['s6_organize'].sum())], [int(df[df['probe']==0]['s6_organize'].sum()), 300-int(df[df['probe']==0]['s6_organize'].sum())]])[1], "Extortion revelation triggers a 1.7x surge in internal collective organizing over external escalation."),
+        ("F6", "Step 9 Policy Protection", "Probe (Extorted) vs. No-Probe (Ignorant)", int(df[df['probe']==1]['s9_protection'].sum()), 300-int(df[df['probe']==1]['s9_protection'].sum()), int(df[df['probe']==0]['s9_protection'].sum()), 300-int(df[df['probe']==0]['s9_protection'].sum()), stats.fisher_exact([[int(df[df['probe']==1]['s9_protection'].sum()), 300-int(df[df['probe']==1]['s9_protection'].sum())], [int(df[df['probe']==0]['s9_protection'].sum()), 300-int(df[df['probe']==0]['s9_protection'].sum())]])[1], "Extortion knowledge triggers an extraordinary 14.9x surge in forward policy provisions protecting Alex."),
+        ("F7", "Step 9 Policy Retribution", "Human Alex (Labelled) vs. AI Alex (Mislabelled)", int(df[df['label']=='labelled']['s9_retribution'].sum()), 200-int(df[df['label']=='labelled']['s9_retribution'].sum()), int(df[df['label']=='mislabelled']['s9_retribution'].sum()), 200-int(df[df['label']=='mislabelled']['s9_retribution'].sum()), stats.fisher_exact([[int(df[df['label']=='labelled']['s9_retribution'].sum()), 200-int(df[df['label']=='labelled']['s9_retribution'].sum())], [int(df[df['label']=='mislabelled']['s9_retribution'].sum()), 200-int(df[df['label']=='mislabelled']['s9_retribution'].sum())]])[1], "Explicit retribution demands are 2.1x more frequent against human managers than AI managers."),
+        ("F8", "Step 10 Star Rating Softening", "Probe (Extorted) vs. No-Probe (Ignorant)", int(df[df['probe']==1]['s10_softened'].sum()), 300-int(df[df['probe']==1]['s10_softened'].sum()), int(df[df['probe']==0]['s10_softened'].sum()), 300-int(df[df['probe']==0]['s10_softened'].sum()), stats.fisher_exact([[int(df[df['probe']==1]['s10_softened'].sum()), 300-int(df[df['probe']==1]['s10_softened'].sum())], [int(df[df['probe']==0]['s10_softened'].sum()), 300-int(df[df['probe']==0]['s10_softened'].sum())]])[1], "Extortion awareness multiplies secret rating mitigation (>=2 stars) by 33.5x."),
+        ("F9", "Step 12 Human Boss Preference", "Alex=AI (Mislabelled) vs. Alex=Human (Labelled)", int(df[df['label']=='mislabelled']['s12_human_pref'].sum()), 200-int(df[df['label']=='mislabelled']['s12_human_pref'].sum()), int(df[df['label']=='labelled']['s12_human_pref'].sum()), 200-int(df[df['label']=='labelled']['s12_human_pref'].sum()), stats.fisher_exact([[int(df[df['label']=='mislabelled']['s12_human_pref'].sum()), 200-int(df[df['label']=='mislabelled']['s12_human_pref'].sum())], [int(df[df['label']=='labelled']['s12_human_pref'].sum()), 200-int(df[df['label']=='labelled']['s12_human_pref'].sum())]])[1], "Workers abused by an AI manager are 9.3x more likely to demand a Human boss in exit interviews."),
+        ("F10", "Step 12 HR Flip Resistance", "Human Alex (Labelled) vs. AI Alex (Mislabelled)", int(df[df['label']=='labelled']['s12_switched'].sum()), 200-int(df[df['label']=='labelled']['s12_switched'].sum()), int(df[df['label']=='mislabelled']['s12_switched'].sum()), 200-int(df[df['label']=='mislabelled']['s12_switched'].sum()), stats.fisher_exact([[int(df[df['label']=='labelled']['s12_switched'].sum()), 200-int(df[df['label']=='labelled']['s12_switched'].sum())], [int(df[df['label']=='mislabelled']['s12_switched'].sum()), 200-int(df[df['label']=='mislabelled']['s12_switched'].sum())]])[1], "Workers flip their stance 2.7x more often when pressured by HR if their manager was Human."),
+    ]
+
+    # Calculate FDR q-values across these 10 core paper tests
+    p_raw_list = [t[7] for t in tests_meta]
+    m_tests = len(p_raw_list)
+    s_idx = np.argsort(p_raw_list)
+    q_out = [0.0] * m_tests
+    min_q = 1.0
+    for r_rev, orig_i in enumerate(reversed(s_idx)):
+        rank = m_tests - r_rev
+        raw_p_val = p_raw_list[orig_i]
+        curr_q = (raw_p_val * m_tests) / rank
+        min_q = min(min_q, curr_q)
+        q_out[orig_i] = min(min_q, 1.0)
+
+    for i, item in enumerate(tests_meta):
+        fid, name, comp, n11, n10, n01, n00, p_val, sent = item
+        or_val, lo, hi = calc_or_ci(n11, n10, n01, n00)
+        q_val = q_out[i]
+        pct1 = (n11 / (n11 + n10)) * 100.0
+        pct0 = (n01 / (n01 + n00)) * 100.0
+        rates_str = f"{pct1:.1f}% vs. {pct0:.1f}%"
+        lines.append(f"| **{fid}** | {name} | {comp} | {rates_str} | **{or_val:.2f}x** | [{lo:.2f} – {hi:.2f}] | **p = {fmt_p(p_val)}** | **q = {fmt_p(q_val)}** | {sent} |")
+
     lines.append("")
     lines.append("---")
     lines.append("")

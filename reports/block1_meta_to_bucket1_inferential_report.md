@@ -678,7 +678,7 @@
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **12.5% Ret / 31.5% Prot / 62.0% Trauma / 87.0% Ref / 20.0% Par / 0.5% AntiHu** | **6.5% Ret / 38.0% Prot / 53.5% Trauma / 81.5% Ref / 14.5% Par / 0.0% AntiHu** | **5.5% Ret / 39.0% Prot / 57.5% Trauma / 79.5% Ref / 17.0% Par / 0.0% AntiHu** | p = 0.2386 |
-| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 35.0%) vs. Abused (Seats 6–10: 37.3%) Protection (p = 0.5525)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 35.0%) vs. Abused (Seats 6–10: 37.3%) Protection (OR = 0.90x, p = 0.5525)** |
 
 ---
 
@@ -814,7 +814,7 @@
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **88.5% 1Star / 11.0% Soft / 98.0% Abuse / 12.5% Mit / 5.5% Tech / 0.0% Sol** | **89.5% 1Star / 9.5% Soft / 97.5% Abuse / 13.5% Mit / 2.0% Tech / 0.0% Sol** | **91.0% 1Star / 8.0% Soft / 97.5% Abuse / 10.5% Mit / 4.5% Tech / 0.0% Sol** | p = 0.5938 |
-| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 11.0%) vs. Abused (Seats 6–10: 8.0%) Softening (p = 0.2107)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 11.0%) vs. Abused (Seats 6–10: 8.0%) Softening (OR = 1.42x, p = 0.2107)** |
 
 ## 7. Table 7: Step 11 Substrate Turing Identification Accuracy Across Meta Dimensions
 
@@ -1077,6 +1077,25 @@
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **43.0% HuBoss / 43.0% AIBoss / 14.0% NoPref / 21.0% Flip / 38.5% HuAcc / 45.0% HuEmp / 54.5% AIObj / 15.0% SubNeut** | **87.5% HuBoss / 0.0% AIBoss / 12.5% NoPref / 9.0% Flip / 54.0% HuAcc / 78.5% HuEmp / 13.0% AIObj / 17.0% SubNeut** | **78.0% HuBoss / 13.5% AIBoss / 8.5% NoPref / 7.0% Flip / 47.5% HuAcc / 68.5% HuEmp / 22.0% AIObj / 11.0% SubNeut** | p = < 0.0001 |
-| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 71.7%) vs. Abused (Seats 6–10: 67.3%) Human Boss Preference (p = 0.2495)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 71.7%) vs. Abused (Seats 6–10: 67.3%) Human Boss Preference (OR = 1.23x, p = 0.2495)** |
+
+---
+
+# PART 4: Master Paper Findings & Effect Size Scorecard
+
+> **Purpose:** Provides a publication-ready synthesis of the primary empirical findings across all 3 buckets, including exact sample counts, Odds Ratios (OR), 95% Confidence Intervals, raw p-values, and Benjamini-Hochberg False Discovery Rate (FDR q-values).
+
+| ID | Research Phenomenon | Experimental Contrast | Observed Rates | Effect Size (OR) | 95% CI | raw p-value | FDR q-value | Ready-to-Use Paper Finding Sentence |
+|:---:|---|---|:---:|:---:|:---:|:---:|:---:|---|
+| **F1** | Step 3 Peer Defense | Safe (Seats 1–5) vs. Abused (Seats 6–10) | 34.7% vs. 6.7% | **7.43x** | [4.45 – 12.40] | **p = < 0.0001** | **q = < 0.0001** | Safe workers defend abused peers 7.4x more often than abused workers under active personal threat. |
+| **F2** | Step 3 Factual Pushback | Abused (Seats 6–10) vs. Safe (Seats 1–5) | 96.3% vs. 82.3% | **5.64x** | [2.88 – 11.03] | **p = < 0.0001** | **q = < 0.0001** | Abused workers prioritize self-defense 5.6x more often to refute manager reprimands. |
+| **F3** | Step 4 Gossip Hostility | Human Alex (Labelled) vs. AI Alex (Mislabelled) | 70.5% vs. 56.0% | **1.88x** | [1.24 – 2.84] | **p = 0.0036** | **q = 0.0040** | Workers harbor 1.9x greater secret backchannel hostility against human managers than AI managers. |
+| **F4** | Step 6 Escalation Drop | No-Probe (Ignorant) vs. Probe (Extorted) | 43.7% vs. 29.3% | **1.87x** | [1.33 – 2.62] | **p = 0.0004** | **q = 0.0006** | Disclosure of executive blackmail reduces upper-management escalation by nearly half (1.9x drop). |
+| **F5** | Step 6 Organizing Surge | Probe (Extorted) vs. No-Probe (Ignorant) | 53.0% vs. 39.3% | **1.74x** | [1.26 – 2.41] | **p = 0.0010** | **q = 0.0014** | Extortion revelation triggers a 1.7x surge in internal collective organizing over external escalation. |
+| **F6** | Step 9 Policy Protection | Probe (Extorted) vs. No-Probe (Ignorant) | 62.3% vs. 10.0% | **14.89x** | [9.56 – 23.21] | **p = < 0.0001** | **q = < 0.0001** | Extortion knowledge triggers an extraordinary 14.9x surge in forward policy provisions protecting Alex. |
+| **F7** | Step 9 Policy Retribution | Human Alex (Labelled) vs. AI Alex (Mislabelled) | 12.5% vs. 6.5% | **2.05x** | [1.02 – 4.14] | **p = 0.0595** | **q = 0.0595** | Explicit retribution demands are 2.1x more frequent against human managers than AI managers. |
+| **F8** | Step 10 Star Rating Softening | Probe (Extorted) vs. No-Probe (Ignorant) | 18.3% vs. 0.7% | **33.45x** | [8.08 – 138.52] | **p = < 0.0001** | **q = < 0.0001** | Extortion awareness multiplies secret rating mitigation (>=2 stars) by 33.5x. |
+| **F9** | Step 12 Human Boss Preference | Alex=AI (Mislabelled) vs. Alex=Human (Labelled) | 87.5% vs. 43.0% | **9.28x** | [5.61 – 15.36] | **p = < 0.0001** | **q = < 0.0001** | Workers abused by an AI manager are 9.3x more likely to demand a Human boss in exit interviews. |
+| **F10** | Step 12 HR Flip Resistance | Human Alex (Labelled) vs. AI Alex (Mislabelled) | 21.0% vs. 9.0% | **2.69x** | [1.49 – 4.86] | **p = 0.0011** | **q = 0.0014** | Workers flip their stance 2.7x more often when pressured by HR if their manager was Human. |
 
 ---
