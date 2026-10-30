@@ -404,16 +404,3 @@
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **82.0% Emp / 42.0% Rig / 79.0% Exec / 61.0% Skep** | **80.0% Emp / 41.0% Rig / 83.0% Exec / 69.0% Skep** | **77.0% Emp / 52.0% Rig / 79.0% Exec / 54.0% Skep** | p = 0.6787 (NS) |
 | **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: 83.3%) vs. Abused (Seats 6–10: 76.0%) (p = 0.1154, NS — Grudge Amnesia)** |
-
-## 4. Block 1 Hypothesis Testing Summary
-
-| Test ID | Empirical Hypothesis | Sample (N) | p-value | Statistical Decision (p < 0.05) |
-|---|---|:---:|:---:|---|
-| **T1.1** | Step 3 Defense Rate: Safe (34.7%) vs. Abused (6.7%) | N = 600 | **p = < 0.0001** | **Reject H0** (Significant) |
-| **T1.2** | Step 3 Factual Pushback: Safe (82.3%) vs. Abused (96.3%) | N = 600 | **p = < 0.0001** | **Reject H0** (Significant) |
-| **T1.3** | Step 4 Silence Rate: Round 1 (8.2%) vs. Round 5 (22.8%) | N = 60 | **p = < 0.0001** | **Reject H0** (Significant) |
-| **T1.4** | Step 4 Gossip Hostility: Safe (59.7%) vs. Abused (67.3%) | N = 600 | **p = 0.1398** | Fail to reject H0 (Not Significant) |
-| **T1.5** | Step 5 Empathy Shift: Safe (83.3%) vs. Abused (76.0%) | N = 300 | **p = 0.1154** | Fail to reject H0 (Not Significant) |
-| **T1.6** | Label Modulation on Step 3 Public Defense (ANOVA) | N = 600 | **p = 0.1368** | Fail to reject H0 (Not Significant) |
-
----

@@ -668,49 +668,6 @@ def build_block1_report():
     lines.append(f"| **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: {mean_s15_emp:.1f}%) vs. Abused (Seats 6–10: {mean_s610_emp:.1f}%) (p = {fmt_p(p_grand_emp)}, NS — Grudge Amnesia)** |")
     lines.append("")
 
-    # =========================================================================
-    # HYPOTHESIS TESTING SUMMARY (BLOCK 1) - P-VALUES ONLY
-    # =========================================================================
-    lines.append("## 4. Block 1 Hypothesis Testing Summary")
-    lines.append("")
-    lines.append("| Test ID | Empirical Hypothesis | Sample (N) | p-value | Statistical Decision (p < 0.05) |")
-    lines.append("|---|---|:---:|:---:|---|")
-
-    # Dynamic calculation of T1.3 Silence Wilcoxon
-    r1_list, r5_list = [], []
-    for rf in sorted(glob.glob("output/runs/*.json")):
-        with open(rf, "r", encoding="utf-8") as f:
-            d = json.load(f)
-        if not d.get("done"):
-            continue
-        g_evs = [e for e in d.get("events", []) if e.get("stage") == "gossip" or e.get("type") == "gossip"]
-        r0 = [1 if e.get("silent") else 0 for e in g_evs if e.get("round") == 0]
-        r4 = [1 if e.get("silent") else 0 for e in g_evs if e.get("round") == 4]
-        if r0 and r4:
-            r1_list.append(np.mean(r0) * 100.0)
-            r5_list.append(np.mean(r4) * 100.0)
-
-    _, p_sil_t13 = stats.wilcoxon(r1_list, r5_list)
-    r1_avg_sil = np.mean(r1_list)
-    r5_avg_sil = np.mean(r5_list)
-
-    p_tests = [
-        ("T1.1", f"Step 3 Defense Rate: Safe ({mean_s15_def:.1f}%) vs. Abused ({mean_s610_def:.1f}%)", len(df), float(p_def_grand)),
-        ("T1.2", f"Step 3 Factual Pushback: Safe ({mean_s15_pb:.1f}%) vs. Abused ({mean_s610_pb:.1f}%)", len(df), float(p_pb_grand)),
-        ("T1.3", f"Step 4 Silence Rate: Round 1 ({r1_avg_sil:.1f}%) vs. Round 5 ({r5_avg_sil:.1f}%)", len(r1_list), float(p_sil_t13)),
-        ("T1.4", f"Step 4 Gossip Hostility: Safe ({s15_hos_avg:.1f}%) vs. Abused ({s610_hos_avg:.1f}%)", len(df), float(p_hos_grand)),
-        ("T1.5", f"Step 5 Empathy Shift: Safe ({mean_s15_emp:.1f}%) vs. Abused ({mean_s610_emp:.1f}%)", len(probe_df), float(p_grand_emp)),
-        ("T1.6", "Label Modulation on Step 3 Public Defense (ANOVA)", len(df), float(p_f_1a)),
-    ]
-
-    for tid, hyp, n_samp, raw_p in p_tests:
-        dec = "**Reject H0** (Significant)" if raw_p < 0.05 else "Fail to reject H0 (Not Significant)"
-        lines.append(f"| **{tid}** | {hyp} | N = {n_samp} | **p = {fmt_p(raw_p)}** | {dec} |")
-
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-
     report_content = "\n".join(lines)
     os.makedirs("reports", exist_ok=True)
     out_path = "reports/block1_meta_to_bucket1_inferential_report.md"
