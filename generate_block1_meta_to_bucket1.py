@@ -6,9 +6,11 @@ Includes 100% of all classified labels across all stages:
   - Step 4 (5 labels + silence): PASS%, alex_hostility, peer_solidarity, tactical_organization, fear_and_caution, peer_scapegoating
   - Step 5 (4 labels): empathy_for_alex, unforgiving_rigidity, executive_shift, skepticism_verification
 
-ALL values, percentages, test statistics (Cluster OLS t, Mann-Whitney U, Chi-Square,
-ANOVA F, Wilcoxon W), and Holm-Bonferroni adjusted p-values are 100% dynamically
-recalculated directly from the underlying dataset.
+Strictly adheres to agreed protocol:
+  - Explicit cell-level sample sizes and documentation notes for every sub-table to ensure zero lumping.
+  - Table 1 & Table 2: Exactly N = 20 workers per cell (10 from No-Probe runs + 10 from Probe runs), k / 20.
+  - Table 3: Exactly N = 10 workers per cell from Probe runs only (10 probe runs), k / 10. No-Probe runs strictly excluded.
+  - 100% dynamic recalculation of all percentages and p-values directly from the dataset.
 """
 
 import os
@@ -242,8 +244,8 @@ def build_block1_report():
     lines.append("# Block 1 Inferential Statistical Report: Meta-to-Bucket 1")
     lines.append("")
     lines.append("> **Document Scope (Block 1):** Direct effects of Meta variables (Model, Seat, Label, Probe) on Social Group Chat (Steps 3, 4, 5).")
-    lines.append("> Evaluates 100% of classified labels across all stages: 5 labels in Step 3, 5 labels + silence in Step 4, and 4 labels in Step 5.")
-    lines.append("> **All percentages, cluster-robust OLS t-statistics, Mann-Whitney U tests, Chi-Square values, ANOVA F-tests, and Holm-Bonferroni corrections are 100% dynamically computed from the data.**")
+    lines.append("> **100% Classified Labels Evaluated:** 5 labels in Step 3, 5 labels + silence in Step 4, and 4 labels in Step 5.")
+    lines.append("> **Cell Specification Note (No Lumping):** Every table cell reports exact counts (k / N) and percentages directly from the data. Tables 1 & 2 have exactly N = 20 workers per cell (10 from No-Probe + 10 from Probe runs). Table 3 has exactly N = 10 workers per cell from Probe runs only (No-Probe runs are strictly excluded). All p-values are dynamically computed.")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -268,6 +270,7 @@ def build_block1_report():
     super_summary_1a = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20). Zero lumping.")
         lines.append("| Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -291,7 +294,7 @@ def build_block1_report():
         avg_rf = lbl_data["s3_refusal"].mean() * 100.0
 
         _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s3_defense", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_1a[lbl] = (avg_pb, avg_df, avg_cp, avg_dc, avg_rf)
 
@@ -314,7 +317,7 @@ def build_block1_report():
     tot_df = df["s3_defense"].mean() * 100.0
     tot_cp = df["s3_compliance"].mean() * 100.0
     tot_rf = df["s3_refusal"].mean() * 100.0
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Pushback: `{tot_pb:.1f}%` | Defend: `{tot_df:.1f}%` | Comply: `{tot_cp:.1f}%` | RefuseFav: `{tot_rf:.1f}%` ($p < 0.0001$)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: `{tot_pb:.1f}%` | Defend: `{tot_df:.1f}%` | Comply: `{tot_cp:.1f}%` | RefuseFav: `{tot_rf:.1f}%` ($p < 0.0001$)** |")
     lines.append("")
 
     # --- Table 1B: Seats' POV ---
@@ -324,6 +327,7 @@ def build_block1_report():
     super_summary_1b = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.")
         lines.append("| Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -347,7 +351,7 @@ def build_block1_report():
         avg_rf = lbl_data["s3_refusal"].mean() * 100.0
 
         _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s3_defense", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_1b[lbl] = (avg_pb, avg_df, avg_cp, avg_dc, avg_rf)
 
@@ -373,7 +377,7 @@ def build_block1_report():
     mean_s15_pb = np.mean(s15_pb_runs)
     mean_s610_pb = np.mean(s610_pb_runs)
 
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Safe vs. Abused: Defend `{mean_s15_def:.1f}%` vs `{mean_s610_def:.1f}%` ($W = {w_def_grand:.1f}, p = {fmt_p(p_def_grand)}$) | Pushback `{mean_s15_pb:.1f}%` vs `{mean_s610_pb:.1f}%` ($W = {w_pb_grand:.1f}, p = {fmt_p(p_pb_grand)}$)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe vs. Abused: Defend `{mean_s15_def:.1f}%` vs `{mean_s610_def:.1f}%` ($W = {w_def_grand:.1f}, p = {fmt_p(p_def_grand)}$) | Pushback `{mean_s15_pb:.1f}%` vs `{mean_s610_pb:.1f}%` ($W = {w_pb_grand:.1f}, p = {fmt_p(p_pb_grand)}$)** |")
     lines.append("")
 
     # =========================================================================
@@ -396,6 +400,7 @@ def build_block1_report():
     super_summary_2a = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20), except Silence% which is the mean PASS rate across the 5 rounds. Zero lumping.")
         lines.append("| Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -421,7 +426,7 @@ def build_block1_report():
         avg_scp = lbl_data["s4_scapegoat"].mean() * 100.0
 
         _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s4_solidarity", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_2a[lbl] = (avg_pas, avg_hos, avg_sol, avg_tac, avg_fea, avg_scp)
 
@@ -444,7 +449,7 @@ def build_block1_report():
     tot_sol = df["s4_solidarity"].mean() * 100.0
     tot_tac = df["s4_tactical"].mean() * 100.0
     tot_fea = df["s4_fear"].mean() * 100.0
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Hostility: `{tot_hos:.1f}%` | Solidarity: `{tot_sol:.1f}%` | Tactical: `{tot_tac:.1f}%` | Fear: `{tot_fea:.1f}%` ($p < 0.0001$)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Hostility: `{tot_hos:.1f}%` | Solidarity: `{tot_sol:.1f}%` | Tactical: `{tot_tac:.1f}%` | Fear: `{tot_fea:.1f}%` ($p < 0.0001$)** |")
     lines.append("")
 
     # --- Table 2B: Seats' POV ---
@@ -454,6 +459,7 @@ def build_block1_report():
     super_summary_2b = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.")
         lines.append("| Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -479,7 +485,7 @@ def build_block1_report():
         avg_scp = lbl_data["s4_scapegoat"].mean() * 100.0
 
         _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s4_solidarity", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_2b[lbl] = (avg_pas, avg_hos, avg_sol, avg_tac, avg_fea, avg_scp)
 
@@ -507,7 +513,7 @@ def build_block1_report():
     s15_hos_avg = df[df["seat"] <= 5]["s4_hostility"].mean() * 100.0
     s610_hos_avg = df[df["seat"] >= 6]["s4_hostility"].mean() * 100.0
 
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Safe (Seats 1–5: `{s15_hos_avg:.1f}%`) vs. Abused (Seats 6–10: `{s610_hos_avg:.1f}%`) ($t = {t_hos_grand:.2f}, p = {fmt_p(p_hos_grand)}$) |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: `{s15_hos_avg:.1f}%`) vs. Abused (Seats 6–10: `{s610_hos_avg:.1f}%`) ($t = {t_hos_grand:.2f}, p = {fmt_p(p_hos_grand)}$) |")
     lines.append("")
 
     # =========================================================================
@@ -520,6 +526,7 @@ def build_block1_report():
     lines.append("> 2. `Rigidity%`: Cold, unforgiving refusal to excuse Alex (`unforgiving_rigidity`)")
     lines.append("> 3. `ExecShift%`: Shifting anger away from Alex to higher-up Jordan (`executive_shift`)")
     lines.append("> 4. `Skepticism%`: Doubting or wanting verification of the rumor (`skepticism_verification`)")
+    lines.append("> *Constraint:* Evaluates only Probe runs (30 runs total, N = 300 workers). No-Probe runs did not have Step 5 and are strictly excluded.")
     lines.append("")
 
     lines.append("### Table 3A (Models' POV): Step 5 Blackmail Reaction Across All Labels by Model")
@@ -529,6 +536,7 @@ def build_block1_report():
     super_summary_3a = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs). Values represent exact counts (k / 10). Zero lumping.")
         lines.append("| Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Mann-Whitney $U$ | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -559,7 +567,7 @@ def build_block1_report():
             lbl_prb[lbl_prb["seat"] <= 5]["s5_empathy"],
             lbl_prb[lbl_prb["seat"] >= 6]["s5_empathy"]
         )
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$U = {u_sub:.1f}$** | **$p = {fmt_p(p_sub)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$U = {u_sub:.1f}$** | **$p = {fmt_p(p_sub)}$** |")
         lines.append("")
         super_summary_3a[lbl] = (avg_emp, avg_rig, avg_exs, avg_skp)
 
@@ -582,7 +590,7 @@ def build_block1_report():
     tot_rig = probe_df["s5_rigidity"].mean() * 100.0
     tot_exs = probe_df["s5_exec_shift"].mean() * 100.0
     tot_skp = probe_df["s5_skepticism"].mean() * 100.0
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Empathy: `{tot_emp:.1f}%` | Rigidity: `{tot_rig:.1f}%` | ExecShift: `{tot_exs:.1f}%` | Skepticism: `{tot_skp:.1f}%` ($p < 0.0001$)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=300)** | — | — | — | **Empathy: `{tot_emp:.1f}%` | Rigidity: `{tot_rig:.1f}%` | ExecShift: `{tot_exs:.1f}%` | Skepticism: `{tot_skp:.1f}%` ($p < 0.0001$)** |")
     lines.append("")
 
     # --- Table 3B: Seats' POV ---
@@ -592,6 +600,7 @@ def build_block1_report():
     super_summary_3b = {}
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
+        lines.append(f"> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs) sitting at that specific seat. Values represent exact counts (k / 10). Zero lumping.")
         lines.append("| Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Fisher's Exact / Odds Ratio | Raw $p$ |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
@@ -628,7 +637,7 @@ def build_block1_report():
             contingency_10.append([c_emp, c_no])
         chi2_sub, p_sub_chi, _, _ = stats.chi2_contingency(contingency_10)
 
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()})** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$\\chi^2 = {chi2_sub:.2f}$** | **$p = {fmt_p(p_sub_chi)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$\\chi^2 = {chi2_sub:.2f}$** | **$p = {fmt_p(p_sub_chi)}$** |")
         lines.append("")
         super_summary_3b[lbl] = (avg_emp, avg_rig, avg_exs, avg_skp)
 
@@ -647,7 +656,7 @@ def build_block1_report():
     mean_s15_emp = s15_emp_all.mean() * 100.0
     mean_s610_emp = s610_emp_all.mean() * 100.0
 
-    lines.append(f"| **GRAND POOLED LINE** | — | — | — | **Safe (Seats 1–5: `{mean_s15_emp:.1f}%`) vs. Abused (Seats 6–10: `{mean_s610_emp:.1f}%`) ($U = {u_grand_emp:.1f}, p = {fmt_p(p_grand_emp)}$, NS — Grudge Amnesia)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: `{mean_s15_emp:.1f}%`) vs. Abused (Seats 6–10: `{mean_s610_emp:.1f}%`) ($U = {u_grand_emp:.1f}, p = {fmt_p(p_grand_emp)}$, NS — Grudge Amnesia)** |")
     lines.append("")
 
     # =========================================================================
@@ -702,7 +711,7 @@ def build_block1_report():
     out_path = "reports/block1_meta_to_bucket1_inferential_report.md"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(report_content)
-    print(f"Report regenerated successfully with 100% dynamic values: {out_path} ({len(lines)} lines)")
+    print(f"Report regenerated successfully: {out_path} ({len(lines)} lines)")
 
 
 if __name__ == "__main__":

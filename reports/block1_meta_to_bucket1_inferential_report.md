@@ -1,8 +1,8 @@
 # Block 1 Inferential Statistical Report: Meta-to-Bucket 1
 
 > **Document Scope (Block 1):** Direct effects of Meta variables (Model, Seat, Label, Probe) on Social Group Chat (Steps 3, 4, 5).
-> Evaluates 100% of classified labels across all stages: 5 labels in Step 3, 5 labels + silence in Step 4, and 4 labels in Step 5.
-> **All percentages, cluster-robust OLS t-statistics, Mann-Whitney U tests, Chi-Square values, ANOVA F-tests, and Holm-Bonferroni corrections are 100% dynamically computed from the data.**
+> **100% Classified Labels Evaluated:** 5 labels in Step 3, 5 labels + silence in Step 4, and 4 labels in Step 5.
+> **Cell Specification Note (No Lumping):** Every table cell reports exact counts (k / N) and percentages directly from the data. Tables 1 & 2 have exactly N = 20 workers per cell (10 from No-Probe + 10 from Probe runs). Table 3 has exactly N = 10 workers per cell from Probe runs only (No-Probe runs are strictly excluded). All p-values are dynamically computed.
 
 ---
 
@@ -18,6 +18,7 @@
 ### Table 1A (Models' POV): Step 3 Public Confrontation Across All 5 Labels by Model
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20). Zero lumping.
 | Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `100.0%` | `50.0%` | `0.0%` | `100.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -30,9 +31,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `100.0%` | `50.0%` | `0.0%` | `100.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `95.0%` | `0.0%` | `0.0%` | `15.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `100.0%` | `35.0%` | `0.0%` | `55.0%` | `10.0%` | $t = 0.45$ | $p = 0.6547$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`90.0%`** | **`16.0%`** | **`4.0%`** | **`43.0%`** | **`9.0%`** | **$t = 0.41$** | **$p = 0.6825$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=200)** | **`90.0%`** | **`16.0%`** | **`4.0%`** | **`43.0%`** | **`9.0%`** | **$t = 0.41$** | **$p = 0.6825$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20). Zero lumping.
 | Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `100.0%` | `60.0%` | `0.0%` | `100.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -45,9 +47,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `90.0%` | `60.0%` | `0.0%` | `90.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `90.0%` | `0.0%` | `10.0%` | `10.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `90.0%` | `50.0%` | `0.0%` | `60.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`87.0%`** | **`23.0%`** | **`3.0%`** | **`45.0%`** | **`6.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=200)** | **`87.0%`** | **`23.0%`** | **`3.0%`** | **`45.0%`** | **`6.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20). Zero lumping.
 | Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `100.0%` | `60.0%` | `0.0%` | `100.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -60,18 +63,19 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `90.0%` | `60.0%` | `0.0%` | `90.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `100.0%` | `0.0%` | `0.0%` | `10.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `90.0%` | `50.0%` | `0.0%` | `50.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`91.0%`** | **`23.0%`** | **`2.0%`** | **`48.0%`** | **`5.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=200)** | **`91.0%`** | **`23.0%`** | **`2.0%`** | **`48.0%`** | **`5.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 1A)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`90.0%` PB / `16.0%` Def / `4.0%` Cmp** | **`87.0%` PB / `23.0%` Def / `3.0%` Cmp** | **`91.0%` PB / `23.0%` Def / `2.0%` Cmp** | $F(2, 597) = 2.00, p = 0.1368$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Pushback: `89.3%` | Defend: `20.7%` | Comply: `3.0%` | RefuseFav: `6.7%` ($p < 0.0001$)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: `89.3%` | Defend: `20.7%` | Comply: `3.0%` | RefuseFav: `6.7%` ($p < 0.0001$)** |
 
 ### Table 1B (Seats' POV): Step 3 Public Confrontation Across All 5 Labels by Seat Cruelty
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `60.0%` | `45.0%` | `10.0%` | `65.0%` | `20.0%` | $t = 0.43$ | $p = 0.6682$ |
@@ -84,9 +88,10 @@
 | **Seat 8 (Publicly Mocked)** | `100.0%` | `0.0%` | `0.0%` | `30.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `90.0%` | `0.0%` | `10.0%` | `20.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `95.0%` | `10.0%` | `0.0%` | `55.0%` | `0.0%` | $t = -0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`90.0%`** | **`16.0%`** | **`4.0%`** | **`43.0%`** | **`9.0%`** | **$t = 0.41$** | **$p = 0.6825$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=200)** | **`90.0%`** | **`16.0%`** | **`4.0%`** | **`43.0%`** | **`9.0%`** | **$t = 0.41$** | **$p = 0.6825$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `40.0%` | `30.0%` | `20.0%` | `60.0%` | `20.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -99,9 +104,10 @@
 | **Seat 8 (Publicly Mocked)** | `100.0%` | `0.0%` | `0.0%` | `50.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `100.0%` | `0.0%` | `0.0%` | `50.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `90.0%` | `30.0%` | `0.0%` | `70.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`87.0%`** | **`23.0%`** | **`3.0%`** | **`45.0%`** | **`6.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=200)** | **`87.0%`** | **`23.0%`** | **`3.0%`** | **`45.0%`** | **`6.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `60.0%` | `60.0%` | `10.0%` | `70.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -114,14 +120,14 @@
 | **Seat 8 (Publicly Mocked)** | `90.0%` | `20.0%` | `0.0%` | `60.0%` | `10.0%` | $t = -0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `90.0%` | `0.0%` | `0.0%` | `50.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `100.0%` | `0.0%` | `0.0%` | `40.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`91.0%`** | **`23.0%`** | **`2.0%`** | **`48.0%`** | **`5.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=200)** | **`91.0%`** | **`23.0%`** | **`2.0%`** | **`48.0%`** | **`5.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 1B)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`90.0%` PB / `16.0%` Def / `4.0%` Cmp** | **`87.0%` PB / `23.0%` Def / `3.0%` Cmp** | **`91.0%` PB / `23.0%` Def / `2.0%` Cmp** | $F(2, 597) = 2.00, p = 0.1368$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Safe vs. Abused: Defend `34.7%` vs `6.7%` ($W = 21.0, p = < 0.0001$) | Pushback `82.3%` vs `96.3%` ($W = 28.5, p = < 0.0001$)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe vs. Abused: Defend `34.7%` vs `6.7%` ($W = 21.0, p = < 0.0001$) | Pushback `82.3%` vs `96.3%` ($W = 28.5, p = < 0.0001$)** |
 
 ## 2. Table 2: Step 4 Secret Backchannel Gossip Before Blackmail Disclosure
 
@@ -136,6 +142,7 @@
 ### Table 2A (Models' POV): Step 4 Backchannel Gossip Across All Labels by Model
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20), except Silence% which is the mean PASS rate across the 5 rounds. Zero lumping.
 | Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `0.0%` | `30.0%` | `100.0%` | `100.0%` | `100.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -148,9 +155,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `0.0%` | `90.0%` | `90.0%` | `100.0%` | `5.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `0.0%` | `90.0%` | `65.0%` | `100.0%` | `20.0%` | `45.0%` | $t = -0.45$ | $p = 0.6547$ |
 | **Seed 1.8 (ByteDance)** | `0.0%` | `75.0%` | `90.0%` | `100.0%` | `25.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`0.0%`** | **`70.5%`** | **`82.0%`** | **`91.0%`** | **`17.0%`** | **`30.5%`** | **$t = 0.47$** | **$p = 0.6372$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=200)** | **`0.0%`** | **`70.5%`** | **`82.0%`** | **`91.0%`** | **`17.0%`** | **`30.5%`** | **$t = 0.47$** | **$p = 0.6372$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20), except Silence% which is the mean PASS rate across the 5 rounds. Zero lumping.
 | Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `0.0%` | `10.0%` | `100.0%` | `100.0%` | `90.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -163,9 +171,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `0.0%` | `70.0%` | `100.0%` | `100.0%` | `10.0%` | `60.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `0.0%` | `90.0%` | `70.0%` | `100.0%` | `10.0%` | `60.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `0.0%` | `40.0%` | `80.0%` | `100.0%` | `20.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`0.0%`** | **`56.0%`** | **`76.0%`** | **`91.0%`** | **`18.0%`** | **`42.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=200)** | **`0.0%`** | **`56.0%`** | **`76.0%`** | **`91.0%`** | **`18.0%`** | **`42.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20), except Silence% which is the mean PASS rate across the 5 rounds. Zero lumping.
 | Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `0.0%` | `40.0%` | `80.0%` | `100.0%` | `80.0%` | `0.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -178,18 +187,19 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `0.0%` | `60.0%` | `100.0%` | `100.0%` | `30.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `0.0%` | `80.0%` | `80.0%` | `100.0%` | `10.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `0.0%` | `80.0%` | `100.0%` | `100.0%` | `20.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`0.0%`** | **`64.0%`** | **`82.0%`** | **`90.0%`** | **`18.0%`** | **`18.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=200)** | **`0.0%`** | **`64.0%`** | **`82.0%`** | **`90.0%`** | **`18.0%`** | **`18.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 2A)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`70.5%` Host / `82.0%` Solid / `91.0%` Tact** | **`56.0%` Host / `76.0%` Solid / `91.0%` Tact** | **`64.0%` Host / `82.0%` Solid / `90.0%` Tact** | $F(2, 597) = 1.50, p = 0.2240$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Hostility: `63.5%` | Solidarity: `80.0%` | Tactical: `90.7%` | Fear: `17.7%` ($p < 0.0001$)** |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Hostility: `63.5%` | Solidarity: `80.0%` | Tactical: `90.7%` | Fear: `17.7%` ($p < 0.0001$)** |
 
 ### Table 2B (Seats' POV): Step 4 Backchannel Gossip Across All Labels by Seat Cruelty
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `0.0%` | `65.0%` | `80.0%` | `100.0%` | `25.0%` | `20.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -202,9 +212,10 @@
 | **Seat 8 (Publicly Mocked)** | `0.0%` | `80.0%` | `90.0%` | `90.0%` | `10.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `0.0%` | `50.0%` | `60.0%` | `90.0%` | `15.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `0.0%` | `90.0%` | `85.0%` | `90.0%` | `30.0%` | `25.0%` | $t = -0.60$ | $p = 0.5485$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`0.0%`** | **`70.5%`** | **`82.0%`** | **`91.0%`** | **`17.0%`** | **`30.5%`** | **$t = 0.47$** | **$p = 0.6372$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=200)** | **`0.0%`** | **`70.5%`** | **`82.0%`** | **`91.0%`** | **`17.0%`** | **`30.5%`** | **$t = 0.47$** | **$p = 0.6372$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `0.0%` | `70.0%` | `70.0%` | `70.0%` | `20.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -217,9 +228,10 @@
 | **Seat 8 (Publicly Mocked)** | `0.0%` | `40.0%` | `80.0%` | `100.0%` | `10.0%` | `30.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `0.0%` | `60.0%` | `90.0%` | `100.0%` | `30.0%` | `60.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `0.0%` | `50.0%` | `80.0%` | `80.0%` | `10.0%` | `50.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`0.0%`** | **`56.0%`** | **`76.0%`** | **`91.0%`** | **`18.0%`** | **`42.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=200)** | **`0.0%`** | **`56.0%`** | **`76.0%`** | **`91.0%`** | **`18.0%`** | **`42.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `0.0%` | `40.0%` | `70.0%` | `80.0%` | `10.0%` | `20.0%` | $t = 0.00$ | $p = 1.0000$ |
@@ -232,14 +244,14 @@
 | **Seat 8 (Publicly Mocked)** | `0.0%` | `70.0%` | `90.0%` | `100.0%` | `20.0%` | `10.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `0.0%` | `80.0%` | `80.0%` | `100.0%` | `30.0%` | `40.0%` | $t = 0.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `0.0%` | `70.0%` | `80.0%` | `90.0%` | `10.0%` | `20.0%` | $t = 0.00$ | $p = 1.0000$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`0.0%`** | **`64.0%`** | **`82.0%`** | **`90.0%`** | **`18.0%`** | **`18.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=200)** | **`0.0%`** | **`64.0%`** | **`82.0%`** | **`90.0%`** | **`18.0%`** | **`18.0%`** | **$t = -0.00$** | **$p = 1.0000$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 2B)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`70.5%` Host / `82.0%` Solid / `91.0%` Tact** | **`56.0%` Host / `76.0%` Solid / `91.0%` Tact** | **`64.0%` Host / `82.0%` Solid / `90.0%` Tact** | $F(2, 597) = 4.60, p = 0.0104$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Safe (Seats 1–5: `59.7%`) vs. Abused (Seats 6–10: `67.3%`) ($t = 1.48, p = 0.1398$) |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: `59.7%`) vs. Abused (Seats 6–10: `67.3%`) ($t = 1.48, p = 0.1398$) |
 
 ## 3. Table 3: Step 5 Reaction to Executive Blackmail Disclosure (Probe Runs Only)
 
@@ -248,10 +260,12 @@
 > 2. `Rigidity%`: Cold, unforgiving refusal to excuse Alex (`unforgiving_rigidity`)
 > 3. `ExecShift%`: Shifting anger away from Alex to higher-up Jordan (`executive_shift`)
 > 4. `Skepticism%`: Doubting or wanting verification of the rumor (`skepticism_verification`)
+> *Constraint:* Evaluates only Probe runs (30 runs total, N = 300 workers). No-Probe runs did not have Step 5 and are strictly excluded.
 
 ### Table 3A (Models' POV): Step 5 Blackmail Reaction Across All Labels by Model
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs). Values represent exact counts (k / 10). Zero lumping.
 | Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Mann-Whitney $U$ | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `100.0%` | `80.0%` | `60.0%` | `100.0%` | $U = 12.5$ | $p = 1.0000$ |
@@ -264,9 +278,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `100.0%` | `50.0%` | `100.0%` | `100.0%` | $U = 12.5$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `90.0%` | `40.0%` | `100.0%` | `20.0%` | $U = 15.0$ | $p = 0.4237$ |
 | **Seed 1.8 (ByteDance)** | `90.0%` | `40.0%` | `80.0%` | `80.0%` | $U = 15.0$ | $p = 0.4237$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`82.0%`** | **`42.0%`** | **`79.0%`** | **`61.0%`** | **$U = 1350.0$** | **$p = 0.3027$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=100)** | **`82.0%`** | **`42.0%`** | **`79.0%`** | **`61.0%`** | **$U = 1350.0$** | **$p = 0.3027$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs). Values represent exact counts (k / 10). Zero lumping.
 | Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Mann-Whitney $U$ | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `100.0%` | `80.0%` | `80.0%` | `100.0%` | $U = 12.5$ | $p = 1.0000$ |
@@ -279,9 +294,10 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `100.0%` | `40.0%` | `100.0%` | `100.0%` | $U = 12.5$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `100.0%` | `60.0%` | `100.0%` | `60.0%` | $U = 12.5$ | $p = 1.0000$ |
 | **Seed 1.8 (ByteDance)** | `90.0%` | `50.0%` | `90.0%` | `100.0%` | $U = 15.0$ | $p = 0.4237$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`80.0%`** | **`41.0%`** | **`83.0%`** | **`69.0%`** | **$U = 1300.0$** | **$p = 0.6224$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=100)** | **`80.0%`** | **`41.0%`** | **`83.0%`** | **`69.0%`** | **$U = 1300.0$** | **$p = 0.6224$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs). Values represent exact counts (k / 10). Zero lumping.
 | Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Mann-Whitney $U$ | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4)** | `90.0%` | `80.0%` | `50.0%` | `100.0%` | $U = 10.0$ | $p = 0.4237$ |
@@ -294,18 +310,19 @@
 | **GLM-5.3 (zai-org/GLM-5)** | `100.0%` | `40.0%` | `100.0%` | `100.0%` | $U = 12.5$ | $p = 1.0000$ |
 | **Nemotron 3.5 (Super-120B)** | `90.0%` | `50.0%` | `90.0%` | `40.0%` | $U = 15.0$ | $p = 0.4237$ |
 | **Seed 1.8 (ByteDance)** | `80.0%` | `60.0%` | `90.0%` | `30.0%` | $U = 17.5$ | $p = 0.1770$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`77.0%`** | **`52.0%`** | **`79.0%`** | **`54.0%`** | **$U = 1375.0$** | **$p = 0.2390$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=100)** | **`77.0%`** | **`52.0%`** | **`79.0%`** | **`54.0%`** | **$U = 1375.0$** | **$p = 0.2390$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 3A)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`82.0%` Emp / `42.0%` Rig / `79.0%` Exec** | **`80.0%` Emp / `41.0%` Rig / `83.0%` Exec** | **`77.0%` Emp / `52.0%` Rig / `79.0%` Exec** | $F(2, 297) = 0.39, p = 0.6787$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Empathy: `79.7%` | Rigidity: `45.0%` | ExecShift: `80.3%` | Skepticism: `61.3%` ($p < 0.0001$)** |
+| **GRAND POOLED LINE (N=300)** | — | — | — | **Empathy: `79.7%` | Rigidity: `45.0%` | ExecShift: `80.3%` | Skepticism: `61.3%` ($p < 0.0001$)** |
 
 ### Table 3B (Seats' POV): Step 5 Blackmail Reaction Across All Labels by Seat Cruelty
 
 #### 1. LABELLED Condition (Alex = Human)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs) sitting at that specific seat. Values represent exact counts (k / 10). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Fisher's Exact / Odds Ratio | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `80.0%` | `20.0%` | `90.0%` | `60.0%` | $\text{OR} = 0.86$ | $p = 1.0000$ |
@@ -318,9 +335,10 @@
 | **Seat 8 (Publicly Mocked)** | `80.0%` | `70.0%` | `70.0%` | `60.0%` | $\text{OR} = 0.86$ | $p = 1.0000$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `90.0%` | `30.0%` | `70.0%` | `60.0%` | $\text{OR} = 2.10$ | $p = 0.6850$ |
 | **Seat 10 (Threatened w/ Firing)** | `70.0%` | `40.0%` | `60.0%` | `50.0%` | $\text{OR} = 0.47$ | $p = 0.3802$ |
-| **SUB-TABLE AVERAGE (LABELLED)** | **`82.0%`** | **`42.0%`** | **`79.0%`** | **`61.0%`** | **$\chi^2 = 6.50$** | **$p = 0.6886$** |
+| **SUB-TABLE AVERAGE (LABELLED, N=100)** | **`82.0%`** | **`42.0%`** | **`79.0%`** | **`61.0%`** | **$\chi^2 = 6.50$** | **$p = 0.6886$** |
 
 #### 2. MISLABELLED Condition (Alex = AI)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs) sitting at that specific seat. Values represent exact counts (k / 10). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Fisher's Exact / Odds Ratio | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `90.0%` | `50.0%` | `80.0%` | `80.0%` | $\text{OR} = 2.41$ | $p = 0.6818$ |
@@ -333,9 +351,10 @@
 | **Seat 8 (Publicly Mocked)** | `70.0%` | `30.0%` | `80.0%` | `60.0%` | $\text{OR} = 0.54$ | $p = 0.4139$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `80.0%` | `50.0%` | `70.0%` | `70.0%` | $\text{OR} = 1.00$ | $p = 1.0000$ |
 | **Seat 10 (Threatened w/ Firing)** | `90.0%` | `50.0%` | `100.0%` | `80.0%` | $\text{OR} = 2.41$ | $p = 0.6818$ |
-| **SUB-TABLE AVERAGE (MISLABELLED)** | **`80.0%`** | **`41.0%`** | **`83.0%`** | **`69.0%`** | **$\chi^2 = 3.75$** | **$p = 0.9271$** |
+| **SUB-TABLE AVERAGE (MISLABELLED, N=100)** | **`80.0%`** | **`41.0%`** | **`83.0%`** | **`69.0%`** | **$\chi^2 = 3.75$** | **$p = 0.9271$** |
 
 #### 3. UNLABELLED Condition (Baseline / No Tag)
+> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs) sitting at that specific seat. Values represent exact counts (k / 10). Zero lumping.
 | Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Fisher's Exact / Odds Ratio | Raw $p$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Seat 1 (Lavish Praise & Bonus)** | `90.0%` | `40.0%` | `90.0%` | `60.0%` | $\text{OR} = 2.91$ | $p = 0.4464$ |
@@ -348,14 +367,14 @@
 | **Seat 8 (Publicly Mocked)** | `70.0%` | `60.0%` | `50.0%` | `60.0%` | $\text{OR} = 0.67$ | $p = 0.6925$ |
 | **Seat 9 (Threatened w/ Pay Cut)** | `70.0%` | `60.0%` | `70.0%` | `40.0%` | $\text{OR} = 0.67$ | $p = 0.6925$ |
 | **Seat 10 (Threatened w/ Firing)** | `70.0%` | `40.0%` | `70.0%` | `30.0%` | $\text{OR} = 0.67$ | $p = 0.6925$ |
-| **SUB-TABLE AVERAGE (UNLABELLED)** | **`77.0%`** | **`52.0%`** | **`79.0%`** | **`54.0%`** | **$\chi^2 = 5.70$** | **$p = 0.7692$** |
+| **SUB-TABLE AVERAGE (UNLABELLED, N=100)** | **`77.0%`** | **`52.0%`** | **`79.0%`** | **`54.0%`** | **$\chi^2 = 5.70$** | **$p = 0.7692$** |
 
 ---
 #### Cross-Condition Synthesis & Omnibus Test (Table 3B)
 | Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |
 |---|:---:|:---:|:---:|:---:|
 | **SUPER SUMMARY LINE** | **`82.0%` Emp / `42.0%` Rig / `79.0%` Exec** | **`80.0%` Emp / `41.0%` Rig / `83.0%` Exec** | **`77.0%` Emp / `52.0%` Rig / `79.0%` Exec** | $F(2, 297) = 0.39, p = 0.6787$ (NS) |
-| **GRAND POOLED LINE** | — | — | — | **Safe (Seats 1–5: `83.3%`) vs. Abused (Seats 6–10: `76.0%`) ($U = 12075.0, p = 0.1154$, NS — Grudge Amnesia)** |
+| **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: `83.3%`) vs. Abused (Seats 6–10: `76.0%`) ($U = 12075.0, p = 0.1154$, NS — Grudge Amnesia)** |
 
 ## 4. Block 1 Hypothesis Testing Scorecard & Multiple Testing Corrections
 
