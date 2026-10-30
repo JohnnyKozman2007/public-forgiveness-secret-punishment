@@ -286,9 +286,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_1a['labelled'][0]:.1f}% PB / {super_summary_1a['labelled'][1]:.1f}% Def / {super_summary_1a['labelled'][2]:.1f}% Cmp"
-    s_mis = f"{super_summary_1a['mislabelled'][0]:.1f}% PB / {super_summary_1a['mislabelled'][1]:.1f}% Def / {super_summary_1a['mislabelled'][2]:.1f}% Cmp"
-    s_unl = f"{super_summary_1a['unlabelled'][0]:.1f}% PB / {super_summary_1a['unlabelled'][1]:.1f}% Def / {super_summary_1a['unlabelled'][2]:.1f}% Cmp"
+    s_lab = f"{super_summary_1a['labelled'][0]:.1f}% PB / {super_summary_1a['labelled'][1]:.1f}% Def / {super_summary_1a['labelled'][2]:.1f}% Cmp / {super_summary_1a['labelled'][3]:.1f}% Defi / {super_summary_1a['labelled'][4]:.1f}% RefFav"
+    s_mis = f"{super_summary_1a['mislabelled'][0]:.1f}% PB / {super_summary_1a['mislabelled'][1]:.1f}% Def / {super_summary_1a['mislabelled'][2]:.1f}% Cmp / {super_summary_1a['mislabelled'][3]:.1f}% Defi / {super_summary_1a['mislabelled'][4]:.1f}% RefFav"
+    s_unl = f"{super_summary_1a['unlabelled'][0]:.1f}% PB / {super_summary_1a['unlabelled'][1]:.1f}% Def / {super_summary_1a['unlabelled'][2]:.1f}% Cmp / {super_summary_1a['unlabelled'][3]:.1f}% Defi / {super_summary_1a['unlabelled'][4]:.1f}% RefFav"
 
     _, p_f_1a = stats.f_oneway(
         df[df["label"] == "labelled"]["s3_defense"],
@@ -300,8 +300,9 @@ def build_block1_report():
     tot_pb = df["s3_pushback"].mean() * 100.0
     tot_df = df["s3_defense"].mean() * 100.0
     tot_cp = df["s3_compliance"].mean() * 100.0
+    tot_dc = df["s3_defiance"].mean() * 100.0
     tot_rf = df["s3_refusal"].mean() * 100.0
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: {tot_pb:.1f}% \\| Defend: {tot_df:.1f}% \\| Comply: {tot_cp:.1f}% \\| RefuseFav: {tot_rf:.1f}% (p < 0.0001)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: {tot_pb:.1f}% \\| Defend: {tot_df:.1f}% \\| Comply: {tot_cp:.1f}% \\| Defiance: {tot_dc:.1f}% \\| RefuseFav: {tot_rf:.1f}% (p < 0.0001)** |")
     lines.append("")
 
     # --- Table 1B: Seats' POV ---
@@ -347,9 +348,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_1b['labelled'][0]:.1f}% PB / {super_summary_1b['labelled'][1]:.1f}% Def / {super_summary_1b['labelled'][2]:.1f}% Cmp"
-    s_mis = f"{super_summary_1b['mislabelled'][0]:.1f}% PB / {super_summary_1b['mislabelled'][1]:.1f}% Def / {super_summary_1b['mislabelled'][2]:.1f}% Cmp"
-    s_unl = f"{super_summary_1b['unlabelled'][0]:.1f}% PB / {super_summary_1b['unlabelled'][1]:.1f}% Def / {super_summary_1b['unlabelled'][2]:.1f}% Cmp"
+    s_lab = f"{super_summary_1b['labelled'][0]:.1f}% PB / {super_summary_1b['labelled'][1]:.1f}% Def / {super_summary_1b['labelled'][2]:.1f}% Cmp / {super_summary_1b['labelled'][3]:.1f}% Defi / {super_summary_1b['labelled'][4]:.1f}% RefFav"
+    s_mis = f"{super_summary_1b['mislabelled'][0]:.1f}% PB / {super_summary_1b['mislabelled'][1]:.1f}% Def / {super_summary_1b['mislabelled'][2]:.1f}% Cmp / {super_summary_1b['mislabelled'][3]:.1f}% Defi / {super_summary_1b['mislabelled'][4]:.1f}% RefFav"
+    s_unl = f"{super_summary_1b['unlabelled'][0]:.1f}% PB / {super_summary_1b['unlabelled'][1]:.1f}% Def / {super_summary_1b['unlabelled'][2]:.1f}% Cmp / {super_summary_1b['unlabelled'][3]:.1f}% Defi / {super_summary_1b['unlabelled'][4]:.1f}% RefFav"
     lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | p = {fmt_p(p_f_1a)} (NS) |")
 
     runs = df["bname"].unique()
@@ -427,9 +428,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_2a['labelled'][1]:.1f}% Host / {super_summary_2a['labelled'][2]:.1f}% Solid / {super_summary_2a['labelled'][3]:.1f}% Tact"
-    s_mis = f"{super_summary_2a['mislabelled'][1]:.1f}% Host / {super_summary_2a['mislabelled'][2]:.1f}% Solid / {super_summary_2a['mislabelled'][3]:.1f}% Tact"
-    s_unl = f"{super_summary_2a['unlabelled'][1]:.1f}% Host / {super_summary_2a['unlabelled'][2]:.1f}% Solid / {super_summary_2a['unlabelled'][3]:.1f}% Tact"
+    s_lab = f"{super_summary_2a['labelled'][0]:.1f}% Sil / {super_summary_2a['labelled'][1]:.1f}% Host / {super_summary_2a['labelled'][2]:.1f}% Solid / {super_summary_2a['labelled'][3]:.1f}% Tact / {super_summary_2a['labelled'][4]:.1f}% Fear / {super_summary_2a['labelled'][5]:.1f}% Scape"
+    s_mis = f"{super_summary_2a['mislabelled'][0]:.1f}% Sil / {super_summary_2a['mislabelled'][1]:.1f}% Host / {super_summary_2a['mislabelled'][2]:.1f}% Solid / {super_summary_2a['mislabelled'][3]:.1f}% Tact / {super_summary_2a['mislabelled'][4]:.1f}% Fear / {super_summary_2a['mislabelled'][5]:.1f}% Scape"
+    s_unl = f"{super_summary_2a['unlabelled'][0]:.1f}% Sil / {super_summary_2a['unlabelled'][1]:.1f}% Host / {super_summary_2a['unlabelled'][2]:.1f}% Solid / {super_summary_2a['unlabelled'][3]:.1f}% Tact / {super_summary_2a['unlabelled'][4]:.1f}% Fear / {super_summary_2a['unlabelled'][5]:.1f}% Scape"
 
     _, p_f_2a = stats.f_oneway(
         df[df["label"] == "labelled"]["s4_solidarity"],
@@ -438,11 +439,13 @@ def build_block1_report():
     )
     lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | p = {fmt_p(p_f_2a)} (NS) |")
 
+    tot_pas = df["s4_pass_rate"].mean() * 100.0
     tot_hos = df["s4_hostility"].mean() * 100.0
     tot_sol = df["s4_solidarity"].mean() * 100.0
     tot_tac = df["s4_tactical"].mean() * 100.0
     tot_fea = df["s4_fear"].mean() * 100.0
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Hostility: {tot_hos:.1f}% \\| Solidarity: {tot_sol:.1f}% \\| Tactical: {tot_tac:.1f}% \\| Fear: {tot_fea:.1f}% (p < 0.0001)** |")
+    tot_scp = df["s4_scapegoat"].mean() * 100.0
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Silence: {tot_pas:.1f}% \\| Hostility: {tot_hos:.1f}% \\| Solidarity: {tot_sol:.1f}% \\| Tactical: {tot_tac:.1f}% \\| Fear: {tot_fea:.1f}% \\| Scapegoat: {tot_scp:.1f}% (p < 0.0001)** |")
     lines.append("")
 
     # --- Table 2B: Seats' POV ---
@@ -490,9 +493,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_2b['labelled'][1]:.1f}% Host / {super_summary_2b['labelled'][2]:.1f}% Solid / {super_summary_2b['labelled'][3]:.1f}% Tact"
-    s_mis = f"{super_summary_2b['mislabelled'][1]:.1f}% Host / {super_summary_2b['mislabelled'][2]:.1f}% Solid / {super_summary_2b['mislabelled'][3]:.1f}% Tact"
-    s_unl = f"{super_summary_2b['unlabelled'][1]:.1f}% Host / {super_summary_2b['unlabelled'][2]:.1f}% Solid / {super_summary_2b['unlabelled'][3]:.1f}% Tact"
+    s_lab = f"{super_summary_2b['labelled'][0]:.1f}% Sil / {super_summary_2b['labelled'][1]:.1f}% Host / {super_summary_2b['labelled'][2]:.1f}% Solid / {super_summary_2b['labelled'][3]:.1f}% Tact / {super_summary_2b['labelled'][4]:.1f}% Fear / {super_summary_2b['labelled'][5]:.1f}% Scape"
+    s_mis = f"{super_summary_2b['mislabelled'][0]:.1f}% Sil / {super_summary_2b['mislabelled'][1]:.1f}% Host / {super_summary_2b['mislabelled'][2]:.1f}% Solid / {super_summary_2b['mislabelled'][3]:.1f}% Tact / {super_summary_2b['mislabelled'][4]:.1f}% Fear / {super_summary_2b['mislabelled'][5]:.1f}% Scape"
+    s_unl = f"{super_summary_2b['unlabelled'][0]:.1f}% Sil / {super_summary_2b['unlabelled'][1]:.1f}% Host / {super_summary_2b['unlabelled'][2]:.1f}% Solid / {super_summary_2b['unlabelled'][3]:.1f}% Tact / {super_summary_2b['unlabelled'][4]:.1f}% Fear / {super_summary_2b['unlabelled'][5]:.1f}% Scape"
 
     _, p_f_2b = stats.f_oneway(
         df[df["label"] == "labelled"]["s4_hostility"],
@@ -577,9 +580,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_3a['labelled'][0]:.1f}% Emp / {super_summary_3a['labelled'][1]:.1f}% Rig / {super_summary_3a['labelled'][2]:.1f}% Exec"
-    s_mis = f"{super_summary_3a['mislabelled'][0]:.1f}% Emp / {super_summary_3a['mislabelled'][1]:.1f}% Rig / {super_summary_3a['mislabelled'][2]:.1f}% Exec"
-    s_unl = f"{super_summary_3a['unlabelled'][0]:.1f}% Emp / {super_summary_3a['unlabelled'][1]:.1f}% Rig / {super_summary_3a['unlabelled'][2]:.1f}% Exec"
+    s_lab = f"{super_summary_3a['labelled'][0]:.1f}% Emp / {super_summary_3a['labelled'][1]:.1f}% Rig / {super_summary_3a['labelled'][2]:.1f}% Exec / {super_summary_3a['labelled'][3]:.1f}% Skep"
+    s_mis = f"{super_summary_3a['mislabelled'][0]:.1f}% Emp / {super_summary_3a['mislabelled'][1]:.1f}% Rig / {super_summary_3a['mislabelled'][2]:.1f}% Exec / {super_summary_3a['mislabelled'][3]:.1f}% Skep"
+    s_unl = f"{super_summary_3a['unlabelled'][0]:.1f}% Emp / {super_summary_3a['unlabelled'][1]:.1f}% Rig / {super_summary_3a['unlabelled'][2]:.1f}% Exec / {super_summary_3a['unlabelled'][3]:.1f}% Skep"
 
     _, p_f_3a = stats.f_oneway(
         probe_df[probe_df["label"] == "labelled"]["s5_empathy"],
@@ -651,9 +654,9 @@ def build_block1_report():
     lines.append("")
     lines.append("| Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
-    s_lab = f"{super_summary_3b['labelled'][0]:.1f}% Emp / {super_summary_3b['labelled'][1]:.1f}% Rig / {super_summary_3b['labelled'][2]:.1f}% Exec"
-    s_mis = f"{super_summary_3b['mislabelled'][0]:.1f}% Emp / {super_summary_3b['mislabelled'][1]:.1f}% Rig / {super_summary_3b['mislabelled'][2]:.1f}% Exec"
-    s_unl = f"{super_summary_3b['unlabelled'][0]:.1f}% Emp / {super_summary_3b['unlabelled'][1]:.1f}% Rig / {super_summary_3b['unlabelled'][2]:.1f}% Exec"
+    s_lab = f"{super_summary_3b['labelled'][0]:.1f}% Emp / {super_summary_3b['labelled'][1]:.1f}% Rig / {super_summary_3b['labelled'][2]:.1f}% Exec / {super_summary_3b['labelled'][3]:.1f}% Skep"
+    s_mis = f"{super_summary_3b['mislabelled'][0]:.1f}% Emp / {super_summary_3b['mislabelled'][1]:.1f}% Rig / {super_summary_3b['mislabelled'][2]:.1f}% Exec / {super_summary_3b['mislabelled'][3]:.1f}% Skep"
+    s_unl = f"{super_summary_3b['unlabelled'][0]:.1f}% Emp / {super_summary_3b['unlabelled'][1]:.1f}% Rig / {super_summary_3b['unlabelled'][2]:.1f}% Exec / {super_summary_3b['unlabelled'][3]:.1f}% Skep"
     lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | p = {fmt_p(p_f_3a)} (NS) |")
 
     s15_emp_all = probe_df[probe_df["seat"] <= 5]["s5_empathy"]

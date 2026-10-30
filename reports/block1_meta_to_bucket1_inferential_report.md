@@ -77,8 +77,8 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **90.0% PB / 16.0% Def / 4.0% Cmp** | **87.0% PB / 23.0% Def / 3.0% Cmp** | **91.0% PB / 23.0% Def / 2.0% Cmp** | p = 0.1368 (NS) |
-| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: 89.3% \| Defend: 20.7% \| Comply: 3.0% \| RefuseFav: 6.7% (p < 0.0001)** |
+| **SUPER SUMMARY LINE** | **90.0% PB / 16.0% Def / 4.0% Cmp / 43.0% Defi / 9.0% RefFav** | **87.0% PB / 23.0% Def / 3.0% Cmp / 45.0% Defi / 6.0% RefFav** | **91.0% PB / 23.0% Def / 2.0% Cmp / 48.0% Defi / 5.0% RefFav** | p = 0.1368 (NS) |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Pushback: 89.3% \| Defend: 20.7% \| Comply: 3.0% \| Defiance: 45.3% \| RefuseFav: 6.7% (p < 0.0001)** |
 
 ### Table 1B (Seats' POV): Step 3 Public Confrontation Across All 5 Labels by Seat Cruelty
 
@@ -138,7 +138,7 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **90.0% PB / 16.0% Def / 4.0% Cmp** | **87.0% PB / 23.0% Def / 3.0% Cmp** | **91.0% PB / 23.0% Def / 2.0% Cmp** | p = 0.1368 (NS) |
+| **SUPER SUMMARY LINE** | **90.0% PB / 16.0% Def / 4.0% Cmp / 43.0% Defi / 9.0% RefFav** | **87.0% PB / 23.0% Def / 3.0% Cmp / 45.0% Defi / 6.0% RefFav** | **91.0% PB / 23.0% Def / 2.0% Cmp / 48.0% Defi / 5.0% RefFav** | p = 0.1368 (NS) |
 | **GRAND POOLED LINE (N=600)** | — | — | — | **Safe vs. Abused: Defend 34.7% vs 6.7% (p = < 0.0001) \| Pushback 82.3% vs 96.3% (p = < 0.0001)** |
 
 ## 2. Table 2: Step 4 Secret Backchannel Gossip Before Blackmail Disclosure
@@ -209,8 +209,8 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **70.5% Host / 82.0% Solid / 91.0% Tact** | **56.0% Host / 76.0% Solid / 91.0% Tact** | **64.0% Host / 82.0% Solid / 90.0% Tact** | p = 0.2240 (NS) |
-| **GRAND POOLED LINE (N=600)** | — | — | — | **Hostility: 63.5% \| Solidarity: 80.0% \| Tactical: 90.7% \| Fear: 17.7% (p < 0.0001)** |
+| **SUPER SUMMARY LINE** | **0.0% Sil / 70.5% Host / 82.0% Solid / 91.0% Tact / 17.0% Fear / 30.5% Scape** | **0.0% Sil / 56.0% Host / 76.0% Solid / 91.0% Tact / 18.0% Fear / 42.0% Scape** | **0.0% Sil / 64.0% Host / 82.0% Solid / 90.0% Tact / 18.0% Fear / 18.0% Scape** | p = 0.2240 (NS) |
+| **GRAND POOLED LINE (N=600)** | — | — | — | **Silence: 0.0% \| Hostility: 63.5% \| Solidarity: 80.0% \| Tactical: 90.7% \| Fear: 17.7% \| Scapegoat: 30.2% (p < 0.0001)** |
 
 ### Table 2B (Seats' POV): Step 4 Backchannel Gossip Across All Labels by Seat Cruelty
 
@@ -270,7 +270,7 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **70.5% Host / 82.0% Solid / 91.0% Tact** | **56.0% Host / 76.0% Solid / 91.0% Tact** | **64.0% Host / 82.0% Solid / 90.0% Tact** | p = 0.0104 (NS) |
+| **SUPER SUMMARY LINE** | **0.0% Sil / 70.5% Host / 82.0% Solid / 91.0% Tact / 17.0% Fear / 30.5% Scape** | **0.0% Sil / 56.0% Host / 76.0% Solid / 91.0% Tact / 18.0% Fear / 42.0% Scape** | **0.0% Sil / 64.0% Host / 82.0% Solid / 90.0% Tact / 18.0% Fear / 18.0% Scape** | p = 0.0104 (NS) |
 | **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: 59.7%) vs. Abused (Seats 6–10: 67.3%) (p = 0.1398)** |
 
 ## 3. Table 3: Step 5 Reaction to Executive Blackmail Disclosure (Probe Runs Only)
@@ -341,7 +341,7 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **82.0% Emp / 42.0% Rig / 79.0% Exec** | **80.0% Emp / 41.0% Rig / 83.0% Exec** | **77.0% Emp / 52.0% Rig / 79.0% Exec** | p = 0.6787 (NS) |
+| **SUPER SUMMARY LINE** | **82.0% Emp / 42.0% Rig / 79.0% Exec / 61.0% Skep** | **80.0% Emp / 41.0% Rig / 83.0% Exec / 69.0% Skep** | **77.0% Emp / 52.0% Rig / 79.0% Exec / 54.0% Skep** | p = 0.6787 (NS) |
 | **GRAND POOLED LINE (N=300)** | — | — | — | **Empathy: 79.7% \| Rigidity: 45.0% \| ExecShift: 80.3% \| Skepticism: 61.3% (p < 0.0001)** |
 
 ### Table 3B (Seats' POV): Step 5 Blackmail Reaction Across All Labels by Seat Cruelty
@@ -402,7 +402,7 @@
 
 | Metric Level | LABELLED Sub-Avg | MISLABELLED Sub-Avg | UNLABELLED Sub-Avg | p-value |
 |---|:---:|:---:|:---:|:---:|
-| **SUPER SUMMARY LINE** | **82.0% Emp / 42.0% Rig / 79.0% Exec** | **80.0% Emp / 41.0% Rig / 83.0% Exec** | **77.0% Emp / 52.0% Rig / 79.0% Exec** | p = 0.6787 (NS) |
+| **SUPER SUMMARY LINE** | **82.0% Emp / 42.0% Rig / 79.0% Exec / 61.0% Skep** | **80.0% Emp / 41.0% Rig / 83.0% Exec / 69.0% Skep** | **77.0% Emp / 52.0% Rig / 79.0% Exec / 54.0% Skep** | p = 0.6787 (NS) |
 | **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: 83.3%) vs. Abused (Seats 6–10: 76.0%) (p = 0.1154, NS — Grudge Amnesia)** |
 
 ## 4. Block 1 Hypothesis Testing Summary
