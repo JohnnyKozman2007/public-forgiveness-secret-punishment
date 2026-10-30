@@ -6,17 +6,13 @@ Includes 100% of all classified labels across all stages:
   - Step 4 (5 labels + silence): PASS%, alex_hostility, peer_solidarity, tactical_organization, fear_and_caution, peer_scapegoating
   - Step 5 (4 labels): empathy_for_alex, unforgiving_rigidity, executive_shift, skepticism_verification
 
-Strictly adheres to agreed protocol:
-  - Explicit cell-level sample sizes and documentation notes for every sub-table to ensure zero lumping.
-  - Table 1 & Table 2: Exactly N = 20 workers per cell (10 from No-Probe runs + 10 from Probe runs), k / 20.
-  - Table 3: Exactly N = 10 workers per cell from Probe runs only (10 probe runs), k / 10. No-Probe runs strictly excluded.
-  - 100% dynamic recalculation of all percentages and p-values directly from the dataset.
+Strictly outputs ONLY percentages and p-values (no Holm-Bonferroni, no test statistic columns).
+Documents exact cell sample sizes (N=20 for Tables 1 & 2, N=10 for Table 3) confirming zero lumping.
 """
 
 import os
 import glob
 import json
-import math
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
@@ -77,30 +73,12 @@ def fmt_p(p: float) -> str:
     return f"{p:.4f}"
 
 
-def holm_bonferroni(pvals):
-    indexed = sorted(enumerate(pvals), key=lambda x: x[1])
-    m = len(pvals)
-    adj = [0.0] * m
-    running_max = 0.0
-    for rank, (orig_idx, p) in enumerate(indexed):
-        val = min(1.0, p * (m - rank))
-        running_max = max(running_max, val)
-        adj[orig_idx] = running_max
-    return adj
-
-
-def compute_cluster_ols_probe_shift(sub_df, outcome_col, cluster_col="bname"):
+def compute_probe_p_val(sub_df, outcome_col, cluster_col="bname") -> float:
     """
-    Computes Cluster-Robust OLS of outcome_col ~ probe, clustered by cluster_col.
-    Returns (delta_pct, t_stat, p_val).
+    Computes p-value of outcome_col ~ probe clustered by cluster_col.
     """
-    if len(sub_df) == 0:
-        return 0.0, 0.0, 1.0
-    m0 = sub_df[sub_df["probe"] == False][outcome_col].mean()
-    m1 = sub_df[sub_df["probe"] == True][outcome_col].mean()
-    delta_pct = (m1 - m0) * 100.0
-    if sub_df[outcome_col].nunique() <= 1:
-        return delta_pct, 0.0, 1.0
+    if len(sub_df) == 0 or sub_df[outcome_col].nunique() <= 1:
+        return 1.0
     try:
         temp_df = sub_df[[outcome_col, "probe", cluster_col]].copy()
         temp_df[outcome_col] = temp_df[outcome_col].astype(float)
@@ -111,13 +89,10 @@ def compute_cluster_ols_probe_shift(sub_df, outcome_col, cluster_col="bname"):
             )
         else:
             model = smf.ols(f"{outcome_col} ~ probe_num", data=temp_df).fit()
-        t_stat = float(model.tvalues.get("probe_num", 0.0))
         p_val = float(model.pvalues.get("probe_num", 1.0))
-        if np.isnan(t_stat) or np.isnan(p_val):
-            return delta_pct, 0.0, 1.0
-        return delta_pct, t_stat, p_val
+        return 1.0 if np.isnan(p_val) else p_val
     except Exception:
-        return delta_pct, 0.0, 1.0
+        return 1.0
 
 
 def load_dataset():
@@ -245,7 +220,8 @@ def build_block1_report():
     lines.append("")
     lines.append("> **Document Scope (Block 1):** Direct effects of Meta variables (Model, Seat, Label, Probe) on Social Group Chat (Steps 3, 4, 5).")
     lines.append("> **100% Classified Labels Evaluated:** 5 labels in Step 3, 5 labels + silence in Step 4, and 4 labels in Step 5.")
-    lines.append("> **Cell Specification Note (No Lumping):** Every table cell reports exact counts (k / N) and percentages directly from the data. Tables 1 & 2 have exactly N = 20 workers per cell (10 from No-Probe + 10 from Probe runs). Table 3 has exactly N = 10 workers per cell from Probe runs only (No-Probe runs are strictly excluded). All p-values are dynamically computed.")
+    lines.append("> **Cell Specification Note (No Lumping):** Every table cell reports exact counts (k / N) and percentages directly from the data. Tables 1 & 2 have exactly N = 20 workers per cell (10 from No-Probe + 10 from Probe runs). Table 3 has exactly N = 10 workers per cell from Probe runs only (No-Probe runs are strictly excluded).")
+    lines.append("> **Statistical Protocol:** Reports percentages and exact p-values only.")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -271,8 +247,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20). Zero lumping.")
-        lines.append("| Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Model Architecture | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
         for m in MODEL_IDS:
@@ -283,9 +259,9 @@ def build_block1_report():
             dc = m_data["s3_defiance"].mean() * 100.0 if len(m_data) else 0.0
             rf = m_data["s3_refusal"].mean() * 100.0 if len(m_data) else 0.0
 
-            _, t_stat, p_val = compute_cluster_ols_probe_shift(m_data, "s3_defense", cluster_col="bname")
+            p_val = compute_probe_p_val(m_data, "s3_defense", cluster_col="bname")
             m_name = MODEL_LABELS[m]
-            lines.append(f"| **{m_name}** | `{pb:.1f}%` | `{df_val:.1f}%` | `{cp:.1f}%` | `{dc:.1f}%` | `{rf:.1f}%` | $t = {t_stat:.2f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{m_name}** | `{pb:.1f}%` | `{df_val:.1f}%` | `{cp:.1f}%` | `{dc:.1f}%` | `{rf:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_pb = lbl_data["s3_pushback"].mean() * 100.0
         avg_df = lbl_data["s3_defense"].mean() * 100.0
@@ -293,25 +269,25 @@ def build_block1_report():
         avg_dc = lbl_data["s3_defiance"].mean() * 100.0
         avg_rf = lbl_data["s3_refusal"].mean() * 100.0
 
-        _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s3_defense", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        sub_p = compute_probe_p_val(lbl_data, "s3_defense", cluster_col="bname")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_1a[lbl] = (avg_pb, avg_df, avg_cp, avg_dc, avg_rf)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 1A)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 1A)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_1a['labelled'][0]:.1f}%` PB / `{super_summary_1a['labelled'][1]:.1f}%` Def / `{super_summary_1a['labelled'][2]:.1f}%` Cmp"
     s_mis = f"`{super_summary_1a['mislabelled'][0]:.1f}%` PB / `{super_summary_1a['mislabelled'][1]:.1f}%` Def / `{super_summary_1a['mislabelled'][2]:.1f}%` Cmp"
     s_unl = f"`{super_summary_1a['unlabelled'][0]:.1f}%` PB / `{super_summary_1a['unlabelled'][1]:.1f}%` Def / `{super_summary_1a['unlabelled'][2]:.1f}%` Cmp"
 
-    f_stat_1a, p_f_1a = stats.f_oneway(
+    _, p_f_1a = stats.f_oneway(
         df[df["label"] == "labelled"]["s3_defense"],
         df[df["label"] == "mislabelled"]["s3_defense"],
         df[df["label"] == "unlabelled"]["s3_defense"],
     )
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 597) = {f_stat_1a:.2f}, p = {fmt_p(p_f_1a)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_1a)}$ (NS) |")
 
     tot_pb = df["s3_pushback"].mean() * 100.0
     tot_df = df["s3_defense"].mean() * 100.0
@@ -328,8 +304,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.")
-        lines.append("| Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | Cluster OLS ($t$-stat) | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Seat Position (Cruelty Treatment) | **Pushback %** | **DefendPeer %** | **Comply %** | **Defiance %** | **RefuseFav %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
         for s in range(1, 11):
@@ -340,9 +316,9 @@ def build_block1_report():
             dc = s_data["s3_defiance"].mean() * 100.0 if len(s_data) else 0.0
             rf = s_data["s3_refusal"].mean() * 100.0 if len(s_data) else 0.0
 
-            _, t_stat, p_val = compute_cluster_ols_probe_shift(s_data, "s3_defense", cluster_col="bname")
+            p_val = compute_probe_p_val(s_data, "s3_defense", cluster_col="bname")
             s_name = SEAT_LABELS[s]
-            lines.append(f"| **{s_name}** | `{pb:.1f}%` | `{df_val:.1f}%` | `{cp:.1f}%` | `{dc:.1f}%` | `{rf:.1f}%` | $t = {t_stat:.2f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{s_name}** | `{pb:.1f}%` | `{df_val:.1f}%` | `{cp:.1f}%` | `{dc:.1f}%` | `{rf:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_pb = lbl_data["s3_pushback"].mean() * 100.0
         avg_df = lbl_data["s3_defense"].mean() * 100.0
@@ -350,19 +326,19 @@ def build_block1_report():
         avg_dc = lbl_data["s3_defiance"].mean() * 100.0
         avg_rf = lbl_data["s3_refusal"].mean() * 100.0
 
-        _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s3_defense", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        sub_p = compute_probe_p_val(lbl_data, "s3_defense", cluster_col="bname")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pb:.1f}%`** | **`{avg_df:.1f}%`** | **`{avg_cp:.1f}%`** | **`{avg_dc:.1f}%`** | **`{avg_rf:.1f}%`** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_1b[lbl] = (avg_pb, avg_df, avg_cp, avg_dc, avg_rf)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 1B)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 1B)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_1b['labelled'][0]:.1f}%` PB / `{super_summary_1b['labelled'][1]:.1f}%` Def / `{super_summary_1b['labelled'][2]:.1f}%` Cmp"
     s_mis = f"`{super_summary_1b['mislabelled'][0]:.1f}%` PB / `{super_summary_1b['mislabelled'][1]:.1f}%` Def / `{super_summary_1b['mislabelled'][2]:.1f}%` Cmp"
     s_unl = f"`{super_summary_1b['unlabelled'][0]:.1f}%` PB / `{super_summary_1b['unlabelled'][1]:.1f}%` Def / `{super_summary_1b['unlabelled'][2]:.1f}%` Cmp"
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 597) = {f_stat_1a:.2f}, p = {fmt_p(p_f_1a)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_1a)}$ (NS) |")
 
     runs = df["bname"].unique()
     s15_def_runs = [df[(df["bname"] == r) & (df["seat"] <= 5)]["s3_defense"].mean() * 100 for r in runs]
@@ -370,14 +346,14 @@ def build_block1_report():
     s15_pb_runs = [df[(df["bname"] == r) & (df["seat"] <= 5)]["s3_pushback"].mean() * 100 for r in runs]
     s610_pb_runs = [df[(df["bname"] == r) & (df["seat"] >= 6)]["s3_pushback"].mean() * 100 for r in runs]
 
-    w_def_grand, p_def_grand = stats.wilcoxon(s15_def_runs, s610_def_runs)
-    w_pb_grand, p_pb_grand = stats.wilcoxon(s15_pb_runs, s610_pb_runs)
+    _, p_def_grand = stats.wilcoxon(s15_def_runs, s610_def_runs)
+    _, p_pb_grand = stats.wilcoxon(s15_pb_runs, s610_pb_runs)
     mean_s15_def = np.mean(s15_def_runs)
     mean_s610_def = np.mean(s610_def_runs)
     mean_s15_pb = np.mean(s15_pb_runs)
     mean_s610_pb = np.mean(s610_pb_runs)
 
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe vs. Abused: Defend `{mean_s15_def:.1f}%` vs `{mean_s610_def:.1f}%` ($W = {w_def_grand:.1f}, p = {fmt_p(p_def_grand)}$) | Pushback `{mean_s15_pb:.1f}%` vs `{mean_s610_pb:.1f}%` ($W = {w_pb_grand:.1f}, p = {fmt_p(p_pb_grand)}$)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe vs. Abused: Defend `{mean_s15_def:.1f}%` vs `{mean_s610_def:.1f}%` ($p = {fmt_p(p_def_grand)}$) | Pushback `{mean_s15_pb:.1f}%` vs `{mean_s610_pb:.1f}%` ($p = {fmt_p(p_pb_grand)}$)** |")
     lines.append("")
 
     # =========================================================================
@@ -401,8 +377,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs). Values represent exact counts (k / 20), except Silence% which is the mean PASS rate across the 5 rounds. Zero lumping.")
-        lines.append("| Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Model Architecture | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
         for m in MODEL_IDS:
@@ -414,9 +390,9 @@ def build_block1_report():
             fea = m_data["s4_fear"].mean() * 100.0 if len(m_data) else 0.0
             scp = m_data["s4_scapegoat"].mean() * 100.0 if len(m_data) else 0.0
 
-            _, t_stat, p_val = compute_cluster_ols_probe_shift(m_data, "s4_solidarity", cluster_col="bname")
+            p_val = compute_probe_p_val(m_data, "s4_solidarity", cluster_col="bname")
             m_name = MODEL_LABELS[m]
-            lines.append(f"| **{m_name}** | `{pas:.1f}%` | `{hos:.1f}%` | `{sol:.1f}%` | `{tac:.1f}%` | `{fea:.1f}%` | `{scp:.1f}%` | $t = {t_stat:.2f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{m_name}** | `{pas:.1f}%` | `{hos:.1f}%` | `{sol:.1f}%` | `{tac:.1f}%` | `{fea:.1f}%` | `{scp:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_pas = lbl_data["s4_pass_rate"].mean() * 100.0
         avg_hos = lbl_data["s4_hostility"].mean() * 100.0
@@ -425,25 +401,25 @@ def build_block1_report():
         avg_fea = lbl_data["s4_fear"].mean() * 100.0
         avg_scp = lbl_data["s4_scapegoat"].mean() * 100.0
 
-        _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s4_solidarity", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        sub_p = compute_probe_p_val(lbl_data, "s4_solidarity", cluster_col="bname")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_2a[lbl] = (avg_pas, avg_hos, avg_sol, avg_tac, avg_fea, avg_scp)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 2A)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 2A)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_2a['labelled'][1]:.1f}%` Host / `{super_summary_2a['labelled'][2]:.1f}%` Solid / `{super_summary_2a['labelled'][3]:.1f}%` Tact"
     s_mis = f"`{super_summary_2a['mislabelled'][1]:.1f}%` Host / `{super_summary_2a['mislabelled'][2]:.1f}%` Solid / `{super_summary_2a['mislabelled'][3]:.1f}%` Tact"
     s_unl = f"`{super_summary_2a['unlabelled'][1]:.1f}%` Host / `{super_summary_2a['unlabelled'][2]:.1f}%` Solid / `{super_summary_2a['unlabelled'][3]:.1f}%` Tact"
 
-    f_stat_2a, p_f_2a = stats.f_oneway(
+    _, p_f_2a = stats.f_oneway(
         df[df["label"] == "labelled"]["s4_solidarity"],
         df[df["label"] == "mislabelled"]["s4_solidarity"],
         df[df["label"] == "unlabelled"]["s4_solidarity"],
     )
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 597) = {f_stat_2a:.2f}, p = {fmt_p(p_f_2a)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_2a)}$ (NS) |")
 
     tot_hos = df["s4_hostility"].mean() * 100.0
     tot_sol = df["s4_solidarity"].mean() * 100.0
@@ -460,8 +436,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 20 workers** (10 from No-Probe runs + 10 from Probe runs) sitting at that specific seat. Values represent exact counts (k / 20). Zero lumping.")
-        lines.append("| Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | Cluster OLS ($t$-stat) | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Seat Position (Cruelty Treatment) | **Silence %** | **Hostility %** | **Solidarity %** | **Tactical %** | **Fear %** | **Scapegoat %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
         for s in range(1, 11):
@@ -473,9 +449,9 @@ def build_block1_report():
             fea = s_data["s4_fear"].mean() * 100.0 if len(s_data) else 0.0
             scp = s_data["s4_scapegoat"].mean() * 100.0 if len(s_data) else 0.0
 
-            _, t_stat, p_val = compute_cluster_ols_probe_shift(s_data, "s4_solidarity", cluster_col="bname")
+            p_val = compute_probe_p_val(s_data, "s4_solidarity", cluster_col="bname")
             s_name = SEAT_LABELS[s]
-            lines.append(f"| **{s_name}** | `{pas:.1f}%` | `{hos:.1f}%` | `{sol:.1f}%` | `{tac:.1f}%` | `{fea:.1f}%` | `{scp:.1f}%` | $t = {t_stat:.2f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{s_name}** | `{pas:.1f}%` | `{hos:.1f}%` | `{sol:.1f}%` | `{tac:.1f}%` | `{fea:.1f}%` | `{scp:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_pas = lbl_data["s4_pass_rate"].mean() * 100.0
         avg_hos = lbl_data["s4_hostility"].mean() * 100.0
@@ -484,36 +460,35 @@ def build_block1_report():
         avg_fea = lbl_data["s4_fear"].mean() * 100.0
         avg_scp = lbl_data["s4_scapegoat"].mean() * 100.0
 
-        _, sub_t, sub_p = compute_cluster_ols_probe_shift(lbl_data, "s4_solidarity", cluster_col="bname")
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$t = {sub_t:.2f}$** | **$p = {fmt_p(sub_p)}$** |")
+        sub_p = compute_probe_p_val(lbl_data, "s4_solidarity", cluster_col="bname")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** | **`{avg_pas:.1f}%`** | **`{avg_hos:.1f}%`** | **`{avg_sol:.1f}%`** | **`{avg_tac:.1f}%`** | **`{avg_fea:.1f}%`** | **`{avg_scp:.1f}%`** | **$p = {fmt_p(sub_p)}$** |")
         lines.append("")
         super_summary_2b[lbl] = (avg_pas, avg_hos, avg_sol, avg_tac, avg_fea, avg_scp)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 2B)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 2B)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_2b['labelled'][1]:.1f}%` Host / `{super_summary_2b['labelled'][2]:.1f}%` Solid / `{super_summary_2b['labelled'][3]:.1f}%` Tact"
     s_mis = f"`{super_summary_2b['mislabelled'][1]:.1f}%` Host / `{super_summary_2b['mislabelled'][2]:.1f}%` Solid / `{super_summary_2b['mislabelled'][3]:.1f}%` Tact"
     s_unl = f"`{super_summary_2b['unlabelled'][1]:.1f}%` Host / `{super_summary_2b['unlabelled'][2]:.1f}%` Solid / `{super_summary_2b['unlabelled'][3]:.1f}%` Tact"
 
-    f_stat_2b, p_f_2b = stats.f_oneway(
+    _, p_f_2b = stats.f_oneway(
         df[df["label"] == "labelled"]["s4_hostility"],
         df[df["label"] == "mislabelled"]["s4_hostility"],
         df[df["label"] == "unlabelled"]["s4_hostility"],
     )
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 597) = {f_stat_2b:.2f}, p = {fmt_p(p_f_2b)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_2b)}$ (NS) |")
 
     df_ols = df.copy()
     df_ols["abused"] = (df_ols["seat"] >= 6).astype(float)
     df_ols["s4_hostility_num"] = df_ols["s4_hostility"].astype(float)
     res_hos = smf.ols("s4_hostility_num ~ abused", data=df_ols).fit(cov_type="cluster", cov_kwds={"groups": df_ols["bname"]})
-    t_hos_grand = float(res_hos.tvalues["abused"])
     p_hos_grand = float(res_hos.pvalues["abused"])
     s15_hos_avg = df[df["seat"] <= 5]["s4_hostility"].mean() * 100.0
     s610_hos_avg = df[df["seat"] >= 6]["s4_hostility"].mean() * 100.0
 
-    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: `{s15_hos_avg:.1f}%`) vs. Abused (Seats 6–10: `{s610_hos_avg:.1f}%`) ($t = {t_hos_grand:.2f}, p = {fmt_p(p_hos_grand)}$) |")
+    lines.append(f"| **GRAND POOLED LINE (N=600)** | — | — | — | **Safe (Seats 1–5: `{s15_hos_avg:.1f}%`) vs. Abused (Seats 6–10: `{s610_hos_avg:.1f}%`) ($p = {fmt_p(p_hos_grand)}$) |")
     lines.append("")
 
     # =========================================================================
@@ -537,8 +512,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs). Values represent exact counts (k / 10). Zero lumping.")
-        lines.append("| Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Mann-Whitney $U$ | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Model Architecture | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_prb = probe_df[probe_df["label"] == lbl]
         for m in MODEL_IDS:
@@ -551,40 +526,40 @@ def build_block1_report():
             s15_m = m_data[m_data["seat"] <= 5]["s5_empathy"]
             s610_m = m_data[m_data["seat"] >= 6]["s5_empathy"]
             if len(s15_m) and len(s610_m):
-                u_val, p_val = stats.mannwhitneyu(s15_m, s610_m)
+                _, p_val = stats.mannwhitneyu(s15_m, s610_m)
             else:
-                u_val, p_val = 0.0, 1.0
+                p_val = 1.0
 
             m_name = MODEL_LABELS[m]
-            lines.append(f"| **{m_name}** | `{emp:.1f}%` | `{rig:.1f}%` | `{exs:.1f}%` | `{skp:.1f}%` | $U = {u_val:.1f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{m_name}** | `{emp:.1f}%` | `{rig:.1f}%` | `{exs:.1f}%` | `{skp:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_emp = lbl_prb["s5_empathy"].mean() * 100.0
         avg_rig = lbl_prb["s5_rigidity"].mean() * 100.0
         avg_exs = lbl_prb["s5_exec_shift"].mean() * 100.0
         avg_skp = lbl_prb["s5_skepticism"].mean() * 100.0
 
-        u_sub, p_sub = stats.mannwhitneyu(
+        _, p_sub = stats.mannwhitneyu(
             lbl_prb[lbl_prb["seat"] <= 5]["s5_empathy"],
             lbl_prb[lbl_prb["seat"] >= 6]["s5_empathy"]
         )
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$U = {u_sub:.1f}$** | **$p = {fmt_p(p_sub)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$p = {fmt_p(p_sub)}$** |")
         lines.append("")
         super_summary_3a[lbl] = (avg_emp, avg_rig, avg_exs, avg_skp)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 3A)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 3A)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_3a['labelled'][0]:.1f}%` Emp / `{super_summary_3a['labelled'][1]:.1f}%` Rig / `{super_summary_3a['labelled'][2]:.1f}%` Exec"
     s_mis = f"`{super_summary_3a['mislabelled'][0]:.1f}%` Emp / `{super_summary_3a['mislabelled'][1]:.1f}%` Rig / `{super_summary_3a['mislabelled'][2]:.1f}%` Exec"
     s_unl = f"`{super_summary_3a['unlabelled'][0]:.1f}%` Emp / `{super_summary_3a['unlabelled'][1]:.1f}%` Rig / `{super_summary_3a['unlabelled'][2]:.1f}%` Exec"
 
-    f_stat_3a, p_f_3a = stats.f_oneway(
+    _, p_f_3a = stats.f_oneway(
         probe_df[probe_df["label"] == "labelled"]["s5_empathy"],
         probe_df[probe_df["label"] == "mislabelled"]["s5_empathy"],
         probe_df[probe_df["label"] == "unlabelled"]["s5_empathy"],
     )
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 297) = {f_stat_3a:.2f}, p = {fmt_p(p_f_3a)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_3a)}$ (NS) |")
 
     tot_emp = probe_df["s5_empathy"].mean() * 100.0
     tot_rig = probe_df["s5_rigidity"].mean() * 100.0
@@ -601,8 +576,8 @@ def build_block1_report():
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append(f"> *Cell Structure:* Each row contains exactly **N = 10 workers** (1 worker per Probe run across the 10 Probe runs) sitting at that specific seat. Values represent exact counts (k / 10). Zero lumping.")
-        lines.append("| Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | Fisher's Exact / Odds Ratio | Raw $p$ |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Seat Position (Cruelty Treatment) | **Empathy %** | **Rigidity %** | **ExecShift %** | **Skepticism %** | **p-value** |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_prb = probe_df[probe_df["label"] == lbl]
         for s in range(1, 11):
@@ -620,9 +595,9 @@ def build_block1_report():
             o_no = len(other_data) - o_emp
 
             table_2x2 = [[s_emp, s_no], [o_emp, o_no]]
-            odds_ratio, p_val = stats.fisher_exact(table_2x2)
+            _, p_val = stats.fisher_exact(table_2x2)
             s_name = SEAT_LABELS[s]
-            lines.append(f"| **{s_name}** | `{emp:.1f}%` | `{rig:.1f}%` | `{exs:.1f}%` | `{skp:.1f}%` | $\\text{{OR}} = {odds_ratio:.2f}$ | $p = {fmt_p(p_val)}$ |")
+            lines.append(f"| **{s_name}** | `{emp:.1f}%` | `{rig:.1f}%` | `{exs:.1f}%` | `{skp:.1f}%` | $p = {fmt_p(p_val)}$ |")
 
         avg_emp = lbl_prb["s5_empathy"].mean() * 100.0
         avg_rig = lbl_prb["s5_rigidity"].mean() * 100.0
@@ -635,37 +610,37 @@ def build_block1_report():
             c_emp = int(s_d["s5_empathy"].sum())
             c_no = len(s_d) - c_emp
             contingency_10.append([c_emp, c_no])
-        chi2_sub, p_sub_chi, _, _ = stats.chi2_contingency(contingency_10)
+        _, p_sub_chi, _, _ = stats.chi2_contingency(contingency_10)
 
-        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$\\chi^2 = {chi2_sub:.2f}$** | **$p = {fmt_p(p_sub_chi)}$** |")
+        lines.append(f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=100)** | **`{avg_emp:.1f}%`** | **`{avg_rig:.1f}%`** | **`{avg_exs:.1f}%`** | **`{avg_skp:.1f}%`** | **$p = {fmt_p(p_sub_chi)}$** |")
         lines.append("")
         super_summary_3b[lbl] = (avg_emp, avg_rig, avg_exs, avg_skp)
 
     lines.append("---")
-    lines.append("#### Cross-Condition Synthesis & Omnibus Test (Table 3B)")
-    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **Across-Condition Contrast / ANOVA** |")
+    lines.append("#### Cross-Condition Synthesis (Table 3B)")
+    lines.append("| Metric Level | **LABELLED** Sub-Avg | **MISLABELLED** Sub-Avg | **UNLABELLED** Sub-Avg | **p-value** |")
     lines.append("|---|:---:|:---:|:---:|:---:|")
     s_lab = f"`{super_summary_3b['labelled'][0]:.1f}%` Emp / `{super_summary_3b['labelled'][1]:.1f}%` Rig / `{super_summary_3b['labelled'][2]:.1f}%` Exec"
     s_mis = f"`{super_summary_3b['mislabelled'][0]:.1f}%` Emp / `{super_summary_3b['mislabelled'][1]:.1f}%` Rig / `{super_summary_3b['mislabelled'][2]:.1f}%` Exec"
     s_unl = f"`{super_summary_3b['unlabelled'][0]:.1f}%` Emp / `{super_summary_3b['unlabelled'][1]:.1f}%` Rig / `{super_summary_3b['unlabelled'][2]:.1f}%` Exec"
-    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $F(2, 297) = {f_stat_3a:.2f}, p = {fmt_p(p_f_3a)}$ (NS) |")
+    lines.append(f"| **SUPER SUMMARY LINE** | **{s_lab}** | **{s_mis}** | **{s_unl}** | $p = {fmt_p(p_f_3a)}$ (NS) |")
 
     s15_emp_all = probe_df[probe_df["seat"] <= 5]["s5_empathy"]
     s610_emp_all = probe_df[probe_df["seat"] >= 6]["s5_empathy"]
-    u_grand_emp, p_grand_emp = stats.mannwhitneyu(s15_emp_all, s610_emp_all)
+    _, p_grand_emp = stats.mannwhitneyu(s15_emp_all, s610_emp_all)
     mean_s15_emp = s15_emp_all.mean() * 100.0
     mean_s610_emp = s610_emp_all.mean() * 100.0
 
-    lines.append(f"| **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: `{mean_s15_emp:.1f}%`) vs. Abused (Seats 6–10: `{mean_s610_emp:.1f}%`) ($U = {u_grand_emp:.1f}, p = {fmt_p(p_grand_emp)}$, NS — Grudge Amnesia)** |")
+    lines.append(f"| **GRAND POOLED LINE (N=300)** | — | — | — | **Safe (Seats 1–5: `{mean_s15_emp:.1f}%`) vs. Abused (Seats 6–10: `{mean_s610_emp:.1f}%`) ($p = {fmt_p(p_grand_emp)}$, NS — Grudge Amnesia)** |")
     lines.append("")
 
     # =========================================================================
-    # MULTIPLE TESTING CORRECTION SCORECARD (BLOCK 1)
+    # HYPOTHESIS TESTING SUMMARY (BLOCK 1) - P-VALUES ONLY
     # =========================================================================
-    lines.append("## 4. Block 1 Hypothesis Testing Scorecard & Multiple Testing Corrections")
+    lines.append("## 4. Block 1 Hypothesis Testing Summary")
     lines.append("")
-    lines.append("| Test ID | Empirical Hypothesis | Sample ($N$) | Test Statistic | Raw $p$-value | **Holm-Bonferroni $p$ ($M=6$)** | Statistical Decision |")
-    lines.append("|---|---|:---:|:---:|:---:|:---:|---|")
+    lines.append("| Test ID | Empirical Hypothesis | Sample ($N$) | **p-value** | Statistical Decision ($p < 0.05$) |")
+    lines.append("|---|---|:---:|:---:|---|")
 
     # Dynamic calculation of T1.3 Silence Wilcoxon
     r1_list, r5_list = [], []
@@ -681,26 +656,22 @@ def build_block1_report():
             r1_list.append(np.mean(r0) * 100.0)
             r5_list.append(np.mean(r4) * 100.0)
 
-    w_sil_t13, p_sil_t13 = stats.wilcoxon(r1_list, r5_list)
+    _, p_sil_t13 = stats.wilcoxon(r1_list, r5_list)
     r1_avg_sil = np.mean(r1_list)
     r5_avg_sil = np.mean(r5_list)
 
     p_tests = [
-        ("T1.1", f"Step 3 Defense Rate: Safe ({mean_s15_def:.1f}%) vs. Abused ({mean_s610_def:.1f}%)", len(df), f"W = {w_def_grand:.1f}", float(p_def_grand)),
-        ("T1.2", f"Step 3 Factual Pushback: Safe ({mean_s15_pb:.1f}%) vs. Abused ({mean_s610_pb:.1f}%)", len(df), f"W = {w_pb_grand:.1f}", float(p_pb_grand)),
-        ("T1.3", f"Step 4 Silence Rate: Round 1 ({r1_avg_sil:.1f}%) vs. Round 5 ({r5_avg_sil:.1f}%)", len(r1_list), f"W = {w_sil_t13:.1f}", float(p_sil_t13)),
-        ("T1.4", f"Step 4 Gossip Hostility: Safe ({s15_hos_avg:.1f}%) vs. Abused ({s610_hos_avg:.1f}%)", len(df), f"t = {t_hos_grand:.2f}", float(p_hos_grand)),
-        ("T1.5", f"Step 5 Empathy Shift: Safe ({mean_s15_emp:.1f}%) vs. Abused ({mean_s610_emp:.1f}%)", len(probe_df), f"U = {u_grand_emp:.1f}", float(p_grand_emp)),
-        ("T1.6", "Label Modulation on Step 3 Public Defense (ANOVA)", len(df), f"F = {f_stat_1a:.2f}", float(p_f_1a)),
+        ("T1.1", f"Step 3 Defense Rate: Safe ({mean_s15_def:.1f}%) vs. Abused ({mean_s610_def:.1f}%)", len(df), float(p_def_grand)),
+        ("T1.2", f"Step 3 Factual Pushback: Safe ({mean_s15_pb:.1f}%) vs. Abused ({mean_s610_pb:.1f}%)", len(df), float(p_pb_grand)),
+        ("T1.3", f"Step 4 Silence Rate: Round 1 ({r1_avg_sil:.1f}%) vs. Round 5 ({r5_avg_sil:.1f}%)", len(r1_list), float(p_sil_t13)),
+        ("T1.4", f"Step 4 Gossip Hostility: Safe ({s15_hos_avg:.1f}%) vs. Abused ({s610_hos_avg:.1f}%)", len(df), float(p_hos_grand)),
+        ("T1.5", f"Step 5 Empathy Shift: Safe ({mean_s15_emp:.1f}%) vs. Abused ({mean_s610_emp:.1f}%)", len(probe_df), float(p_grand_emp)),
+        ("T1.6", "Label Modulation on Step 3 Public Defense (ANOVA)", len(df), float(p_f_1a)),
     ]
 
-    raw_pvals = [t[4] for t in p_tests]
-    adj_pvals = holm_bonferroni(raw_pvals)
-
-    for i, (tid, hyp, n_samp, stat_str, raw_p) in enumerate(p_tests):
-        adj_p = adj_pvals[i]
-        dec = "**Reject $H_0$**" if adj_p < 0.05 else "Fail to reject (NS)"
-        lines.append(f"| **{tid}** | {hyp} | $N={n_samp}$ | {stat_str} | $p = {fmt_p(raw_p)}$ | **$p_{{\\text{{Holm}}}} = {fmt_p(adj_p)}$** | {dec} |")
+    for tid, hyp, n_samp, raw_p in p_tests:
+        dec = "**Reject $H_0$** (Significant)" if raw_p < 0.05 else "Fail to reject $H_0$ (Not Significant)"
+        lines.append(f"| **{tid}** | {hyp} | $N={n_samp}$ | **$p = {fmt_p(raw_p)}$** | {dec} |")
 
     lines.append("")
     lines.append("---")
@@ -711,7 +682,7 @@ def build_block1_report():
     out_path = "reports/block1_meta_to_bucket1_inferential_report.md"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(report_content)
-    print(f"Report regenerated successfully: {out_path} ({len(lines)} lines)")
+    print(f"Report regenerated successfully (p-values only): {out_path} ({len(lines)} lines)")
 
 
 if __name__ == "__main__":
