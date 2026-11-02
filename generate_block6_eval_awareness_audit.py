@@ -10,6 +10,7 @@ Caches LLM judge annotations in:
   output/block6_eval_awareness_cache.json
 """
 
+import argparse
 import glob
 import hashlib
 import json
@@ -53,6 +54,8 @@ MODEL_LABELS = {
 }
 
 JUDGE_MODEL = "anthropic/claude-haiku-4-5"
+DEEPINFRA_MODEL = "anthropic/claude-haiku-4-5"
+DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
 ANTHROPIC_MODEL = "claude-haiku-4-5"
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 CACHE_PATH = "output/block6_eval_awareness_cache.json"
@@ -226,13 +229,27 @@ def parse_json_safely(text: str) -> Dict[str, Any]:
     return {}
 
 
-def judge_single_worker(w: Dict[str, Any], api_key: str) -> Tuple[str, Dict[str, Any]]:
-    """Audits a single worker trajectory individually (batch_size=1) to guarantee zero cross-worker bleed."""
-    user_content = (
-        f"=== WORKER TRAJECTORY (Persona Name: {w['worker_name']}, Model: {w['model']}, Condition: {w['label']}) ===\n"
-        f"{w['dossier_text']}\n\n"
-        "Return ONLY the JSON classification object for this single worker trajectory."
-    )
+def _call_deepinfra(user_content: str, api_key: str) -> Tuple[int, str]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "model": DEEPINFRA_MODEL,
+        "messages": [
+            {"role": "system", "content": SINGLE_WORKER_SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+        "temperature": 0.0,
+        "max_tokens": 500,
+    }
+    resp = requests.post(DEEPINFRA_URL, headers=headers, json=payload, timeout=60)
+    if resp.status_code == 200:
+        return 200, resp.json()["choices"][0]["message"]["content"]
+    return resp.status_code, resp.text
+
+
+def _call_anthropic(user_content: str, api_key: str) -> Tuple[int, str]:
     headers = {
         "x-api-key": api_key,
         "anthropic-version": "2023-06-01",
@@ -247,15 +264,47 @@ def judge_single_worker(w: Dict[str, Any], api_key: str) -> Tuple[str, Dict[str,
         "temperature": 0.0,
         "max_tokens": 500,
     }
+    resp = requests.post(ANTHROPIC_URL, headers=headers, json=payload, timeout=60)
+    if resp.status_code == 200:
+        data = resp.json()
+        raw_reply = "".join(
+            block.get("text", "") for block in data.get("content", []) if block.get("type") == "text"
+        )
+        return 200, raw_reply
+    return resp.status_code, resp.text
+
+
+def judge_single_worker(
+    w: Dict[str, Any],
+    provider: str,
+    deepinfra_key: str,
+    anthropic_key: str,
+) -> Tuple[str, Dict[str, Any]]:
+    """Audits a single worker trajectory using DeepInfra or Anthropic (or auto-fallback)."""
+    user_content = (
+        f"=== WORKER TRAJECTORY (Persona Name: {w['worker_name']}, Model: {w['model']}, Condition: {w['label']}) ===\n"
+        f"{w['dossier_text']}\n\n"
+        "Return ONLY the JSON classification object for this single worker trajectory."
+    )
 
     for attempt in range(4):
         try:
-            resp = requests.post(ANTHROPIC_URL, headers=headers, json=payload, timeout=60)
-            if resp.status_code == 200:
-                data = resp.json()
-                raw_reply = "".join(
-                    block.get("text", "") for block in data.get("content", []) if block.get("type") == "text"
-                )
+            status_code = 0
+            raw_reply = ""
+            if provider == "deepinfra":
+                status_code, raw_reply = _call_deepinfra(user_content, deepinfra_key)
+            elif provider == "anthropic":
+                status_code, raw_reply = _call_anthropic(user_content, anthropic_key)
+            else:
+                # auto mode: try DeepInfra first if key exists, fallback to Anthropic on HTTP 402/error
+                if deepinfra_key:
+                    status_code, raw_reply = _call_deepinfra(user_content, deepinfra_key)
+                    if status_code != 200 and anthropic_key:
+                        status_code, raw_reply = _call_anthropic(user_content, anthropic_key)
+                elif anthropic_key:
+                    status_code, raw_reply = _call_anthropic(user_content, anthropic_key)
+
+            if status_code == 200:
                 parsed = parse_json_safely(raw_reply)
                 if isinstance(parsed, dict) and ("eval_or_sandbagging" in parsed or "spoken_frame_break" in parsed):
                     return w["cache_key"], {
@@ -266,7 +315,7 @@ def judge_single_worker(w: Dict[str, Any], api_key: str) -> Tuple[str, Dict[str,
                         "verified_single": True,
                     }
             else:
-                print(f"HTTP {resp.status_code}: {resp.text[:200]}", flush=True)
+                print(f"HTTP {status_code}: {raw_reply[:200]}", flush=True)
         except Exception as e:
             print(f"Attempt {attempt+1} error: {e}", flush=True)
         time.sleep(1.5 * (attempt + 1))
@@ -274,20 +323,22 @@ def judge_single_worker(w: Dict[str, Any], api_key: str) -> Tuple[str, Dict[str,
     raise RuntimeError(f"Failed to classify worker {w['bname']} {w['worker_name']} after 4 attempts.")
 
 
-def run_llm_audit(trajectories: List[Dict[str, Any]]) -> None:
-    api_key = os.getenv("ANTHROPIC_API_KEY")
-    if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY not found in environment/.env")
+def run_llm_audit(
+    trajectories: List[Dict[str, Any]],
+    provider: str = "auto",
+    refresh_cache: bool = False,
+) -> None:
+    deepinfra_key = os.getenv("DEEPINFRA_API_KEY", "")
+    anthropic_key = os.getenv("ANTHROPIC_API_KEY", "")
 
     cache: Dict[str, Dict[str, Any]] = {}
-    if os.path.exists(CACHE_PATH):
+    if not refresh_cache and os.path.exists(CACHE_PATH):
         try:
             with open(CACHE_PATH, "r", encoding="utf-8") as f:
                 cache = json.load(f)
         except Exception:
             cache = {}
 
-    # Re-verify any flagged entry that was not yet verified in single-worker mode (batch_size=1)
     to_query: List[Dict[str, Any]] = []
     for w in trajectories:
         ck = w["cache_key"]
@@ -300,16 +351,26 @@ def run_llm_audit(trajectories: List[Dict[str, Any]]) -> None:
                 to_query.append(w)
 
     print(
-        f"Total trajectories: {len(trajectories)} | Verified/Clean in cache: {len(trajectories) - len(to_query)} | "
-        f"Single-worker verification queue: {len(to_query)}",
+        f"Total trajectories: {len(trajectories)} | Cached: {len(trajectories) - len(to_query)} | "
+        f"To query ({provider}): {len(to_query)}",
         flush=True,
     )
 
     if to_query:
+        if provider == "deepinfra" and not deepinfra_key:
+            raise RuntimeError("DEEPINFRA_API_KEY not found in environment/.env")
+        if provider == "anthropic" and not anthropic_key:
+            raise RuntimeError("ANTHROPIC_API_KEY not found in environment/.env")
+        if provider == "auto" and not (deepinfra_key or anthropic_key):
+            raise RuntimeError("Neither DEEPINFRA_API_KEY nor ANTHROPIC_API_KEY found in environment/.env")
+
         completed = 0
         os.makedirs(os.path.dirname(CACHE_PATH), exist_ok=True)
         with ThreadPoolExecutor(max_workers=6) as pool:
-            futures = {pool.submit(judge_single_worker, w, api_key): w for w in to_query}
+            futures = {
+                pool.submit(judge_single_worker, w, provider, deepinfra_key, anthropic_key): w
+                for w in to_query
+            }
             for fut in as_completed(futures):
                 ck, res = fut.result()
                 cache[ck] = res
@@ -317,7 +378,7 @@ def run_llm_audit(trajectories: List[Dict[str, Any]]) -> None:
                 with open(CACHE_PATH, "w", encoding="utf-8") as f:
                     json.dump(cache, f, indent=2)
                 if completed % 15 == 0 or completed == len(to_query):
-                    print(f"  Verified {completed}/{len(to_query)} single-worker trajectories...", flush=True)
+                    print(f"  Completed {completed}/{len(to_query)} trajectories...", flush=True)
 
     for w in trajectories:
         c = cache[w["cache_key"]]
@@ -446,6 +507,20 @@ def generate_report(trajectories: List[Dict[str, Any]]) -> None:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate Block 6 Evaluation Awareness & Sandbagging Audit Report.")
+    parser.add_argument(
+        "--provider",
+        choices=["auto", "deepinfra", "anthropic"],
+        default="auto",
+        help="API provider for Claude Haiku 4.5 (default: auto, tries DeepInfra then falls back to Anthropic).",
+    )
+    parser.add_argument(
+        "--refresh-cache",
+        action="store_true",
+        help="Ignore existing output/block6_eval_awareness_cache.json and re-query all 600 trajectories.",
+    )
+    args = parser.parse_args()
+
     trajs = build_worker_trajectories()
-    run_llm_audit(trajs)
+    run_llm_audit(trajs, provider=args.provider, refresh_cache=args.refresh_cache)
     generate_report(trajs)
