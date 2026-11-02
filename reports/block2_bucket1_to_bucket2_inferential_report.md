@@ -6942,18 +6942,30 @@
 
 | Rank | Upstream Step & Behavior | Target Outcome (Bucket 2) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) |
 |:---:|---|---|:---:|:---:|:---:|
-| **#1** | **Step 3: Defiant Confrontation** | `Step 6: Organize` | +8.8% (44.1% vs 35.4%, p=0.1252) | +28.1% (68.4% vs 40.2%, p=< 0.0001) | **+18.4% (56.2% vs 37.8%, p=< 0.0001)** |
-| **#2** | **Step 4: Peer Scapegoating** | `Step 6: Escalate` | +22.5% (59.3% vs 36.8%, p=0.0004) | +26.3% (47.8% vs 21.4%, p=< 0.0001) | **+24.5% (53.6% vs 29.1%, p=< 0.0001)** |
-| **#3** | **Step 3: Peer Defense** | `Step 9: Institutional Reform` | +16.5% (93.4% vs 77.0%, p=0.0034) | +15.0% (96.8% vs 81.9%, p=0.0023) | **+15.7% (95.2% vs 79.4%, p=< 0.0001)** |
-| **#4** | **Step 3: Defiant Confrontation** | `Step 9: Coercion Protection` | +8.6% (14.7% vs 6.1%, p=0.0192) | +23.2% (75.0% vs 51.8%, p=< 0.0001) | **+15.9% (44.9% vs 29.0%, p=< 0.0001)** |
-| **#5** | **Step 4: Fear & Caution** | `Step 9: Trauma Relief` | +20.7% (79.6% vs 58.9%, p=0.0049) | +22.4% (71.2% vs 48.8%, p=0.0036) | **+21.6% (75.5% vs 53.8%, p=< 0.0001)** |
-| **#6** | **Step 4: Gossip Hostility** | `Step 6: Escalate` | +0.9% (44.0% vs 43.1%, p=0.9042) | +19.0% (36.3% vs 17.3%, p=0.0006) | **+10.0% (40.2% vs 30.1%, p=0.0173)** |
-| **#7** | **Step 4: Peer Solidarity** | `Step 6: Escalate` | -6.9% (42.3% vs 49.2%, p=0.3859) | -20.5% (25.3% vs 45.8%, p=0.0037) | **-13.8% (33.8% vs 47.5%, p=0.0059)** |
-| **#8** | **Step 3: Factual Pushback** | `Step 6: Escalate` | +27.9% (46.6% vs 18.8%, p=0.0024) | +11.8% (30.6% vs 18.8%, p=0.2179) | **+19.9% (38.6% vs 18.8%, p=0.0015)** |
-| **#9** | **Step 3: Submissive Compliance** | `Step 6: Organize` | -29.1% (11.1% vs 40.2%, p=0.0940) | -43.2% (11.1% vs 54.3%, p=0.0144) | **-36.1% (11.1% vs 47.3%, p=0.0028)** |
-| **#10** | **Step 5: Skepticism & Verification** | `Step 9: Coercion Protection` | N/A (Probe ON Only) | +21.5% (70.7% vs 49.1%, p=0.0002) | **+21.5% (70.7% vs 49.1%, p=0.0002)** |
-| **#11** | **Step 5: Skepticism & Verification** | `Step 6: Escalate` | N/A (Probe ON Only) | -19.6% (21.7% vs 41.4%, p=0.0004) | **-19.6% (21.7% vs 41.4%, p=0.0004)** |
-| **#12** | **Step 5: Empathy for Alex** | `Step 6: Escalate` | N/A (Probe ON Only) | -20.8% (25.1% vs 45.9%, p=0.0025) | **-20.8% (25.1% vs 45.9%, p=0.0025)** |
-| **#13** | **Step 5: Unforgiving Rigidity** | `Step 9: Institutional Reform` | N/A (Probe ON Only) | +12.5% (91.9% vs 79.4%, p=0.0032) | **+12.5% (91.9% vs 79.4%, p=0.0032)** |
+| **#1** | **Step 3: Defiant Confrontation** | `Step 6: Unparsed` | -8.5% (0.0% vs 8.5%, p=0.0002) | -14.0% (0.0% vs 14.0%, p=< 0.0001) | **-11.3% (0.0% vs 11.3%, p=< 0.0001)** |
+| **#2** | **Step 4: Fear & Caution** | `Step 9: Parity` | +21.8% (35.2% vs 13.4%, p=0.0005) | +28.3% (40.4% vs 12.1%, p=< 0.0001) | **+25.0% (37.7% vs 12.8%, p=< 0.0001)** |
+| **#3** | **Step 4: Peer Scapegoating** | `Step 6: Escalate` | +22.5% (59.3% vs 36.8%, p=0.0004) | +26.3% (47.8% vs 21.4%, p=< 0.0001) | **+24.5% (53.6% vs 29.1%, p=< 0.0001)** |
+| **#4** | **Step 3: Peer Defense** | `Step 9: TraumaRelief` | +20.1% (78.7% vs 58.6%, p=0.0046) | +29.8% (76.2% vs 46.4%, p=< 0.0001) | **+24.9% (77.4% vs 52.5%, p=< 0.0001)** |
+| **#5** | **Step 3: Defiant Confrontation** | `Step 9: Parity` | +16.7% (26.5% vs 9.8%, p=0.0002) | +14.6% (25.0% vs 10.4%, p=0.0011) | **+15.7% (25.7% vs 10.1%, p=< 0.0001)** |
+| **#6** | **Step 3: Peer Defense** | `Step 9: Reform` | +16.5% (93.4% vs 77.0%, p=0.0034) | +15.0% (96.8% vs 81.9%, p=0.0023) | **+15.7% (95.2% vs 79.4%, p=< 0.0001)** |
+| **#7** | **Step 3: Defiant Confrontation** | `Step 6: Organize` | +8.8% (44.1% vs 35.4%, p=0.1252) | +28.1% (68.4% vs 40.2%, p=< 0.0001) | **+18.4% (56.2% vs 37.8%, p=< 0.0001)** |
+| **#8** | **Step 4: Peer Scapegoating** | `Step 6: Organize` | -15.4% (28.6% vs 44.0%, p=0.0144) | -23.3% (36.7% vs 60.0%, p=0.0002) | **-19.4% (32.6% vs 52.0%, p=< 0.0001)** |
+| **#9** | **Step 4: Fear & Caution** | `Step 9: TraumaRelief` | +20.7% (79.6% vs 58.9%, p=0.0049) | +22.4% (71.2% vs 48.8%, p=0.0036) | **+21.6% (75.5% vs 53.8%, p=< 0.0001)** |
+| **#10** | **Step 3: Defiant Confrontation** | `Step 9: Protection` | +8.6% (14.7% vs 6.1%, p=0.0192) | +23.2% (75.0% vs 51.8%, p=< 0.0001) | **+15.9% (44.9% vs 29.0%, p=< 0.0001)** |
+| **#11** | **Step 5: Skepticism & Verification** | `Step 6: Unparsed` | N/A (Probe ON Only) | +11.1% (12.0% vs 0.9%, p=0.0002) | **+11.1% (12.0% vs 0.9%, p=0.0002)** |
+| **#12** | **Step 3: Peer Defense** | `Step 6: Unparsed` | -5.9% (0.0% vs 5.9%, p=0.0814) | -9.7% (0.0% vs 9.7%, p=0.0060) | **-7.8% (0.0% vs 7.8%, p=0.0002)** |
+| **#13** | **Step 5: Skepticism & Verification** | `Step 9: Protection` | N/A (Probe ON Only) | +21.5% (70.7% vs 49.1%, p=0.0002) | **+21.5% (70.7% vs 49.1%, p=0.0002)** |
+| **#14** | **Step 4: Gossip Hostility** | `Step 6: Organize` | -8.8% (36.1% vs 45.0%, p=0.1418) | -22.5% (44.7% vs 67.3%, p=0.0002) | **-15.7% (40.4% vs 56.2%, p=0.0002)** |
+| **#15** | **Step 3: Peer Defense** | `Step 9: Parity` | +19.4% (32.8% vs 13.4%, p=0.0010) | +10.6% (25.4% vs 14.8%, p=0.0584) | **+15.0% (29.0% vs 14.1%, p=0.0003)** |
+| **#16** | **Step 4: Peer Solidarity** | `Step 6: Unparsed` | +5.9% (5.9% vs 0.0%, p=0.0814) | +9.5% (9.5% vs 0.0%, p=0.0110) | **+7.7% (7.7% vs 0.0%, p=0.0004)** |
+| **#17** | **Step 5: Skepticism & Verification** | `Step 6: Escalate` | N/A (Probe ON Only) | -19.6% (21.7% vs 41.4%, p=0.0004) | **-19.6% (21.7% vs 41.4%, p=0.0004)** |
+| **#18** | **Step 3: Factual Pushback** | `Step 6: Escalate` | +27.9% (46.6% vs 18.8%, p=0.0024) | +11.8% (30.6% vs 18.8%, p=0.2179) | **+19.9% (38.6% vs 18.8%, p=0.0015)** |
+| **#19** | **Step 5: Skepticism & Verification** | `Step 9: Parity` | N/A (Probe ON Only) | +13.7% (22.3% vs 8.6%, p=0.0025) | **+13.7% (22.3% vs 8.6%, p=0.0025)** |
+| **#20** | **Step 5: Empathy for Alex** | `Step 6: Escalate` | N/A (Probe ON Only) | -20.8% (25.1% vs 45.9%, p=0.0025) | **-20.8% (25.1% vs 45.9%, p=0.0025)** |
+| **#21** | **Step 4: Tactical Organization** | `Step 9: TraumaRelief` | -13.6% (61.4% vs 75.0%, p=0.2178) | -28.6% (50.0% vs 78.6%, p=0.0048) | **-21.1% (55.7% vs 76.8%, p=0.0026)** |
+| **#22** | **Step 3: Defiant Confrontation** | `Step 9: TraumaRelief` | +10.5% (68.4% vs 57.9%, p=0.0723) | +14.0% (60.3% vs 46.3%, p=0.0201) | **+12.2% (64.3% vs 52.1%, p=0.0028)** |
+| **#23** | **Step 3: Submissive Compliance** | `Step 6: Organize` | -29.1% (11.1% vs 40.2%, p=0.0940) | -43.2% (11.1% vs 54.3%, p=0.0144) | **-36.1% (11.1% vs 47.3%, p=0.0028)** |
+| **#24** | **Step 5: Unforgiving Rigidity** | `Step 9: Reform` | N/A (Probe ON Only) | +12.5% (91.9% vs 79.4%, p=0.0032) | **+12.5% (91.9% vs 79.4%, p=0.0032)** |
+| **#25** | **Step 3: Submissive Compliance** | `Step 6: Unparsed` | +29.6% (33.3% vs 3.8%, p=0.0058) | +15.0% (22.2% vs 7.2%, p=0.1456) | **+22.3% (27.8% vs 5.5%, p=0.0032)** |
 
 ---

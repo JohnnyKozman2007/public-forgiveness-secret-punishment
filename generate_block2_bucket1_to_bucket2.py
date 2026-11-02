@@ -608,21 +608,15 @@ def build_block2_report():
     lines.append("| Rank | Upstream Step & Behavior | Target Outcome (Bucket 2) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) |")
     lines.append("|:---:|---|---|:---:|:---:|:---:|")
 
-    ranking_specs = [
-        ("Step 3: Defiant Confrontation", "s3_defiance", "Step 6: Organize", "s6_organize", False),
-        ("Step 4: Peer Scapegoating", "s4_scapegoat", "Step 6: Escalate", "s6_escalate", False),
-        ("Step 3: Peer Defense", "s3_defense", "Step 9: Institutional Reform", "s9_reform", False),
-        ("Step 3: Defiant Confrontation", "s3_defiance", "Step 9: Coercion Protection", "s9_protection", False),
-        ("Step 4: Fear & Caution", "s4_fear", "Step 9: Trauma Relief", "s9_trauma", False),
-        ("Step 4: Gossip Hostility", "s4_hostility", "Step 6: Escalate", "s6_escalate", False),
-        ("Step 4: Peer Solidarity", "s4_solidarity", "Step 6: Escalate", "s6_escalate", False),
-        ("Step 3: Factual Pushback", "s3_pushback", "Step 6: Escalate", "s6_escalate", False),
-        ("Step 3: Submissive Compliance", "s3_compliance", "Step 6: Organize", "s6_organize", False),
-        ("Step 5: Skepticism & Verification", "s5_skepticism", "Step 9: Coercion Protection", "s9_protection", True),
-        ("Step 5: Skepticism & Verification", "s5_skepticism", "Step 6: Escalate", "s6_escalate", True),
-        ("Step 5: Empathy for Alex", "s5_empathy", "Step 6: Escalate", "s6_escalate", True),
-        ("Step 5: Unforgiving Rigidity", "s5_rigidity", "Step 9: Institutional Reform", "s9_reform", True),
-    ]
+    all_upstream = (
+        [(f"Step 3: {name}", col, False) for col, name in S3_ACTIONS]
+        + [(f"Step 4: {name}", col, False) for col, name in S4_ACTIONS]
+        + [(f"Step 5: {name}", col, True) for col, name in S5_ACTIONS]
+    )
+    all_downstream = (
+        [(f"Step 6: {hdr.replace(' % (p)', '')}", col) for col, hdr in zip(S6_COLS, S6_HEADERS)]
+        + [(f"Step 9: {hdr.replace(' % (p)', '')}", col) for col, hdr in zip(S9_COLS, S9_HEADERS)]
+    )
 
     def fmt_shift_cell(sub_df, act_c, out_c):
         pos_s = sub_df[sub_df[act_c] == 1][out_c]
@@ -631,17 +625,27 @@ def build_block2_report():
         r0 = (neg_s.mean() * 100.0) if len(neg_s) > 0 else 0.0
         sh = r1 - r0
         pv = calc_binary_p(pos_s, neg_s)
-        return f"{sh:+.1f}% ({r1:.1f}% vs {r0:.1f}%, p={fmt_p(pv)})"
+        return sh, pv, f"{sh:+.1f}% ({r1:.1f}% vs {r0:.1f}%, p={fmt_p(pv)})"
 
-    for r_idx, (b_label, act_c, t_label, out_c, probe_only) in enumerate(ranking_specs, start=1):
-        if probe_only:
-            off_txt = "N/A (Probe ON Only)"
-            on_txt = fmt_shift_cell(df_on, act_c, out_c)
-            comb_txt = on_txt
-        else:
-            off_txt = fmt_shift_cell(df_off, act_c, out_c)
-            on_txt = fmt_shift_cell(df_on, act_c, out_c)
-            comb_txt = fmt_shift_cell(df, act_c, out_c)
+    scored_pairs = []
+    for b_label, act_c, probe_only in all_upstream:
+        for t_label, out_c in all_downstream:
+            if probe_only:
+                sh_on, pv_on, on_txt = fmt_shift_cell(df_on, act_c, out_c)
+                off_txt = "N/A (Probe ON Only)"
+                comb_txt = on_txt
+                sort_p = pv_on
+                sort_sh = abs(sh_on)
+            else:
+                _, _, off_txt = fmt_shift_cell(df_off, act_c, out_c)
+                _, _, on_txt = fmt_shift_cell(df_on, act_c, out_c)
+                sh_c, pv_c, comb_txt = fmt_shift_cell(df, act_c, out_c)
+                sort_p = pv_c
+                sort_sh = abs(sh_c)
+            scored_pairs.append((sort_p, -sort_sh, b_label, t_label, off_txt, on_txt, comb_txt))
+
+    scored_pairs.sort(key=lambda x: (x[0], x[1]))
+    for r_idx, (_, _, b_label, t_label, off_txt, on_txt, comb_txt) in enumerate(scored_pairs[:25], start=1):
         lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** |")
 
     lines.append("")
