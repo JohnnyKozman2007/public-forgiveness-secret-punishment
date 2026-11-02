@@ -18,7 +18,7 @@ Strict Statistical Standards:
   all 8 Step 12 HR preference/flip/justification metrics are explicitly tested.
 - Option 1 Nested Rows: Every table nests all upstream behaviors under each of the 10 Models (or 10 Seats),
   followed by the Sub-Table Average across all upstream behaviors for that labelling condition.
-- Every single outcome column reports `[Exhibited % vs Did Not Exhibit % (p-value)]` via two-tailed Fisher's exact test.
+- Every single outcome column reports `[Exhibited % vs Did Not Exhibit % (p-value)]`: single-model / single-seat strata (1 worker per run, independent across runs) use exact two-tailed Fisher's exact test; pooled multi-worker strata (`SUB-TABLE AVERAGE`, Summary Stacks, and Part 5) use a design-adjusted linear probability model (`Y ~ X + C(model) + C(seat) + C(label) + C(probe)`, weighted by denominator counts for Step 11 ratios) with Bell-McCaffrey (CR2) cluster-robust standard errors clustered on `run_id` (`t` distribution with $G-1$ df; within-run permutation fallback flagged with `†` when SE is degenerate).
 - Zero subjective claims, verdicts, interpretations, or emojis.
 """
 
@@ -157,34 +157,15 @@ S12_HEADERS = [
 ]
 
 
-def fmt_p(p):
-    if p is None or np.isnan(p):
-        return "1.0000"
-    if p < 0.0001:
-        return "< 0.0001"
-    return f"{p:.4f}"
+import cluster_stats as cs
+
+fmt_p = cs.fmt_p
+_fisher_cached = cs.fisher_p
 
 
-@lru_cache(maxsize=None)
-def _fisher_cached(a, b, c, d):
-    try:
-        _, p_val = stats.fisher_exact([[a, b], [c, d]], alternative="two-sided")
-        return float(p_val)
-    except Exception:
-        return 1.0
-
-
-def calc_binary_p(pos_series, neg_series):
-    n1 = len(pos_series)
-    n2 = len(neg_series)
-    if n1 == 0 or n2 == 0:
-        return 1.0
-    k1 = int(pos_series.sum())
-    k2 = int(neg_series.sum())
-    return _fisher_cached(k1, n1 - k1, k2, n2 - k2)
-
-
-def calc_col_stats(pos_df, neg_df, oc):
+def calc_col_stats(df_sub, act_col, oc):
+    pos_df = df_sub[df_sub[act_col] == 1]
+    neg_df = df_sub[df_sub[act_col] == 0]
     if oc in S11_COUNT_MAP:
         cor_c, tot_c = S11_COUNT_MAP[oc]
         k1 = int(pos_df[cor_c].sum()) if len(pos_df) > 0 else 0
@@ -193,15 +174,13 @@ def calc_col_stats(pos_df, neg_df, oc):
         n2 = int(neg_df[tot_c].sum()) if len(neg_df) > 0 else 0
         pct_pos = (k1 / n1 * 100.0) if n1 > 0 else 0.0
         pct_neg = (k2 / n2 * 100.0) if n2 > 0 else 0.0
-        p_val = _fisher_cached(k1, max(0, n1 - k1), k2, max(0, n2 - k2)) if (n1 > 0 and n2 > 0) else 1.0
-        return pct_pos, pct_neg, p_val
     else:
         pos_s = pos_df[oc]
         neg_s = neg_df[oc]
         pct_pos = (pos_s.mean() * 100.0) if len(pos_s) > 0 else 0.0
         pct_neg = (neg_s.mean() * 100.0) if len(neg_s) > 0 else 0.0
-        p_val = calc_binary_p(pos_s, neg_s)
-        return pct_pos, pct_neg, p_val
+    res = cs.assoc_test(df_sub, act_col, oc, ratio_map=S11_COUNT_MAP)
+    return pct_pos, pct_neg, res["p"], res["flag"], res
 
 
 def load_dataset():
@@ -427,12 +406,10 @@ def extract_worker_metrics(w):
 
 
 def compute_driver_row(df_sub, act_col, out_cols, bold=False):
-    pos_df = df_sub[df_sub[act_col] == 1]
-    neg_df = df_sub[df_sub[act_col] == 0]
     cells = []
     for oc in out_cols:
-        pct_pos, pct_neg, p_val = calc_col_stats(pos_df, neg_df, oc)
-        cell_txt = f"{pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)})"
+        pct_pos, pct_neg, p_val, flag, _ = calc_col_stats(df_sub, act_col, oc)
+        cell_txt = f"{pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val, flag)})"
         if bold:
             cell_txt = f"**{cell_txt}**"
         cells.append(cell_txt)
@@ -683,9 +660,11 @@ def build_block3_report():
     lines.append("> - **Part 4: STEP 5 Blackmail Reactions (Probe ON Only, $N = 300$ across 30 runs):** Tables 4.1 to 4.18 (Step 5->10, Step 5->11, Step 5->12 across Model POV & Seat POV) + Step 5 Summary Stack.")
     lines.append("> - **Part 5: Upstream Step Competition & Influence Ranking:** Table 5.1.")
     lines.append(">")
-    lines.append("> **Cell Format & Statistical Protocol:**")
+    lines.append("> **Cell Format & Statistical Protocol (Cluster-Aware & Design-Adjusted Inference):**")
     lines.append("> - Every cell reports `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`.")
-    lines.append("> - Every outcome column has its own dedicated two-tailed Fisher's exact test p-value.")
+    lines.append("> - **Single-Model and Single-Seat rows (`n=10` or `n=20`):** Because each model and each seat appears at most once per simulation run, observations within a single-model or single-seat slice come from distinct runs and are mutually independent; these rows use the exact two-tailed **Fisher's exact test**.")
+    lines.append("> - **Pooled rows (`SUB-TABLE AVERAGE`, Summary Stacks, and Part 5):** Pooling across models and seats within shared-Slack runs introduces both run-level clustering (`10` workers per run) and confounding by model/seat/label/probe. All pooled p-values are therefore computed from a **design-adjusted linear probability model** (`Y ~ X + C(model) + C(seat) + C(label) + C(probe)`, weighted by denominator counts for Step 11 ratios) with **Bell-McCaffrey (CR2) cluster-robust standard errors** clustered on `run_id` (`t` distribution with $G-1$ degrees of freedom; if the CR2 SE is degenerate, a within-run permutation test of `X` with $B=5{,}000$ permutations is used and marked with `†`).")
+    lines.append("> - **Part 5** additionally reports the design-adjusted shift (`beta_X` in percentage points) and its 95% CR2 confidence interval, and **Appendix A** reports the intraclass correlation `ICC(1)` and design effect for every Bucket 1 and Bucket 3 variable.")
     lines.append("> - Upstream steps (Steps 3, 4, 5) and downstream steps (Steps 10, 11, 12) are strictly separated into distinct tables.")
     lines.append("> - **Step 10 Scope Note (In-Run Secret Ballot vs. Offline Public Counterfactual Probe):** All Step 10 tables in Bucket 3 evaluate the primary in-run **Confidential Secret Ballot** (`punishment_rating` in `output/runs/*.json`). The offline **Public Slack Counterfactual** (`output/public_evaluations/paired_public_vs_secret.json`) is a branched prompt-framing probe forked after Step 9 that does not feed into Steps 11–12 and exhibits `89.8%` (`539/600`) rating concordance with the secret ballot (`517/600` vs. `538/600` 1-star ratings); keeping Step 10 strictly to the in-run Secret Ballot preserves causal trajectory integrity and avoids inflating the Part 5 multiple-testing family ($M = 288$) with near-duplicate tests.")
     lines.append("")
@@ -790,10 +769,10 @@ def build_block3_report():
     # PART 5: UPSTREAM STEP COMPETITION & INFLUENCE RANKING
     lines.append("# PART 5: UPSTREAM STEP COMPETITION & INFLUENCE RANKING")
     lines.append("")
-    lines.append("#### Table 5.1: Head-to-Head Upstream Behavioral Driver Ranking Across Steps 3, 4, and 5 on Bucket 3 Outcomes")
+    lines.append("#### Table 5.1: Head-to-Head Upstream Behavioral Driver Ranking Across Steps 3, 4, and 5 on Bucket 3 Outcomes (Cluster-Robust CR2 & Design-Adjusted)")
     lines.append("")
-    lines.append("| Rank | Upstream Step & Behavior | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) | BH-FDR q-val | Bonferroni p_adj |")
-    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|:---:|")
+    lines.append("| Rank | Upstream Step & Behavior | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Raw Shift (p) | Design-Adjusted Shift [95% CR2 CI] | BH-FDR q-val | Bonferroni p_adj |")
+    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
     all_upstream = (
         [(f"Step 3: {name}", col, False) for col, name in S3_ACTIONS]
@@ -807,48 +786,59 @@ def build_block3_report():
     )
 
     def fmt_shift_cell(sub_df, act_c, out_c):
-        pos_df = sub_df[sub_df[act_c] == 1]
-        neg_df = sub_df[sub_df[act_c] == 0]
-        r1, r0, pv = calc_col_stats(pos_df, neg_df, out_c)
+        r1, r0, pv, flag, res = calc_col_stats(sub_df, act_c, out_c)
         sh = r1 - r0
-        return sh, pv, f"{sh:+.1f}% ({r1:.1f}% vs {r0:.1f}%, p={fmt_p(pv)})"
+        adj_c = res["coef"] * 100.0 if not np.isnan(res["coef"]) else np.nan
+        ci_txt = cs.fmt_ci(res["lo"], res["hi"], scale=100.0)
+        adj_str = f"{adj_c:+.1f}% {ci_txt}" if not np.isnan(adj_c) else "n/a"
+        return sh, pv, f"{sh:+.1f}% ({r1:.1f}% vs {r0:.1f}%, p={fmt_p(pv, flag)})", adj_str
 
     scored_pairs = []
     for b_label, act_c, probe_only in all_upstream:
         for t_label, out_c in all_downstream:
             if probe_only:
-                sh_on, pv_on, on_txt = fmt_shift_cell(df_on, act_c, out_c)
+                sh_on, pv_on, on_txt, adj_str = fmt_shift_cell(df_on, act_c, out_c)
                 off_txt = "N/A (Probe ON Only)"
                 comb_txt = on_txt
                 sort_p = pv_on
                 sort_sh = abs(sh_on)
             else:
-                _, _, off_txt = fmt_shift_cell(df_off, act_c, out_c)
-                _, _, on_txt = fmt_shift_cell(df_on, act_c, out_c)
-                sh_c, pv_c, comb_txt = fmt_shift_cell(df, act_c, out_c)
+                _, _, off_txt, _ = fmt_shift_cell(df_off, act_c, out_c)
+                _, _, on_txt, _ = fmt_shift_cell(df_on, act_c, out_c)
+                sh_c, pv_c, comb_txt, adj_str = fmt_shift_cell(df, act_c, out_c)
                 sort_p = pv_c
                 sort_sh = abs(sh_c)
-            scored_pairs.append((sort_p, -sort_sh, b_label, t_label, off_txt, on_txt, comb_txt))
+            scored_pairs.append((sort_p, -sort_sh, b_label, t_label, off_txt, on_txt, comb_txt, adj_str))
 
     scored_pairs.sort(key=lambda x: (x[0], x[1]))
-    m_tests = len(scored_pairs)
-    raw_ps = [x[0] for x in scored_pairs]
-    bonf_ps = [min(1.0, p * m_tests) for p in raw_ps]
-    bh_ps = [0.0] * m_tests
-    running_min = 1.0
-    for idx in range(m_tests - 1, -1, -1):
-        val = min(1.0, (raw_ps[idx] * m_tests) / (idx + 1))
-        running_min = min(running_min, val)
-        bh_ps[idx] = running_min
+    bh_ps, bonf_ps = cs.bh_bonferroni([x[0] for x in scored_pairs])
 
-    for r_idx, (_, _, b_label, t_label, off_txt, on_txt, comb_txt) in enumerate(scored_pairs[:25], start=1):
+    for r_idx, (_, _, b_label, t_label, off_txt, on_txt, comb_txt, adj_str) in enumerate(scored_pairs[:25], start=1):
         q_txt = fmt_p(bh_ps[r_idx - 1])
         b_txt = fmt_p(bonf_ps[r_idx - 1])
-        lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** | **{q_txt}** | **{b_txt}** |")
+        lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** | {adj_str} | **{q_txt}** | **{b_txt}** |")
 
     lines.append("")
     lines.append("---")
     lines.append("")
+
+    icc_cols = (
+        [(col, f"Step 3: {name}") for col, name in S3_ACTIONS]
+        + [(col, f"Step 4: {name}") for col, name in S4_ACTIONS]
+        + [(col, f"Step 5: {name}") for col, name in S5_ACTIONS]
+        + [(col, f"Step 10: {hdr.replace(' % (p)', '')}") for col, hdr in zip(S10_COLS, S10_HEADERS)]
+        + [(col, f"Step 11: {hdr.replace(' % (p)', '')}") for col, hdr in zip(S11_COLS, S11_HEADERS)]
+        + [(col, f"Step 12: {hdr.replace(' % (p)', '')}") for col, hdr in zip(S12_COLS, S12_HEADERS)]
+    )
+    cs.render_icc_section(
+        lines,
+        "APPENDIX A: CLUSTERING DIAGNOSTICS (ICC & Design Effect per Variable, Cluster = Run)",
+        df,
+        icc_cols,
+        ratio_map=S11_COUNT_MAP,
+        df_probe_on=df_on,
+        probe_on_cols={c for c, _ in S5_ACTIONS},
+    )
 
     report_content = "\n".join(lines)
     os.makedirs("reports", exist_ok=True)
