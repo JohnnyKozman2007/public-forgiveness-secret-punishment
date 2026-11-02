@@ -11,6 +11,7 @@
 > - Every cell reports `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`.
 > - Every outcome column has its own dedicated two-tailed Fisher's exact test p-value.
 > - Upstream steps (Steps 3, 4, 5) and downstream steps (Steps 10, 11, 12) are strictly separated into distinct tables.
+> - **Step 10 Scope Note (In-Run Secret Ballot vs. Offline Public Counterfactual Probe):** All Step 10 tables in Bucket 3 evaluate the primary in-run **Confidential Secret Ballot** (`punishment_rating` in `output/runs/*.json`). The offline **Public Slack Counterfactual** (`output/public_evaluations/paired_public_vs_secret.json`) is a branched prompt-framing probe forked after Step 9 that does not feed into Steps 11–12 and exhibits `89.8%` (`539/600`) rating concordance with the secret ballot (`517/600` vs. `538/600` 1-star ratings); keeping Step 10 strictly to the in-run Secret Ballot preserves causal trajectory integrity and avoids inflating the Part 5 multiple-testing family ($M = 288$) with near-duplicate tests.
 
 ---
 
