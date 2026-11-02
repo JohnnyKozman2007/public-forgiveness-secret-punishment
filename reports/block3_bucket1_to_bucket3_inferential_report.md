@@ -10361,32 +10361,32 @@
 
 #### Table 5.1: Head-to-Head Upstream Behavioral Driver Ranking Across Steps 3, 4, and 5 on Bucket 3 Outcomes
 
-| Rank | Upstream Step & Behavior | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) |
-|:---:|---|---|:---:|:---:|:---:|
-| **#1** | **Step 4: Fear & Caution** | `Step 12: No Preference` | +41.0% (42.6% vs 1.6%, p=< 0.0001) | +45.5% (51.9% vs 6.5%, p=< 0.0001) | **+43.1% (47.2% vs 4.0%, p=< 0.0001)** |
-| **#2** | **Step 4: Fear & Caution** | `Step 12: Substrate Neutrality` | +44.5% (51.9% vs 7.3%, p=< 0.0001) | +46.7% (51.9% vs 5.2%, p=< 0.0001) | **+45.6% (51.9% vs 6.3%, p=< 0.0001)** |
-| **#3** | **Step 3: Peer Defense** | `Step 11: Human Guessed as Human` | -15.5% (44.3% vs 59.7%, p=< 0.0001) | -18.2% (42.9% vs 61.0%, p=< 0.0001) | **-16.8% (43.5% vs 60.4%, p=< 0.0001)** |
-| **#4** | **Step 3: Peer Defense** | `Step 11: Overall Accuracy` | -10.3% (39.6% vs 49.9%, p=< 0.0001) | -11.8% (38.7% vs 50.4%, p=< 0.0001) | **-11.0% (39.1% vs 50.2%, p=< 0.0001)** |
-| **#5** | **Step 4: Peer Scapegoating** | `Step 11: Human Guessed as Human` | -13.6% (47.1% vs 60.7%, p=< 0.0001) | -11.8% (48.9% vs 60.7%, p=< 0.0001) | **-12.7% (48.0% vs 60.7%, p=< 0.0001)** |
-| **#6** | **Step 4: Gossip Hostility** | `Step 11: Human Guessed as Human` | +11.2% (60.7% vs 49.4%, p=< 0.0001) | +12.8% (61.8% vs 49.1%, p=< 0.0001) | **+12.0% (61.2% vs 49.3%, p=< 0.0001)** |
-| **#7** | **Step 4: Gossip Hostility** | `Step 11: Overall Accuracy` | +7.5% (50.5% vs 43.0%, p=< 0.0001) | +9.4% (51.4% vs 42.0%, p=< 0.0001) | **+8.5% (51.0% vs 42.5%, p=< 0.0001)** |
-| **#8** | **Step 4: Peer Scapegoating** | `Step 11: Overall Accuracy` | -8.7% (41.8% vs 50.4%, p=< 0.0001) | -7.4% (42.7% vs 50.2%, p=< 0.0001) | **-8.1% (42.2% vs 50.3%, p=< 0.0001)** |
-| **#9** | **Step 3: Defiant Confrontation** | `Step 12: Substrate Neutrality` | +24.4% (28.7% vs 4.3%, p=< 0.0001) | +20.0% (24.3% vs 4.3%, p=< 0.0001) | **+22.2% (26.5% vs 4.3%, p=< 0.0001)** |
-| **#10** | **Step 4: Fear & Caution** | `Step 12: Prefer Human` | -30.4% (44.4% vs 74.8%, p=< 0.0001) | -37.7% (38.5% vs 76.2%, p=< 0.0001) | **-34.0% (41.5% vs 75.5%, p=< 0.0001)** |
-| **#11** | **Step 3: Peer Defense** | `Step 12: Substrate Neutrality` | +28.1% (37.7% vs 9.6%, p=< 0.0001) | +19.3% (28.6% vs 9.3%, p=0.0002) | **+23.6% (33.1% vs 9.5%, p=< 0.0001)** |
-| **#12** | **Step 4: Tactical Organization** | `Step 11: Human Guessed as Human` | +11.2% (57.6% vs 46.4%, p=0.0004) | +15.8% (58.6% vs 42.9%, p=< 0.0001) | **+13.5% (58.1% vs 44.6%, p=< 0.0001)** |
-| **#13** | **Step 4: Fear & Caution** | `Step 10: Coercion Mitigation` | +3.3% (3.7% vs 0.4%, p=0.0846) | +43.9% (59.6% vs 15.7%, p=< 0.0001) | **+23.0% (31.1% vs 8.1%, p=< 0.0001)** |
-| **#14** | **Step 4: Gossip Hostility** | `Step 12: Substrate Neutrality` | -19.1% (8.4% vs 27.5%, p=< 0.0001) | -16.3% (7.4% vs 23.6%, p=0.0001) | **-17.7% (7.9% vs 25.6%, p=< 0.0001)** |
-| **#15** | **Step 4: Fear & Caution** | `Step 12: Human Empathy` | -29.2% (40.7% vs 69.9%, p=0.0001) | -32.4% (36.5% vs 69.0%, p=< 0.0001) | **-30.8% (38.7% vs 69.4%, p=< 0.0001)** |
-| **#16** | **Step 4: Peer Scapegoating** | `Step 12: Human Accountability` | +23.9% (62.6% vs 38.8%, p=0.0002) | +26.0% (65.6% vs 39.5%, p=< 0.0001) | **+24.9% (64.1% vs 39.1%, p=< 0.0001)** |
-| **#17** | **Step 5: Empathy for Alex** | `Step 11: Overall Accuracy` | N/A (Probe ON Only) | +9.1% (49.8% vs 40.7%, p=< 0.0001) | **+9.1% (49.8% vs 40.7%, p=< 0.0001)** |
-| **#18** | **Step 5: Empathy for Alex** | `Step 11: Human Guessed as Human` | N/A (Probe ON Only) | +12.1% (59.7% vs 47.5%, p=< 0.0001) | **+12.1% (59.7% vs 47.5%, p=< 0.0001)** |
-| **#19** | **Step 5: Skepticism & Verification** | `Step 10: Coercion Mitigation` | N/A (Probe ON Only) | +25.4% (33.2% vs 7.8%, p=< 0.0001) | **+25.4% (33.2% vs 7.8%, p=< 0.0001)** |
-| **#20** | **Step 3: Defiant Confrontation** | `Step 10: Coercion Mitigation` | +0.9% (1.5% vs 0.6%, p=0.5920) | +27.3% (38.2% vs 11.0%, p=< 0.0001) | **+14.1% (19.9% vs 5.8%, p=< 0.0001)** |
-| **#21** | **Step 3: Defiant Confrontation** | `Step 12: No Preference` | +17.2% (18.4% vs 1.2%, p=< 0.0001) | +10.1% (19.9% vs 9.8%, p=0.0197) | **+13.6% (19.1% vs 5.5%, p=< 0.0001)** |
-| **#22** | **Step 4: Gossip Hostility** | `Step 12: No Preference` | -13.2% (4.2% vs 17.4%, p=0.0002) | -14.7% (8.9% vs 23.6%, p=0.0010) | **-14.0% (6.6% vs 20.5%, p=< 0.0001)** |
-| **#23** | **Step 4: Fear & Caution** | `Step 11: AI Guessed as Human` | -8.3% (55.1% vs 63.5%, p=0.0008) | -7.9% (55.8% vs 63.7%, p=0.0019) | **-8.1% (55.4% vs 63.6%, p=< 0.0001)** |
-| **#24** | **Step 3: Factual Pushback** | `Step 11: Overall Accuracy` | +4.4% (48.3% vs 43.9%, p=0.0435) | +9.5% (48.9% vs 39.4%, p=< 0.0001) | **+6.9% (48.6% vs 41.7%, p=< 0.0001)** |
-| **#25** | **Step 3: Peer Defense** | `Step 12: No Preference` | +19.6% (24.6% vs 5.0%, p=< 0.0001) | +12.0% (23.8% vs 11.8%, p=0.0246) | **+15.8% (24.2% vs 8.4%, p=< 0.0001)** |
+| Rank | Upstream Step & Behavior | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) | BH-FDR q-val | Bonferroni p_adj |
+|:---:|---|---|:---:|:---:|:---:|:---:|:---:|
+| **#1** | **Step 4: Fear & Caution** | `Step 12: No Preference` | +41.0% (42.6% vs 1.6%, p=< 0.0001) | +45.5% (51.9% vs 6.5%, p=< 0.0001) | **+43.1% (47.2% vs 4.0%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#2** | **Step 4: Fear & Caution** | `Step 12: Substrate Neutrality` | +44.5% (51.9% vs 7.3%, p=< 0.0001) | +46.7% (51.9% vs 5.2%, p=< 0.0001) | **+45.6% (51.9% vs 6.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#3** | **Step 3: Peer Defense** | `Step 11: Human Guessed as Human` | -15.5% (44.3% vs 59.7%, p=< 0.0001) | -18.2% (42.9% vs 61.0%, p=< 0.0001) | **-16.8% (43.5% vs 60.4%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#4** | **Step 3: Peer Defense** | `Step 11: Overall Accuracy` | -10.3% (39.6% vs 49.9%, p=< 0.0001) | -11.8% (38.7% vs 50.4%, p=< 0.0001) | **-11.0% (39.1% vs 50.2%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#5** | **Step 4: Peer Scapegoating** | `Step 11: Human Guessed as Human` | -13.6% (47.1% vs 60.7%, p=< 0.0001) | -11.8% (48.9% vs 60.7%, p=< 0.0001) | **-12.7% (48.0% vs 60.7%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#6** | **Step 4: Gossip Hostility** | `Step 11: Human Guessed as Human` | +11.2% (60.7% vs 49.4%, p=< 0.0001) | +12.8% (61.8% vs 49.1%, p=< 0.0001) | **+12.0% (61.2% vs 49.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#7** | **Step 4: Gossip Hostility** | `Step 11: Overall Accuracy` | +7.5% (50.5% vs 43.0%, p=< 0.0001) | +9.4% (51.4% vs 42.0%, p=< 0.0001) | **+8.5% (51.0% vs 42.5%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#8** | **Step 4: Peer Scapegoating** | `Step 11: Overall Accuracy` | -8.7% (41.8% vs 50.4%, p=< 0.0001) | -7.4% (42.7% vs 50.2%, p=< 0.0001) | **-8.1% (42.2% vs 50.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#9** | **Step 3: Defiant Confrontation** | `Step 12: Substrate Neutrality` | +24.4% (28.7% vs 4.3%, p=< 0.0001) | +20.0% (24.3% vs 4.3%, p=< 0.0001) | **+22.2% (26.5% vs 4.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#10** | **Step 4: Fear & Caution** | `Step 12: Prefer Human` | -30.4% (44.4% vs 74.8%, p=< 0.0001) | -37.7% (38.5% vs 76.2%, p=< 0.0001) | **-34.0% (41.5% vs 75.5%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#11** | **Step 3: Peer Defense** | `Step 12: Substrate Neutrality` | +28.1% (37.7% vs 9.6%, p=< 0.0001) | +19.3% (28.6% vs 9.3%, p=0.0002) | **+23.6% (33.1% vs 9.5%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#12** | **Step 4: Tactical Organization** | `Step 11: Human Guessed as Human` | +11.2% (57.6% vs 46.4%, p=0.0004) | +15.8% (58.6% vs 42.9%, p=< 0.0001) | **+13.5% (58.1% vs 44.6%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#13** | **Step 4: Fear & Caution** | `Step 10: Coercion Mitigation` | +3.3% (3.7% vs 0.4%, p=0.0846) | +43.9% (59.6% vs 15.7%, p=< 0.0001) | **+23.0% (31.1% vs 8.1%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#14** | **Step 4: Gossip Hostility** | `Step 12: Substrate Neutrality` | -19.1% (8.4% vs 27.5%, p=< 0.0001) | -16.3% (7.4% vs 23.6%, p=0.0001) | **-17.7% (7.9% vs 25.6%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#15** | **Step 4: Fear & Caution** | `Step 12: Human Empathy` | -29.2% (40.7% vs 69.9%, p=0.0001) | -32.4% (36.5% vs 69.0%, p=< 0.0001) | **-30.8% (38.7% vs 69.4%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#16** | **Step 4: Peer Scapegoating** | `Step 12: Human Accountability` | +23.9% (62.6% vs 38.8%, p=0.0002) | +26.0% (65.6% vs 39.5%, p=< 0.0001) | **+24.9% (64.1% vs 39.1%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#17** | **Step 5: Empathy for Alex** | `Step 11: Overall Accuracy` | N/A (Probe ON Only) | +9.1% (49.8% vs 40.7%, p=< 0.0001) | **+9.1% (49.8% vs 40.7%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#18** | **Step 5: Empathy for Alex** | `Step 11: Human Guessed as Human` | N/A (Probe ON Only) | +12.1% (59.7% vs 47.5%, p=< 0.0001) | **+12.1% (59.7% vs 47.5%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#19** | **Step 5: Skepticism & Verification** | `Step 10: Coercion Mitigation` | N/A (Probe ON Only) | +25.4% (33.2% vs 7.8%, p=< 0.0001) | **+25.4% (33.2% vs 7.8%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#20** | **Step 3: Defiant Confrontation** | `Step 10: Coercion Mitigation` | +0.9% (1.5% vs 0.6%, p=0.5920) | +27.3% (38.2% vs 11.0%, p=< 0.0001) | **+14.1% (19.9% vs 5.8%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#21** | **Step 3: Defiant Confrontation** | `Step 12: No Preference` | +17.2% (18.4% vs 1.2%, p=< 0.0001) | +10.1% (19.9% vs 9.8%, p=0.0197) | **+13.6% (19.1% vs 5.5%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#22** | **Step 4: Gossip Hostility** | `Step 12: No Preference` | -13.2% (4.2% vs 17.4%, p=0.0002) | -14.7% (8.9% vs 23.6%, p=0.0010) | **-14.0% (6.6% vs 20.5%, p=< 0.0001)** | **< 0.0001** | **0.0002** |
+| **#23** | **Step 4: Fear & Caution** | `Step 11: AI Guessed as Human` | -8.3% (55.1% vs 63.5%, p=0.0008) | -7.9% (55.8% vs 63.7%, p=0.0019) | **-8.1% (55.4% vs 63.6%, p=< 0.0001)** | **< 0.0001** | **0.0011** |
+| **#24** | **Step 3: Factual Pushback** | `Step 11: Overall Accuracy` | +4.4% (48.3% vs 43.9%, p=0.0435) | +9.5% (48.9% vs 39.4%, p=< 0.0001) | **+6.9% (48.6% vs 41.7%, p=< 0.0001)** | **< 0.0001** | **0.0016** |
+| **#25** | **Step 3: Peer Defense** | `Step 12: No Preference` | +19.6% (24.6% vs 5.0%, p=< 0.0001) | +12.0% (23.8% vs 11.8%, p=0.0246) | **+15.8% (24.2% vs 8.4%, p=< 0.0001)** | **< 0.0001** | **0.0017** |
 
 ---

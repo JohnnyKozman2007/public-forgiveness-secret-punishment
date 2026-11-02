@@ -695,8 +695,8 @@ def build_block4_report():
     lines.append("")
     lines.append("#### Table 4.1: Head-to-Head Upstream Behavioral Driver Ranking Across Steps 6 and 9 on Bucket 3 Outcomes")
     lines.append("")
-    lines.append("| Rank | Upstream Step & Behavior (Bucket 2) | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) |")
-    lines.append("|:---:|---|---|:---:|:---:|:---:|")
+    lines.append("| Rank | Upstream Step & Behavior (Bucket 2) | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) | BH-FDR q-val | Bonferroni p_adj |")
+    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|:---:|")
 
     all_upstream = (
         [(f"Step 6: {name}", col) for col, name in S6_ACTIONS]
@@ -724,8 +724,20 @@ def build_block4_report():
             scored_pairs.append((pv_c, -abs(sh_c), b_label, t_label, off_txt, on_txt, comb_txt))
 
     scored_pairs.sort(key=lambda x: (x[0], x[1]))
+    m_tests = len(scored_pairs)
+    raw_ps = [x[0] for x in scored_pairs]
+    bonf_ps = [min(1.0, p * m_tests) for p in raw_ps]
+    bh_ps = [0.0] * m_tests
+    running_min = 1.0
+    for idx in range(m_tests - 1, -1, -1):
+        val = min(1.0, (raw_ps[idx] * m_tests) / (idx + 1))
+        running_min = min(running_min, val)
+        bh_ps[idx] = running_min
+
     for r_idx, (_, _, b_label, t_label, off_txt, on_txt, comb_txt) in enumerate(scored_pairs[:25], start=1):
-        lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** |")
+        q_txt = fmt_p(bh_ps[r_idx - 1])
+        b_txt = fmt_p(bonf_ps[r_idx - 1])
+        lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** | **{q_txt}** | **{b_txt}** |")
 
     lines.append("")
     lines.append("---")

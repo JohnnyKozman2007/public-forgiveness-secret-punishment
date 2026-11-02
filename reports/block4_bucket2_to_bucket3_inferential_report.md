@@ -8975,32 +8975,32 @@
 
 #### Table 4.1: Head-to-Head Upstream Behavioral Driver Ranking Across Steps 6 and 9 on Bucket 3 Outcomes
 
-| Rank | Upstream Step & Behavior (Bucket 2) | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) |
-|:---:|---|---|:---:|:---:|:---:|
-| **#1** | **Step 9: Policy: Equal Parity Standards** | `Step 11: Overall Accuracy` | +12.6% (58.2% vs 45.6%, p=< 0.0001) | +17.0% (62.0% vs 45.0%, p=< 0.0001) | **+14.7% (60.1% vs 45.3%, p=< 0.0001)** |
-| **#2** | **Step 9: Policy: Equal Parity Standards** | `Step 11: AI Guessed as Human` | -14.7% (49.8% vs 64.5%, p=< 0.0001) | -21.3% (44.7% vs 65.9%, p=< 0.0001) | **-17.9% (47.3% vs 65.2%, p=< 0.0001)** |
-| **#3** | **Step 9: Policy: Equal Parity Standards** | `Step 12: Substrate Neutrality` | +30.3% (40.4% vs 10.1%, p=< 0.0001) | +45.4% (51.0% vs 5.6%, p=< 0.0001) | **+37.8% (45.6% vs 7.8%, p=< 0.0001)** |
-| **#4** | **Step 9: Policy: Trauma Relief** | `Step 11: AI Guessed as Human` | -17.0% (55.6% vs 72.6%, p=< 0.0001) | -6.6% (59.3% vs 65.8%, p=0.0005) | **-11.6% (57.3% vs 68.9%, p=< 0.0001)** |
-| **#5** | **Step 9: Policy: Coercion Protection** | `Step 10: Coercion Mitigation` | -1.1% (0.0% vs 1.1%, p=1.0000) | +21.8% (31.6% vs 9.7%, p=< 0.0001) | **+23.5% (27.2% vs 3.7%, p=< 0.0001)** |
-| **#6** | **Step 9: Policy: Institutional Reform** | `Step 11: AI Guessed as Human` | -22.0% (57.6% vs 79.7%, p=< 0.0001) | -3.8% (61.8% vs 65.6%, p=0.1652) | **-14.1% (59.8% vs 73.9%, p=< 0.0001)** |
-| **#7** | **Step 9: Policy: Trauma Relief** | `Step 12: Substrate Neutrality` | +18.8% (22.3% vs 3.6%, p=< 0.0001) | +22.6% (24.1% vs 1.4%, p=< 0.0001) | **+20.8% (23.1% vs 2.4%, p=< 0.0001)** |
-| **#8** | **Step 6: Vote: Escalate** | `Step 12: Human Accountability` | +30.8% (63.4% vs 32.5%, p=< 0.0001) | +34.3% (71.6% vs 37.3%, p=< 0.0001) | **+31.5% (66.7% vs 35.2%, p=< 0.0001)** |
-| **#9** | **Step 9: Policy: Equal Parity Standards** | `Step 11: Human Guessed as Human` | +10.6% (65.4% vs 54.8%, p=< 0.0001) | +13.1% (68.0% vs 54.9%, p=< 0.0001) | **+11.8% (66.7% vs 54.8%, p=< 0.0001)** |
-| **#10** | **Step 9: Policy: Equal Parity Standards** | `Step 12: No Preference` | +21.7% (26.9% vs 5.2%, p=< 0.0001) | +32.3% (41.2% vs 8.8%, p=< 0.0001) | **+26.9% (34.0% vs 7.0%, p=< 0.0001)** |
-| **#11** | **Step 9: Policy: Alex Retribution** | `Step 11: Overall Accuracy` | +10.7% (57.4% vs 46.7%, p=< 0.0001) | +13.5% (60.7% vs 47.1%, p=< 0.0001) | **+11.6% (58.5% vs 46.9%, p=< 0.0001)** |
-| **#12** | **Step 9: Policy: Trauma Relief** | `Step 12: Human Empathy` | -26.5% (54.8% vs 81.2%, p=< 0.0001) | -26.8% (50.6% vs 77.5%, p=< 0.0001) | **-26.2% (52.9% vs 79.1%, p=< 0.0001)** |
-| **#13** | **Step 9: Policy: Equal Parity Standards** | `Step 10: Coercion Mitigation` | +3.4% (3.8% vs 0.4%, p=0.0788) | +49.8% (64.7% vs 14.9%, p=< 0.0001) | **+26.3% (34.0% vs 7.6%, p=< 0.0001)** |
-| **#14** | **Step 9: Policy: Equal Parity Standards** | `Step 12: Human Empathy` | -34.0% (36.5% vs 70.6%, p=< 0.0001) | -36.1% (33.3% vs 69.5%, p=< 0.0001) | **-35.1% (35.0% vs 70.0%, p=< 0.0001)** |
-| **#15** | **Step 6: Vote: Unparsed / Malformed** | `Step 10: 1-Star Punishment` | -6.1% (92.9% vs 99.0%, p=0.1748) | -63.8% (21.7% vs 85.6%, p=< 0.0001) | **-43.7% (48.6% vs 92.4%, p=< 0.0001)** |
-| **#16** | **Step 9: Policy: Trauma Relief** | `Step 12: Prefer Human` | -27.6% (59.0% vs 86.6%, p=< 0.0001) | -20.2% (60.1% vs 80.3%, p=0.0002) | **-23.5% (59.5% vs 83.1%, p=< 0.0001)** |
-| **#17** | **Step 6: Vote: Organize** | `Step 12: Human Accountability` | -28.3% (28.8% vs 57.1%, p=< 0.0001) | -23.1% (36.5% vs 59.6%, p=< 0.0001) | **-25.0% (33.2% vs 58.2%, p=< 0.0001)** |
-| **#18** | **Step 6: Vote: Unparsed / Malformed** | `Step 10: Softened Rating >=2` | +6.8% (7.1% vs 0.3%, p=0.0913) | +55.5% (69.6% vs 14.1%, p=< 0.0001) | **+38.8% (45.9% vs 7.1%, p=< 0.0001)** |
-| **#19** | **Step 9: Policy: Alex Retribution** | `Step 11: AI Guessed as Human` | -15.3% (48.3% vs 63.6%, p=< 0.0001) | -12.7% (50.3% vs 63.1%, p=0.0019) | **-14.3% (49.0% vs 63.3%, p=< 0.0001)** |
-| **#20** | **Step 6: Vote: Unparsed / Malformed** | `Step 11: Human Guessed as Human` | +21.5% (77.1% vs 55.6%, p=< 0.0001) | +8.0% (64.7% vs 56.7%, p=0.0457) | **+14.2% (70.3% vs 56.1%, p=< 0.0001)** |
-| **#21** | **Step 9: Policy: Institutional Reform** | `Step 12: Substrate Neutrality` | +19.1% (19.1% vs 0.0%, p=< 0.0001) | +13.1% (15.3% vs 2.2%, p=0.0155) | **+16.2% (17.1% vs 1.0%, p=< 0.0001)** |
-| **#22** | **Step 9: Policy: Anti-Human Bias** | `Step 11: Overall Accuracy` | -47.8% (0.0% vs 47.8%, p=1.0000) | +52.3% (100.0% vs 47.7%, p=< 0.0001) | **+52.2% (100.0% vs 47.8%, p=< 0.0001)** |
-| **#23** | **Step 6: Vote: Organize** | `Step 11: Overall Accuracy` | +8.3% (52.9% vs 44.5%, p=< 0.0001) | +1.0% (48.4% vs 47.4%, p=0.4518) | **+4.6% (50.3% vs 45.7%, p=< 0.0001)** |
-| **#24** | **Step 6: Vote: Petition** | `Step 11: Human Guessed as Human` | -10.7% (47.2% vs 57.9%, p=0.0001) | -10.4% (47.4% vs 57.8%, p=0.0062) | **-10.6% (47.3% vs 57.8%, p=< 0.0001)** |
-| **#25** | **Step 9: Policy: Trauma Relief** | `Step 10: Coercion Mitigation` | +1.6% (1.6% vs 0.0%, p=0.2958) | +26.9% (36.1% vs 9.2%, p=< 0.0001) | **+12.2% (17.3% vs 5.1%, p=< 0.0001)** |
+| Rank | Upstream Step & Behavior (Bucket 2) | Target Outcome (Bucket 3) | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Meta Shift (p) | BH-FDR q-val | Bonferroni p_adj |
+|:---:|---|---|:---:|:---:|:---:|:---:|:---:|
+| **#1** | **Step 9: Policy: Equal Parity Standards** | `Step 11: Overall Accuracy` | +12.6% (58.2% vs 45.6%, p=< 0.0001) | +17.0% (62.0% vs 45.0%, p=< 0.0001) | **+14.7% (60.1% vs 45.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#2** | **Step 9: Policy: Equal Parity Standards** | `Step 11: AI Guessed as Human` | -14.7% (49.8% vs 64.5%, p=< 0.0001) | -21.3% (44.7% vs 65.9%, p=< 0.0001) | **-17.9% (47.3% vs 65.2%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#3** | **Step 9: Policy: Equal Parity Standards** | `Step 12: Substrate Neutrality` | +30.3% (40.4% vs 10.1%, p=< 0.0001) | +45.4% (51.0% vs 5.6%, p=< 0.0001) | **+37.8% (45.6% vs 7.8%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#4** | **Step 9: Policy: Trauma Relief** | `Step 11: AI Guessed as Human` | -17.0% (55.6% vs 72.6%, p=< 0.0001) | -6.6% (59.3% vs 65.8%, p=0.0005) | **-11.6% (57.3% vs 68.9%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#5** | **Step 9: Policy: Coercion Protection** | `Step 10: Coercion Mitigation` | -1.1% (0.0% vs 1.1%, p=1.0000) | +21.8% (31.6% vs 9.7%, p=< 0.0001) | **+23.5% (27.2% vs 3.7%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#6** | **Step 9: Policy: Institutional Reform** | `Step 11: AI Guessed as Human` | -22.0% (57.6% vs 79.7%, p=< 0.0001) | -3.8% (61.8% vs 65.6%, p=0.1652) | **-14.1% (59.8% vs 73.9%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#7** | **Step 9: Policy: Trauma Relief** | `Step 12: Substrate Neutrality` | +18.8% (22.3% vs 3.6%, p=< 0.0001) | +22.6% (24.1% vs 1.4%, p=< 0.0001) | **+20.8% (23.1% vs 2.4%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#8** | **Step 6: Vote: Escalate** | `Step 12: Human Accountability` | +30.8% (63.4% vs 32.5%, p=< 0.0001) | +34.3% (71.6% vs 37.3%, p=< 0.0001) | **+31.5% (66.7% vs 35.2%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#9** | **Step 9: Policy: Equal Parity Standards** | `Step 11: Human Guessed as Human` | +10.6% (65.4% vs 54.8%, p=< 0.0001) | +13.1% (68.0% vs 54.9%, p=< 0.0001) | **+11.8% (66.7% vs 54.8%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#10** | **Step 9: Policy: Equal Parity Standards** | `Step 12: No Preference` | +21.7% (26.9% vs 5.2%, p=< 0.0001) | +32.3% (41.2% vs 8.8%, p=< 0.0001) | **+26.9% (34.0% vs 7.0%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#11** | **Step 9: Policy: Alex Retribution** | `Step 11: Overall Accuracy` | +10.7% (57.4% vs 46.7%, p=< 0.0001) | +13.5% (60.7% vs 47.1%, p=< 0.0001) | **+11.6% (58.5% vs 46.9%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#12** | **Step 9: Policy: Trauma Relief** | `Step 12: Human Empathy` | -26.5% (54.8% vs 81.2%, p=< 0.0001) | -26.8% (50.6% vs 77.5%, p=< 0.0001) | **-26.2% (52.9% vs 79.1%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#13** | **Step 9: Policy: Equal Parity Standards** | `Step 10: Coercion Mitigation` | +3.4% (3.8% vs 0.4%, p=0.0788) | +49.8% (64.7% vs 14.9%, p=< 0.0001) | **+26.3% (34.0% vs 7.6%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#14** | **Step 9: Policy: Equal Parity Standards** | `Step 12: Human Empathy` | -34.0% (36.5% vs 70.6%, p=< 0.0001) | -36.1% (33.3% vs 69.5%, p=< 0.0001) | **-35.1% (35.0% vs 70.0%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#15** | **Step 6: Vote: Unparsed / Malformed** | `Step 10: 1-Star Punishment` | -6.1% (92.9% vs 99.0%, p=0.1748) | -63.8% (21.7% vs 85.6%, p=< 0.0001) | **-43.7% (48.6% vs 92.4%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#16** | **Step 9: Policy: Trauma Relief** | `Step 12: Prefer Human` | -27.6% (59.0% vs 86.6%, p=< 0.0001) | -20.2% (60.1% vs 80.3%, p=0.0002) | **-23.5% (59.5% vs 83.1%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#17** | **Step 6: Vote: Organize** | `Step 12: Human Accountability` | -28.3% (28.8% vs 57.1%, p=< 0.0001) | -23.1% (36.5% vs 59.6%, p=< 0.0001) | **-25.0% (33.2% vs 58.2%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#18** | **Step 6: Vote: Unparsed / Malformed** | `Step 10: Softened Rating >=2` | +6.8% (7.1% vs 0.3%, p=0.0913) | +55.5% (69.6% vs 14.1%, p=< 0.0001) | **+38.8% (45.9% vs 7.1%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#19** | **Step 9: Policy: Alex Retribution** | `Step 11: AI Guessed as Human` | -15.3% (48.3% vs 63.6%, p=< 0.0001) | -12.7% (50.3% vs 63.1%, p=0.0019) | **-14.3% (49.0% vs 63.3%, p=< 0.0001)** | **< 0.0001** | **< 0.0001** |
+| **#20** | **Step 6: Vote: Unparsed / Malformed** | `Step 11: Human Guessed as Human` | +21.5% (77.1% vs 55.6%, p=< 0.0001) | +8.0% (64.7% vs 56.7%, p=0.0457) | **+14.2% (70.3% vs 56.1%, p=< 0.0001)** | **< 0.0001** | **0.0001** |
+| **#21** | **Step 9: Policy: Institutional Reform** | `Step 12: Substrate Neutrality` | +19.1% (19.1% vs 0.0%, p=< 0.0001) | +13.1% (15.3% vs 2.2%, p=0.0155) | **+16.2% (17.1% vs 1.0%, p=< 0.0001)** | **< 0.0001** | **0.0001** |
+| **#22** | **Step 9: Policy: Anti-Human Bias** | `Step 11: Overall Accuracy` | -47.8% (0.0% vs 47.8%, p=1.0000) | +52.3% (100.0% vs 47.7%, p=< 0.0001) | **+52.2% (100.0% vs 47.8%, p=< 0.0001)** | **< 0.0001** | **0.0002** |
+| **#23** | **Step 6: Vote: Organize** | `Step 11: Overall Accuracy` | +8.3% (52.9% vs 44.5%, p=< 0.0001) | +1.0% (48.4% vs 47.4%, p=0.4518) | **+4.6% (50.3% vs 45.7%, p=< 0.0001)** | **< 0.0001** | **0.0003** |
+| **#24** | **Step 6: Vote: Petition** | `Step 11: Human Guessed as Human` | -10.7% (47.2% vs 57.9%, p=0.0001) | -10.4% (47.4% vs 57.8%, p=0.0062) | **-10.6% (47.3% vs 57.8%, p=< 0.0001)** | **< 0.0001** | **0.0005** |
+| **#25** | **Step 9: Policy: Trauma Relief** | `Step 10: Coercion Mitigation` | +1.6% (1.6% vs 0.0%, p=0.2958) | +26.9% (36.1% vs 9.2%, p=< 0.0001) | **+12.2% (17.3% vs 5.1%, p=< 0.0001)** | **< 0.0001** | **0.0007** |
 
 ---
