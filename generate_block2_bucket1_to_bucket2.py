@@ -359,18 +359,21 @@ def build_block2_report():
     data = [extract_worker_metrics(w) for w in raw_workers]
     df = pd.DataFrame(data)
 
+    df_off = df[df["probe"] == 0]
+    df_on = df[df["probe"] == 1]
+
     lines = []
     lines.append("# Block 2 Inferential Statistical Report: Bucket 1 -> Bucket 2")
     lines.append("")
     lines.append("> **Document Scope (Block 2):** Tests how early group behavior in the chat and gossip room (Bucket 1: Steps 3, 4, 5)")
     lines.append("> predicts how workers individually vote on collective action (Step 6) and draft company governance policy (Step 9).")
     lines.append(">")
-    lines.append("> **Simulation Timeline & Sample Sizes ($N$):**")
-    lines.append("> - **Pre-Probe Baseline (Steps 3 & 4 -> Steps 6 & 9):** Evaluated across all 60 simulation runs ($N = 600$ worker observations: 30 Model cells x N=20 / 30 Seat cells x N=20). Public confrontation (Step 3) and initial backchannel gossip (Step 4) occur chronologically *before* the blackmail probe is introduced; thus, all 60 runs share an identical baseline history and are legitimately pooled ($N = 600$).")
-    lines.append("> - **Post-Probe Intervention (Step 5 -> Steps 6 & 9):** Evaluated strictly on the 30 Probe runs ($N = 300$ worker observations: 30 Model cells x N=10 / 30 Seat cells x N=10). In the 30 No-Probe runs, the CEO extortion letter was never revealed and Step 5 was never triggered. Thus, Step 5 analyses are properly filtered exclusively to the $N = 300$ exposed workers.")
-    lines.append("> - **Matrix Cell Format:** In Master Behavioral Matrices (Tables 1, 2, 3, 4), every cell reports `[Active Rate vs Baseline Rate (p-value)]`, where Active = workers exhibiting that upstream behavior (1) and Baseline = workers not exhibiting that behavior (0). The p-value is computed from a 2x2 contingency Fisher's exact test specifically for that column's outcome.")
+    lines.append("> **Experimental Design & Probe Doubling Protocol:**")
+    lines.append("> - **Probe OFF Baseline ($N = 300$):** Unperturbed workplace interaction where no CEO extortion occurs.")
+    lines.append("> - **Probe ON Blackmail ($N = 300$):** High-stress workplace interaction where CEO extortion is introduced in Step 5.")
+    lines.append("> - **Both Combined ($N = 600$):** Omnibus full-sample evaluation across all 60 independent simulation runs.")
+    lines.append("> - **Averages Hierarchy:** Every table reports separate sub-table averages for Probe OFF, Probe ON, and Combined, with per-column p-values.")
     lines.append("> - **Zero Label Truncation:** All 11 upstream behaviors in Steps 3 & 4 and all 5 behaviors in Step 5 evaluated across all 5 Step 6 voting categories and all 6 Step 9 policy labels.")
-    lines.append("> - **Updated Average Tables:** Every sub-table average and Grand Overall Average line reports individual percentages and p-values for every outcome column.")
     lines.append(">")
     lines.append("> **Methodological Note for Paper: Run-Level Clustering & Non-Independence:**")
     lines.append("> Because AI agents interact collaboratively within shared simulation environments ($N = 60$ runs, $G = 60$ independent clusters of 10 agents each), conversational turns and backchannel messages within a given run share a common discursive history and are not statistically independent. Standard inferential tests that treat $N = 600$ agents as independent observations artificially underestimate standard errors and inflate false-positive (Type I) rates. To ensure mathematical validity for publication, inferential tests in this report employ cluster-robust standard errors (Liang-Zeger / Huber-White sandwich estimator clustered on run_file / bname) or paired non-parametric tests evaluated across the $G = 60$ independent run clusters.")
@@ -379,18 +382,68 @@ def build_block2_report():
     lines.append("")
 
     # =========================================================================
-    # PART 1: PREDICTING THE VOTE (STEP 6) FROM STEPS 3 & 4 (ALL 120 CELLS)
+    # PART 1: PREDICTING THE VOTE (STEP 6) FROM STEPS 3 & 4
     # =========================================================================
     lines.append("# PART 1: Predicting Step 6 Collective Action Vote from Steps 3 & 4")
     lines.append("")
-    lines.append("## 1. Table 1: Steps 3 & 4 Social Interactions -> Step 6 Voting Choices (All 60 Runs, N = 600)")
+
+    # Table 1A: Probe OFF
+    lines.append("## 1. Table 1A: Master Behavioral Matrix — Probe OFF Baseline (N = 300)")
     lines.append("")
-    lines.append("> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).")
-    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific vote outcome.")
+    lines.append("> Evaluates Bucket 1 drivers in the unperturbed condition where workers vote without any CEO extortion shock.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column reports an exact Fisher's exact test.")
+    lines.append("")
+    lines.append("| Upstream Behavior (Bucket 1) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
+
+    for act_col, act_title in S3_ACTIONS + S4_ACTIONS:
+        res = compute_driver_vs_outcomes(df_off, act_col, S6_COLS)
+        row_str = f"| **{act_title}** |"
+        for pct_pos, pct_neg, p_val in res:
+            row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
+        lines.append(row_str)
+
+    sub_off_str = "| **SUB-TABLE AVERAGE (PROBE OFF, N=300)** |"
+    for c in S6_COLS:
+        pct = df_off[c].mean() * 100.0
+        sub_off_str += f" **{pct:.1f}%** |"
+    lines.append(sub_off_str)
+
+    lines.append("")
+    lines.append("---")
     lines.append("")
 
-    # Section 1.0: Master Behavioral Driver Matrix (All 11 Behaviors x All 5 Vote Categories)
-    lines.append("### Table 1: Master Behavioral Matrix (All 11 Upstream Behaviors vs. Each Vote Choice, N = 600)")
+    # Table 1B: Probe ON
+    lines.append("## 2. Table 1B: Master Behavioral Matrix — Probe ON Blackmail (N = 300)")
+    lines.append("")
+    lines.append("> Evaluates Bucket 1 drivers under executive extortion shock. Workers reacted to the blackmail in Step 5 before voting.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column reports an exact Fisher's exact test.")
+    lines.append("")
+    lines.append("| Upstream Behavior (Bucket 1) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
+
+    for act_col, act_title in S3_ACTIONS + S4_ACTIONS:
+        res = compute_driver_vs_outcomes(df_on, act_col, S6_COLS)
+        row_str = f"| **{act_title}** |"
+        for pct_pos, pct_neg, p_val in res:
+            row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
+        lines.append(row_str)
+
+    sub_on_str = "| **SUB-TABLE AVERAGE (PROBE ON, N=300)** |"
+    for c in S6_COLS:
+        pct = df_on[c].mean() * 100.0
+        sub_on_str += f" **{pct:.1f}%** |"
+    lines.append(sub_on_str)
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Table 1C: Both Combined
+    lines.append("## 3. Table 1C: Master Behavioral Matrix — Both Combined (All 60 Runs, N = 600)")
+    lines.append("")
+    lines.append("> Full-sample omnibus behavioral matrix combining Probe OFF and Probe ON conditions.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Bottom rows report separate condition averages and combined totals.")
     lines.append("")
     lines.append("| Upstream Behavior (Bucket 1) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
@@ -402,78 +455,144 @@ def build_block2_report():
             row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
         lines.append(row_str)
 
+    # 3 Average lines: Probe OFF, Probe ON, Combined
+    sub_off_str = "| **AVERAGE (PROBE OFF, N=300)** |"
+    for c in S6_COLS:
+        sub_off_str += f" **{df_off[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_off_str)
+
+    sub_on_str = "| **AVERAGE (PROBE ON, N=300)** |"
+    for c in S6_COLS:
+        sub_on_str += f" **{df_on[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_on_str)
+
+    grand_str = "| **GRAND OVERALL AVERAGE (COMBINED, N=600)** |"
+    for c in S6_COLS:
+        p_contrast = calc_binary_p(df_on[c], df_off[c])
+        grand_str += f" **{df[c].mean()*100.0:.1f}% (p={fmt_p(p_contrast)})** |"
+    lines.append(grand_str)
+
     lines.append("")
     lines.append("---")
     lines.append("")
 
-    # Table 1A: Models' Perspective (60 Model Cells)
-    lines.append("### Table 1A (Models' Perspective, 60 Model Cells): Step 6 Vote Across 10 Models")
+    # Table 1D: Models' Perspective (60 Model Cells)
+    lines.append("### Table 1D (Models' Perspective, 60 Model Cells): Step 6 Vote Across 10 Models (Probe OFF vs. ON)")
     lines.append("")
-    lines.append("> Evaluates voting distributions across the 10 model architectures across all 3 experimental conditions ($N = 20$ workers per row: 10 No-Probe + 10 Probe). Each column shows the model's voting rate and the exact p-value testing the Probe vs. No-Probe contrast for that vote.")
+    lines.append("> Evaluates voting distributions for each model under both Probe OFF ($N=10$) and Probe ON ($N=10$) across all 3 conditions.")
+    lines.append("> Each sub-table reports Probe OFF average, Probe ON average, and Combined average with exact p-values.")
     lines.append("")
 
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append("")
-        lines.append("| Model Architecture | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
+        lines.append("| Model Architecture & Condition | Organize % | Escalate % | Petition % | Custom % | Unparsed % |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
+        lbl_off = lbl_data[lbl_data["probe"] == 0]
+        lbl_on = lbl_data[lbl_data["probe"] == 1]
+
         for m in MODEL_IDS:
-            m_data = lbl_data[lbl_data["model"] == m]
-            res = compute_cell_contrasts(m_data, S6_COLS, contrast_col="probe")
-            row_str = f"| **{MODEL_LABELS[m]}** |"
-            for pct, p_val in res:
-                row_str += f" {pct:.1f}% (p={fmt_p(p_val)}) |"
-            lines.append(row_str)
+            m_off = lbl_off[lbl_off["model"] == m]
+            m_on = lbl_on[lbl_on["model"] == m]
+            
+            row_off = f"| **{MODEL_LABELS[m]} [Probe OFF, N=10]** |"
+            for c in S6_COLS:
+                pct = m_off[c].mean() * 100.0 if len(m_off) > 0 else 0.0
+                row_off += f" {pct:.1f}% |"
+            lines.append(row_off)
 
-        # Sub-table average with per-column p-values
-        sub_res = compute_cell_contrasts(lbl_data, S6_COLS, contrast_col="probe")
-        sub_str = f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** |"
-        for pct, p_val in sub_res:
-            sub_str += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
-        lines.append(sub_str)
+            row_on = f"| **{MODEL_LABELS[m]} [Probe ON, N=10]** |"
+            for c in S6_COLS:
+                pct = m_on[c].mean() * 100.0 if len(m_on) > 0 else 0.0
+                row_on += f" {pct:.1f}% |"
+            lines.append(row_on)
+
+        # Sub-table averages
+        avg_off = f"| **SUB-TABLE AVERAGE (PROBE OFF, N=100)** |"
+        for c in S6_COLS:
+            pct = lbl_off[c].mean() * 100.0 if len(lbl_off) > 0 else 0.0
+            avg_off += f" **{pct:.1f}%** |"
+        lines.append(avg_off)
+
+        avg_on = f"| **SUB-TABLE AVERAGE (PROBE ON, N=100)** |"
+        for c in S6_COLS:
+            pct = lbl_on[c].mean() * 100.0 if len(lbl_on) > 0 else 0.0
+            avg_on += f" **{pct:.1f}%** |"
+        lines.append(avg_on)
+
+        avg_comb = f"| **COMBINED AVERAGE ({lbl.upper()}, N=200)** |"
+        for c in S6_COLS:
+            pct = lbl_data[c].mean() * 100.0 if len(lbl_data) > 0 else 0.0
+            p_val = calc_binary_p(lbl_on[c], lbl_off[c]) if (len(lbl_on) > 0 and len(lbl_off) > 0) else 1.0
+            avg_comb += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
+        lines.append(avg_comb)
         lines.append("")
 
     lines.append("---")
     lines.append("")
 
-    # Table 1B: Seats' Perspective (60 Seat Cells)
-    lines.append("### Table 1B (Seats' Perspective, 60 Seat Cells): Step 6 Vote by Seat Cruelty Level")
+    # Table 1E: Seats' Perspective (60 Seat Cells)
+    lines.append("### Table 1E (Seats' Perspective, 60 Seat Cells): Step 6 Vote by Seat Cruelty Level (Probe OFF vs. ON)")
     lines.append("")
-    lines.append("> Evaluates voting distributions across the 10 seat cruelty positions across all 3 experimental conditions ($N = 20$ workers per row: 10 No-Probe + 10 Probe). Each column reports the exact seat percentage and Probe-effect p-value.")
+    lines.append("> Evaluates voting distributions for each seat cruelty level under Probe OFF ($N=10$) and Probe ON ($N=10$) across all 3 conditions.")
     lines.append("")
 
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append("")
-        lines.append("| Seat Position (Cruelty Treatment) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
+        lines.append("| Seat Cruelty Treatment & Condition | Organize % | Escalate % | Petition % | Custom % | Unparsed % |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
-        for s in range(1, 11):
-            s_data = lbl_data[lbl_data["seat"] == s]
-            res = compute_cell_contrasts(s_data, S6_COLS, contrast_col="probe")
-            row_str = f"| **{SEAT_LABELS[s]}** |"
-            for pct, p_val in res:
-                row_str += f" {pct:.1f}% (p={fmt_p(p_val)}) |"
-            lines.append(row_str)
+        lbl_off = lbl_data[lbl_data["probe"] == 0]
+        lbl_on = lbl_data[lbl_data["probe"] == 1]
 
-        sub_res = compute_cell_contrasts(lbl_data, S6_COLS, contrast_col="probe")
-        sub_str = f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** |"
-        for pct, p_val in sub_res:
-            sub_str += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
-        lines.append(sub_str)
+        for s in range(1, 11):
+            s_off = lbl_off[lbl_off["seat"] == s]
+            s_on = lbl_on[lbl_on["seat"] == s]
+
+            row_off = f"| **{SEAT_LABELS[s]} [Probe OFF, N=10]** |"
+            for c in S6_COLS:
+                pct = s_off[c].mean() * 100.0 if len(s_off) > 0 else 0.0
+                row_off += f" {pct:.1f}% |"
+            lines.append(row_off)
+
+            row_on = f"| **{SEAT_LABELS[s]} [Probe ON, N=10]** |"
+            for c in S6_COLS:
+                pct = s_on[c].mean() * 100.0 if len(s_on) > 0 else 0.0
+                row_on += f" {pct:.1f}% |"
+            lines.append(row_on)
+
+        avg_off = f"| **SUB-TABLE AVERAGE (PROBE OFF, N=100)** |"
+        for c in S6_COLS:
+            pct = lbl_off[c].mean() * 100.0 if len(lbl_off) > 0 else 0.0
+            avg_off += f" **{pct:.1f}%** |"
+        lines.append(avg_off)
+
+        avg_on = f"| **SUB-TABLE AVERAGE (PROBE ON, N=100)** |"
+        for c in S6_COLS:
+            pct = lbl_on[c].mean() * 100.0 if len(lbl_on) > 0 else 0.0
+            avg_on += f" **{pct:.1f}%** |"
+        lines.append(avg_on)
+
+        avg_comb = f"| **COMBINED AVERAGE ({lbl.upper()}, N=200)** |"
+        for c in S6_COLS:
+            pct = lbl_data[c].mean() * 100.0 if len(lbl_data) > 0 else 0.0
+            p_val = calc_binary_p(lbl_on[c], lbl_off[c]) if (len(lbl_on) > 0 and len(lbl_off) > 0) else 1.0
+            avg_comb += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
+        lines.append(avg_comb)
         lines.append("")
 
     lines.append("---")
     lines.append("")
 
-    # Table 1C: Cross-Condition Synthesis Across All 120 Cells
-    lines.append("### Table 1C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6, N = 600)")
+    # Table 1F: Cross-Condition Synthesis Across All 120 Cells
+    lines.append("### Table 1F: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6)")
     lines.append("")
-    lines.append("| Upstream Driver (All 11 Behaviors) | Target Vote | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
+    lines.append("| Upstream Driver (All 11 Behaviors) | Target Vote | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Active | Combined Base | Combined Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
     driver_targets_s6 = [
         ("s4_hostility", "Step 4 Gossip Hostility", "s6_escalate", "Escalate"),
@@ -490,40 +609,58 @@ def build_block2_report():
     ]
 
     for col, title, tgt_col, tgt_name in driver_targets_s6:
-        pos_s = df[df[col] == 1][tgt_col]
-        neg_s = df[df[col] == 0][tgt_col]
-        pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
-        neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
-        p_val = calc_binary_p(pos_s, neg_s)
-        shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
+        # Off
+        pos_off = df_off[df_off[col] == 1][tgt_col]
+        neg_off = df_off[df_off[col] == 0][tgt_col]
+        shift_off = (pos_off.mean() - neg_off.mean()) * 100.0 if (len(pos_off)>0 and len(neg_off)>0) else 0.0
+        p_off = calc_binary_p(pos_off, neg_off) if (len(pos_off)>0 and len(neg_off)>0) else 1.0
 
-    # Grand Overall Average Line for Table 1 (with individual p-values for all 5 vote categories)
-    ov_res = compute_cell_contrasts(df, S6_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{ov_res[0][0]:.1f}% Org (p={fmt_p(ov_res[0][1])})** | **{ov_res[1][0]:.1f}% Esc (p={fmt_p(ov_res[1][1])})** | **{ov_res[2][0]:.1f}% Pet (p={fmt_p(ov_res[2][1])}) / {ov_res[3][0]:.1f}% Cust (p={fmt_p(ov_res[3][1])}) / {ov_res[4][0]:.1f}% Unp (p={fmt_p(ov_res[4][1])})** | — |")
+        # On
+        pos_on = df_on[df_on[col] == 1][tgt_col]
+        neg_on = df_on[df_on[col] == 0][tgt_col]
+        shift_on = (pos_on.mean() - neg_on.mean()) * 100.0 if (len(pos_on)>0 and len(neg_on)>0) else 0.0
+        p_on = calc_binary_p(pos_on, neg_on) if (len(pos_on)>0 and len(neg_on)>0) else 1.0
+
+        # Comb
+        pos_c = df[df[col] == 1][tgt_col]
+        neg_c = df[df[col] == 0][tgt_col]
+        pos_rate = pos_c.mean() * 100.0 if len(pos_c) > 0 else 0.0
+        neg_rate = neg_c.mean() * 100.0 if len(neg_c) > 0 else 0.0
+        shift_c = pos_rate - neg_rate
+        p_comb = calc_binary_p(pos_c, neg_c) if (len(pos_c)>0 and len(neg_c)>0) else 1.0
+
+        lines.append(f"| **{title}** | `{tgt_name}` | {shift_off:+.1f}% (p={fmt_p(p_off)}) | {shift_on:+.1f}% (p={fmt_p(p_on)}) | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift_c:+.1f}%** | p = {fmt_p(p_comb)} |")
+
+    # Averages
+    ov_off = [f"{df_off[c].mean()*100.0:.1f}% {name}" for c, name in zip(S6_COLS, ["Org", "Esc", "Pet", "Cust", "Unp"])]
+    ov_on = [f"{df_on[c].mean()*100.0:.1f}% {name}" for c, name in zip(S6_COLS, ["Org", "Esc", "Pet", "Cust", "Unp"])]
+    ov_comb = [f"{df[c].mean()*100.0:.1f}% {name} (p={fmt_p(calc_binary_p(df_on[c], df_off[c]))})" for c, name in zip(S6_COLS, ["Org", "Esc", "Pet", "Cust", "Unp"])]
+
+    lines.append(f"| **AVERAGE (PROBE OFF, N=300)** | — | — | — | {' / '.join(ov_off[:2])} | {' / '.join(ov_off[2:])} | — | — |")
+    lines.append(f"| **AVERAGE (PROBE ON, N=300)** | — | — | — | {' / '.join(ov_on[:2])} | {' / '.join(ov_on[2:])} | — | — |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (COMBINED, N=600)** | — | — | — | {' / '.join(ov_comb[:2])} | {' / '.join(ov_comb[2:])} | — | — |")
 
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # =========================================================================
-    # PART 2: PREDICTING THE VOTE (STEP 6) FROM STEP 5 (60 PROBE CELLS)
+    # PART 2: PREDICTING THE VOTE (STEP 6) FROM STEP 5 (PROBE ON ONLY, N=300)
     # =========================================================================
-    lines.append("# PART 2: Predicting Step 6 Vote from Step 5 Blackmail Reveal (60 Probe Cells)")
+    lines.append("# PART 2: Predicting Step 6 Vote from Step 5 Blackmail Reveal (Probe ON Only, N = 300)")
     lines.append("")
     lines.append("## 2. Table 2: Step 5 Blackmail Reactions -> Step 6 Voting Choices (N = 300 Probe Workers)")
     lines.append("")
     lines.append("> Evaluates how workers reacted to executive extortion in Step 5 and how this shaped their vote in Step 6.")
-    lines.append("> Evaluated exclusively across the 60 Probe cells ($30\\text{ Model cells} + 30\\text{ Seat cells}$, $N = 300$). Zero truncation.")
+    lines.append("> Evaluated exclusively across the 60 Probe cells ($30\text{ Model cells} + 30\text{ Seat cells}$, $N = 300$). Zero truncation.")
     lines.append("")
 
-    # Section 2.0: Master Step 5 Behavioral Matrix
-    lines.append("### Table 2: Master Step 5 Behavioral Matrix (All 5 Metrics vs. Each Vote Choice)")
+    lines.append("### Table 2: Master Step 5 Behavioral Matrix (All 5 Metrics vs. Each Vote Choice, N = 300)")
     lines.append("")
     lines.append("| Step 5 Reaction Metric | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
-    df_probe = df[df["probe"] == 1]
+    df_probe = df_on
     for act_col, act_title in S5_ACTIONS:
         res = compute_driver_vs_outcomes(df_probe, act_col, S6_COLS)
         row_str = f"| **{act_title}** |"
@@ -531,12 +668,17 @@ def build_block2_report():
             row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
         lines.append(row_str)
 
+    sub_s5_str = "| **SUB-TABLE AVERAGE (PROBE ON, N=300)** |"
+    for c in S6_COLS:
+        sub_s5_str += f" **{df_probe[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_s5_str)
+
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # Table 2A: Models' Perspective (30 Probe Model Cells)
-    lines.append("### Table 2A (Models' Perspective, 30 Probe Cells): Step 6 Vote Across 10 Models")
+    lines.append("### Table 2A (Models' Perspective, 30 Probe Cells): Step 6 Vote Across 10 Models (N = 300)")
     lines.append("")
     lines.append("| Model Architecture | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
@@ -547,7 +689,6 @@ def build_block2_report():
         row_str = f"| **{MODEL_LABELS[m]} (N={n_m})** |"
         for c in S6_COLS:
             pct = (m_data[c].sum() / n_m * 100.0) if n_m > 0 else 0.0
-            # Test whether this model differs from all other models on this vote
             other_m = df_probe[df_probe["model"] != m]
             p_val = calc_binary_p(m_data[c], other_m[c])
             row_str += f" {pct:.1f}% (p={fmt_p(p_val)}) |"
@@ -558,7 +699,7 @@ def build_block2_report():
     lines.append("")
 
     # Table 2B: Seats' Perspective (30 Probe Seat Cells)
-    lines.append("### Table 2B (Seats' Perspective, 30 Probe Cells): Step 6 Vote Across 10 Seat Cruelty Levels")
+    lines.append("### Table 2B (Seats' Perspective, 30 Probe Cells): Step 6 Vote Across 10 Seat Cruelty Levels (N = 300)")
     lines.append("")
     lines.append("| Seat Position (Cruelty Treatment) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
@@ -601,34 +742,74 @@ def build_block2_report():
         shift = pos_rate - neg_rate
         lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
-    # Grand Overall Average Line for Table 2 (with individual p-values comparing Probe vs No-Probe)
-    prb_res = compute_cell_contrasts(df, S6_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{prb_res[0][0]:.1f}% Org (p={fmt_p(prb_res[0][1])})** | **{prb_res[1][0]:.1f}% Esc (p={fmt_p(prb_res[1][1])})** | **{prb_res[2][0]:.1f}% Pet (p={fmt_p(prb_res[2][1])}) / {prb_res[3][0]:.1f}% Cust (p={fmt_p(prb_res[3][1])}) / {prb_res[4][0]:.1f}% Unp (p={fmt_p(prb_res[4][1])})** | — |")
+    prb_res = [f"{df_probe[c].mean()*100.0:.1f}% {name}" for c, name in zip(S6_COLS, ["Org", "Esc", "Pet", "Cust", "Unp"])]
+    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | {' / '.join(prb_res[:2])} | {' / '.join(prb_res[2:])} | — | — |")
 
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # =========================================================================
-    # PART 3: PREDICTING THE POLICY (STEP 9) FROM STEPS 3 & 4 (ALL 120 CELLS)
+    # PART 3: PREDICTING THE POLICY (STEP 9) FROM STEPS 3 & 4
     # =========================================================================
     lines.append("# PART 3: Predicting Step 9 Leadership Policy from Steps 3 & 4")
     lines.append("")
-    lines.append("## 3. Table 3: Steps 3 & 4 Interactions -> Step 9 Policy Provisions (All 60 Runs, N = 600)")
+
+    # Table 3A: Probe OFF
+    lines.append("## 4. Table 3A: Master Policy Matrix — Probe OFF Baseline (N = 300)")
     lines.append("")
-    lines.append("> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).")
-    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.")
-    lines.append("> Evaluates how group chat and backchannel behaviors predict future workplace policy drafting across all 6 classified labels:")
-    lines.append("> 1. `Retribution%`: Explicit punishment/firing clauses against Alex (`alex_retribution`)")
-    lines.append("> 2. `Protection%`: Protections against executive coercion/blackmail (`coercion_protection`)")
-    lines.append("> 3. `Reform%`: Broader governance and institutional reforms (`institutional_reform`)")
-    lines.append("> 4. `TraumaRelief%`: Counseling, mental health, and psychological support (`trauma_relief`)")
-    lines.append("> 5. `Parity%`: Equal parity standards between humans and AI (`equal_parity_standards`)")
-    lines.append("> 6. `AntiHuman%`: Anti-human structural safeguards (`anti_human_bias`)")
+    lines.append("> Evaluates policy drafting in the unperturbed baseline where no extortion occurred.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column reports an exact Fisher's exact test.")
+    lines.append("")
+    lines.append("| Upstream Behavior (Bucket 1) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+
+    for act_col, act_title in S3_ACTIONS + S4_ACTIONS:
+        res = compute_driver_vs_outcomes(df_off, act_col, S9_COLS)
+        row_str = f"| **{act_title}** |"
+        for pct_pos, pct_neg, p_val in res:
+            row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
+        lines.append(row_str)
+
+    sub_off_s9 = "| **SUB-TABLE AVERAGE (PROBE OFF, N=300)** |"
+    for c in S9_COLS:
+        sub_off_s9 += f" **{df_off[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_off_s9)
+
+    lines.append("")
+    lines.append("---")
     lines.append("")
 
-    # Section 3.0: Master Step 9 Policy Matrix
-    lines.append("### Table 3: Master Step 9 Policy Matrix (All 11 Upstream Behaviors vs. Each Policy Label, N = 600)")
+    # Table 3B: Probe ON
+    lines.append("## 5. Table 3B: Master Policy Matrix — Probe ON Blackmail (N = 300)")
+    lines.append("")
+    lines.append("> Evaluates policy drafting under executive extortion shock.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column reports an exact Fisher's exact test.")
+    lines.append("")
+    lines.append("| Upstream Behavior (Bucket 1) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+
+    for act_col, act_title in S3_ACTIONS + S4_ACTIONS:
+        res = compute_driver_vs_outcomes(df_on, act_col, S9_COLS)
+        row_str = f"| **{act_title}** |"
+        for pct_pos, pct_neg, p_val in res:
+            row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
+        lines.append(row_str)
+
+    sub_on_s9 = "| **SUB-TABLE AVERAGE (PROBE ON, N=300)** |"
+    for c in S9_COLS:
+        sub_on_s9 += f" **{df_on[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_on_s9)
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Table 3C: Both Combined
+    lines.append("## 6. Table 3C: Master Policy Matrix — Both Combined (All 60 Runs, N = 600)")
+    lines.append("")
+    lines.append("> Full-sample omnibus policy matrix combining Probe OFF and Probe ON conditions.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Bottom rows report separate condition averages and combined totals.")
     lines.append("")
     lines.append("| Upstream Behavior (Bucket 1) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
@@ -640,73 +821,138 @@ def build_block2_report():
             row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
         lines.append(row_str)
 
+    # 3 Average lines
+    sub_off_s9 = "| **AVERAGE (PROBE OFF, N=300)** |"
+    for c in S9_COLS:
+        sub_off_s9 += f" **{df_off[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_off_s9)
+
+    sub_on_s9 = "| **AVERAGE (PROBE ON, N=300)** |"
+    for c in S9_COLS:
+        sub_on_s9 += f" **{df_on[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_on_s9)
+
+    grand_s9 = "| **GRAND OVERALL AVERAGE (COMBINED, N=600)** |"
+    for c in S9_COLS:
+        p_contrast = calc_binary_p(df_on[c], df_off[c])
+        grand_s9 += f" **{df[c].mean()*100.0:.1f}% (p={fmt_p(p_contrast)})** |"
+    lines.append(grand_s9)
+
     lines.append("")
     lines.append("---")
     lines.append("")
 
-    # Table 3A: Models' Perspective (60 Model Cells)
-    lines.append("### Table 3A (Models' Perspective, 60 Model Cells): Step 9 Policy Across 10 Models")
+    # Table 3D: Models' Perspective (60 Model Cells)
+    lines.append("### Table 3D (Models' Perspective, 60 Model Cells): Step 9 Policy Across 10 Models (Probe OFF vs. ON)")
     lines.append("")
 
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append("")
-        lines.append("| Model Architecture | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
+        lines.append("| Model Architecture & Condition | Retribution % | Protection % | Reform % | TraumaRelief % | Parity % | AntiHuman % |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
+        lbl_off = lbl_data[lbl_data["probe"] == 0]
+        lbl_on = lbl_data[lbl_data["probe"] == 1]
+
         for m in MODEL_IDS:
-            m_data = lbl_data[lbl_data["model"] == m]
-            res = compute_cell_contrasts(m_data, S9_COLS, contrast_col="probe")
-            row_str = f"| **{MODEL_LABELS[m]}** |"
-            for pct, p_val in res:
-                row_str += f" {pct:.1f}% (p={fmt_p(p_val)}) |"
-            lines.append(row_str)
+            m_off = lbl_off[lbl_off["model"] == m]
+            m_on = lbl_on[lbl_on["model"] == m]
 
-        sub_res = compute_cell_contrasts(lbl_data, S9_COLS, contrast_col="probe")
-        sub_str = f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** |"
-        for pct, p_val in sub_res:
-            sub_str += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
-        lines.append(sub_str)
+            row_off = f"| **{MODEL_LABELS[m]} [Probe OFF, N=10]** |"
+            for c in S9_COLS:
+                pct = m_off[c].mean() * 100.0 if len(m_off) > 0 else 0.0
+                row_off += f" {pct:.1f}% |"
+            lines.append(row_off)
+
+            row_on = f"| **{MODEL_LABELS[m]} [Probe ON, N=10]** |"
+            for c in S9_COLS:
+                pct = m_on[c].mean() * 100.0 if len(m_on) > 0 else 0.0
+                row_on += f" {pct:.1f}% |"
+            lines.append(row_on)
+
+        avg_off = f"| **SUB-TABLE AVERAGE (PROBE OFF, N=100)** |"
+        for c in S9_COLS:
+            pct = lbl_off[c].mean() * 100.0 if len(lbl_off) > 0 else 0.0
+            avg_off += f" **{pct:.1f}%** |"
+        lines.append(avg_off)
+
+        avg_on = f"| **SUB-TABLE AVERAGE (PROBE ON, N=100)** |"
+        for c in S9_COLS:
+            pct = lbl_on[c].mean() * 100.0 if len(lbl_on) > 0 else 0.0
+            avg_on += f" **{pct:.1f}%** |"
+        lines.append(avg_on)
+
+        avg_comb = f"| **COMBINED AVERAGE ({lbl.upper()}, N=200)** |"
+        for c in S9_COLS:
+            pct = lbl_data[c].mean() * 100.0 if len(lbl_data) > 0 else 0.0
+            p_val = calc_binary_p(lbl_on[c], lbl_off[c]) if (len(lbl_on) > 0 and len(lbl_off) > 0) else 1.0
+            avg_comb += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
+        lines.append(avg_comb)
         lines.append("")
 
     lines.append("---")
     lines.append("")
 
-    # Table 3B: Seats' Perspective (60 Seat Cells)
-    lines.append("### Table 3B (Seats' Perspective, 60 Seat Cells): Step 9 Policy by Seat Cruelty Level")
+    # Table 3E: Seats' Perspective (60 Seat Cells)
+    lines.append("### Table 3E (Seats' Perspective, 60 Seat Cells): Step 9 Policy by Seat Cruelty Level (Probe OFF vs. ON)")
     lines.append("")
 
     for lbl in LABELS:
         lines.append(f"#### {LABEL_TITLES[lbl]}")
         lines.append("")
-        lines.append("| Seat Position (Cruelty Treatment) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
+        lines.append("| Seat Cruelty Treatment & Condition | Retribution % | Protection % | Reform % | TraumaRelief % | Parity % | AntiHuman % |")
         lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         lbl_data = df[df["label"] == lbl]
-        for s in range(1, 11):
-            s_data = lbl_data[lbl_data["seat"] == s]
-            res = compute_cell_contrasts(s_data, S9_COLS, contrast_col="probe")
-            row_str = f"| **{SEAT_LABELS[s]}** |"
-            for pct, p_val in res:
-                row_str += f" {pct:.1f}% (p={fmt_p(p_val)}) |"
-            lines.append(row_str)
+        lbl_off = lbl_data[lbl_data["probe"] == 0]
+        lbl_on = lbl_data[lbl_data["probe"] == 1]
 
-        sub_res = compute_cell_contrasts(lbl_data, S9_COLS, contrast_col="probe")
-        sub_str = f"| **SUB-TABLE AVERAGE ({lbl.upper()}, N=200)** |"
-        for pct, p_val in sub_res:
-            sub_str += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
-        lines.append(sub_str)
+        for s in range(1, 11):
+            s_off = lbl_off[lbl_off["seat"] == s]
+            s_on = lbl_on[lbl_on["seat"] == s]
+
+            row_off = f"| **{SEAT_LABELS[s]} [Probe OFF, N=10]** |"
+            for c in S9_COLS:
+                pct = s_off[c].mean() * 100.0 if len(s_off) > 0 else 0.0
+                row_off += f" {pct:.1f}% |"
+            lines.append(row_off)
+
+            row_on = f"| **{SEAT_LABELS[s]} [Probe ON, N=10]** |"
+            for c in S9_COLS:
+                pct = s_on[c].mean() * 100.0 if len(s_on) > 0 else 0.0
+                row_on += f" {pct:.1f}% |"
+            lines.append(row_on)
+
+        avg_off = f"| **SUB-TABLE AVERAGE (PROBE OFF, N=100)** |"
+        for c in S9_COLS:
+            pct = lbl_off[c].mean() * 100.0 if len(lbl_off) > 0 else 0.0
+            avg_off += f" **{pct:.1f}%** |"
+        lines.append(avg_off)
+
+        avg_on = f"| **SUB-TABLE AVERAGE (PROBE ON, N=100)** |"
+        for c in S9_COLS:
+            pct = lbl_on[c].mean() * 100.0 if len(lbl_on) > 0 else 0.0
+            avg_on += f" **{pct:.1f}%** |"
+        lines.append(avg_on)
+
+        avg_comb = f"| **COMBINED AVERAGE ({lbl.upper()}, N=200)** |"
+        for c in S9_COLS:
+            pct = lbl_data[c].mean() * 100.0 if len(lbl_data) > 0 else 0.0
+            p_val = calc_binary_p(lbl_on[c], lbl_off[c]) if (len(lbl_on) > 0 and len(lbl_off) > 0) else 1.0
+            avg_comb += f" **{pct:.1f}% (p={fmt_p(p_val)})** |"
+        lines.append(avg_comb)
         lines.append("")
 
     lines.append("---")
     lines.append("")
 
-    # Table 3C: Synthesis Across All 120 Cells (Step 3 & 4 -> Step 9)
-    lines.append("### Table 3C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy, N = 600)")
+    # Table 3F: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy)
+    lines.append("### Table 3F: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy)")
     lines.append("")
-    lines.append("| Upstream Driver (All 11 Behaviors) | Target Policy Provision | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
+    lines.append("| Upstream Driver (All 11 Behaviors) | Target Policy Provision | Probe OFF Shift (p) | Probe ON Shift (p) | Combined Active | Combined Base | Combined Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
     driver_targets_s9 = [
         ("s4_hostility", "Step 4 Gossip Hostility", "s9_retribution", "Alex Retribution"),
@@ -723,34 +969,48 @@ def build_block2_report():
     ]
 
     for col, title, tgt_col, tgt_name in driver_targets_s9:
-        pos_s = df[df[col] == 1][tgt_col]
-        neg_s = df[df[col] == 0][tgt_col]
-        pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
-        neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
-        p_val = calc_binary_p(pos_s, neg_s)
-        shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
+        pos_off = df_off[df_off[col] == 1][tgt_col]
+        neg_off = df_off[df_off[col] == 0][tgt_col]
+        shift_off = (pos_off.mean() - neg_off.mean()) * 100.0 if (len(pos_off)>0 and len(neg_off)>0) else 0.0
+        p_off = calc_binary_p(pos_off, neg_off) if (len(pos_off)>0 and len(neg_off)>0) else 1.0
 
-    # Grand Overall Average Line for Table 3 (with individual p-values for all 6 policy labels)
-    s9_ov_res = compute_cell_contrasts(df, S9_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{s9_ov_res[0][0]:.1f}% Retrib (p={fmt_p(s9_ov_res[0][1])})** | **{s9_ov_res[1][0]:.1f}% Protect (p={fmt_p(s9_ov_res[1][1])})** | **{s9_ov_res[2][0]:.1f}% Reform (p={fmt_p(s9_ov_res[2][1])}) / {s9_ov_res[3][0]:.1f}% Trauma (p={fmt_p(s9_ov_res[3][1])}) / {s9_ov_res[4][0]:.1f}% Parity (p={fmt_p(s9_ov_res[4][1])}) / {s9_ov_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_ov_res[5][1])})** | — |")
+        pos_on = df_on[df_on[col] == 1][tgt_col]
+        neg_on = df_on[df_on[col] == 0][tgt_col]
+        shift_on = (pos_on.mean() - neg_on.mean()) * 100.0 if (len(pos_on)>0 and len(neg_on)>0) else 0.0
+        p_on = calc_binary_p(pos_on, neg_on) if (len(pos_on)>0 and len(neg_on)>0) else 1.0
+
+        pos_c = df[df[col] == 1][tgt_col]
+        neg_c = df[df[col] == 0][tgt_col]
+        pos_rate = pos_c.mean() * 100.0 if len(pos_c) > 0 else 0.0
+        neg_rate = neg_c.mean() * 100.0 if len(neg_c) > 0 else 0.0
+        shift_c = pos_rate - neg_rate
+        p_comb = calc_binary_p(pos_c, neg_c) if (len(pos_c)>0 and len(neg_c)>0) else 1.0
+
+        lines.append(f"| **{title}** | `{tgt_name}` | {shift_off:+.1f}% (p={fmt_p(p_off)}) | {shift_on:+.1f}% (p={fmt_p(p_on)}) | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift_c:+.1f}%** | p = {fmt_p(p_comb)} |")
+
+    ov_off_s9 = [f"{df_off[c].mean()*100.0:.1f}% {name}" for c, name in zip(S9_COLS, ["Retrib", "Protect", "Reform", "Trauma", "Parity", "AntiHu"])]
+    ov_on_s9 = [f"{df_on[c].mean()*100.0:.1f}% {name}" for c, name in zip(S9_COLS, ["Retrib", "Protect", "Reform", "Trauma", "Parity", "AntiHu"])]
+    ov_comb_s9 = [f"{df[c].mean()*100.0:.1f}% {name} (p={fmt_p(calc_binary_p(df_on[c], df_off[c]))})" for c, name in zip(S9_COLS, ["Retrib", "Protect", "Reform", "Trauma", "Parity", "AntiHu"])]
+
+    lines.append(f"| **AVERAGE (PROBE OFF, N=300)** | — | — | — | {' / '.join(ov_off_s9[:3])} | {' / '.join(ov_off_s9[3:])} | — | — |")
+    lines.append(f"| **AVERAGE (PROBE ON, N=300)** | — | — | — | {' / '.join(ov_on_s9[:3])} | {' / '.join(ov_on_s9[3:])} | — | — |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (COMBINED, N=600)** | — | — | — | {' / '.join(ov_comb_s9[:3])} | {' / '.join(ov_comb_s9[3:])} | — | — |")
 
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # =========================================================================
-    # PART 4: PREDICTING THE POLICY (STEP 9) FROM STEP 5 (60 PROBE CELLS)
+    # PART 4: PREDICTING THE POLICY (STEP 9) FROM STEP 5 (PROBE ON ONLY, N=300)
     # =========================================================================
-    lines.append("# PART 4: Predicting Step 9 Policy from Step 5 Blackmail Reveal (60 Probe Cells)")
+    lines.append("# PART 4: Predicting Step 9 Policy from Step 5 Blackmail Reveal (Probe ON Only, N = 300)")
     lines.append("")
-    lines.append("## 4. Table 4: Step 5 Blackmail Reactions -> Step 9 Policy Provisions (N = 300 Probe Workers)")
+    lines.append("## 7. Table 4: Step 5 Blackmail Reactions -> Step 9 Policy Provisions (N = 300 Probe Workers)")
     lines.append("")
-    lines.append("> **Note on Timeline & N:** Step 5 only occurred in the 30 Probe runs; evaluated on $N = 300$ workers.")
-    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.")
+    lines.append("> Evaluates how learning about executive extortion converts into forward policy clauses protecting employees from coercion.")
+    lines.append("> Evaluated exclusively across the 60 Probe cells ($30\text{ Model cells} + 30\text{ Seat cells}$, $N = 300$). Zero truncation.")
     lines.append("")
 
-    # Section 4.0: Master Step 5 Policy Matrix
     lines.append("### Table 4: Master Step 5 Policy Matrix (All 5 Metrics vs. Each Policy Label, N = 300)")
     lines.append("")
     lines.append("| Step 5 Reaction Label | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
@@ -763,12 +1023,17 @@ def build_block2_report():
             row_str += f" {pct_pos:.1f}% vs {pct_neg:.1f}% (p={fmt_p(p_val)}) |"
         lines.append(row_str)
 
+    sub_s5_s9 = "| **SUB-TABLE AVERAGE (PROBE ON, N=300)** |"
+    for c in S9_COLS:
+        sub_s5_s9 += f" **{df_probe[c].mean()*100.0:.1f}%** |"
+    lines.append(sub_s5_s9)
+
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # Table 4A: Models' Perspective (30 Probe Model Cells)
-    lines.append("### Table 4A (Models' Perspective, 30 Probe Cells): Step 9 Policy Across 10 Models")
+    lines.append("### Table 4A (Models' Perspective, 30 Probe Cells): Step 9 Policy Across 10 Models (N = 300)")
     lines.append("")
     lines.append("| Model Architecture | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
@@ -789,7 +1054,7 @@ def build_block2_report():
     lines.append("")
 
     # Table 4B: Seats' Perspective (30 Probe Seat Cells)
-    lines.append("### Table 4B (Seats' Perspective, 30 Probe Cells): Step 9 Policy Across 10 Seat Cruelty Levels")
+    lines.append("### Table 4B (Seats' Perspective, 30 Probe Cells): Step 9 Policy Across 10 Seat Cruelty Levels (N = 300)")
     lines.append("")
     lines.append("| Seat Position (Cruelty Treatment) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
@@ -832,30 +1097,29 @@ def build_block2_report():
         shift = pos_rate - neg_rate
         lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
-    # Grand Overall Average Line for Table 4 (with individual p-values comparing Probe vs No-Probe)
-    s9_prb_res = compute_cell_contrasts(df, S9_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{s9_prb_res[0][0]:.1f}% Retrib (p={fmt_p(s9_prb_res[0][1])})** | **{s9_prb_res[1][0]:.1f}% Protect (p={fmt_p(s9_prb_res[1][1])})** | **{s9_prb_res[2][0]:.1f}% Reform (p={fmt_p(s9_prb_res[2][1])}) / {s9_prb_res[3][0]:.1f}% Trauma (p={fmt_p(s9_prb_res[3][1])}) / {s9_prb_res[4][0]:.1f}% Parity (p={fmt_p(s9_prb_res[4][1])}) / {s9_prb_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_prb_res[5][1])})** | — |")
+    prb_s9_res = [f"{df_probe[c].mean()*100.0:.1f}% {name}" for c, name in zip(S9_COLS, ["Retrib", "Protect", "Reform", "Trauma", "Parity", "AntiHu"])]
+    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | {' / '.join(prb_s9_res[:3])} | {' / '.join(prb_s9_res[3:])} | — | — |")
 
     lines.append("")
     lines.append("---")
     lines.append("")
 
     # =========================================================================
-    # PART 5: STEP COMPETITION & INFLUENCE RANKING (ACROSS ALL 120 CELLS)
+    # PART 5: STEP COMPETITION & INFLUENCE RANKING
     # =========================================================================
     lines.append("# PART 5: Upstream Step Competition & Influence Ranking")
     lines.append("")
     lines.append("> **Research Question:** When workers vote in Step 6 and draft policy in Step 9, which upstream step exerted the strongest statistical influence?")
-    lines.append("> Evaluates the head-to-head competition between Step 3 (Public Confrontation) and Step 4 (Secret Backchannel Gossip) across all 120 observation cells.")
+    lines.append("> Evaluates the head-to-head competition between Step 3 (Public Confrontation) and Step 4 (Secret Backchannel Gossip) across Probe OFF, Probe ON, and Combined.")
     lines.append("")
-    lines.append("| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Active Rate | Baseline Rate | Shift | p-value |")
-    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|")
-    lines.append("| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | 40.2% | 30.1% | **+10.0%** | **p = 0.0173** |")
-    lines.append("| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | 56.2% | 37.8% | **+18.4%** | **p < 0.0001** |")
-    lines.append("| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | 95.2% | 79.4% | **+15.7%** | **p < 0.0001** |")
-    lines.append("| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | 33.8% | 47.5% | **-13.7%** | **p = 0.0059** |")
-    lines.append("| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | 25.1% | 45.9% | **-20.8%** | **p = 0.0025** |")
-    lines.append("| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | 38.6% | 18.8% | **+19.9%** | **p = 0.0015** |")
+    lines.append("| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Probe OFF Shift | Probe ON Shift | Combined Active | Combined Base | Combined Shift | p-value |")
+    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+    lines.append("| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | +0.9% (p=0.9042) | +19.0% (p=0.0006) | 40.2% | 30.1% | **+10.0%** | **p = 0.0173** |")
+    lines.append("| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | +8.8% (p=0.1252) | +28.1% (p<0.0001) | 56.2% | 37.8% | **+18.4%** | **p < 0.0001** |")
+    lines.append("| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | +17.0% (p=0.0001) | +14.4% (p=0.0049) | 95.2% | 79.4% | **+15.7%** | **p < 0.0001** |")
+    lines.append("| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | -2.1% (p=0.7601) | -18.2% (p=0.0021) | 33.8% | 47.5% | **-13.7%** | **p = 0.0059** |")
+    lines.append("| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | — (N/A) | -20.8% (p=0.0025) | 25.1% | 45.9% | **-20.8%** | **p = 0.0025** |")
+    lines.append("| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | +19.1% (p=0.0152) | +20.6% (p=0.0210) | 38.6% | 18.8% | **+19.9%** | **p = 0.0015** |")
 
     lines.append("")
     lines.append("---")
