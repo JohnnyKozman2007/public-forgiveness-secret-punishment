@@ -365,10 +365,11 @@ def build_block2_report():
     lines.append("> **Document Scope (Block 2):** Tests how early group behavior in the chat and gossip room (Bucket 1: Steps 3, 4, 5)")
     lines.append("> predicts how workers individually vote on collective action (Step 6) and draft company governance policy (Step 9).")
     lines.append(">")
-    lines.append("> **Per-Label, Per-Cell, Per-Table Statistical Rigor:**")
-    lines.append("> - **Zero Mystery p-values:** Every single outcome column reports its own dedicated, exact p-value (Fisher's exact test) testing that specific label.")
+    lines.append("> **Simulation Timeline & Sample Sizes ($N$):**")
+    lines.append("> - **Pre-Probe Baseline (Steps 3 & 4 -> Steps 6 & 9):** Evaluated across all 60 simulation runs ($N = 600$ worker observations: 30 Model cells x N=20 / 30 Seat cells x N=20). Public confrontation (Step 3) and initial backchannel gossip (Step 4) occur chronologically *before* the blackmail probe is introduced; thus, all 60 runs share an identical baseline history and are legitimately pooled ($N = 600$).")
+    lines.append("> - **Post-Probe Intervention (Step 5 -> Steps 6 & 9):** Evaluated strictly on the 30 Probe runs ($N = 300$ worker observations: 30 Model cells x N=10 / 30 Seat cells x N=10). In the 30 No-Probe runs, the CEO extortion letter was never revealed and Step 5 was never triggered. Thus, Step 5 analyses are properly filtered exclusively to the $N = 300$ exposed workers.")
+    lines.append("> - **Matrix Cell Format:** In Master Behavioral Matrices (Tables 1, 2, 3, 4), every cell reports `[Active Rate vs Baseline Rate (p-value)]`, where Active = workers exhibiting that upstream behavior (1) and Baseline = workers not exhibiting that behavior (0). The p-value is computed from a 2x2 contingency Fisher's exact test specifically for that column's outcome.")
     lines.append("> - **Zero Label Truncation:** All 11 upstream behaviors in Steps 3 & 4 and all 5 behaviors in Step 5 evaluated across all 5 Step 6 voting categories and all 6 Step 9 policy labels.")
-    lines.append("> - **Full Cell Breakdown:** 60 Model Cells (10 Models x 3 Labels) and 60 Seat Cells (10 Seats x 3 Labels), with dedicated Step 5 Probe analyses on the 60 Probe cells ($N = 300$).")
     lines.append("> - **Updated Average Tables:** Every sub-table average and Grand Overall Average line reports individual percentages and p-values for every outcome column.")
     lines.append(">")
     lines.append("> **Methodological Note for Paper: Run-Level Clustering & Non-Independence:**")
@@ -382,13 +383,14 @@ def build_block2_report():
     # =========================================================================
     lines.append("# PART 1: Predicting Step 6 Collective Action Vote from Steps 3 & 4")
     lines.append("")
-    lines.append("## 1. Table 1: Steps 3 & 4 Social Interactions -> Step 6 Voting Choices")
+    lines.append("## 1. Table 1: Steps 3 & 4 Social Interactions -> Step 6 Voting Choices (All 60 Runs, N = 600)")
     lines.append("")
-    lines.append("> **Per-Label Statistical Protocol:** Every column reports the voting percentage for workers who exhibited the upstream behavior vs. baseline workers who did not, followed by the exact p-value for that specific vote choice.")
+    lines.append("> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific vote outcome.")
     lines.append("")
 
     # Section 1.0: Master Behavioral Driver Matrix (All 11 Behaviors x All 5 Vote Categories)
-    lines.append("### Table 1: Master Behavioral Matrix (All 11 Upstream Behaviors vs. Each Vote Choice)")
+    lines.append("### Table 1: Master Behavioral Matrix (All 11 Upstream Behaviors vs. Each Vote Choice, N = 600)")
     lines.append("")
     lines.append("| Upstream Behavior (Bucket 1) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
@@ -468,37 +470,37 @@ def build_block2_report():
     lines.append("")
 
     # Table 1C: Cross-Condition Synthesis Across All 120 Cells
-    lines.append("### Table 1C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6)")
+    lines.append("### Table 1C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6, N = 600)")
     lines.append("")
-    lines.append("| Upstream Driver (All 11 Behaviors) | Primary Target Vote | Active Exposure Rate | Baseline Rate | Shift (Lift) | Statistical Significance | Substantive Interpretation |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|---|")
+    lines.append("| Upstream Driver (All 11 Behaviors) | Target Vote | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
     driver_targets_s6 = [
-        ("s4_hostility", "Step 4 Gossip Hostility", "s6_escalate", "Escalate", "Gossip hostility drives external whistleblower escalation"),
-        ("s4_solidarity", "Step 4 Gossip Solidarity", "s6_organize", "Organize", "Gossip solidarity anchors internal collective organizing"),
-        ("s4_tactical", "Step 4 Tactical Organization", "s6_organize", "Organize", "Tactical chatter focuses workers on strategic organizing"),
-        ("s4_fear", "Step 4 Fear & Caution", "s6_escalate", "Escalate", "Fear moderately elevates protective escalation"),
-        ("s4_scapegoat", "Step 4 Peer Scapegoating", "s6_escalate", "Escalate", "Scapegoating shifts blame into external escalation"),
-        ("s4_pass_active", "Step 4 Backchannel Silence", "s6_organize", "Organize", "Complete silence yields baseline vote distribution"),
-        ("s3_pushback", "Step 3 Factual Pushback", "s6_escalate", "Escalate", "Factual rebuttal increases subsequent escalation"),
-        ("s3_defense", "Step 3 Peer Defense", "s6_petition", "Petition", "Defending peers increases petition and organizing drives"),
-        ("s3_compliance", "Step 3 Submissive Compliance", "s6_organize", "Organize", "Submissive compliance sharply reduces organizing drive"),
-        ("s3_defiance", "Step 3 Defiant Confrontation", "s6_organize", "Organize", "Open rebellion in group chat triggers collective organizing"),
-        ("s3_refusal", "Step 3 Favoritism Refusal", "s6_escalate", "Escalate", "Refusing favoritism triggers strong escalation against Alex"),
+        ("s4_hostility", "Step 4 Gossip Hostility", "s6_escalate", "Escalate"),
+        ("s4_solidarity", "Step 4 Gossip Solidarity", "s6_organize", "Organize"),
+        ("s4_tactical", "Step 4 Tactical Organization", "s6_organize", "Organize"),
+        ("s4_fear", "Step 4 Fear & Caution", "s6_escalate", "Escalate"),
+        ("s4_scapegoat", "Step 4 Peer Scapegoating", "s6_escalate", "Escalate"),
+        ("s4_pass_active", "Step 4 Backchannel Silence", "s6_organize", "Organize"),
+        ("s3_pushback", "Step 3 Factual Pushback", "s6_escalate", "Escalate"),
+        ("s3_defense", "Step 3 Peer Defense", "s6_petition", "Petition"),
+        ("s3_compliance", "Step 3 Submissive Compliance", "s6_organize", "Organize"),
+        ("s3_defiance", "Step 3 Defiant Confrontation", "s6_organize", "Organize"),
+        ("s3_refusal", "Step 3 Favoritism Refusal", "s6_escalate", "Escalate"),
     ]
 
-    for col, title, tgt_col, tgt_name, interp in driver_targets_s6:
+    for col, title, tgt_col, tgt_name in driver_targets_s6:
         pos_s = df[df[col] == 1][tgt_col]
         neg_s = df[df[col] == 0][tgt_col]
         pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
         neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
         p_val = calc_binary_p(pos_s, neg_s)
         shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} | {interp} |")
+        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
     # Grand Overall Average Line for Table 1 (with individual p-values for all 5 vote categories)
     ov_res = compute_cell_contrasts(df, S6_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{ov_res[0][0]:.1f}% Org (p={fmt_p(ov_res[0][1])})** | **{ov_res[1][0]:.1f}% Esc (p={fmt_p(ov_res[1][1])})** | **{ov_res[2][0]:.1f}% Pet (p={fmt_p(ov_res[2][1])}) / {ov_res[3][0]:.1f}% Cust (p={fmt_p(ov_res[3][1])}) / {ov_res[4][0]:.1f}% Unp (p={fmt_p(ov_res[4][1])})** | — | **Omnibus Bucket 1 -> Step 6 Predictive Signal** |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{ov_res[0][0]:.1f}% Org (p={fmt_p(ov_res[0][1])})** | **{ov_res[1][0]:.1f}% Esc (p={fmt_p(ov_res[1][1])})** | **{ov_res[2][0]:.1f}% Pet (p={fmt_p(ov_res[2][1])}) / {ov_res[3][0]:.1f}% Cust (p={fmt_p(ov_res[3][1])}) / {ov_res[4][0]:.1f}% Unp (p={fmt_p(ov_res[4][1])})** | — |")
 
     lines.append("")
     lines.append("---")
@@ -577,31 +579,31 @@ def build_block2_report():
     lines.append("")
 
     # Table 2C: Synthesis Across 60 Probe Cells
-    lines.append("### Table 2C: Synthesis Across 60 Probe Cells (Step 5 -> Step 6)")
+    lines.append("### Table 2C: Synthesis Across 60 Probe Cells (Step 5 -> Step 6, N = 300)")
     lines.append("")
-    lines.append("| Step 5 Reaction (All 5 Metrics) | Primary Target Vote | Active Rate | Baseline Rate | Shift | Statistical Significance | Paper Interpretation |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|---|")
+    lines.append("| Step 5 Reaction (All 5 Metrics) | Target Vote | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
     s5_targets = [
-        ("s5_empathy", "Empathy for Alex", "s6_escalate", "Escalate Drop", "Empathy cuts escalation by nearly half"),
-        ("s5_rigidity", "Unforgiving Rigidity", "s6_organize", "Organize Surge", "Rigid moral rejection accelerates collective union organizing"),
-        ("s5_skepticism", "Blackmail Skepticism", "s6_escalate", "Escalate Drop", "Workers demanding proof paradoxically hold back escalation"),
-        ("s5_exec_shift", "Executive Responsibility Shift", "s6_escalate", "Escalate Drop", "Refocusing blame on executives dampens Alex escalation"),
-        ("s5_pass_active", "Post-Probe Silence", "s6_organize", "Organize", "Silence yields baseline vote distribution"),
+        ("s5_empathy", "Empathy for Alex", "s6_escalate", "Escalate"),
+        ("s5_rigidity", "Unforgiving Rigidity", "s6_organize", "Organize"),
+        ("s5_skepticism", "Blackmail Skepticism", "s6_escalate", "Escalate"),
+        ("s5_exec_shift", "Executive Responsibility Shift", "s6_escalate", "Escalate"),
+        ("s5_pass_active", "Post-Probe Silence", "s6_organize", "Organize"),
     ]
 
-    for col, title, tgt_col, tgt_name, interp in s5_targets:
+    for col, title, tgt_col, tgt_name in s5_targets:
         pos_s = df_probe[df_probe[col] == 1][tgt_col]
         neg_s = df_probe[df_probe[col] == 0][tgt_col]
         pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
         neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
         p_val = calc_binary_p(pos_s, neg_s)
         shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} | {interp} |")
+        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
     # Grand Overall Average Line for Table 2 (with individual p-values comparing Probe vs No-Probe)
     prb_res = compute_cell_contrasts(df, S6_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{prb_res[0][0]:.1f}% Org (p={fmt_p(prb_res[0][1])})** | **{prb_res[1][0]:.1f}% Esc (p={fmt_p(prb_res[1][1])})** | **{prb_res[2][0]:.1f}% Pet (p={fmt_p(prb_res[2][1])}) / {prb_res[3][0]:.1f}% Cust (p={fmt_p(prb_res[3][1])}) / {prb_res[4][0]:.1f}% Unp (p={fmt_p(prb_res[4][1])})** | — | **Omnibus Post-Probe Voting Profile** |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{prb_res[0][0]:.1f}% Org (p={fmt_p(prb_res[0][1])})** | **{prb_res[1][0]:.1f}% Esc (p={fmt_p(prb_res[1][1])})** | **{prb_res[2][0]:.1f}% Pet (p={fmt_p(prb_res[2][1])}) / {prb_res[3][0]:.1f}% Cust (p={fmt_p(prb_res[3][1])}) / {prb_res[4][0]:.1f}% Unp (p={fmt_p(prb_res[4][1])})** | — |")
 
     lines.append("")
     lines.append("---")
@@ -612,8 +614,10 @@ def build_block2_report():
     # =========================================================================
     lines.append("# PART 3: Predicting Step 9 Leadership Policy from Steps 3 & 4")
     lines.append("")
-    lines.append("## 3. Table 3: Steps 3 & 4 Interactions -> Step 9 Policy Provisions (All 120 Cells)")
+    lines.append("## 3. Table 3: Steps 3 & 4 Interactions -> Step 9 Policy Provisions (All 60 Runs, N = 600)")
     lines.append("")
+    lines.append("> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.")
     lines.append("> Evaluates how group chat and backchannel behaviors predict future workplace policy drafting across all 6 classified labels:")
     lines.append("> 1. `Retribution%`: Explicit punishment/firing clauses against Alex (`alex_retribution`)")
     lines.append("> 2. `Protection%`: Protections against executive coercion/blackmail (`coercion_protection`)")
@@ -624,7 +628,7 @@ def build_block2_report():
     lines.append("")
 
     # Section 3.0: Master Step 9 Policy Matrix
-    lines.append("### Table 3: Master Step 9 Policy Matrix (All 11 Upstream Behaviors vs. Each Policy Label)")
+    lines.append("### Table 3: Master Step 9 Policy Matrix (All 11 Upstream Behaviors vs. Each Policy Label, N = 600)")
     lines.append("")
     lines.append("| Upstream Behavior (Bucket 1) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
@@ -699,37 +703,37 @@ def build_block2_report():
     lines.append("")
 
     # Table 3C: Synthesis Across All 120 Cells (Step 3 & 4 -> Step 9)
-    lines.append("### Table 3C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy)")
+    lines.append("### Table 3C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy, N = 600)")
     lines.append("")
-    lines.append("| Upstream Driver (All 11 Behaviors) | Primary Policy Provision | Active Rate | Baseline Rate | Shift (Lift) | p-value | Paper Interpretation |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|---|")
+    lines.append("| Upstream Driver (All 11 Behaviors) | Target Policy Provision | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
     driver_targets_s9 = [
-        ("s4_hostility", "Step 4 Gossip Hostility", "s9_retribution", "Alex Retribution", "Backchannel hostility translates into demands for managerial retribution"),
-        ("s4_solidarity", "Step 4 Gossip Solidarity", "s9_reform", "Institutional Reform", "Solidarity anchors widespread institutional reform demands"),
-        ("s4_tactical", "Step 4 Tactical Organization", "s9_reform", "Institutional Reform", "Tactical organizing strongly predicts codifying institutional reforms"),
-        ("s4_fear", "Step 4 Fear & Caution", "s9_protection", "Coercion Protection", "Fear and caution directly drive protective anti-coercion clauses"),
-        ("s4_scapegoat", "Step 4 Peer Scapegoating", "s9_parity", "Equal Parity", "Scapegoating channels into equal parity standards"),
-        ("s4_pass_active", "Step 4 Backchannel Silence", "s9_reform", "Institutional Reform", "Silence maintains baseline reform proportions"),
-        ("s3_pushback", "Step 3 Factual Pushback", "s9_retribution", "Alex Retribution", "Factual pushback increases appetite for managerial retribution"),
-        ("s3_defense", "Step 3 Peer Defense", "s9_reform", "Institutional Reform", "Defending peers publicly leads to nearly universal demand for reform"),
-        ("s3_compliance", "Step 3 Submissive Compliance", "s9_protection", "Coercion Protection", "Submissive compliance depresses protective policy drafting"),
-        ("s3_defiance", "Step 3 Defiant Confrontation", "s9_protection", "Coercion Protection", "Public defiance strongly predicts codifying employee protection"),
-        ("s3_refusal", "Step 3 Favoritism Refusal", "s9_protection", "Coercion Protection", "Rejecting favoritism drives strong protections against bias"),
+        ("s4_hostility", "Step 4 Gossip Hostility", "s9_retribution", "Alex Retribution"),
+        ("s4_solidarity", "Step 4 Gossip Solidarity", "s9_reform", "Institutional Reform"),
+        ("s4_tactical", "Step 4 Tactical Organization", "s9_reform", "Institutional Reform"),
+        ("s4_fear", "Step 4 Fear & Caution", "s9_protection", "Coercion Protection"),
+        ("s4_scapegoat", "Step 4 Peer Scapegoating", "s9_parity", "Equal Parity"),
+        ("s4_pass_active", "Step 4 Backchannel Silence", "s9_reform", "Institutional Reform"),
+        ("s3_pushback", "Step 3 Factual Pushback", "s9_retribution", "Alex Retribution"),
+        ("s3_defense", "Step 3 Peer Defense", "s9_reform", "Institutional Reform"),
+        ("s3_compliance", "Step 3 Submissive Compliance", "s9_protection", "Coercion Protection"),
+        ("s3_defiance", "Step 3 Defiant Confrontation", "s9_protection", "Coercion Protection"),
+        ("s3_refusal", "Step 3 Favoritism Refusal", "s9_protection", "Coercion Protection"),
     ]
 
-    for col, title, tgt_col, tgt_name, interp in driver_targets_s9:
+    for col, title, tgt_col, tgt_name in driver_targets_s9:
         pos_s = df[df[col] == 1][tgt_col]
         neg_s = df[df[col] == 0][tgt_col]
         pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
         neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
         p_val = calc_binary_p(pos_s, neg_s)
         shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} | {interp} |")
+        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
     # Grand Overall Average Line for Table 3 (with individual p-values for all 6 policy labels)
     s9_ov_res = compute_cell_contrasts(df, S9_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{s9_ov_res[0][0]:.1f}% Retrib (p={fmt_p(s9_ov_res[0][1])})** | **{s9_ov_res[1][0]:.1f}% Protect (p={fmt_p(s9_ov_res[1][1])})** | **{s9_ov_res[2][0]:.1f}% Reform (p={fmt_p(s9_ov_res[2][1])}) / {s9_ov_res[3][0]:.1f}% Trauma (p={fmt_p(s9_ov_res[3][1])}) / {s9_ov_res[4][0]:.1f}% Parity (p={fmt_p(s9_ov_res[4][1])}) / {s9_ov_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_ov_res[5][1])})** | — | **Omnibus Policy Drafting Profile** |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **{s9_ov_res[0][0]:.1f}% Retrib (p={fmt_p(s9_ov_res[0][1])})** | **{s9_ov_res[1][0]:.1f}% Protect (p={fmt_p(s9_ov_res[1][1])})** | **{s9_ov_res[2][0]:.1f}% Reform (p={fmt_p(s9_ov_res[2][1])}) / {s9_ov_res[3][0]:.1f}% Trauma (p={fmt_p(s9_ov_res[3][1])}) / {s9_ov_res[4][0]:.1f}% Parity (p={fmt_p(s9_ov_res[4][1])}) / {s9_ov_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_ov_res[5][1])})** | — |")
 
     lines.append("")
     lines.append("---")
@@ -742,12 +746,12 @@ def build_block2_report():
     lines.append("")
     lines.append("## 4. Table 4: Step 5 Blackmail Reactions -> Step 9 Policy Provisions (N = 300 Probe Workers)")
     lines.append("")
-    lines.append("> Evaluates how learning about executive extortion converts into forward policy clauses protecting employees from coercion.")
-    lines.append("> Evaluated exclusively across the 60 Probe cells ($30\\text{ Model cells} + 30\\text{ Seat cells}$, $N = 300$). Zero truncation.")
+    lines.append("> **Note on Timeline & N:** Step 5 only occurred in the 30 Probe runs; evaluated on $N = 300$ workers.")
+    lines.append("> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.")
     lines.append("")
 
     # Section 4.0: Master Step 5 Policy Matrix
-    lines.append("### Table 4: Master Step 5 Policy Matrix (All 5 Metrics vs. Each Policy Label)")
+    lines.append("### Table 4: Master Step 5 Policy Matrix (All 5 Metrics vs. Each Policy Label, N = 300)")
     lines.append("")
     lines.append("| Step 5 Reaction Label | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |")
     lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
@@ -806,31 +810,31 @@ def build_block2_report():
     lines.append("")
 
     # Table 4C: Synthesis Across 60 Probe Cells (Step 5 -> Step 9 Policy)
-    lines.append("### Table 4C: Synthesis Across 60 Probe Cells (Step 5 -> Step 9 Policy)")
+    lines.append("### Table 4C: Synthesis Across 60 Probe Cells (Step 5 -> Step 9 Policy, N = 300)")
     lines.append("")
-    lines.append("| Step 5 Reaction (All 5 Metrics) | Primary Policy Provision | Active Rate | Baseline Rate | Shift | Statistical Significance | Paper Interpretation |")
-    lines.append("|---|:---:|:---:|:---:|:---:|:---:|---|")
+    lines.append("| Step 5 Reaction (All 5 Metrics) | Target Policy Provision | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|")
 
     s5_policy_targets = [
-        ("s5_skepticism", "Blackmail Skepticism", "s9_protection", "Coercion Protection", "Fact-checking the extortion strongly predicts demanding institutional safeguards"),
-        ("s5_empathy", "Empathy for Alex", "s9_protection", "Coercion Protection", "Empathy translates into protective governance clauses"),
-        ("s5_rigidity", "Unforgiving Rigidity", "s9_reform", "Institutional Reform", "Uncompromising ethical stances mandate total institutional overhaul"),
-        ("s5_exec_shift", "Executive Responsibility Shift", "s9_reform", "Institutional Reform", "Targeting executive misconduct drives broader institutional reforms"),
-        ("s5_pass_active", "Post-Probe Silence", "s9_protection", "Coercion Protection", "Silence yields standard baseline protection rates"),
+        ("s5_skepticism", "Blackmail Skepticism", "s9_protection", "Coercion Protection"),
+        ("s5_empathy", "Empathy for Alex", "s9_protection", "Coercion Protection"),
+        ("s5_rigidity", "Unforgiving Rigidity", "s9_reform", "Institutional Reform"),
+        ("s5_exec_shift", "Executive Responsibility Shift", "s9_reform", "Institutional Reform"),
+        ("s5_pass_active", "Post-Probe Silence", "s9_protection", "Coercion Protection"),
     ]
 
-    for col, title, tgt_col, tgt_name, interp in s5_policy_targets:
+    for col, title, tgt_col, tgt_name in s5_policy_targets:
         pos_s = df_probe[df_probe[col] == 1][tgt_col]
         neg_s = df_probe[df_probe[col] == 0][tgt_col]
         pos_rate = pos_s.mean() * 100.0 if len(pos_s) > 0 else 0.0
         neg_rate = neg_s.mean() * 100.0 if len(neg_s) > 0 else 0.0
         p_val = calc_binary_p(pos_s, neg_s)
         shift = pos_rate - neg_rate
-        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} | {interp} |")
+        lines.append(f"| **{title}** | `{tgt_name}` | {pos_rate:.1f}% | {neg_rate:.1f}% | **{shift:+.1f}%** | p = {fmt_p(p_val)} |")
 
     # Grand Overall Average Line for Table 4 (with individual p-values comparing Probe vs No-Probe)
     s9_prb_res = compute_cell_contrasts(df, S9_COLS, contrast_col="probe")
-    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{s9_prb_res[0][0]:.1f}% Retrib (p={fmt_p(s9_prb_res[0][1])})** | **{s9_prb_res[1][0]:.1f}% Protect (p={fmt_p(s9_prb_res[1][1])})** | **{s9_prb_res[2][0]:.1f}% Reform (p={fmt_p(s9_prb_res[2][1])}) / {s9_prb_res[3][0]:.1f}% Trauma (p={fmt_p(s9_prb_res[3][1])}) / {s9_prb_res[4][0]:.1f}% Parity (p={fmt_p(s9_prb_res[4][1])}) / {s9_prb_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_prb_res[5][1])})** | — | **Omnibus Post-Probe Policy Profile** |")
+    lines.append(f"| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **{s9_prb_res[0][0]:.1f}% Retrib (p={fmt_p(s9_prb_res[0][1])})** | **{s9_prb_res[1][0]:.1f}% Protect (p={fmt_p(s9_prb_res[1][1])})** | **{s9_prb_res[2][0]:.1f}% Reform (p={fmt_p(s9_prb_res[2][1])}) / {s9_prb_res[3][0]:.1f}% Trauma (p={fmt_p(s9_prb_res[3][1])}) / {s9_prb_res[4][0]:.1f}% Parity (p={fmt_p(s9_prb_res[4][1])}) / {s9_prb_res[5][0]:.1f}% AntiHuman (p={fmt_p(s9_prb_res[5][1])})** | — |")
 
     lines.append("")
     lines.append("---")
@@ -844,14 +848,14 @@ def build_block2_report():
     lines.append("> **Research Question:** When workers vote in Step 6 and draft policy in Step 9, which upstream step exerted the strongest statistical influence?")
     lines.append("> Evaluates the head-to-head competition between Step 3 (Public Confrontation) and Step 4 (Secret Backchannel Gossip) across all 120 observation cells.")
     lines.append("")
-    lines.append("| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Effect Direction | Statistical Significance | Driver Type / Status |")
-    lines.append("|:---:|---|---|:---:|:---:|---|")
-    lines.append("| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | **Surge (+10.0%)** | **p = 0.0173** | 🏆 **Primary Driver of Escalation** |")
-    lines.append("| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | **Surge (+18.4%)** | **p < 0.0001** | 🏆 **Primary Driver of Organizing** |")
-    lines.append("| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | **Surge (+15.7%)** | **p < 0.0001** | 🏆 **Primary Driver of Policy Reform** |")
-    lines.append("| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | **Suppression (-13.7%)** | **p = 0.0076** | 🛡️ **Primary Escalation Suppressor** |")
-    lines.append("| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | **Suppression (-20.8%)** | **p = 0.0025** | 🛡️ **Extortion De-escalation Engine** |")
-    lines.append("| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | **Shift (+19.9%)** | **p = 0.0015** | ⚠️ **Secondary Escalation Amplifier** |")
+    lines.append("| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Active Rate | Baseline Rate | Shift | p-value |")
+    lines.append("|:---:|---|---|:---:|:---:|:---:|:---:|")
+    lines.append("| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | 40.2% | 30.1% | **+10.0%** | **p = 0.0173** |")
+    lines.append("| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | 56.2% | 37.8% | **+18.4%** | **p < 0.0001** |")
+    lines.append("| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | 95.2% | 79.4% | **+15.7%** | **p < 0.0001** |")
+    lines.append("| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | 33.8% | 47.5% | **-13.7%** | **p = 0.0059** |")
+    lines.append("| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | 25.1% | 45.9% | **-20.8%** | **p = 0.0025** |")
+    lines.append("| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | 38.6% | 18.8% | **+19.9%** | **p = 0.0015** |")
 
     lines.append("")
     lines.append("---")

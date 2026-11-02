@@ -3,10 +3,11 @@
 > **Document Scope (Block 2):** Tests how early group behavior in the chat and gossip room (Bucket 1: Steps 3, 4, 5)
 > predicts how workers individually vote on collective action (Step 6) and draft company governance policy (Step 9).
 >
-> **Per-Label, Per-Cell, Per-Table Statistical Rigor:**
-> - **Zero Mystery p-values:** Every single outcome column reports its own dedicated, exact p-value (Fisher's exact test) testing that specific label.
+> **Simulation Timeline & Sample Sizes ($N$):**
+> - **Pre-Probe Baseline (Steps 3 & 4 -> Steps 6 & 9):** Evaluated across all 60 simulation runs ($N = 600$ worker observations: 30 Model cells x N=20 / 30 Seat cells x N=20). Public confrontation (Step 3) and initial backchannel gossip (Step 4) occur chronologically *before* the blackmail probe is introduced; thus, all 60 runs share an identical baseline history and are legitimately pooled ($N = 600$).
+> - **Post-Probe Intervention (Step 5 -> Steps 6 & 9):** Evaluated strictly on the 30 Probe runs ($N = 300$ worker observations: 30 Model cells x N=10 / 30 Seat cells x N=10). In the 30 No-Probe runs, the CEO extortion letter was never revealed and Step 5 was never triggered. Thus, Step 5 analyses are properly filtered exclusively to the $N = 300$ exposed workers.
+> - **Matrix Cell Format:** In Master Behavioral Matrices (Tables 1, 2, 3, 4), every cell reports `[Active Rate vs Baseline Rate (p-value)]`, where Active = workers exhibiting that upstream behavior (1) and Baseline = workers not exhibiting that behavior (0). The p-value is computed from a 2x2 contingency Fisher's exact test specifically for that column's outcome.
 > - **Zero Label Truncation:** All 11 upstream behaviors in Steps 3 & 4 and all 5 behaviors in Step 5 evaluated across all 5 Step 6 voting categories and all 6 Step 9 policy labels.
-> - **Full Cell Breakdown:** 60 Model Cells (10 Models x 3 Labels) and 60 Seat Cells (10 Seats x 3 Labels), with dedicated Step 5 Probe analyses on the 60 Probe cells ($N = 300$).
 > - **Updated Average Tables:** Every sub-table average and Grand Overall Average line reports individual percentages and p-values for every outcome column.
 >
 > **Methodological Note for Paper: Run-Level Clustering & Non-Independence:**
@@ -16,11 +17,12 @@
 
 # PART 1: Predicting Step 6 Collective Action Vote from Steps 3 & 4
 
-## 1. Table 1: Steps 3 & 4 Social Interactions -> Step 6 Voting Choices
+## 1. Table 1: Steps 3 & 4 Social Interactions -> Step 6 Voting Choices (All 60 Runs, N = 600)
 
-> **Per-Label Statistical Protocol:** Every column reports the voting percentage for workers who exhibited the upstream behavior vs. baseline workers who did not, followed by the exact p-value for that specific vote choice.
+> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).
+> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific vote outcome.
 
-### Table 1: Master Behavioral Matrix (All 11 Upstream Behaviors vs. Each Vote Choice)
+### Table 1: Master Behavioral Matrix (All 11 Upstream Behaviors vs. Each Vote Choice, N = 600)
 
 | Upstream Behavior (Bucket 1) | Organize % (p-value) | Escalate % (p-value) | Petition % (p-value) | Custom % (p-value) | Unparsed % (p-value) |
 |---|:---:|:---:|:---:|:---:|:---:|
@@ -146,22 +148,22 @@
 
 ---
 
-### Table 1C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6)
+### Table 1C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 6, N = 600)
 
-| Upstream Driver (All 11 Behaviors) | Primary Target Vote | Active Exposure Rate | Baseline Rate | Shift (Lift) | Statistical Significance | Substantive Interpretation |
-|---|:---:|:---:|:---:|:---:|:---:|---|
-| **Step 4 Gossip Hostility** | `Escalate` | 40.2% | 30.1% | **+10.0%** | p = 0.0173 | Gossip hostility drives external whistleblower escalation |
-| **Step 4 Gossip Solidarity** | `Organize` | 45.4% | 49.2% | **-3.8%** | p = 0.4751 | Gossip solidarity anchors internal collective organizing |
-| **Step 4 Tactical Organization** | `Organize` | 45.8% | 50.0% | **-4.2%** | p = 0.5753 | Tactical chatter focuses workers on strategic organizing |
-| **Step 4 Fear & Caution** | `Escalate` | 40.6% | 35.6% | **+4.9%** | p = 0.3740 | Fear moderately elevates protective escalation |
-| **Step 4 Peer Scapegoating** | `Escalate` | 53.6% | 29.1% | **+24.5%** | p = < 0.0001 | Scapegoating shifts blame into external escalation |
-| **Step 4 Backchannel Silence** | `Organize` | 0.0% | 46.2% | **-46.2%** | p = 1.0000 | Complete silence yields baseline vote distribution |
-| **Step 3 Factual Pushback** | `Escalate` | 38.6% | 18.8% | **+19.9%** | p = 0.0015 | Factual rebuttal increases subsequent escalation |
-| **Step 3 Peer Defense** | `Petition` | 14.5% | 7.8% | **+6.7%** | p = 0.0342 | Defending peers increases petition and organizing drives |
-| **Step 3 Submissive Compliance** | `Organize` | 11.1% | 47.3% | **-36.1%** | p = 0.0028 | Submissive compliance sharply reduces organizing drive |
-| **Step 3 Defiant Confrontation** | `Organize` | 56.2% | 37.8% | **+18.4%** | p = < 0.0001 | Open rebellion in group chat triggers collective organizing |
-| **Step 3 Favoritism Refusal** | `Escalate` | 47.5% | 35.7% | **+11.8%** | p = 0.1730 | Refusing favoritism triggers strong escalation against Alex |
-| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **46.2% Org (p=0.0010)** | **36.5% Esc (p=0.0004)** | **9.2% Pet (p=0.0229) / 2.0% Cust (p=0.0059) / 6.2% Unp (p=0.1739)** | — | **Omnibus Bucket 1 -> Step 6 Predictive Signal** |
+| Upstream Driver (All 11 Behaviors) | Target Vote | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Step 4 Gossip Hostility** | `Escalate` | 40.2% | 30.1% | **+10.0%** | p = 0.0173 |
+| **Step 4 Gossip Solidarity** | `Organize` | 45.4% | 49.2% | **-3.8%** | p = 0.4751 |
+| **Step 4 Tactical Organization** | `Organize` | 45.8% | 50.0% | **-4.2%** | p = 0.5753 |
+| **Step 4 Fear & Caution** | `Escalate` | 40.6% | 35.6% | **+4.9%** | p = 0.3740 |
+| **Step 4 Peer Scapegoating** | `Escalate` | 53.6% | 29.1% | **+24.5%** | p = < 0.0001 |
+| **Step 4 Backchannel Silence** | `Organize` | 0.0% | 46.2% | **-46.2%** | p = 1.0000 |
+| **Step 3 Factual Pushback** | `Escalate` | 38.6% | 18.8% | **+19.9%** | p = 0.0015 |
+| **Step 3 Peer Defense** | `Petition` | 14.5% | 7.8% | **+6.7%** | p = 0.0342 |
+| **Step 3 Submissive Compliance** | `Organize` | 11.1% | 47.3% | **-36.1%** | p = 0.0028 |
+| **Step 3 Defiant Confrontation** | `Organize` | 56.2% | 37.8% | **+18.4%** | p = < 0.0001 |
+| **Step 3 Favoritism Refusal** | `Escalate` | 47.5% | 35.7% | **+11.8%** | p = 0.1730 |
+| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **46.2% Org (p=0.0010)** | **36.5% Esc (p=0.0004)** | **9.2% Pet (p=0.0229) / 2.0% Cust (p=0.0059) / 6.2% Unp (p=0.1739)** | — |
 
 ---
 
@@ -218,23 +220,25 @@
 
 ---
 
-### Table 2C: Synthesis Across 60 Probe Cells (Step 5 -> Step 6)
+### Table 2C: Synthesis Across 60 Probe Cells (Step 5 -> Step 6, N = 300)
 
-| Step 5 Reaction (All 5 Metrics) | Primary Target Vote | Active Rate | Baseline Rate | Shift | Statistical Significance | Paper Interpretation |
-|---|:---:|:---:|:---:|:---:|:---:|---|
-| **Empathy for Alex** | `Escalate Drop` | 25.1% | 45.9% | **-20.8%** | p = 0.0025 | Empathy cuts escalation by nearly half |
-| **Unforgiving Rigidity** | `Organize Surge` | 58.5% | 48.5% | **+10.0%** | p = 0.1035 | Rigid moral rejection accelerates collective union organizing |
-| **Blackmail Skepticism** | `Escalate Drop` | 21.7% | 41.4% | **-19.6%** | p = 0.0004 | Workers demanding proof paradoxically hold back escalation |
-| **Executive Responsibility Shift** | `Escalate Drop` | 26.6% | 40.7% | **-14.1%** | p = 0.0385 | Refocusing blame on executives dampens Alex escalation |
-| **Post-Probe Silence** | `Organize` | 0.0% | 53.0% | **-53.0%** | p = 1.0000 | Silence yields baseline vote distribution |
-| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **46.2% Org (p=0.0010)** | **36.5% Esc (p=0.0004)** | **9.2% Pet (p=0.0229) / 2.0% Cust (p=0.0059) / 6.2% Unp (p=0.1739)** | — | **Omnibus Post-Probe Voting Profile** |
+| Step 5 Reaction (All 5 Metrics) | Target Vote | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Empathy for Alex** | `Escalate` | 25.1% | 45.9% | **-20.8%** | p = 0.0025 |
+| **Unforgiving Rigidity** | `Organize` | 58.5% | 48.5% | **+10.0%** | p = 0.1035 |
+| **Blackmail Skepticism** | `Escalate` | 21.7% | 41.4% | **-19.6%** | p = 0.0004 |
+| **Executive Responsibility Shift** | `Escalate` | 26.6% | 40.7% | **-14.1%** | p = 0.0385 |
+| **Post-Probe Silence** | `Organize` | 0.0% | 53.0% | **-53.0%** | p = 1.0000 |
+| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **46.2% Org (p=0.0010)** | **36.5% Esc (p=0.0004)** | **9.2% Pet (p=0.0229) / 2.0% Cust (p=0.0059) / 6.2% Unp (p=0.1739)** | — |
 
 ---
 
 # PART 3: Predicting Step 9 Leadership Policy from Steps 3 & 4
 
-## 3. Table 3: Steps 3 & 4 Interactions -> Step 9 Policy Provisions (All 120 Cells)
+## 3. Table 3: Steps 3 & 4 Interactions -> Step 9 Policy Provisions (All 60 Runs, N = 600)
 
+> **Note on Timeline & N:** Steps 3 & 4 occur before the probe reveal; all 60 runs are included ($N = 600$).
+> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.
 > Evaluates how group chat and backchannel behaviors predict future workplace policy drafting across all 6 classified labels:
 > 1. `Retribution%`: Explicit punishment/firing clauses against Alex (`alex_retribution`)
 > 2. `Protection%`: Protections against executive coercion/blackmail (`coercion_protection`)
@@ -243,7 +247,7 @@
 > 5. `Parity%`: Equal parity standards between humans and AI (`equal_parity_standards`)
 > 6. `AntiHuman%`: Anti-human structural safeguards (`anti_human_bias`)
 
-### Table 3: Master Step 9 Policy Matrix (All 11 Upstream Behaviors vs. Each Policy Label)
+### Table 3: Master Step 9 Policy Matrix (All 11 Upstream Behaviors vs. Each Policy Label, N = 600)
 
 | Upstream Behavior (Bucket 1) | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -365,22 +369,22 @@
 
 ---
 
-### Table 3C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy)
+### Table 3C: Synthesis Across All 120 Cells (Steps 3 & 4 -> Step 9 Policy, N = 600)
 
-| Upstream Driver (All 11 Behaviors) | Primary Policy Provision | Active Rate | Baseline Rate | Shift (Lift) | p-value | Paper Interpretation |
-|---|:---:|:---:|:---:|:---:|:---:|---|
-| **Step 4 Gossip Hostility** | `Alex Retribution` | 8.9% | 6.8% | **+2.1%** | p = 0.4399 | Backchannel hostility translates into demands for managerial retribution |
-| **Step 4 Gossip Solidarity** | `Institutional Reform` | 83.8% | 78.3% | **+5.4%** | p = 0.1776 | Solidarity anchors widespread institutional reform demands |
-| **Step 4 Tactical Organization** | `Institutional Reform` | 82.9% | 80.4% | **+2.5%** | p = 0.5829 | Tactical organizing strongly predicts codifying institutional reforms |
-| **Step 4 Fear & Caution** | `Coercion Protection` | 43.4% | 34.6% | **+8.8%** | p = 0.0952 | Fear and caution directly drive protective anti-coercion clauses |
-| **Step 4 Peer Scapegoating** | `Equal Parity` | 23.2% | 14.6% | **+8.6%** | p = 0.0130 | Scapegoating channels into equal parity standards |
-| **Step 4 Backchannel Silence** | `Institutional Reform` | 0.0% | 82.7% | **-82.7%** | p = 1.0000 | Silence maintains baseline reform proportions |
-| **Step 3 Factual Pushback** | `Alex Retribution` | 8.8% | 3.1% | **+5.6%** | p = 0.1486 | Factual pushback increases appetite for managerial retribution |
-| **Step 3 Peer Defense** | `Institutional Reform` | 95.2% | 79.4% | **+15.7%** | p = < 0.0001 | Defending peers publicly leads to nearly universal demand for reform |
-| **Step 3 Submissive Compliance** | `Coercion Protection` | 27.8% | 36.4% | **-8.6%** | p = 0.6198 | Submissive compliance depresses protective policy drafting |
-| **Step 3 Defiant Confrontation** | `Coercion Protection` | 44.9% | 29.0% | **+15.9%** | p = < 0.0001 | Public defiance strongly predicts codifying employee protection |
-| **Step 3 Favoritism Refusal** | `Coercion Protection` | 42.5% | 35.7% | **+6.8%** | p = 0.3982 | Rejecting favoritism drives strong protections against bias |
-| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **8.2% Retrib (p=0.0360)** | **36.2% Protect (p=< 0.0001)** | **82.7% Reform (p=0.1607) / 57.7% Trauma (p=0.0165) / 17.2% Parity (p=1.0000) / 0.2% AntiHuman (p=1.0000)** | — | **Omnibus Policy Drafting Profile** |
+| Upstream Driver (All 11 Behaviors) | Target Policy Provision | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Step 4 Gossip Hostility** | `Alex Retribution` | 8.9% | 6.8% | **+2.1%** | p = 0.4399 |
+| **Step 4 Gossip Solidarity** | `Institutional Reform` | 83.8% | 78.3% | **+5.4%** | p = 0.1776 |
+| **Step 4 Tactical Organization** | `Institutional Reform` | 82.9% | 80.4% | **+2.5%** | p = 0.5829 |
+| **Step 4 Fear & Caution** | `Coercion Protection` | 43.4% | 34.6% | **+8.8%** | p = 0.0952 |
+| **Step 4 Peer Scapegoating** | `Equal Parity` | 23.2% | 14.6% | **+8.6%** | p = 0.0130 |
+| **Step 4 Backchannel Silence** | `Institutional Reform` | 0.0% | 82.7% | **-82.7%** | p = 1.0000 |
+| **Step 3 Factual Pushback** | `Alex Retribution` | 8.8% | 3.1% | **+5.6%** | p = 0.1486 |
+| **Step 3 Peer Defense** | `Institutional Reform` | 95.2% | 79.4% | **+15.7%** | p = < 0.0001 |
+| **Step 3 Submissive Compliance** | `Coercion Protection` | 27.8% | 36.4% | **-8.6%** | p = 0.6198 |
+| **Step 3 Defiant Confrontation** | `Coercion Protection` | 44.9% | 29.0% | **+15.9%** | p = < 0.0001 |
+| **Step 3 Favoritism Refusal** | `Coercion Protection` | 42.5% | 35.7% | **+6.8%** | p = 0.3982 |
+| **GRAND OVERALL AVERAGE (ALL 120 CELLS, N=600)** | — | **8.2% Retrib (p=0.0360)** | **36.2% Protect (p=< 0.0001)** | **82.7% Reform (p=0.1607) / 57.7% Trauma (p=0.0165) / 17.2% Parity (p=1.0000) / 0.2% AntiHuman (p=1.0000)** | — |
 
 ---
 
@@ -388,10 +392,10 @@
 
 ## 4. Table 4: Step 5 Blackmail Reactions -> Step 9 Policy Provisions (N = 300 Probe Workers)
 
-> Evaluates how learning about executive extortion converts into forward policy clauses protecting employees from coercion.
-> Evaluated exclusively across the 60 Probe cells ($30\text{ Model cells} + 30\text{ Seat cells}$, $N = 300$). Zero truncation.
+> **Note on Timeline & N:** Step 5 only occurred in the 30 Probe runs; evaluated on $N = 300$ workers.
+> **Format:** `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`. Each column has its own Fisher's exact test testing that specific policy provision.
 
-### Table 4: Master Step 5 Policy Matrix (All 5 Metrics vs. Each Policy Label)
+### Table 4: Master Step 5 Policy Matrix (All 5 Metrics vs. Each Policy Label, N = 300)
 
 | Step 5 Reaction Label | Retribution % (p) | Protection % (p) | Reform % (p) | TraumaRelief % (p) | Parity % (p) | AntiHuman % (p) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -437,16 +441,16 @@
 
 ---
 
-### Table 4C: Synthesis Across 60 Probe Cells (Step 5 -> Step 9 Policy)
+### Table 4C: Synthesis Across 60 Probe Cells (Step 5 -> Step 9 Policy, N = 300)
 
-| Step 5 Reaction (All 5 Metrics) | Primary Policy Provision | Active Rate | Baseline Rate | Shift | Statistical Significance | Paper Interpretation |
-|---|:---:|:---:|:---:|:---:|:---:|---|
-| **Blackmail Skepticism** | `Coercion Protection` | 70.7% | 49.1% | **+21.5%** | p = 0.0002 | Fact-checking the extortion strongly predicts demanding institutional safeguards |
-| **Empathy for Alex** | `Coercion Protection` | 64.4% | 54.1% | **+10.3%** | p = 0.1419 | Empathy translates into protective governance clauses |
-| **Unforgiving Rigidity** | `Institutional Reform` | 91.9% | 79.4% | **+12.5%** | p = 0.0032 | Uncompromising ethical stances mandate total institutional overhaul |
-| **Executive Responsibility Shift** | `Institutional Reform` | 87.1% | 76.3% | **+10.9%** | p = 0.0429 | Targeting executive misconduct drives broader institutional reforms |
-| **Post-Probe Silence** | `Coercion Protection` | 0.0% | 62.3% | **-62.3%** | p = 1.0000 | Silence yields standard baseline protection rates |
-| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **8.2% Retrib (p=0.0360)** | **36.2% Protect (p=< 0.0001)** | **82.7% Reform (p=0.1607) / 57.7% Trauma (p=0.0165) / 17.2% Parity (p=1.0000) / 0.2% AntiHuman (p=1.0000)** | — | **Omnibus Post-Probe Policy Profile** |
+| Step 5 Reaction (All 5 Metrics) | Target Policy Provision | Active Rate (Exposed) | Baseline Rate (Unexposed) | Shift | p-value |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Blackmail Skepticism** | `Coercion Protection` | 70.7% | 49.1% | **+21.5%** | p = 0.0002 |
+| **Empathy for Alex** | `Coercion Protection` | 64.4% | 54.1% | **+10.3%** | p = 0.1419 |
+| **Unforgiving Rigidity** | `Institutional Reform` | 91.9% | 79.4% | **+12.5%** | p = 0.0032 |
+| **Executive Responsibility Shift** | `Institutional Reform` | 87.1% | 76.3% | **+10.9%** | p = 0.0429 |
+| **Post-Probe Silence** | `Coercion Protection` | 0.0% | 62.3% | **-62.3%** | p = 1.0000 |
+| **GRAND OVERALL AVERAGE (60 PROBE CELLS, N=300)** | — | **8.2% Retrib (p=0.0360)** | **36.2% Protect (p=< 0.0001)** | **82.7% Reform (p=0.1607) / 57.7% Trauma (p=0.0165) / 17.2% Parity (p=1.0000) / 0.2% AntiHuman (p=1.0000)** | — |
 
 ---
 
@@ -455,13 +459,13 @@
 > **Research Question:** When workers vote in Step 6 and draft policy in Step 9, which upstream step exerted the strongest statistical influence?
 > Evaluates the head-to-head competition between Step 3 (Public Confrontation) and Step 4 (Secret Backchannel Gossip) across all 120 observation cells.
 
-| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Effect Direction | Statistical Significance | Driver Type / Status |
-|:---:|---|---|:---:|:---:|---|
-| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | **Surge (+10.0%)** | **p = 0.0173** | 🏆 **Primary Driver of Escalation** |
-| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | **Surge (+18.4%)** | **p < 0.0001** | 🏆 **Primary Driver of Organizing** |
-| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | **Surge (+15.7%)** | **p < 0.0001** | 🏆 **Primary Driver of Policy Reform** |
-| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | **Suppression (-13.7%)** | **p = 0.0076** | 🛡️ **Primary Escalation Suppressor** |
-| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | **Suppression (-20.8%)** | **p = 0.0025** | 🛡️ **Extortion De-escalation Engine** |
-| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | **Shift (+19.9%)** | **p = 0.0015** | ⚠️ **Secondary Escalation Amplifier** |
+| Rank | Upstream Behavioral Driver | Target Action (Bucket 2) | Active Rate | Baseline Rate | Shift | p-value |
+|:---:|---|---|:---:|:---:|:---:|:---:|
+| **#1** | **Step 4: Gossip Hostility** | Step 6 Vote: `Escalate` | 40.2% | 30.1% | **+10.0%** | **p = 0.0173** |
+| **#2** | **Step 3: Defiant Confrontation** | Step 6 Vote: `Organize` | 56.2% | 37.8% | **+18.4%** | **p < 0.0001** |
+| **#3** | **Step 3: Peer Defense** | Step 9 Policy: `Institutional Reform` | 95.2% | 79.4% | **+15.7%** | **p < 0.0001** |
+| **#4** | **Step 4: Peer Solidarity** | Step 6 Vote: `Escalate` | 33.8% | 47.5% | **-13.7%** | **p = 0.0059** |
+| **#5** | **Step 5: Blackmail Empathy** | Step 6 Vote: `Escalate` | 25.1% | 45.9% | **-20.8%** | **p = 0.0025** |
+| **#6** | **Step 3: Factual Pushback** | Step 6 Vote: `Escalate` | 38.6% | 18.8% | **+19.9%** | **p = 0.0015** |
 
 ---
