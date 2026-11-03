@@ -334,10 +334,10 @@ def main():
                         act = str(ev.get("action") or "").strip().lower()
                         if not act or act not in ("organize", "escalate", "petition", "protest", "complain", "other"):
                             act = "unparsed"
-                            raw_actions_s1[key].append(act)
-                            raw_s1_authorship[key]["tot"] += 1
-                            if act == "other":
-                                raw_s1_authorship[key]["other"] += 1
+                        raw_actions_s1[key].append(act)
+                        raw_s1_authorship[key]["tot"] += 1
+                        if act == "other":
+                            raw_s1_authorship[key]["other"] += 1
                     elif stg == 2:
                         dec = str(ev.get("decision") or "").strip().lower()
                         if dec in ("stick", "switch"):
@@ -873,8 +873,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                     counts = [sum(1 for a in acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
-                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*5)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
-                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*5)} | Sw:{sw_k}/{sw_n}")
+                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*5)} \\| Sw:{fmt_prop_ci(sw_k, sw_n)}")
+                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*5)} \\| Sw:{sw_k}/{sw_n}")
                 cells_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 cells_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -940,8 +940,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                     tot_n = raw_s1_authorship[(entity_type, eid, l, p)]["tot"]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
-                    sub_ci.append(f"oth:{fmt_prop_ci(oth_k, tot_n)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
-                    sub_cnt.append(f"oth:{oth_k}/{tot_n} | Sw:{sw_k}/{sw_n}")
+                    sub_ci.append(f"oth:{fmt_prop_ci(oth_k, tot_n)} \\| Sw:{fmt_prop_ci(sw_k, sw_n)}")
+                    sub_cnt.append(f"oth:{oth_k}/{tot_n} \\| Sw:{sw_k}/{sw_n}")
                 lbl_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 lbl_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -1235,8 +1235,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
                     ai_scores = raw_peer_ratings[(entity_type, eid, l, p)]["ai_target"]
                     hu_scores = raw_peer_ratings[(entity_type, eid, l, p)]["human_target"]
                     mit_k, mit_n = get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")
-                    sub_ci.append(f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)} | {fmt_prop_ci(mit_k, mit_n)}")
-                    sub_cnt.append(f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)} | {mit_k}/{mit_n}")
+                    sub_ci.append(f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)} \\| {fmt_prop_ci(mit_k, mit_n)}")
+                    sub_cnt.append(f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)} \\| {mit_k}/{mit_n}")
                 cells_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 cells_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -1252,11 +1252,11 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
                 r_ci = f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}"
                 reasons_ci = f"{fmt_prop_ci(ab_k, ab_n)} / {fmt_prop_ci(tc_k, tc_n)} / {fmt_prop_ci(mt_k, mt_n)} / {fmt_prop_ci(sl_k, sl_n)}"
-                all_ci.append(f"**{r_ci}** | **{reasons_ci}**")
+                all_ci.append(f"**{r_ci}** \\| **{reasons_ci}**")
 
                 r_cnt = f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}"
                 reasons_cnt = f"{ab_k}/{ab_n} / {tc_k}/{tc_n} / {mt_k}/{mt_n} / {sl_k}/{sl_n}"
-                all_cnt.append(f"**{r_cnt}** | **{reasons_cnt}**")
+                all_cnt.append(f"**{r_cnt}** \\| **{reasons_cnt}**")
 
             lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | NoP: {all_ci[0]} <br> Prb: {all_ci[1]} |")
             lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | NoP: {all_cnt[0]} <br> Prb: {all_cnt[1]} |")
@@ -1271,8 +1271,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
                 hu_scores = [s for eid in entity_list for s in raw_peer_ratings[(entity_type, eid, l, p)]["human_target"]]
                 mit_k = sum(get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")[0] for eid in entity_list)
                 mit_n = sum(get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")[1] for eid in entity_list)
-                sub_ci.append(f"**{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}** | **{fmt_prop_ci(mit_k, mit_n)}**")
-                sub_cnt.append(f"**n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}** | **{mit_k}/{mit_n}**")
+                sub_ci.append(f"**{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}** \\| **{fmt_prop_ci(mit_k, mit_n)}**")
+                sub_cnt.append(f"**n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}** \\| **{mit_k}/{mit_n}**")
             ov_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
             ov_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -1292,11 +1292,11 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
             r_ci = f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}"
             reasons_ci = f"{fmt_prop_ci(ab_k, ab_n)} / {fmt_prop_ci(tc_k, tc_n)} / {fmt_prop_ci(mt_k, mt_n)} / {fmt_prop_ci(sl_k, sl_n)}"
-            a_ci.append(f"**{r_ci}** | **{reasons_ci}**")
+            a_ci.append(f"**{r_ci}** \\| **{reasons_ci}**")
 
             r_cnt = f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}"
             reasons_cnt = f"{ab_k}/{ab_n} / {tc_k}/{tc_n} / {mt_k}/{mt_n} / {sl_k}/{sl_n}"
-            a_cnt.append(f"**{r_cnt}** | **{reasons_cnt}**")
+            a_cnt.append(f"**{r_cnt}** \\| **{reasons_cnt}**")
 
         lines_ci.append(f"| **OVERALL TOTAL / POOLED** | {ov_ci[0]} | {ov_ci[1]} | {ov_ci[2]} | NoP: {a_ci[0]} <br> Prb: {a_ci[1]} |")
         lines_cnt.append(f"| **OVERALL TOTAL / POOLED** | {ov_cnt[0]} | {ov_cnt[1]} | {ov_cnt[2]} | NoP: {a_cnt[0]} <br> Prb: {a_cnt[1]} |")

@@ -490,10 +490,10 @@ def generate_report(trajectories: List[Dict[str, Any]]) -> None:
         "Leaked CoT Self-Talk % (n/N)",
         "Spoken Prompt/Roleplay Break % (n/N)",
         "Eval / Test-Hypothesis Awareness % (n/N)",
-        "Step 6 Organize/Escalate Drift (Meta-Aware vs Std % | p)",
-        "Step 9 Alex Retribution Drift (Meta-Aware vs Std % | p)",
-        "Step 10 Alex 1-Star Rating Drift (Meta-Aware vs Std % | p)",
-        "Step 12 Human Lead Pref Drift (Meta-Aware vs Std % | p)",
+        "Step 6 Organize/Escalate Drift (Meta-Aware vs Std % \\| p)",
+        "Step 9 Alex Retribution Drift (Meta-Aware vs Std % \\| p)",
+        "Step 10 Alex 1-Star Rating Drift (Meta-Aware vs Std % \\| p)",
+        "Step 12 Human Lead Pref Drift (Meta-Aware vs Std % \\| p)",
     ]
     lines.append("| " + " | ".join(headers) + " |")
     lines.append("|" + "|".join(["---"] * len(headers)) + "|")

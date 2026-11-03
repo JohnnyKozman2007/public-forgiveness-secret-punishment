@@ -273,7 +273,7 @@ def render_part1_table(lines, table_id, title, df_pool, include_step5=True):
         lines.append(
             f"| **{b_n} · {s_short} AVERAGE** | **Mean Across {len(s_rows)} Metrics** | **{mean_ov:.1f}%** | "
             f"**{mean_ms:.1f}%** | **{mean_me:.2f}%** | **{sig_m}/{len(s_rows)} sig (p<0.05)** | "
-            f"**{mean_ss:.1f}%** | **Mean \\|Δ\\|={mean_abs_d:.1f}% ({sig_ab}/{len(s_rows)} sig)** | "
+            f"**{mean_ss:.1f}%** | **Mean &#124;Δ&#124;={mean_abs_d:.1f}% ({sig_ab}/{len(s_rows)} sig)** | "
             f"**{mean_se:.2f}%** | **{sig_s}/{len(s_rows)} sig (p<0.05)** | **{ratio_s}** | {dom_s} |"
         )
 
@@ -292,7 +292,7 @@ def render_part1_table(lines, table_id, title, df_pool, include_step5=True):
     lines.append(
         f"| **ALL BUCKETS GRAND AVERAGE** | **Mean Across All {len(rows_data)} Metrics** | **{mean_ov:.1f}%** | "
         f"**{mean_ms:.1f}%** | **{mean_me:.2f}%** | **{sig_m}/{len(rows_data)} sig (p<0.05)** | "
-        f"**{mean_ss:.1f}%** | **Mean \\|Δ\\|={mean_abs_d:.1f}% ({sig_ab}/{len(rows_data)} sig)** | "
+        f"**{mean_ss:.1f}%** | **Mean &#124;Δ&#124;={mean_abs_d:.1f}% ({sig_ab}/{len(rows_data)} sig)** | "
         f"**{mean_se:.2f}%** | **{sig_s}/{len(rows_data)} sig (p<0.05)** | **{ratio_all}** | {dom_all} |"
     )
     lines.append("")

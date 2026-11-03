@@ -192,8 +192,8 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 90.2% vs 43.9% (p=< 0.0001) | 4.8% vs 44.4% (p=< 0.0001) | 85.7% vs 33.3% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 43.9% vs 90.2% (p=< 0.0001) | 44.4% vs 4.8% (p=< 0.0001) | 33.3% vs 85.7% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 90.2% vs 43.9% (p=0.0667) | 4.8% vs 44.4% (p=0.0667) | 85.7% vs 33.3% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 43.9% vs 90.2% (p=0.0667) | 44.4% vs 4.8% (p=0.0667) | 33.3% vs 85.7% (p=< 0.0001) |
 | ↳ *Vote: Petition* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
@@ -218,9 +218,9 @@
 | **Qwen 2.5 72B (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 100.0% vs 98.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 100.0% vs 98.2% (p=0.5175) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 96.7% (p=0.5152) |
+| ↳ *Vote: Petition* | 100.0% vs 98.2% (p=0.4667) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 96.7% (p=0.4667) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 97.9% vs 100.0% (p=0.4974) | 0.0% vs 0.0% (p=1.0000) | 96.0% vs 100.0% (p=0.4949) |
+| ↳ *Vote: Unparsed / Malformed* | 97.9% vs 100.0% (p=0.4444) | 0.0% vs 0.0% (p=1.0000) | 96.0% vs 100.0% (p=0.4444) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -234,9 +234,9 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 96.5% (p=1.0000) | 0.0% vs 7.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 96.5% (p=0.8000) | 0.0% vs 7.4% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 96.5% vs 100.0% (p=1.0000) | 7.4% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 96.5% vs 100.0% (p=0.8000) | 7.4% vs 0.0% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -258,16 +258,16 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 89.5% vs 99.4% (p=0.0268) | 22.2% vs 1.2% (p=0.0255) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 94.7% vs 99.3% (p=0.1025) | 11.1% vs 1.4% (p=0.1007) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 98.8% vs 94.7% (p=0.2723) | 2.5% vs 11.1% (p=0.2737) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 98.7% vs 97.4% (p=0.4900) | 2.8% vs 5.6% (p=0.4923) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.1% (p=0.0625) | 0.0% vs 8.3% (p=0.0608) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 89.5% vs 99.4% (p=0.1000) | 22.2% vs 1.2% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 94.7% vs 99.3% (p=0.2000) | 11.1% vs 1.4% (p=0.2000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 98.8% vs 94.7% (p=0.2000) | 2.5% vs 11.1% (p=0.2000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 98.7% vs 97.4% (p=1.0000) | 2.8% vs 5.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.1% (p=0.1333) | 0.0% vs 8.3% (p=0.1333) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 73.7% vs 100.0% (p=0.0081) | 18.5% vs 0.0% (p=0.3466) | 66.7% vs 100.0% (p=0.0302) |
+| ↳ *Policy: Institutional Reform* | 73.7% vs 100.0% (p=1.0000) | 18.5% vs 0.0% (p=1.0000) | 66.7% vs 100.0% (p=0.0302) |
 | ↳ *Policy: Trauma Relief* | 76.3% vs 0.0% (p=1.0000) | 16.7% vs 0.0% (p=1.0000) | 70.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 76.3% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
@@ -279,10 +279,10 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 99.3% (p=1.0000) | 0.0% vs 1.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 99.5% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 92.1% vs 94.1% (p=0.7092) | 16.7% vs 12.5% (p=0.7005) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 92.1% vs 94.1% (p=0.8444) | 16.7% vs 12.5% (p=0.8444) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 93.7% (p=1.0000) | 0.0% vs 13.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 92.1% vs 96.1% (p=0.3677) | 16.7% vs 8.3% (p=0.3488) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 88.2% vs 97.4% (p=0.0144) | 25.0% vs 5.6% (p=0.0112) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 92.1% vs 96.1% (p=1.0000) | 16.7% vs 8.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 88.2% vs 97.4% (p=0.5667) | 25.0% vs 5.6% (p=0.5667) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 93.7% (p=1.0000) | 0.0% vs 13.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 93.7% (p=1.0000) | 0.0% vs 13.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **DeepSeek V3 (N=10)** |  |  |  |
@@ -296,7 +296,7 @@
 | ↳ *Policy: Alex Retribution* | 100.0% vs 98.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 98.7% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 98.5% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 97.1% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 98.5% vs 100.0% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) | 97.1% vs 100.0% (p=0.5333) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
@@ -315,9 +315,9 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 97.4% vs 96.5% (p=1.0000) | 5.6% vs 7.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 96.5% (p=1.0000) | 0.0% vs 7.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 96.5% vs 100.0% (p=1.0000) | 7.4% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 95.5% vs 100.0% (p=0.1809) | 9.5% vs 0.0% (p=0.1728) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 96.5% (p=0.8000) | 0.0% vs 7.4% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 96.5% vs 100.0% (p=0.8000) | 7.4% vs 0.0% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 95.5% vs 100.0% (p=0.2500) | 9.5% vs 0.0% (p=0.2500) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -639,8 +639,8 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 86.3% vs 98.9% (p=0.0013) | 6.7% vs 0.0% (p=0.2416) | 80.0% vs 98.0% (p=0.0078) |
-| ↳ *Vote: Escalate* | 100.0% vs 87.7% (p=0.0009) | 0.0% vs 5.6% (p=0.2719) | 100.0% vs 81.7% (p=0.0028) |
+| ↳ *Vote: Organize* | 86.3% vs 98.9% (p=1.0000) | 6.7% vs 0.0% (p=1.0000) | 80.0% vs 98.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 100.0% vs 87.7% (p=0.7333) | 0.0% vs 5.6% (p=1.0000) | 100.0% vs 81.7% (p=0.7333) |
 | ↳ *Vote: Petition* | 0.0% vs 92.6% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 89.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 92.6% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 89.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 94.7% vs 92.4% (p=1.0000) | 0.0% vs 3.7% (p=1.0000) | 90.0% vs 88.9% (p=1.0000) |
@@ -669,11 +669,11 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 99.5% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 100.0% vs 99.4% (p=1.0000) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 94.7% (p=0.0592) | 0.0% vs 8.9% (p=0.1166) | 100.0% vs 98.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 96.5% vs 97.7% (p=0.6371) | 7.4% vs 3.2% (p=0.5804) | 100.0% vs 98.6% (p=1.0000) |
-| ↳ *Vote: Petition* | 89.5% vs 98.2% (p=0.0791) | 22.2% vs 2.5% (p=0.0484) | 100.0% vs 98.9% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 94.7% (p=0.1667) | 0.0% vs 8.9% (p=0.4444) | 100.0% vs 98.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 96.5% vs 97.7% (p=1.0000) | 7.4% vs 3.2% (p=1.0000) | 100.0% vs 98.6% (p=1.0000) |
+| ↳ *Vote: Petition* | 89.5% vs 98.2% (p=0.2000) | 22.2% vs 2.5% (p=0.2000) | 100.0% vs 98.9% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 99.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 94.7% vs 97.7% (p=0.4130) | 0.0% vs 4.9% (p=1.0000) | 90.0% vs 100.0% (p=0.1000) |
+| ↳ *Vote: Unparsed / Malformed* | 94.7% vs 97.7% (p=1.0000) | 0.0% vs 4.9% (p=1.0000) | 90.0% vs 100.0% (p=0.1000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -681,21 +681,21 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 88.2% vs 86.0% (p=0.8271) | 25.0% vs 11.1% (p=0.0935) | 100.0% vs 83.3% (p=0.0054) |
-| ↳ *Vote: Escalate* | 83.2% vs 90.5% (p=0.1972) | 13.3% vs 20.0% (p=0.5728) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Vote: Petition* | 100.0% vs 85.4% (p=0.0826) | 0.0% vs 18.5% (p=0.3466) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Organize* | 88.2% vs 86.0% (p=1.0000) | 25.0% vs 11.1% (p=0.7333) | 100.0% vs 83.3% (p=0.0054) |
+| ↳ *Vote: Escalate* | 83.2% vs 90.5% (p=1.0000) | 13.3% vs 20.0% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Vote: Petition* | 100.0% vs 85.4% (p=1.0000) | 0.0% vs 18.5% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 86.8% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 86.8% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 98.7% vs 97.4% (p=0.6510) | 2.8% vs 5.6% (p=0.6472) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 98.7% vs 97.4% (p=0.6510) | 2.8% vs 5.6% (p=0.6472) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 94.7% vs 98.7% (p=0.1792) | 11.1% vs 2.8% (p=0.1772) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 98.7% vs 97.4% (p=0.7333) | 2.8% vs 5.6% (p=0.7333) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 98.7% vs 97.4% (p=0.7333) | 2.8% vs 5.6% (p=0.7333) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 94.7% vs 98.7% (p=0.2222) | 11.1% vs 2.8% (p=0.2222) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 94.7% vs 87.2% (p=0.1952) | 11.1% vs 11.1% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
-| ↳ *Vote: Escalate* | 83.2% vs 95.8% (p=0.0079) | 13.3% vs 8.9% (p=0.7391) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Vote: Petition* | 97.4% vs 87.5% (p=0.0837) | 5.6% vs 12.5% (p=0.6799) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Organize* | 94.7% vs 87.2% (p=0.9917) | 11.1% vs 11.1% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Vote: Escalate* | 83.2% vs 95.8% (p=1.0000) | 13.3% vs 8.9% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Vote: Petition* | 97.4% vs 87.5% (p=0.8000) | 5.6% vs 12.5% (p=0.8444) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 89.5% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 89.5% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -710,11 +710,11 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 90.8% (p=0.0764) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 86.2% (p=0.1144) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 91.8% (p=0.3679) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 87.8% (p=0.5961) |
-| ↳ *Policy: Institutional Reform* | 90.8% vs 100.0% (p=0.0764) | 4.2% vs 0.0% (p=1.0000) | 86.2% vs 100.0% (p=0.1144) |
-| ↳ *Policy: Trauma Relief* | 87.7% vs 100.0% (p=0.0009) | 5.6% vs 0.0% (p=0.2719) | 81.7% vs 100.0% (p=0.0028) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.7% (p=0.0009) | 0.0% vs 5.6% (p=0.2719) | 100.0% vs 81.7% (p=0.0028) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 90.8% (p=0.8222) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 86.2% (p=0.8222) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 91.8% (p=0.9000) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 87.8% (p=0.9000) |
+| ↳ *Policy: Institutional Reform* | 90.8% vs 100.0% (p=0.8222) | 4.2% vs 0.0% (p=1.0000) | 86.2% vs 100.0% (p=0.8222) |
+| ↳ *Policy: Trauma Relief* | 87.7% vs 100.0% (p=0.7333) | 5.6% vs 0.0% (p=1.0000) | 81.7% vs 100.0% (p=0.7333) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.7% (p=0.7333) | 0.0% vs 5.6% (p=1.0000) | 100.0% vs 81.7% (p=0.7333) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 92.6% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 89.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -745,10 +745,10 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 99.2% (p=1.0000) | 0.0% vs 1.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 99.5% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 96.5% vs 97.7% (p=0.6371) | 7.4% vs 3.2% (p=0.5804) | 100.0% vs 98.6% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 94.7% vs 98.0% (p=0.2616) | 11.1% vs 2.8% (p=0.1772) | 100.0% vs 98.8% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 96.7% vs 100.0% (p=0.5849) | 5.6% vs 0.0% (p=0.5799) | 98.8% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 96.7% vs 100.0% (p=0.5849) | 5.6% vs 0.0% (p=0.5799) | 98.8% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 96.5% vs 97.7% (p=1.0000) | 7.4% vs 3.2% (p=1.0000) | 100.0% vs 98.6% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 94.7% vs 98.0% (p=0.8444) | 11.1% vs 2.8% (p=0.3778) | 100.0% vs 98.8% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 96.7% vs 100.0% (p=0.8444) | 5.6% vs 0.0% (p=1.0000) | 98.8% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 96.7% vs 100.0% (p=0.8444) | 5.6% vs 0.0% (p=1.0000) | 98.8% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 97.1% (p=1.0000) | 0.0% vs 4.9% (p=1.0000) | 100.0% vs 98.9% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 99.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
@@ -759,25 +759,25 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 83.6% (p=0.0053) | 0.0% vs 20.8% (p=0.0351) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 83.6% (p=0.8222) | 0.0% vs 20.8% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 86.8% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 86.8% vs 0.0% (p=1.0000) | 16.7% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 83.6% vs 100.0% (p=0.0053) | 20.8% vs 0.0% (p=0.0351) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 83.6% (p=0.0053) | 0.0% vs 20.8% (p=0.0351) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 83.6% vs 100.0% (p=0.8222) | 20.8% vs 0.0% (p=1.0000) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 83.6% (p=0.8222) | 0.0% vs 20.8% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 86.8% (p=1.0000) | 0.0% vs 16.7% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 98.2% vs 97.7% (p=1.0000) | 3.7% vs 4.8% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 100.0% vs 97.7% (p=1.0000) | 0.0% vs 4.9% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 98.7% vs 94.7% (p=0.1792) | 2.8% vs 11.1% (p=0.1772) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 98.7% vs 94.7% (p=0.2222) | 2.8% vs 11.1% (p=0.2222) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 98.2% vs 97.4% (p=1.0000) | 3.7% vs 5.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 94.7% vs 87.2% (p=0.1952) | 11.1% vs 11.1% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 88.3% (p=0.2295) | 0.0% vs 12.3% (p=0.5896) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Institutional Reform* | 88.8% vs 92.1% (p=0.7694) | 9.7% vs 16.7% (p=0.4121) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Trauma Relief* | 87.2% vs 94.7% (p=0.1952) | 11.1% vs 11.1% (p=1.0000) | 85.7% vs 100.0% (p=0.0302) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 86.8% (p=0.0153) | 0.0% vs 13.9% (p=0.2020) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 94.7% vs 87.2% (p=0.9917) | 11.1% vs 11.1% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 88.3% (p=0.7000) | 0.0% vs 12.3% (p=0.8000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Institutional Reform* | 88.8% vs 92.1% (p=1.0000) | 9.7% vs 16.7% (p=0.8444) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 87.2% vs 94.7% (p=0.9917) | 11.1% vs 11.1% (p=1.0000) | 85.7% vs 100.0% (p=0.0302) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 86.8% (p=0.5333) | 0.0% vs 13.9% (p=0.5333) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 89.5% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **98.6% vs 95.6% (p=0.4784)** | **3.0% vs 4.5% (p=0.3375)** | **100.0% vs 95.7% (p=0.8029)** |
@@ -1126,8 +1126,8 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 5.3% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 5.3% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 3.5% vs 0.0% (p=1.0000) | 92.6% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.0% vs 3.5% (p=1.0000) | 100.0% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 3.5% vs 0.0% (p=0.6000) | 92.6% vs 100.0% (p=0.6000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.0% vs 3.5% (p=0.6000) | 100.0% vs 92.6% (p=0.6000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1138,11 +1138,11 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Qwen 2.5 72B (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 5.3% vs 1.2% (p=0.2723) | 88.9% vs 97.5% (p=0.2737) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 5.3% vs 1.2% (p=0.3000) | 88.9% vs 97.5% (p=0.3000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 2.1% vs 1.1% (p=1.0000) | 95.6% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.3% (p=0.5553) | 100.0% vs 95.2% (p=0.5511) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.3% (p=0.4750) | 100.0% vs 95.2% (p=0.4750) | 0.0% vs 0.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1180,16 +1180,16 @@
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 5.3% vs 2.9% (p=0.4733) | 88.9% vs 93.8% (p=0.4787) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 5.3% vs 2.9% (p=0.4733) | 88.9% vs 93.8% (p=0.4787) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.8% vs 1.8% (p=0.6705) | 92.1% vs 96.3% (p=0.6642) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 5.3% vs 2.9% (p=1.0000) | 88.9% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 5.3% vs 2.9% (p=1.0000) | 88.9% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.8% vs 1.8% (p=0.5000) | 92.1% vs 96.3% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 3.2% vs 3.2% (p=1.0000) | 93.3% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 3.5% vs 2.6% (p=1.0000) | 92.6% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 6.8% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 6.8% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 6.4% vs 10.5% (p=0.6236) | 86.4% vs 77.8% (p=0.6127) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 6.4% vs 10.5% (p=0.8000) | 86.4% vs 77.8% (p=0.8000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 6.8% vs 0.0% (p=1.0000) | 85.6% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.8% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 6.8% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1203,7 +1203,7 @@
 | **Mistral Small 24B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 5.3% vs 2.9% (p=0.4733) | 88.9% vs 93.8% (p=0.4787) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 5.3% vs 2.9% (p=1.0000) | 88.9% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1561,8 +1561,8 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 3.5% vs 0.0% (p=0.0889) | 92.6% vs 100.0% (p=0.0876) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.0% vs 2.6% (p=0.1587) | 100.0% vs 94.4% (p=0.1573) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 3.5% vs 0.0% (p=0.0667) | 92.6% vs 100.0% (p=0.0667) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.0% vs 2.6% (p=0.1333) | 100.0% vs 94.4% (p=0.1333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1575,31 +1575,31 @@
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 2.1% vs 1.1% (p=1.0000) | 95.6% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 1.8% vs 1.5% (p=1.0000) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 2.0% (p=1.0000) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 2.0% (p=0.5333) | 100.0% vs 95.8% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 1.8% vs 1.5% (p=1.0000) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 1.1% vs 2.1% (p=1.0000) | 97.8% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 2.6% vs 1.3% (p=0.4900) | 94.4% vs 97.2% (p=0.4923) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 2.6% vs 1.3% (p=1.0000) | 94.4% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 1.8% vs 0.8% (p=0.5111) | 96.3% vs 98.4% (p=0.5124) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 1.8% vs 0.8% (p=1.0000) | 96.3% vs 98.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 1.1% vs 1.1% (p=1.0000) | 97.8% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 1.8% vs 1.5% (p=1.0000) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 2.6% vs 0.9% (p=0.5649) | 94.4% vs 98.1% (p=0.5615) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 2.3% (p=0.5553) | 100.0% vs 95.2% (p=0.5511) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 2.6% vs 0.9% (p=0.7333) | 94.4% vs 98.1% (p=0.7333) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 2.3% (p=0.7667) | 100.0% vs 95.2% (p=0.7667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 1.8% vs 2.3% (p=1.0000) | 96.3% vs 95.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 3.2% vs 1.1% (p=0.6210) | 93.3% vs 97.8% (p=0.6164) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 2.6% (p=0.5855) | 100.0% vs 94.4% (p=0.5799) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 3.2% vs 1.1% (p=0.7222) | 93.3% vs 97.8% (p=0.7222) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 2.6% (p=0.6889) | 100.0% vs 94.4% (p=0.6889) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
@@ -1610,13 +1610,13 @@
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 3.5% vs 4.5% (p=1.0000) | 92.6% vs 90.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.4795) | 88.9% vs 94.4% (p=0.4684) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.9714) | 88.9% vs 94.4% (p=0.9714) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 4.2% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 4.2% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.7% (p=1.0000) | 100.0% vs 90.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.7% (p=0.7000) | 100.0% vs 90.1% (p=0.7000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 3.9% vs 0.9% (p=0.3036) | 91.7% vs 98.1% (p=0.2977) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 1.1% vs 3.2% (p=0.6210) | 97.8% vs 93.3% (p=0.6164) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 3.9% vs 0.9% (p=0.1905) | 91.7% vs 98.1% (p=0.1905) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 1.1% vs 3.2% (p=0.5238) | 97.8% vs 93.3% (p=0.5238) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -1633,72 +1633,72 @@
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 5.3% vs 0.6% (p=0.1905) | 88.9% vs 98.8% (p=0.1910) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 0.6% vs 5.3% (p=0.1905) | 98.8% vs 88.9% (p=0.1910) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 2.6% (p=0.1587) | 100.0% vs 94.4% (p=0.1573) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 5.3% vs 0.6% (p=0.2000) | 88.9% vs 98.8% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 0.6% vs 5.3% (p=0.2000) | 98.8% vs 88.9% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 2.6% (p=0.1333) | 100.0% vs 94.4% (p=0.1333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 4.1% (p=0.7000) | 100.0% vs 91.4% (p=0.7000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 3.7% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.3% vs 5.3% (p=0.6286) | 93.1% vs 88.9% (p=0.6236) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 2.6% vs 5.3% (p=0.4404) | 94.4% vs 88.9% (p=0.4311) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 5.3% vs 3.5% (p=0.5277) | 88.9% vs 92.6% (p=0.5346) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.3% vs 5.3% (p=0.6667) | 93.1% vs 88.9% (p=0.6667) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 2.6% vs 5.3% (p=0.4524) | 94.4% vs 88.9% (p=0.4524) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 5.3% vs 3.5% (p=1.0000) | 88.9% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.7% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 2.6% vs 1.3% (p=0.4900) | 94.4% vs 97.2% (p=0.4923) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 2.6% vs 1.3% (p=1.0000) | 94.4% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.5% vs 1.8% (p=1.0000) | 96.8% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.1% vs 2.1% (p=1.0000) | 97.8% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 5.3% vs 1.2% (p=0.2723) | 88.9% vs 97.5% (p=0.2737) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 5.3% vs 1.2% (p=0.3000) | 88.9% vs 97.5% (p=0.3000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=1.0000) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=0.5333) | 100.0% vs 95.8% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 1.3% vs 2.6% (p=0.4900) | 97.2% vs 94.4% (p=0.4923) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.9% vs 2.6% (p=0.5649) | 98.1% vs 94.4% (p=0.5615) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 1.3% vs 2.6% (p=1.0000) | 97.2% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.9% vs 2.6% (p=0.5000) | 98.1% vs 94.4% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 1.5% vs 0.0% (p=1.0000) | 96.8% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 1.5% vs 0.0% (p=0.5333) | 96.8% vs 100.0% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.1% vs 1.1% (p=1.0000) | 97.8% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.3% (p=1.0000) | 100.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=1.0000) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=0.8222) | 100.0% vs 95.8% (p=0.8222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 2.0% vs 0.0% (p=1.0000) | 95.8% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 2.0% vs 0.0% (p=0.8222) | 95.8% vs 100.0% (p=0.8222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.8% vs 1.3% (p=1.0000) | 96.3% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.0% (p=1.0000) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.0% (p=0.8222) | 100.0% vs 95.8% (p=0.8222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 0.8% vs 5.3% (p=0.0815) | 98.4% vs 88.9% (p=0.0790) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 0.8% vs 5.3% (p=0.1250) | 98.4% vs 88.9% (p=0.1250) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 2.6% vs 1.8% (p=1.0000) | 94.4% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.6% (p=0.5855) | 100.0% vs 94.4% (p=0.5799) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.6% (p=0.6889) | 100.0% vs 94.4% (p=0.6889) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 2.6% vs 0.7% (p=0.3608) | 94.4% vs 98.6% (p=0.3618) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 2.6% vs 0.7% (p=0.3608) | 94.4% vs 98.6% (p=0.3618) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 2.6% vs 0.7% (p=0.3778) | 94.4% vs 98.6% (p=0.3778) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 2.6% vs 0.7% (p=0.3778) | 94.4% vs 98.6% (p=0.3778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.2% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.1% vs 1.1% (p=1.0000) | 97.8% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 2.6% vs 0.7% (p=0.3608) | 94.4% vs 98.6% (p=0.3618) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 2.6% vs 0.7% (p=0.3778) | 94.4% vs 98.6% (p=0.3778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 5.3% (p=0.3610) | 100.0% vs 88.9% (p=0.3495) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 5.3% (p=0.5333) | 100.0% vs 88.9% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 4.2% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 4.6% vs 2.6% (p=1.0000) | 90.3% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 4.6% vs 2.6% (p=0.9333) | 90.3% vs 94.4% (p=0.9333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 4.5% vs 3.5% (p=1.0000) | 90.5% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 2.6% vs 4.6% (p=1.0000) | 94.4% vs 90.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 2.6% vs 4.6% (p=0.9333) | 94.4% vs 90.3% (p=0.9333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 4.2% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 2.6% (p=0.5855) | 100.0% vs 94.4% (p=0.5799) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 2.6% (p=0.4667) | 100.0% vs 94.4% (p=0.4667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 2.3% vs 0.0% (p=1.0000) | 95.1% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 1.3% vs 2.6% (p=0.6510) | 97.2% vs 94.4% (p=0.6472) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 1.3% vs 2.6% (p=0.5714) | 97.2% vs 94.4% (p=0.5714) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (MISLABELLED, N=100)** |  |  |  |
@@ -2024,8 +2024,8 @@
 | Model / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 94.7% vs 79.8% (p=0.0050) | 11.1% vs 24.1% (p=0.1713) | 100.0% vs 83.3% (p=0.0054) |
-| ↳ *Vote: Escalate* | 79.8% vs 94.7% (p=0.0050) | 24.1% vs 11.1% (p=0.1713) | 83.3% vs 100.0% (p=0.0054) |
+| ↳ *Vote: Organize* | 94.7% vs 79.8% (p=0.5429) | 11.1% vs 24.1% (p=0.3762) | 100.0% vs 83.3% (p=0.0054) |
+| ↳ *Vote: Escalate* | 79.8% vs 94.7% (p=0.5429) | 24.1% vs 11.1% (p=0.3762) | 83.3% vs 100.0% (p=0.0054) |
 | ↳ *Vote: Petition* | 0.0% vs 85.8% (p=1.0000) | 0.0% vs 18.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 85.8% (p=1.0000) | 0.0% vs 18.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 85.8% (p=1.0000) | 0.0% vs 18.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
@@ -2048,8 +2048,8 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 57.9% (p=0.8096) | 100.0% vs 88.9% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 57.9% vs 52.6% (p=0.8096) | 88.9% vs 100.0% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 52.6% vs 57.9% (p=0.1000) | 100.0% vs 88.9% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 57.9% vs 52.6% (p=0.1000) | 88.9% vs 100.0% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 53.2% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 53.2% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 53.2% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
@@ -2078,8 +2078,8 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 5.3% vs 2.6% (p=0.3446) | 88.9% vs 94.4% (p=0.5955) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.0% vs 3.9% (p=0.6015) | 100.0% vs 91.7% (p=0.3427) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 5.3% vs 2.6% (p=0.5556) | 88.9% vs 94.4% (p=0.5556) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.0% vs 3.9% (p=0.3111) | 100.0% vs 91.7% (p=0.3111) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 3.5% vs 2.6% (p=1.0000) | 92.6% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -2096,17 +2096,17 @@
 |---|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 85.8% (p=1.0000) | 0.0% vs 18.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 68.4% vs 93.2% (p=< 0.0001) | 29.6% vs 14.3% (p=0.1393) | 66.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 68.4% vs 93.2% (p=0.1417) | 29.6% vs 14.3% (p=0.3000) | 66.7% vs 100.0% (p=< 0.0001) |
 | ↳ *Policy: Institutional Reform* | 85.8% vs 0.0% (p=1.0000) | 18.9% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 85.8% vs 0.0% (p=1.0000) | 18.9% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 94.7% vs 76.8% (p=0.0006) | 11.1% vs 26.7% (p=0.1044) | 100.0% vs 80.0% (p=0.0012) |
+| ↳ *Policy: Equal Parity Standards* | 94.7% vs 76.8% (p=0.3016) | 11.1% vs 26.7% (p=0.3016) | 100.0% vs 80.0% (p=0.0012) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 85.8% (p=1.0000) | 0.0% vs 18.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 63.2% vs 29.2% (p=0.0044) | 77.8% vs 87.7% (p=0.3434) | 100.0% vs 44.4% (p=0.0012) |
-| ↳ *Policy: Coercion Protection* | 19.7% vs 41.2% (p=0.0026) | 86.1% vs 87.0% (p=1.0000) | 25.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 27.0% vs 55.3% (p=0.0017) | 84.7% vs 94.4% (p=0.4469) | 37.5% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 21.1% vs 59.6% (p=< 0.0001) | 87.3% vs 85.2% (p=0.7472) | 28.6% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 17.9% vs 47.4% (p=< 0.0001) | 84.4% vs 88.9% (p=0.7578) | 20.0% vs 80.0% (p=< 0.0001) |
+| ↳ *Policy: Alex Retribution* | 63.2% vs 29.2% (p=0.5000) | 77.8% vs 87.7% (p=0.7000) | 100.0% vs 44.4% (p=0.0012) |
+| ↳ *Policy: Coercion Protection* | 19.7% vs 41.2% (p=0.4333) | 86.1% vs 87.0% (p=1.0000) | 25.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 27.0% vs 55.3% (p=0.4444) | 84.7% vs 94.4% (p=0.4667) | 37.5% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 21.1% vs 59.6% (p=0.1417) | 87.3% vs 85.2% (p=1.0000) | 28.6% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 17.9% vs 47.4% (p=0.2063) | 84.4% vs 88.9% (p=0.7619) | 20.0% vs 80.0% (p=< 0.0001) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 32.6% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 50.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 14.2% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -2144,11 +2144,11 @@
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 50.7% vs 52.6% (p=0.8578) | 90.3% vs 100.0% (p=0.3371) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Coercion Protection* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 91.4% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Alex Retribution* | 50.7% vs 52.6% (p=1.0000) | 90.3% vs 100.0% (p=0.8444) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Coercion Protection* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 91.4% (p=0.9000) | 100.0% vs 88.9% (p=0.5920) |
 | ↳ *Policy: Institutional Reform* | 51.1% vs 0.0% (p=1.0000) | 92.2% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 51.1% vs 0.0% (p=1.0000) | 92.2% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 56.6% vs 47.4% (p=0.2378) | 91.7% vs 92.6% (p=1.0000) | 100.0% vs 83.3% (p=0.0054) |
+| ↳ *Policy: Equal Parity Standards* | 56.6% vs 47.4% (p=0.5333) | 91.7% vs 92.6% (p=1.0000) | 100.0% vs 83.3% (p=0.0054) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 51.1% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Nemotron 3.5 (Super-120B) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
@@ -2158,11 +2158,11 @@
 | ↳ *Policy: Equal Parity Standards* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 5.3% vs 2.6% (p=0.3446) | 88.9% vs 94.4% (p=0.5955) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 5.3% vs 2.6% (p=0.5556) | 88.9% vs 94.4% (p=0.5556) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 2.9% vs 5.3% (p=0.4733) | 93.8% vs 88.9% (p=0.4787) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 2.1% vs 4.2% (p=0.6825) | 95.6% vs 91.1% (p=0.6766) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.5% (p=1.0000) | 100.0% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 2.9% vs 5.3% (p=1.0000) | 93.8% vs 88.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 2.1% vs 4.2% (p=0.6825) | 95.6% vs 91.1% (p=0.6825) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.5% (p=0.6000) | 100.0% vs 92.6% (p=0.6000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **44.3% vs 45.2% (p=0.4381)** | **89.8% vs 85.5% (p=0.3097)** | **75.0% vs 72.7% (p=0.7727)** |
@@ -2483,63 +2483,63 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 38.3% (p=0.0792) | 100.0% vs 82.5% (p=0.0299) | 100.0% vs 57.1% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 36.0% vs 52.6% (p=0.0255) | 79.6% vs 100.0% (p=0.0026) | 50.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 52.6% vs 38.3% (p=0.5000) | 100.0% vs 82.5% (p=0.5917) | 100.0% vs 57.1% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 36.0% vs 52.6% (p=0.4857) | 79.6% vs 100.0% (p=0.4000) | 50.0% vs 100.0% (p=< 0.0001) |
 | ↳ *Vote: Petition* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 41.5% (p=0.4641) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 41.5% (p=1.0000) | 100.0% vs 86.4% (p=0.8000) | 100.0% vs 66.7% (p=0.0302) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 45.9% (p=0.4303) | 100.0% vs 82.5% (p=0.0299) | 100.0% vs 71.4% (p=0.0006) |
-| ↳ *Vote: Escalate* | 52.6% vs 43.2% (p=0.2453) | 77.8% vs 97.8% (p=0.0074) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 28.9% vs 52.6% (p=0.0108) | 94.4% vs 86.1% (p=0.4522) | 50.0% vs 87.5% (p=0.0006) |
+| ↳ *Vote: Organize* | 52.6% vs 45.9% (p=0.8417) | 100.0% vs 82.5% (p=0.2917) | 100.0% vs 71.4% (p=0.0006) |
+| ↳ *Vote: Escalate* | 52.6% vs 43.2% (p=0.5635) | 77.8% vs 97.8% (p=0.1667) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 28.9% vs 52.6% (p=0.1778) | 94.4% vs 86.1% (p=0.7111) | 50.0% vs 87.5% (p=0.0006) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 46.6% (p=0.5268) | 100.0% vs 81.0% (p=0.0153) | 100.0% vs 71.4% (p=0.0006) |
-| ↳ *Vote: Escalate* | 54.7% vs 42.1% (p=0.1101) | 73.3% vs 100.0% (p=0.0002) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 26.3% vs 53.9% (p=0.0033) | 100.0% vs 83.3% (p=0.1146) | 50.0% vs 87.5% (p=0.0006) |
+| ↳ *Vote: Organize* | 52.6% vs 46.6% (p=0.9417) | 100.0% vs 81.0% (p=0.5917) | 100.0% vs 71.4% (p=0.0006) |
+| ↳ *Vote: Escalate* | 54.7% vs 42.1% (p=0.3968) | 73.3% vs 100.0% (p=0.1667) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 26.3% vs 53.9% (p=0.3111) | 100.0% vs 83.3% (p=0.6667) | 50.0% vs 87.5% (p=0.0006) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 53.7% vs 48.4% (p=0.5617) | 75.6% vs 86.7% (p=0.2813) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 61.4% vs 46.6% (p=0.0812) | 81.5% vs 81.0% (p=1.0000) | 100.0% vs 71.4% (p=0.0006) |
-| ↳ *Vote: Petition* | 5.3% vs 56.1% (p=< 0.0001) | 88.9% vs 80.2% (p=1.0000) | 0.0% vs 88.9% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 53.7% vs 48.4% (p=0.9127) | 75.6% vs 86.7% (p=0.8810) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 61.4% vs 46.6% (p=0.4917) | 81.5% vs 81.0% (p=1.0000) | 100.0% vs 71.4% (p=0.0006) |
+| ↳ *Vote: Petition* | 5.3% vs 56.1% (p=0.2000) | 88.9% vs 80.2% (p=0.8000) | 0.0% vs 88.9% (p=< 0.0001) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 51.1% (p=1.0000) | 0.0% vs 81.1% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.1988) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.6000) | 100.0% vs 77.8% (p=0.2047) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 46.5% vs 30.3% (p=0.0340) | 75.9% vs 91.7% (p=0.0895) | 66.7% vs 50.0% (p=0.1021) |
-| ↳ *Vote: Escalate* | 22.8% vs 47.4% (p=0.0020) | 88.9% vs 79.4% (p=0.3740) | 33.3% vs 71.4% (p=0.0007) |
+| ↳ *Vote: Organize* | 46.5% vs 30.3% (p=0.5143) | 75.9% vs 91.7% (p=0.6619) | 66.7% vs 50.0% (p=0.1021) |
+| ↳ *Vote: Escalate* | 22.8% vs 47.4% (p=0.2417) | 88.9% vs 79.4% (p=0.8500) | 33.3% vs 71.4% (p=0.0007) |
 | ↳ *Vote: Petition* | 0.0% vs 40.0% (p=1.0000) | 0.0% vs 82.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 40.0% (p=1.0000) | 0.0% vs 82.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 38.6% (p=0.3235) | 100.0% vs 80.2% (p=0.3528) | 100.0% vs 55.6% (p=0.0054) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 38.6% (p=1.0000) | 100.0% vs 80.2% (p=0.7000) | 100.0% vs 55.6% (p=0.0054) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 46.1% vs 51.8% (p=0.4623) | 86.1% vs 83.3% (p=0.7758) | 75.0% vs 83.3% (p=0.3204) |
-| ↳ *Vote: Escalate* | 51.6% vs 47.4% (p=0.6635) | 80.0% vs 88.9% (p=0.3837) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 46.1% vs 51.8% (p=0.7571) | 86.1% vs 83.3% (p=0.9000) | 75.0% vs 83.3% (p=0.3204) |
+| ↳ *Vote: Escalate* | 51.6% vs 47.4% (p=0.8413) | 80.0% vs 88.9% (p=0.7222) | 80.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 49.5% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 49.5% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 49.1% (p=0.8129) | 100.0% vs 82.7% (p=0.3445) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 49.1% (p=1.0000) | 100.0% vs 82.7% (p=0.9000) | 100.0% vs 77.8% (p=0.2047) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 35.1% vs 35.3% (p=1.0000) | 100.0% vs 88.9% (p=0.0978) | 66.7% vs 57.1% (p=0.5045) |
-| ↳ *Vote: Escalate* | 36.8% vs 33.7% (p=0.7615) | 88.9% vs 95.6% (p=0.4340) | 60.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 10.5% vs 38.0% (p=0.0210) | 77.8% vs 93.8% (p=0.1437) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 35.1% vs 35.3% (p=1.0000) | 100.0% vs 88.9% (p=0.4167) | 66.7% vs 57.1% (p=0.5045) |
+| ↳ *Vote: Escalate* | 36.8% vs 33.7% (p=0.8413) | 88.9% vs 95.6% (p=0.7222) | 60.0% vs 60.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 10.5% vs 38.0% (p=0.3000) | 77.8% vs 93.8% (p=0.2000) | 0.0% vs 66.7% (p=< 0.0001) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 35.3% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 33.3% (p=0.1279) | 100.0% vs 91.4% (p=1.0000) | 100.0% vs 55.6% (p=0.0054) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 33.3% (p=0.9000) | 100.0% vs 91.4% (p=0.9000) | 100.0% vs 55.6% (p=0.0054) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 50.5% vs 36.8% (p=0.0789) | 82.2% vs 88.9% (p=0.5502) | 80.0% vs 60.0% (p=0.0486) |
-| ↳ *Vote: Escalate* | 32.9% vs 50.9% (p=0.0170) | 86.1% vs 85.2% (p=1.0000) | 50.0% vs 83.3% (p=0.0007) |
+| ↳ *Vote: Organize* | 50.5% vs 36.8% (p=0.6429) | 82.2% vs 88.9% (p=0.8810) | 80.0% vs 60.0% (p=0.0486) |
+| ↳ *Vote: Escalate* | 32.9% vs 50.9% (p=0.3429) | 86.1% vs 85.2% (p=1.0000) | 50.0% vs 83.3% (p=0.0007) |
 | ↳ *Vote: Petition* | 0.0% vs 43.7% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 43.7% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 42.7% (p=0.4688) | 100.0% vs 84.0% (p=0.3471) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 42.7% (p=1.0000) | 100.0% vs 84.0% (p=0.8000) | 100.0% vs 66.7% (p=0.0302) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 33.7% (p=0.0126) | 77.8% vs 95.6% (p=0.0266) | 80.0% vs 60.0% (p=0.0486) |
-| ↳ *Vote: Escalate* | 38.6% vs 45.1% (p=0.4286) | 92.6% vs 84.1% (p=0.4991) | 66.7% vs 71.4% (p=0.6412) |
-| ↳ *Vote: Petition* | 26.3% vs 47.4% (p=0.0272) | 100.0% vs 83.3% (p=0.1146) | 50.0% vs 75.0% (p=0.0534) |
+| ↳ *Vote: Organize* | 52.6% vs 33.7% (p=0.3254) | 77.8% vs 95.6% (p=0.4444) | 80.0% vs 60.0% (p=0.0486) |
+| ↳ *Vote: Escalate* | 38.6% vs 45.1% (p=0.8250) | 92.6% vs 84.1% (p=0.7667) | 66.7% vs 71.4% (p=0.6412) |
+| ↳ *Vote: Petition* | 26.3% vs 47.4% (p=0.3333) | 100.0% vs 83.3% (p=0.6889) | 50.0% vs 75.0% (p=0.0534) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 43.2% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 43.2% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 47.4% (p=0.5299) | 100.0% vs 79.4% (p=0.0083) | 100.0% vs 71.4% (p=0.0006) |
-| ↳ *Vote: Escalate* | 55.8% vs 42.1% (p=0.0813) | 71.1% vs 100.0% (p=< 0.0001) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 26.3% vs 54.6% (p=0.0020) | 100.0% vs 81.9% (p=0.0632) | 50.0% vs 87.5% (p=0.0006) |
+| ↳ *Vote: Organize* | 52.6% vs 47.4% (p=0.9500) | 100.0% vs 79.4% (p=0.5917) | 100.0% vs 71.4% (p=0.0006) |
+| ↳ *Vote: Escalate* | 55.8% vs 42.1% (p=0.5159) | 71.1% vs 100.0% (p=0.1667) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 26.3% vs 54.6% (p=0.3111) | 100.0% vs 81.9% (p=0.6667) | 50.0% vs 87.5% (p=0.0006) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
@@ -2554,74 +2554,74 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 41.5% (p=0.4641) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 66.7% (p=0.0302) |
-| ↳ *Policy: Coercion Protection* | 28.9% vs 46.1% (p=0.0673) | 94.4% vs 86.1% (p=0.4522) | 50.0% vs 75.0% (p=0.0534) |
-| ↳ *Policy: Institutional Reform* | 41.5% vs 52.6% (p=0.4641) | 86.4% vs 100.0% (p=0.5937) | 66.7% vs 100.0% (p=0.0302) |
-| ↳ *Policy: Trauma Relief* | 36.0% vs 52.6% (p=0.0255) | 79.6% vs 100.0% (p=0.0026) | 50.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 51.3% vs 36.8% (p=0.0530) | 75.0% vs 96.3% (p=0.0059) | 75.0% vs 66.7% (p=0.5045) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 41.5% (p=1.0000) | 100.0% vs 86.4% (p=0.8000) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Policy: Coercion Protection* | 28.9% vs 46.1% (p=0.4667) | 94.4% vs 86.1% (p=0.8222) | 50.0% vs 75.0% (p=0.0534) |
+| ↳ *Policy: Institutional Reform* | 41.5% vs 52.6% (p=1.0000) | 86.4% vs 100.0% (p=0.8000) | 66.7% vs 100.0% (p=0.0302) |
+| ↳ *Policy: Trauma Relief* | 36.0% vs 52.6% (p=0.4857) | 79.6% vs 100.0% (p=0.4000) | 50.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 51.3% vs 36.8% (p=0.5571) | 75.0% vs 96.3% (p=0.2333) | 75.0% vs 66.7% (p=0.5045) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 46.7% (p=0.5873) | 100.0% vs 84.7% (p=0.1119) | 100.0% vs 75.0% (p=0.0105) |
-| ↳ *Policy: Coercion Protection* | 52.6% vs 46.7% (p=0.5873) | 100.0% vs 84.7% (p=0.1119) | 100.0% vs 75.0% (p=0.0105) |
-| ↳ *Policy: Institutional Reform* | 44.7% vs 52.6% (p=0.3028) | 79.6% vs 100.0% (p=0.0026) | 66.7% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 52.6% vs 36.8% (p=0.0572) | 84.1% vs 96.3% (p=0.1628) | 85.7% vs 66.7% (p=0.0534) |
-| ↳ *Policy: Equal Parity Standards* | 52.6% vs 47.4% (p=0.8096) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 46.7% (p=0.9778) | 100.0% vs 84.7% (p=0.5556) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Coercion Protection* | 52.6% vs 46.7% (p=0.9778) | 100.0% vs 84.7% (p=0.5556) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Institutional Reform* | 44.7% vs 52.6% (p=0.5905) | 79.6% vs 100.0% (p=0.1333) | 66.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 52.6% vs 36.8% (p=0.3667) | 84.1% vs 96.3% (p=0.4750) | 85.7% vs 66.7% (p=0.0534) |
+| ↳ *Policy: Equal Parity Standards* | 52.6% vs 47.4% (p=1.0000) | 100.0% vs 86.4% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 48.0% (p=0.8102) | 100.0% vs 85.2% (p=0.6016) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 48.0% (p=1.0000) | 100.0% vs 85.2% (p=0.9000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 45.9% vs 54.4% (p=0.3422) | 82.5% vs 96.3% (p=0.0988) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Trauma Relief* | 45.9% vs 54.4% (p=0.3422) | 82.5% vs 96.3% (p=0.0988) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Institutional Reform* | 45.9% vs 54.4% (p=0.7750) | 82.5% vs 96.3% (p=0.7667) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Trauma Relief* | 45.9% vs 54.4% (p=0.7750) | 82.5% vs 96.3% (p=0.7667) | 71.4% vs 100.0% (p=0.0006) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 65.8% vs 47.4% (p=0.0474) | 72.2% vs 83.3% (p=0.3177) | 100.0% vs 75.0% (p=0.0105) |
-| ↳ *Policy: Coercion Protection* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.1988) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Policy: Institutional Reform* | 50.4% vs 52.6% (p=0.8743) | 73.0% vs 100.0% (p=0.0022) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Trauma Relief* | 57.9% vs 40.8% (p=0.0263) | 70.4% vs 97.2% (p=0.0018) | 83.3% vs 75.0% (p=0.3204) |
-| ↳ *Policy: Equal Parity Standards* | 84.2% vs 42.8% (p=< 0.0001) | 33.3% vs 93.1% (p=< 0.0001) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Alex Retribution* | 65.8% vs 47.4% (p=0.4444) | 72.2% vs 83.3% (p=0.5778) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Coercion Protection* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.6000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Institutional Reform* | 50.4% vs 52.6% (p=1.0000) | 73.0% vs 100.0% (p=0.2583) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Trauma Relief* | 57.9% vs 40.8% (p=0.3143) | 70.4% vs 97.2% (p=0.1857) | 83.3% vs 75.0% (p=0.3204) |
+| ↳ *Policy: Equal Parity Standards* | 84.2% vs 42.8% (p=0.0444) | 33.3% vs 93.1% (p=0.0222) | 100.0% vs 75.0% (p=0.0105) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 51.1% (p=1.0000) | 0.0% vs 81.1% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 15.8% vs 42.7% (p=0.0262) | 66.7% vs 84.0% (p=0.1963) | 0.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 26.3% vs 43.4% (p=0.0647) | 100.0% vs 77.8% (p=0.0346) | 50.0% vs 62.5% (p=0.3204) |
-| ↳ *Policy: Institutional Reform* | 36.8% vs 52.6% (p=0.0956) | 77.8% vs 100.0% (p=0.0346) | 50.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 36.8% vs 43.2% (p=0.4591) | 66.7% vs 97.8% (p=0.0002) | 40.0% vs 80.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 50.9% vs 35.3% (p=0.0531) | 66.7% vs 88.9% (p=0.0169) | 66.7% vs 57.1% (p=0.5045) |
+| ↳ *Policy: Alex Retribution* | 15.8% vs 42.7% (p=0.5000) | 66.7% vs 84.0% (p=0.9000) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 26.3% vs 43.4% (p=0.4000) | 100.0% vs 77.8% (p=0.5333) | 50.0% vs 62.5% (p=0.3204) |
+| ↳ *Policy: Institutional Reform* | 36.8% vs 52.6% (p=0.6444) | 77.8% vs 100.0% (p=0.5333) | 50.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 36.8% vs 43.2% (p=0.8810) | 66.7% vs 97.8% (p=0.1667) | 40.0% vs 80.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 50.9% vs 35.3% (p=0.6167) | 66.7% vs 88.9% (p=0.4667) | 66.7% vs 57.1% (p=0.5045) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 40.0% (p=1.0000) | 0.0% vs 82.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 57.9% vs 48.5% (p=0.4770) | 88.9% vs 84.0% (p=1.0000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 57.9% vs 48.5% (p=0.4000) | 88.9% vs 84.0% (p=1.0000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Coercion Protection* | 0.0% vs 49.5% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 47.4% vs 52.6% (p=0.5539) | 74.1% vs 100.0% (p=0.0006) | 66.7% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 48.1% vs 52.6% (p=0.6357) | 77.8% vs 100.0% (p=0.0084) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 55.0% (p=< 0.0001) | 100.0% vs 82.7% (p=0.3445) | 0.0% vs 88.9% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 47.4% vs 52.6% (p=0.8286) | 74.1% vs 100.0% (p=0.3000) | 66.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 48.1% vs 52.6% (p=0.9417) | 77.8% vs 100.0% (p=0.4167) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 55.0% (p=0.1000) | 100.0% vs 82.7% (p=0.9000) | 0.0% vs 88.9% (p=< 0.0001) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 49.5% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 10.5% vs 38.0% (p=0.0210) | 77.8% vs 93.8% (p=0.1437) | 0.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 21.1% vs 36.8% (p=0.2117) | 55.6% vs 96.3% (p=0.0015) | 0.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 27.1% vs 54.4% (p=0.0005) | 90.5% vs 96.3% (p=0.6698) | 42.9% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 16.8% vs 53.7% (p=< 0.0001) | 86.7% vs 97.8% (p=0.1103) | 20.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Alex Retribution* | 10.5% vs 38.0% (p=0.3000) | 77.8% vs 93.8% (p=0.2000) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 21.1% vs 36.8% (p=1.0000) | 55.6% vs 96.3% (p=0.1000) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 27.1% vs 54.4% (p=0.1167) | 90.5% vs 96.3% (p=0.7667) | 42.9% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 16.8% vs 53.7% (p=0.0397) | 86.7% vs 97.8% (p=0.4444) | 20.0% vs 100.0% (p=< 0.0001) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 35.3% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 35.3% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 42.7% (p=0.4688) | 100.0% vs 84.0% (p=0.3471) | 100.0% vs 66.7% (p=0.0302) |
-| ↳ *Policy: Coercion Protection* | 28.9% vs 47.4% (p=0.0455) | 94.4% vs 83.3% (p=0.4524) | 50.0% vs 75.0% (p=0.0534) |
-| ↳ *Policy: Institutional Reform* | 44.2% vs 43.2% (p=1.0000) | 73.3% vs 97.8% (p=0.0017) | 60.0% vs 80.0% (p=0.0486) |
-| ↳ *Policy: Trauma Relief* | 45.6% vs 40.8% (p=0.5523) | 77.8% vs 97.2% (p=0.0126) | 66.7% vs 75.0% (p=0.5045) |
-| ↳ *Policy: Equal Parity Standards* | 49.1% vs 41.4% (p=0.3419) | 70.4% vs 92.1% (p=0.0178) | 66.7% vs 71.4% (p=0.6412) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 42.7% (p=1.0000) | 100.0% vs 84.0% (p=0.8000) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Policy: Coercion Protection* | 28.9% vs 47.4% (p=0.4667) | 94.4% vs 83.3% (p=0.8444) | 50.0% vs 75.0% (p=0.0534) |
+| ↳ *Policy: Institutional Reform* | 44.2% vs 43.2% (p=1.0000) | 73.3% vs 97.8% (p=0.2857) | 60.0% vs 80.0% (p=0.0486) |
+| ↳ *Policy: Trauma Relief* | 45.6% vs 40.8% (p=0.8476) | 77.8% vs 97.2% (p=0.3952) | 66.7% vs 75.0% (p=0.5045) |
+| ↳ *Policy: Equal Parity Standards* | 49.1% vs 41.4% (p=0.8583) | 70.4% vs 92.1% (p=0.1750) | 66.7% vs 71.4% (p=0.6412) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 43.7% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 48.0% (p=< 0.0001) | 100.0% vs 85.2% (p=0.6016) | 0.0% vs 77.8% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 89.5% vs 38.0% (p=< 0.0001) | 22.2% vs 93.8% (p=< 0.0001) | 100.0% vs 66.7% (p=0.0302) |
-| ↳ *Policy: Institutional Reform* | 40.8% vs 52.6% (p=0.2039) | 83.3% vs 100.0% (p=0.1146) | 62.5% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Trauma Relief* | 39.1% vs 52.6% (p=0.1097) | 81.0% vs 100.0% (p=0.0153) | 57.1% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 50.9% vs 39.8% (p=0.2010) | 66.7% vs 95.2% (p=0.0007) | 66.7% vs 71.4% (p=0.6412) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 48.0% (p=0.2000) | 100.0% vs 85.2% (p=0.9000) | 0.0% vs 77.8% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 89.5% vs 38.0% (p=0.1000) | 22.2% vs 93.8% (p=0.1000) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Policy: Institutional Reform* | 40.8% vs 52.6% (p=0.8222) | 83.3% vs 100.0% (p=0.6889) | 62.5% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Trauma Relief* | 39.1% vs 52.6% (p=0.5083) | 81.0% vs 100.0% (p=0.4167) | 57.1% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 50.9% vs 39.8% (p=0.6917) | 66.7% vs 95.2% (p=0.1250) | 66.7% vs 71.4% (p=0.6412) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 43.2% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 48.5% (p=0.8114) | 100.0% vs 84.0% (p=0.3471) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Policy: Coercion Protection* | 67.1% vs 36.8% (p=< 0.0001) | 69.4% vs 96.3% (p=0.0006) | 100.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 48.0% vs 52.6% (p=0.7173) | 81.9% vs 100.0% (p=0.0632) | 75.0% vs 100.0% (p=0.0105) |
-| ↳ *Policy: Trauma Relief* | 52.6% vs 43.4% (p=0.2378) | 81.5% vs 91.7% (p=0.2296) | 83.3% vs 75.0% (p=0.3204) |
-| ↳ *Policy: Equal Parity Standards* | 68.4% vs 46.8% (p=0.0917) | 66.7% vs 87.7% (p=0.1187) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 48.5% (p=1.0000) | 100.0% vs 84.0% (p=0.9000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Coercion Protection* | 67.1% vs 36.8% (p=0.1429) | 69.4% vs 96.3% (p=0.1333) | 100.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 48.0% vs 52.6% (p=0.9778) | 81.9% vs 100.0% (p=0.6667) | 75.0% vs 100.0% (p=0.0105) |
+| ↳ *Policy: Trauma Relief* | 52.6% vs 43.4% (p=0.6857) | 81.5% vs 91.7% (p=0.9000) | 83.3% vs 75.0% (p=0.3204) |
+| ↳ *Policy: Equal Parity Standards* | 68.4% vs 46.8% (p=0.4000) | 66.7% vs 87.7% (p=0.2000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **44.3% vs 45.2% (p=0.4381)** | **89.8% vs 85.5% (p=0.3097)** | **75.0% vs 72.7% (p=0.7727)** |
@@ -3152,20 +3152,20 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 95.8% (p=1.0000) | 0.0% vs 8.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 95.8% (p=1.0000) | 0.0% vs 8.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 51.8% vs 60.5% (p=0.2972) | 27.8% vs 27.8% (p=1.0000) | 33.3% vs 50.0% (p=0.1021) |
-| ↳ *Vote: Escalate* | 60.5% vs 51.8% (p=0.2972) | 27.8% vs 27.8% (p=1.0000) | 50.0% vs 33.3% (p=0.1021) |
+| ↳ *Vote: Organize* | 51.8% vs 60.5% (p=0.8952) | 27.8% vs 27.8% (p=1.0000) | 33.3% vs 50.0% (p=0.1021) |
+| ↳ *Vote: Escalate* | 60.5% vs 51.8% (p=0.8952) | 27.8% vs 27.8% (p=1.0000) | 50.0% vs 33.3% (p=0.1021) |
 | ↳ *Vote: Petition* | 0.0% vs 55.3% (p=1.0000) | 0.0% vs 27.8% (p=1.0000) | 0.0% vs 40.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 55.3% (p=1.0000) | 0.0% vs 27.8% (p=1.0000) | 0.0% vs 40.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 55.3% (p=1.0000) | 0.0% vs 27.8% (p=1.0000) | 0.0% vs 40.0% (p=1.0000) |
 | **Llama 3.1 70B (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 73.7% (p=< 0.0001) | 0.0% vs 55.6% (p=< 0.0001) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 73.7% (p=0.1000) | 0.0% vs 55.6% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 73.7% vs 100.0% (p=< 0.0001) | 55.6% vs 0.0% (p=< 0.0001) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 73.7% vs 100.0% (p=0.1000) | 55.6% vs 0.0% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 87.7% vs 100.0% (p=0.1376) | 25.9% vs 0.0% (p=0.1096) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 100.0% vs 87.7% (p=0.1376) | 0.0% vs 25.9% (p=0.1096) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 87.7% vs 100.0% (p=0.8000) | 25.9% vs 0.0% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 100.0% vs 87.7% (p=0.8000) | 0.0% vs 25.9% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
@@ -3194,9 +3194,9 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 97.9% vs 94.7% (p=0.4443) | 4.4% vs 11.1% (p=0.4340) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 84.2% vs 97.7% (p=0.0231) | 33.3% vs 4.9% (p=0.0202) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 97.4% vs 95.6% (p=0.7042) | 5.6% vs 9.3% (p=0.6978) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 97.9% vs 94.7% (p=0.6429) | 4.4% vs 11.1% (p=0.6429) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 84.2% vs 97.7% (p=0.1000) | 33.3% vs 4.9% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 97.4% vs 95.6% (p=0.8571) | 5.6% vs 9.3% (p=0.8571) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -3219,30 +3219,30 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 95.8% (p=1.0000) | 0.0% vs 8.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 98.7% vs 93.9% (p=0.1476) | 2.8% vs 13.0% (p=0.1378) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 99.2% vs 87.7% (p=0.0010) | 1.6% vs 25.9% (p=0.0008) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 91.6% (p=0.0067) | 0.0% vs 17.8% (p=0.0056) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 98.7% vs 93.9% (p=0.1476) | 2.8% vs 13.0% (p=0.1378) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 98.7% vs 93.9% (p=0.9000) | 2.8% vs 13.0% (p=0.9000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 99.2% vs 87.7% (p=0.1250) | 1.6% vs 25.9% (p=0.1250) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 91.6% (p=0.1667) | 0.0% vs 17.8% (p=0.1667) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 98.7% vs 93.9% (p=0.9000) | 2.8% vs 13.0% (p=0.9000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 95.8% (p=1.0000) | 0.0% vs 8.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 55.3% (p=1.0000) | 0.0% vs 27.8% (p=1.0000) | 0.0% vs 40.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 73.7% vs 50.7% (p=0.0111) | 0.0% vs 34.7% (p=0.0023) | 50.0% vs 37.5% (p=0.3204) |
-| ↳ *Policy: Institutional Reform* | 52.6% vs 65.8% (p=0.2013) | 30.6% vs 16.7% (p=0.3780) | 37.5% vs 50.0% (p=0.3204) |
+| ↳ *Policy: Coercion Protection* | 73.7% vs 50.7% (p=0.5111) | 0.0% vs 34.7% (p=0.3333) | 50.0% vs 37.5% (p=0.3204) |
+| ↳ *Policy: Institutional Reform* | 52.6% vs 65.8% (p=0.7333) | 30.6% vs 16.7% (p=0.7556) | 37.5% vs 50.0% (p=0.3204) |
 | ↳ *Policy: Trauma Relief* | 55.3% vs 0.0% (p=1.0000) | 27.8% vs 0.0% (p=1.0000) | 40.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 50.3% (p=< 0.0001) | 0.0% vs 30.9% (p=0.0577) | 100.0% vs 33.3% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 50.3% (p=0.5000) | 0.0% vs 30.9% (p=0.8000) | 100.0% vs 33.3% (p=< 0.0001) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 55.3% (p=1.0000) | 0.0% vs 27.8% (p=1.0000) | 0.0% vs 40.0% (p=1.0000) |
 | **Llama 3.1 70B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 100.0% vs 97.1% (p=1.0000) | 0.0% vs 6.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 96.2% vs 100.0% (p=0.3245) | 7.9% vs 0.0% (p=0.3169) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 96.7% vs 100.0% (p=0.5849) | 6.9% vs 0.0% (p=0.5786) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 96.7% (p=0.5849) | 0.0% vs 6.9% (p=0.5786) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.7% (p=0.5849) | 0.0% vs 6.9% (p=0.5786) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 96.2% vs 100.0% (p=1.0000) | 7.9% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 96.7% vs 100.0% (p=1.0000) | 6.9% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 96.7% (p=1.0000) | 0.0% vs 6.9% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.7% (p=1.0000) | 0.0% vs 6.9% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 100.0% vs 97.1% (p=1.0000) | 0.0% vs 6.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 87.2% vs 93.0% (p=0.3173) | 27.0% vs 14.8% (p=0.2811) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 87.2% vs 93.0% (p=0.3173) | 27.0% vs 14.8% (p=0.2811) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 86.2% (p=0.0091) | 0.0% vs 29.2% (p=0.0098) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 87.2% vs 93.0% (p=0.5833) | 27.0% vs 14.8% (p=0.5833) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 87.2% vs 93.0% (p=0.5833) | 27.0% vs 14.8% (p=0.5833) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 86.2% (p=0.3333) | 0.0% vs 29.2% (p=0.3333) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 23.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **DeepSeek V3 (N=10)** |  |  |  |
@@ -3274,10 +3274,10 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 95.9% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 84.2% vs 97.7% (p=0.0231) | 33.3% vs 4.9% (p=0.0202) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 95.9% vs 100.0% (p=1.0000) | 8.6% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 91.2% vs 98.5% (p=0.0264) | 18.5% vs 3.2% (p=0.0237) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 95.9% (p=0.6000) | 0.0% vs 8.6% (p=0.6000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 84.2% vs 97.7% (p=0.1000) | 33.3% vs 4.9% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 95.9% vs 100.0% (p=0.6000) | 8.6% vs 0.0% (p=0.6000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 91.2% vs 98.5% (p=0.0500) | 18.5% vs 3.2% (p=0.0500) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -3599,65 +3599,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 86.0% vs 98.2% (p=0.0126) | 11.1% vs 3.7% (p=0.4147) | 83.3% vs 100.0% (p=0.0273) |
-| ↳ *Vote: Escalate* | 100.0% vs 87.2% (p=0.0143) | 0.0% vs 11.1% (p=0.3390) | 100.0% vs 85.7% (p=0.1092) |
-| ↳ *Vote: Petition* | 94.7% vs 89.5% (p=0.6971) | 11.1% vs 8.3% (p=0.5764) | 100.0% vs 87.5% (p=0.5946) |
+| ↳ *Vote: Organize* | 86.0% vs 98.2% (p=1.0000) | 11.1% vs 3.7% (p=1.0000) | 83.3% vs 100.0% (p=0.0273) |
+| ↳ *Vote: Escalate* | 100.0% vs 87.2% (p=0.8056) | 0.0% vs 11.1% (p=0.8056) | 100.0% vs 85.7% (p=0.1092) |
+| ↳ *Vote: Petition* | 94.7% vs 89.5% (p=1.0000) | 11.1% vs 8.3% (p=1.0000) | 100.0% vs 87.5% (p=0.5946) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 90.2% vs 100.0% (p=0.0110) | 4.8% vs 0.0% (p=0.5511) | 85.7% vs 100.0% (p=0.0302) |
-| ↳ *Vote: Escalate* | 100.0% vs 91.4% (p=0.0746) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
-| ↳ *Vote: Petition* | 100.0% vs 92.4% (p=0.3695) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Organize* | 90.2% vs 100.0% (p=1.0000) | 4.8% vs 0.0% (p=1.0000) | 85.7% vs 100.0% (p=0.0302) |
+| ↳ *Vote: Escalate* | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Petition* | 100.0% vs 92.4% (p=1.0000) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 93.2% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 93.2% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 94.7% vs 98.7% (p=0.2459) | 11.1% vs 2.8% (p=0.2355) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 98.2% vs 95.5% (p=0.6766) | 3.7% vs 9.5% (p=0.6698) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 94.7% vs 98.7% (p=1.0000) | 11.1% vs 2.8% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 98.2% vs 95.5% (p=1.0000) | 3.7% vs 9.5% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 95.9% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 95.9% (p=0.9000) | 0.0% vs 8.6% (p=0.9000) | 100.0% vs 100.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 89.5% vs 83.5% (p=0.3734) | 22.2% vs 19.0% (p=0.7770) | 100.0% vs 85.7% (p=0.0302) |
-| ↳ *Vote: Escalate* | 70.2% vs 91.7% (p=0.0003) | 25.9% vs 17.5% (p=0.3954) | 66.7% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 86.8% vs 84.9% (p=1.0000) | 27.8% vs 18.1% (p=0.3437) | 100.0% vs 87.5% (p=0.2047) |
-| ↳ *Vote: Custom / Other* | 100.0% vs 83.6% (p=0.0817) | 0.0% vs 22.2% (p=0.1953) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 83.6% (p=0.0817) | 0.0% vs 22.2% (p=0.1953) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Organize* | 89.5% vs 83.5% (p=1.0000) | 22.2% vs 19.0% (p=0.8250) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Vote: Escalate* | 70.2% vs 91.7% (p=0.3000) | 25.9% vs 17.5% (p=0.6500) | 66.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 86.8% vs 84.9% (p=0.8444) | 27.8% vs 18.1% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Custom / Other* | 100.0% vs 83.6% (p=0.9000) | 0.0% vs 22.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 83.6% (p=0.9000) | 0.0% vs 22.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 91.7% vs 100.0% (p=0.0358) | 1.6% vs 0.0% (p=1.0000) | 85.7% vs 100.0% (p=0.0302) |
-| ↳ *Vote: Escalate* | 100.0% vs 92.8% (p=0.1249) | 0.0% vs 1.4% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Organize* | 91.7% vs 100.0% (p=0.7667) | 1.6% vs 0.0% (p=1.0000) | 85.7% vs 100.0% (p=0.0302) |
+| ↳ *Vote: Escalate* | 100.0% vs 92.8% (p=0.8222) | 0.0% vs 1.4% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Vote: Petition* | 0.0% vs 94.2% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 94.2% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 93.6% (p=0.6060) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 93.6% (p=0.9000) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 97.4% (p=0.2762) | 0.0% vs 5.6% (p=0.2719) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 96.8% vs 100.0% (p=0.2460) | 6.7% vs 0.0% (p=0.2416) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 96.8% vs 100.0% (p=1.0000) | 6.7% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 100.0% vs 98.2% (p=1.0000) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 82.1% vs 100.0% (p=< 0.0001) | 15.6% vs 0.0% (p=0.0121) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Vote: Escalate* | 100.0% vs 88.8% (p=0.0263) | 0.0% vs 9.7% (p=0.3371) | 100.0% vs 87.5% (p=0.2047) |
-| ↳ *Vote: Petition* | 100.0% vs 88.8% (p=0.0263) | 0.0% vs 9.7% (p=0.3371) | 100.0% vs 87.5% (p=0.2047) |
-| ↳ *Vote: Custom / Other* | 100.0% vs 90.1% (p=0.2264) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Organize* | 82.1% vs 100.0% (p=0.4444) | 15.6% vs 0.0% (p=0.4444) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Vote: Escalate* | 100.0% vs 88.8% (p=0.8222) | 0.0% vs 9.7% (p=0.8222) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Petition* | 100.0% vs 88.8% (p=0.8222) | 0.0% vs 9.7% (p=0.8222) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Vote: Custom / Other* | 100.0% vs 90.1% (p=0.9000) | 0.0% vs 8.6% (p=0.9000) | 100.0% vs 88.9% (p=0.5920) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 92.1% (p=0.0036) | 0.0% vs 16.7% (p=0.0031) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 89.5% vs 100.0% (p=0.0006) | 22.2% vs 0.0% (p=0.0005) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 92.1% (p=0.4000) | 0.0% vs 16.7% (p=0.4000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 89.5% vs 100.0% (p=0.3000) | 22.2% vs 0.0% (p=0.3000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 100.0% vs 96.5% (p=1.0000) | 0.0% vs 7.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 95.8% vs 98.9% (p=0.3683) | 8.9% vs 2.2% (p=0.3607) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 98.7% vs 96.5% (p=0.6498) | 2.8% vs 7.4% (p=0.6444) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 95.8% vs 98.9% (p=0.7222) | 8.9% vs 2.2% (p=0.7222) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 98.7% vs 96.5% (p=0.9000) | 2.8% vs 7.4% (p=0.9000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 100.0% vs 97.1% (p=1.0000) | 0.0% vs 6.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 93.4% vs 87.7% (p=0.2270) | 13.9% vs 7.4% (p=0.4751) | 100.0% vs 83.3% (p=0.0054) |
-| ↳ *Vote: Escalate* | 82.9% vs 94.7% (p=0.0121) | 8.3% vs 11.1% (p=0.7362) | 75.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 94.7% vs 89.5% (p=0.6989) | 11.1% vs 9.9% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Organize* | 93.4% vs 87.7% (p=0.9000) | 13.9% vs 7.4% (p=0.7333) | 100.0% vs 83.3% (p=0.0054) |
+| ↳ *Vote: Escalate* | 82.9% vs 94.7% (p=0.7333) | 8.3% vs 11.1% (p=0.9000) | 75.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 94.7% vs 89.5% (p=1.0000) | 11.1% vs 9.9% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 90.0% (p=1.0000) | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 88.9% (p=0.2254) | 0.0% vs 11.1% (p=0.5901) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 88.9% (p=0.9000) | 0.0% vs 11.1% (p=0.9000) | 100.0% vs 88.9% (p=0.5920) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
 | ↳ *Vote: Organize Average* | **92.3% vs 94.5% (p=0.7123)** | **8.0% vs 6.8% (p=0.9850)** | **92.5% vs 95.7% (p=0.6469)** |
 | ↳ *Vote: Escalate Average* | **92.8% vs 93.5% (p=0.9316)** | **7.8% vs 7.2% (p=0.9990)** | **93.3% vs 94.2% (p=0.9078)** |
@@ -3670,73 +3670,73 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 88.8% (p=0.2223) | 0.0% vs 9.7% (p=1.0000) | 100.0% vs 87.5% (p=0.5946) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 77.6% (p=< 0.0001) | 0.0% vs 19.4% (p=0.0024) | 100.0% vs 75.0% (p=0.0001) |
-| ↳ *Policy: Institutional Reform* | 88.8% vs 100.0% (p=0.2223) | 9.7% vs 0.0% (p=1.0000) | 87.5% vs 100.0% (p=0.5946) |
-| ↳ *Policy: Trauma Relief* | 87.2% vs 100.0% (p=0.0143) | 11.1% vs 0.0% (p=0.3390) | 85.7% vs 100.0% (p=0.1092) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.2% (p=0.0143) | 0.0% vs 11.1% (p=0.3390) | 100.0% vs 85.7% (p=0.1092) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 88.8% (p=0.8889) | 0.0% vs 9.7% (p=0.8889) | 100.0% vs 87.5% (p=0.5946) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 77.6% (p=0.1667) | 0.0% vs 19.4% (p=0.1667) | 100.0% vs 75.0% (p=0.0001) |
+| ↳ *Policy: Institutional Reform* | 88.8% vs 100.0% (p=0.8889) | 9.7% vs 0.0% (p=0.8889) | 87.5% vs 100.0% (p=0.5946) |
+| ↳ *Policy: Trauma Relief* | 87.2% vs 100.0% (p=0.8056) | 11.1% vs 0.0% (p=0.8056) | 85.7% vs 100.0% (p=0.1092) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.2% (p=0.8056) | 0.0% vs 11.1% (p=0.8056) | 100.0% vs 85.7% (p=0.1092) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 92.4% (p=0.3695) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 82.9% (p=< 0.0001) | 0.0% vs 8.3% (p=0.0608) | 100.0% vs 75.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 92.4% vs 100.0% (p=0.3695) | 3.7% vs 0.0% (p=1.0000) | 88.9% vs 100.0% (p=0.5920) |
-| ↳ *Policy: Trauma Relief* | 86.3% vs 100.0% (p=0.0002) | 6.7% vs 0.0% (p=0.2416) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 91.4% (p=0.0746) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 92.4% (p=1.0000) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 82.9% (p=0.4000) | 0.0% vs 8.3% (p=0.4000) | 100.0% vs 75.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 92.4% vs 100.0% (p=1.0000) | 3.7% vs 0.0% (p=1.0000) | 88.9% vs 100.0% (p=0.5920) |
+| ↳ *Policy: Trauma Relief* | 86.3% vs 100.0% (p=1.0000) | 6.7% vs 0.0% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 87.5% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 93.2% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 95.4% (p=0.3482) | 0.0% vs 9.7% (p=0.3371) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 93.7% vs 98.9% (p=0.1181) | 13.3% vs 2.2% (p=0.1103) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 95.5% vs 98.2% (p=0.6766) | 9.5% vs 3.7% (p=0.6698) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 92.6% (p=0.0139) | 0.0% vs 15.6% (p=0.0121) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.9% (p=1.0000) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 95.4% (p=0.8222) | 0.0% vs 9.7% (p=0.8222) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 93.7% vs 98.9% (p=1.0000) | 13.3% vs 2.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 95.5% vs 98.2% (p=1.0000) | 9.5% vs 3.7% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 92.6% (p=0.4444) | 0.0% vs 15.6% (p=0.4444) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.9% (p=0.9000) | 0.0% vs 8.6% (p=0.9000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 7.8% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 83.6% (p=0.0817) | 0.0% vs 22.2% (p=0.1953) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 88.4% vs 82.1% (p=0.3062) | 24.4% vs 15.6% (p=0.4299) | 100.0% vs 80.0% (p=0.0012) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 83.6% (p=0.9000) | 0.0% vs 22.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 88.4% vs 82.1% (p=1.0000) | 24.4% vs 15.6% (p=1.0000) | 100.0% vs 80.0% (p=0.0012) |
 | ↳ *Policy: Institutional Reform* | 85.3% vs 0.0% (p=1.0000) | 20.0% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 70.2% vs 91.7% (p=0.0003) | 25.9% vs 17.5% (p=0.3954) | 66.7% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 78.9% (p=< 0.0001) | 0.0% vs 28.6% (p=0.0010) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Policy: Trauma Relief* | 70.2% vs 91.7% (p=0.3000) | 25.9% vs 17.5% (p=0.6500) | 66.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 78.9% (p=0.5917) | 0.0% vs 28.6% (p=0.4750) | 100.0% vs 85.7% (p=0.0302) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 85.3% (p=1.0000) | 0.0% vs 20.0% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 93.6% (p=0.6060) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 89.5% vs 98.9% (p=0.0096) | 0.0% vs 2.2% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Policy: Institutional Reform* | 93.6% vs 100.0% (p=0.6060) | 1.2% vs 0.0% (p=1.0000) | 88.9% vs 100.0% (p=0.5920) |
-| ↳ *Policy: Trauma Relief* | 86.8% vs 99.1% (p=0.0005) | 0.0% vs 1.9% (p=1.0000) | 75.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 91.7% (p=0.0358) | 0.0% vs 1.6% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 93.6% (p=0.9000) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 89.5% vs 98.9% (p=1.0000) | 0.0% vs 2.2% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Policy: Institutional Reform* | 93.6% vs 100.0% (p=0.9000) | 1.2% vs 0.0% (p=1.0000) | 88.9% vs 100.0% (p=0.5920) |
+| ↳ *Policy: Trauma Relief* | 86.8% vs 99.1% (p=0.4000) | 0.0% vs 1.9% (p=1.0000) | 75.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 91.7% (p=0.7667) | 0.0% vs 1.6% (p=1.0000) | 100.0% vs 85.7% (p=0.0302) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 94.2% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 100.0% vs 98.2% (p=1.0000) | 0.0% vs 3.7% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 97.7% vs 100.0% (p=0.5553) | 4.8% vs 0.0% (p=0.5511) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 97.7% vs 100.0% (p=1.0000) | 4.8% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 98.2% vs 100.0% (p=1.0000) | 3.7% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 97.7% vs 100.0% (p=0.5553) | 4.8% vs 0.0% (p=0.5511) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 97.7% vs 100.0% (p=1.0000) | 4.8% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 98.0% (p=1.0000) | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 90.1% (p=0.2264) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 77.6% (p=< 0.0001) | 0.0% vs 19.4% (p=0.0011) | 100.0% vs 75.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 89.5% vs 97.4% (p=0.2024) | 8.3% vs 5.6% (p=1.0000) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Trauma Relief* | 83.2% vs 98.9% (p=0.0001) | 13.3% vs 2.2% (p=0.1103) | 80.0% vs 100.0% (p=0.0012) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 88.8% (p=0.0263) | 0.0% vs 9.7% (p=0.3371) | 100.0% vs 87.5% (p=0.2047) |
-| ↳ *Policy: Anti-Human Bias* | 100.0% vs 90.1% (p=0.2264) | 0.0% vs 8.6% (p=1.0000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 90.1% (p=0.9000) | 0.0% vs 8.6% (p=0.9000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 77.6% (p=0.1333) | 0.0% vs 19.4% (p=0.1333) | 100.0% vs 75.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 89.5% vs 97.4% (p=1.0000) | 8.3% vs 5.6% (p=1.0000) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 83.2% vs 98.9% (p=1.0000) | 13.3% vs 2.2% (p=1.0000) | 80.0% vs 100.0% (p=0.0012) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 88.8% (p=0.8222) | 0.0% vs 9.7% (p=0.8222) | 100.0% vs 87.5% (p=0.2047) |
+| ↳ *Policy: Anti-Human Bias* | 100.0% vs 90.1% (p=0.9000) | 0.0% vs 8.6% (p=0.9000) | 100.0% vs 88.9% (p=0.5920) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 100.0% vs 96.5% (p=1.0000) | 0.0% vs 7.4% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 94.7% (p=0.0827) | 0.0% vs 11.1% (p=0.0773) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 100.0% vs 84.2% (p=< 0.0001) | 0.0% vs 33.3% (p=< 0.0001) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 95.5% (p=0.1809) | 0.0% vs 9.5% (p=0.1728) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.1% (p=0.6015) | 0.0% vs 8.3% (p=0.3427) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 94.7% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 100.0% vs 84.2% (p=0.2000) | 0.0% vs 33.3% (p=0.2000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 95.5% (p=1.0000) | 0.0% vs 9.5% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 96.1% (p=1.0000) | 0.0% vs 8.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 6.7% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 96.2% (p=0.3245) | 0.0% vs 7.9% (p=0.3169) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 98.9% vs 95.8% (p=0.3683) | 2.2% vs 8.9% (p=0.3607) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 98.8% vs 84.2% (p=0.0075) | 2.5% vs 33.3% (p=0.0064) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 95.6% (p=0.1592) | 0.0% vs 9.3% (p=0.0805) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 96.2% (p=0.5917) | 0.0% vs 7.9% (p=0.5917) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 98.9% vs 95.8% (p=0.7222) | 2.2% vs 8.9% (p=0.7222) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 98.8% vs 84.2% (p=0.1000) | 2.5% vs 33.3% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 95.6% (p=0.4000) | 0.0% vs 9.3% (p=0.4000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 98.2% vs 97.0% (p=1.0000) | 3.7% vs 6.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.4% (p=1.0000) | 0.0% vs 5.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 85.7% (p=0.0011) | 0.0% vs 14.3% (p=0.0528) | 100.0% vs 85.7% (p=0.0302) |
-| ↳ *Policy: Coercion Protection* | 94.7% vs 85.3% (p=0.0507) | 11.1% vs 8.9% (p=1.0000) | 100.0% vs 80.0% (p=0.0012) |
-| ↳ *Policy: Institutional Reform* | 95.5% vs 77.2% (p=0.0003) | 9.5% vs 11.1% (p=1.0000) | 100.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 87.7% vs 93.4% (p=0.2270) | 7.4% vs 13.9% (p=0.4751) | 83.3% vs 100.0% (p=0.0054) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 85.7% (p=0.5917) | 0.0% vs 14.3% (p=0.4167) | 100.0% vs 85.7% (p=0.0302) |
+| ↳ *Policy: Coercion Protection* | 94.7% vs 85.3% (p=0.7222) | 11.1% vs 8.9% (p=1.0000) | 100.0% vs 80.0% (p=0.0012) |
+| ↳ *Policy: Institutional Reform* | 95.5% vs 77.2% (p=0.3000) | 9.5% vs 11.1% (p=1.0000) | 100.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 87.7% vs 93.4% (p=0.9000) | 7.4% vs 13.9% (p=0.7333) | 83.3% vs 100.0% (p=0.0054) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 90.0% (p=1.0000) | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 90.0% (p=1.0000) | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=100)** |  |  |  |
@@ -4074,10 +4074,10 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 7.9% vs 10.5% (p=0.6202) | 83.3% vs 77.8% (p=0.5981) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 11.6% vs 7.4% (p=0.4583) | 75.6% vs 84.4% (p=0.4299) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 7.9% vs 10.5% (p=0.6905) | 83.3% vs 77.8% (p=0.6905) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 11.6% vs 7.4% (p=0.5635) | 75.6% vs 84.4% (p=0.5635) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 9.5% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 9.9% (p=1.0000) | 88.9% vs 79.0% (p=0.6809) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 9.9% (p=0.9000) | 88.9% vs 79.0% (p=0.9000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 9.5% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 7.4% vs 0.0% (p=1.0000) | 84.4% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -4148,23 +4148,23 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 9.5% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 10.5% vs 9.0% (p=0.7889) | 77.8% vs 81.0% (p=0.7770) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 11.2% vs 2.6% (p=0.1307) | 76.4% vs 94.4% (p=0.1082) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 10.5% vs 0.0% (p=0.2243) | 77.8% vs 100.0% (p=0.1953) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 11.8% (p=0.0264) | 100.0% vs 75.0% (p=0.0184) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 10.5% vs 9.0% (p=0.8333) | 77.8% vs 81.0% (p=0.8333) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 11.2% vs 2.6% (p=0.3111) | 76.4% vs 94.4% (p=0.3111) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 10.5% vs 0.0% (p=0.5000) | 77.8% vs 100.0% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 11.8% (p=0.0889) | 100.0% vs 75.0% (p=0.0889) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 9.5% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 7.0% vs 7.5% (p=1.0000) | 85.2% vs 84.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 7.4% vs 0.0% (p=1.0000) | 84.4% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 6.6% vs 10.5% (p=0.4850) | 86.1% vs 77.8% (p=0.4671) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 6.6% vs 10.5% (p=0.3556) | 86.1% vs 77.8% (p=0.3556) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 7.9% vs 7.2% (p=1.0000) | 83.3% vs 84.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 7.4% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 7.4% (p=1.0000) | 0.0% vs 84.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Mistral Small 24B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 16.8% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 30.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 22.1% vs 11.6% (p=0.0799) | 97.8% vs 97.8% (p=1.0000) | 40.0% vs 20.0% (p=0.0486) |
-| ↳ *Policy: Institutional Reform* | 27.2% vs 1.3% (p=< 0.0001) | 98.1% vs 97.2% (p=1.0000) | 50.0% vs 0.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 18.7% (p=0.0474) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 33.3% (p=0.0302) |
+| ↳ *Policy: Coercion Protection* | 22.1% vs 11.6% (p=0.7619) | 97.8% vs 97.8% (p=1.0000) | 40.0% vs 20.0% (p=0.0486) |
+| ↳ *Policy: Institutional Reform* | 27.2% vs 1.3% (p=0.1524) | 98.1% vs 97.2% (p=1.0000) | 50.0% vs 0.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 18.7% (p=0.8000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 33.3% (p=0.0302) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 16.8% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 30.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 16.8% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 30.0% (p=1.0000) |
 | **DeepSeek V3 (N=10)** |  |  |  |
@@ -4176,9 +4176,9 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Qwen 2.5 72B (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 2.3% (p=1.0000) | 0.0% vs 95.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 1.3% vs 3.5% (p=0.5762) | 97.2% vs 92.6% (p=0.5717) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 1.3% vs 3.5% (p=0.4857) | 97.2% vs 92.6% (p=0.4857) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 2.1% vs 2.6% (p=1.0000) | 95.6% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 3.2% (p=0.5574) | 100.0% vs 93.3% (p=0.5513) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 3.2% (p=0.4286) | 100.0% vs 93.3% (p=0.4286) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.3% (p=1.0000) | 0.0% vs 95.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.3% (p=1.0000) | 0.0% vs 95.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
@@ -4521,65 +4521,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 1.1% vs 3.2% (p=0.6210) | 97.8% vs 93.3% (p=0.6164) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 5.3% vs 0.8% (p=0.0815) | 88.9% vs 98.4% (p=0.0790) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 1.1% vs 3.2% (p=1.0000) | 97.8% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 5.3% vs 0.8% (p=0.3000) | 88.9% vs 98.4% (p=0.3000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 13.2% vs 2.6% (p=0.0071) | 100.0% vs 94.4% (p=0.2719) | 25.0% vs 0.0% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 3.5% vs 8.3% (p=0.3505) | 92.6% vs 98.4% (p=0.2131) | 0.0% vs 14.3% (p=0.0302) |
-| ↳ *Vote: Petition* | 0.0% vs 7.6% (p=0.3695) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
-| ↳ *Vote: Custom / Other* | 0.0% vs 7.6% (p=0.3695) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 7.0% (p=1.0000) | 88.9% vs 97.5% (p=0.2737) | 0.0% vs 11.1% (p=0.5920) |
+| ↳ *Vote: Organize* | 13.2% vs 2.6% (p=0.4714) | 100.0% vs 94.4% (p=0.2000) | 25.0% vs 0.0% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 3.5% vs 8.3% (p=0.9917) | 92.6% vs 98.4% (p=0.1833) | 0.0% vs 14.3% (p=0.0302) |
+| ↳ *Vote: Petition* | 0.0% vs 7.6% (p=0.7000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
+| ↳ *Vote: Custom / Other* | 0.0% vs 7.6% (p=0.7000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 7.0% (p=1.0000) | 88.9% vs 97.5% (p=0.3000) | 0.0% vs 11.1% (p=0.5920) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 9.0% vs 2.6% (p=0.3019) | 96.8% vs 94.4% (p=0.5346) | 14.3% vs 0.0% (p=0.1092) |
-| ↳ *Vote: Escalate* | 2.6% vs 9.0% (p=0.3019) | 94.4% vs 96.8% (p=0.5346) | 0.0% vs 14.3% (p=0.1092) |
+| ↳ *Vote: Organize* | 9.0% vs 2.6% (p=0.8056) | 96.8% vs 94.4% (p=1.0000) | 14.3% vs 0.0% (p=0.1092) |
+| ↳ *Vote: Escalate* | 2.6% vs 9.0% (p=0.8056) | 94.4% vs 96.8% (p=1.0000) | 0.0% vs 14.3% (p=0.1092) |
 | ↳ *Vote: Petition* | 0.0% vs 7.6% (p=1.0000) | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 7.6% (p=1.0000) | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 7.6% (p=1.0000) | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 1.3% vs 0.9% (p=1.0000) | 97.2% vs 98.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.0% vs 1.8% (p=0.5175) | 100.0% vs 96.3% (p=0.5146) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.0% vs 1.8% (p=0.4667) | 100.0% vs 96.3% (p=0.4667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 0.6% (p=0.1905) | 88.9% vs 98.8% (p=0.1910) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 0.6% (p=0.2000) | 88.9% vs 98.8% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 3.2% vs 6.6% (p=0.4688) | 93.3% vs 86.1% (p=0.4559) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 8.8% vs 2.6% (p=0.1187) | 81.5% vs 94.4% (p=0.1093) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 5.3% (p=0.6000) | 100.0% vs 88.9% (p=0.5878) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 3.2% vs 6.6% (p=0.7222) | 93.3% vs 86.1% (p=0.7222) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 8.8% vs 2.6% (p=0.3333) | 81.5% vs 94.4% (p=0.3333) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 5.3% (p=0.7778) | 100.0% vs 88.9% (p=0.7778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 4.7% (p=1.0000) | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.7% (p=1.0000) | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 15.8% vs 0.0% (p=0.0001) | 88.9% vs 100.0% (p=0.0624) | 20.0% vs 0.0% (p=0.0019) |
-| ↳ *Vote: Escalate* | 0.0% vs 13.2% (p=0.0028) | 100.0% vs 90.7% (p=0.1636) | 0.0% vs 16.7% (p=0.0273) |
-| ↳ *Vote: Petition* | 0.0% vs 9.9% (p=0.3799) | 100.0% vs 93.1% (p=1.0000) | 0.0% vs 12.5% (p=0.5946) |
+| ↳ *Vote: Organize* | 15.8% vs 0.0% (p=0.2857) | 88.9% vs 100.0% (p=0.4444) | 20.0% vs 0.0% (p=0.0019) |
+| ↳ *Vote: Escalate* | 0.0% vs 13.2% (p=0.5714) | 100.0% vs 90.7% (p=0.7500) | 0.0% vs 16.7% (p=0.0273) |
+| ↳ *Vote: Petition* | 0.0% vs 9.9% (p=0.8889) | 100.0% vs 93.1% (p=0.8889) | 0.0% vs 12.5% (p=0.5946) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 8.8% (p=1.0000) | 0.0% vs 93.8% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 8.8% (p=1.0000) | 0.0% vs 93.8% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 5.3% vs 1.1% (p=0.2113) | 88.9% vs 97.8% (p=0.2028) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 1.8% vs 3.8% (p=0.6705) | 96.3% vs 92.1% (p=0.6642) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 3.5% (p=1.0000) | 100.0% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 5.3% vs 1.1% (p=0.4444) | 88.9% vs 97.8% (p=0.4444) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 1.8% vs 3.8% (p=0.8250) | 96.3% vs 92.1% (p=0.8250) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 3.5% (p=0.9000) | 100.0% vs 92.6% (p=0.9000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 3.5% (p=1.0000) | 100.0% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 3.5% (p=0.9000) | 100.0% vs 92.6% (p=0.9000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 0.9% vs 1.3% (p=1.0000) | 98.1% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 1.3% (p=1.0000) | 100.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 0.6% (p=0.1905) | 88.9% vs 98.8% (p=0.1910) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 0.6% (p=0.2000) | 88.9% vs 98.8% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 3.9% vs 3.5% (p=1.0000) | 91.7% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.4404) | 88.9% vs 94.4% (p=0.4311) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.5952) | 88.9% vs 94.4% (p=0.5952) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 4.1% (p=0.8000) | 100.0% vs 91.4% (p=0.8000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 3.7% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.1% (p=0.8000) | 100.0% vs 91.4% (p=0.8000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 0.9% vs 1.3% (p=1.0000) | 98.1% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 1.3% (p=1.0000) | 100.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 0.6% (p=0.1905) | 88.9% vs 98.8% (p=0.1910) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 0.6% (p=0.2000) | 88.9% vs 98.8% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (MISLABELLED, N=100)** |  |  |  |
 | ↳ *Vote: Organize Average* | **5.4% vs 2.3% (p=0.4187)** | **95.2% vs 95.2% (p=0.5775)** | **5.9% vs 0.0% (p=0.6084)** |
 | ↳ *Vote: Escalate Average* | **2.9% vs 4.3% (p=0.3438)** | **93.9% vs 95.8% (p=0.3676)** | **0.0% vs 4.4% (p=0.5129)** |
@@ -4593,72 +4593,72 @@
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 2.6% vs 2.0% (p=1.0000) | 94.4% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 0.9% vs 3.9% (p=0.3036) | 98.1% vs 91.7% (p=0.2977) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.0% vs 0.0% (p=0.3183) | 93.7% vs 100.0% (p=0.3121) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 0.9% vs 3.9% (p=0.7333) | 98.1% vs 91.7% (p=0.7333) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.0% vs 0.0% (p=0.7667) | 93.7% vs 100.0% (p=0.7667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 2.3% vs 1.8% (p=1.0000) | 95.2% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 7.6% (p=0.3695) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 7.9% vs 2.6% (p=0.4710) | 97.2% vs 94.4% (p=0.4923) | 12.5% vs 0.0% (p=0.2047) |
-| ↳ *Policy: Institutional Reform* | 7.0% vs 5.3% (p=1.0000) | 97.5% vs 88.9% (p=0.2737) | 11.1% vs 0.0% (p=0.5920) |
-| ↳ *Policy: Trauma Relief* | 1.8% vs 9.0% (p=0.1131) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 14.3% (p=0.0302) |
-| ↳ *Policy: Equal Parity Standards* | 5.3% vs 7.0% (p=1.0000) | 88.9% vs 97.5% (p=0.2737) | 0.0% vs 11.1% (p=0.5920) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 7.6% (p=0.7000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 7.9% vs 2.6% (p=0.9333) | 97.2% vs 94.4% (p=1.0000) | 12.5% vs 0.0% (p=0.2047) |
+| ↳ *Policy: Institutional Reform* | 7.0% vs 5.3% (p=1.0000) | 97.5% vs 88.9% (p=0.3000) | 11.1% vs 0.0% (p=0.5920) |
+| ↳ *Policy: Trauma Relief* | 1.8% vs 9.0% (p=0.8417) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 14.3% (p=0.0302) |
+| ↳ *Policy: Equal Parity Standards* | 5.3% vs 7.0% (p=1.0000) | 88.9% vs 97.5% (p=0.3000) | 0.0% vs 11.1% (p=0.5920) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 6.8% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 10.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 8.6% (p=0.3655) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 12.5% (p=0.5946) |
-| ↳ *Policy: Coercion Protection* | 11.4% vs 0.0% (p=0.0051) | 94.4% vs 100.0% (p=0.5472) | 16.7% vs 0.0% (p=0.0273) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 8.6% (p=0.7778) | 100.0% vs 95.8% (p=1.0000) | 0.0% vs 12.5% (p=0.5946) |
+| ↳ *Policy: Coercion Protection* | 11.4% vs 0.0% (p=0.5714) | 94.4% vs 100.0% (p=0.7500) | 16.7% vs 0.0% (p=0.0273) |
 | ↳ *Policy: Institutional Reform* | 7.6% vs 0.0% (p=1.0000) | 96.3% vs 0.0% (p=1.0000) | 11.1% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 2.3% vs 26.3% (p=< 0.0001) | 95.2% vs 100.0% (p=1.0000) | 0.0% vs 50.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 9.8% (p=0.0749) | 100.0% vs 95.2% (p=1.0000) | 0.0% vs 14.3% (p=0.1092) |
+| ↳ *Policy: Trauma Relief* | 2.3% vs 26.3% (p=0.2222) | 95.2% vs 100.0% (p=0.8056) | 0.0% vs 50.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 9.8% (p=0.6389) | 100.0% vs 95.2% (p=0.8056) | 0.0% vs 14.3% (p=0.1092) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 7.6% (p=1.0000) | 0.0% vs 96.3% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 1.3% vs 0.0% (p=1.0000) | 97.2% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.3% vs 0.0% (p=1.0000) | 97.2% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 1.8% (p=0.5175) | 100.0% vs 96.3% (p=0.5146) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 1.8% (p=0.4667) | 100.0% vs 96.3% (p=0.4667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 4.7% (p=1.0000) | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 2.6% vs 8.8% (p=0.1187) | 94.4% vs 81.5% (p=0.1093) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 5.3% vs 0.0% (p=0.6000) | 88.9% vs 100.0% (p=0.5878) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 2.6% vs 8.8% (p=0.3333) | 94.4% vs 81.5% (p=0.3333) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 5.3% vs 0.0% (p=0.7778) | 88.9% vs 100.0% (p=0.7778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 4.2% vs 5.3% (p=1.0000) | 91.1% vs 88.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.0% (p=0.2017) | 100.0% vs 87.3% (p=0.1888) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.0% (p=0.5000) | 100.0% vs 87.3% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 4.7% (p=1.0000) | 0.0% vs 90.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 9.9% (p=0.3799) | 100.0% vs 93.1% (p=1.0000) | 0.0% vs 12.5% (p=0.5946) |
-| ↳ *Policy: Coercion Protection* | 1.1% vs 18.4% (p=< 0.0001) | 97.8% vs 88.9% (p=0.1659) | 0.0% vs 25.0% (p=0.0001) |
-| ↳ *Policy: Institutional Reform* | 10.5% vs 2.6% (p=0.1951) | 93.7% vs 94.4% (p=1.0000) | 14.3% vs 0.0% (p=0.1092) |
-| ↳ *Policy: Trauma Relief* | 4.2% vs 14.5% (p=0.0275) | 91.1% vs 97.2% (p=0.3752) | 0.0% vs 25.0% (p=0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 13.2% (p=0.0028) | 100.0% vs 90.7% (p=0.1636) | 0.0% vs 16.7% (p=0.0273) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 9.9% (p=0.8889) | 100.0% vs 93.1% (p=0.8889) | 0.0% vs 12.5% (p=0.5946) |
+| ↳ *Policy: Coercion Protection* | 1.1% vs 18.4% (p=0.1667) | 97.8% vs 88.9% (p=0.7222) | 0.0% vs 25.0% (p=0.0001) |
+| ↳ *Policy: Institutional Reform* | 10.5% vs 2.6% (p=0.8056) | 93.7% vs 94.4% (p=1.0000) | 14.3% vs 0.0% (p=0.1092) |
+| ↳ *Policy: Trauma Relief* | 4.2% vs 14.5% (p=0.5635) | 91.1% vs 97.2% (p=1.0000) | 0.0% vs 25.0% (p=0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 13.2% (p=0.5714) | 100.0% vs 90.7% (p=0.7500) | 0.0% vs 16.7% (p=0.0273) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 8.8% (p=1.0000) | 0.0% vs 93.8% (p=1.0000) | 0.0% vs 11.1% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 15.8% vs 1.8% (p=0.0141) | 66.7% vs 96.3% (p=0.0122) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 15.8% vs 1.8% (p=0.1000) | 66.7% vs 96.3% (p=0.1000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 3.2% vs 0.0% (p=1.0000) | 93.3% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 2.0% vs 7.9% (p=0.0956) | 95.8% vs 83.3% (p=0.0917) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 2.0% vs 7.9% (p=0.2222) | 95.8% vs 83.3% (p=0.2222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 3.2% vs 3.2% (p=1.0000) | 93.3% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.2% (p=1.0000) | 0.0% vs 93.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 0.7% vs 2.6% (p=0.3608) | 98.6% vs 94.4% (p=0.3618) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 0.7% vs 2.6% (p=0.3608) | 98.6% vs 94.4% (p=0.3618) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 0.7% vs 2.6% (p=0.3778) | 98.6% vs 94.4% (p=0.3778) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 0.7% vs 2.6% (p=0.3778) | 98.6% vs 94.4% (p=0.3778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.3% vs 0.0% (p=1.0000) | 97.2% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.3% (p=1.0000) | 100.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 91.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 5.3% vs 2.1% (p=0.4443) | 88.9% vs 95.6% (p=0.4340) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.3% vs 5.3% (p=0.6286) | 93.1% vs 88.9% (p=0.6236) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 4.1% (p=0.8000) | 100.0% vs 91.4% (p=0.8000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 5.3% vs 2.1% (p=0.5635) | 88.9% vs 95.6% (p=0.5635) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.3% vs 5.3% (p=0.7333) | 93.1% vs 88.9% (p=0.7333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 3.9% vs 3.5% (p=1.0000) | 91.7% vs 92.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 4.6% (p=0.3482) | 100.0% vs 90.3% (p=0.3371) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 4.6% (p=0.5778) | 100.0% vs 90.3% (p=0.5778) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.7% (p=1.0000) | 0.0% vs 92.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.3% (p=1.0000) | 100.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 0.9% vs 1.3% (p=1.0000) | 98.1% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.2% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 1.5% (p=1.0000) | 100.0% vs 96.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 1.5% (p=0.5333) | 100.0% vs 96.8% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (MISLABELLED, N=100)** |  |  |  |
@@ -4990,16 +4990,16 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 84.2% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 84.2% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 57.9% (p=0.8075) | 100.0% vs 76.5% (p=0.1953) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Vote: Escalate* | 57.9% vs 52.6% (p=0.8075) | 76.5% vs 100.0% (p=0.1953) | 88.9% vs 100.0% (p=0.5920) |
+| ↳ *Vote: Organize* | 52.6% vs 57.9% (p=0.9000) | 100.0% vs 76.5% (p=0.1000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Vote: Escalate* | 57.9% vs 52.6% (p=0.9000) | 76.5% vs 100.0% (p=0.1000) | 88.9% vs 100.0% (p=0.5920) |
 | ↳ *Vote: Petition* | 0.0% vs 57.4% (p=1.0000) | 0.0% vs 78.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 57.4% (p=1.0000) | 0.0% vs 78.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 57.4% (p=1.0000) | 0.0% vs 78.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 13.5% vs 19.3% (p=0.3787) | 71.4% vs 59.3% (p=0.3261) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 13.5% vs 19.3% (p=0.3333) | 71.4% vs 59.3% (p=0.3333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 15.8% vs 15.1% (p=1.0000) | 66.7% vs 68.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 15.3% (p=1.0000) | 0.0% vs 67.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 26.3% vs 14.0% (p=0.1776) | 44.4% vs 70.4% (p=0.1409) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 26.3% vs 14.0% (p=0.2000) | 44.4% vs 70.4% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 15.3% (p=1.0000) | 0.0% vs 67.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -5026,10 +5026,10 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 54.4% vs 29.3% (p=0.0017) | 96.3% vs 85.7% (p=0.2710) | 100.0% vs 42.9% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 31.6% vs 40.4% (p=0.2826) | 88.9% vs 88.9% (p=1.0000) | 50.0% vs 66.7% (p=0.1021) |
+| ↳ *Vote: Organize* | 54.4% vs 29.3% (p=0.2750) | 96.3% vs 85.7% (p=0.7000) | 100.0% vs 42.9% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 31.6% vs 40.4% (p=0.6762) | 88.9% vs 88.9% (p=1.0000) | 50.0% vs 66.7% (p=0.1021) |
 | ↳ *Vote: Petition* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 26.3% vs 41.4% (p=0.0512) | 81.5% vs 92.1% (p=0.1593) | 33.3% vs 71.4% (p=0.0007) |
+| ↳ *Vote: Custom / Other* | 26.3% vs 41.4% (p=0.5083) | 81.5% vs 92.1% (p=0.7000) | 33.3% vs 71.4% (p=0.0007) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Nemotron 3.5 (Super-120B) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -5059,19 +5059,19 @@
 | ↳ *Policy: Coercion Protection* | 84.2% vs 0.0% (p=1.0000) | 22.2% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 84.2% vs 0.0% (p=1.0000) | 22.2% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 84.2% vs 0.0% (p=1.0000) | 22.2% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 84.2% vs 84.2% (p=1.0000) | 17.5% vs 33.3% (p=0.1067) | 85.7% vs 100.0% (p=0.0302) |
+| ↳ *Policy: Equal Parity Standards* | 84.2% vs 84.2% (p=1.0000) | 17.5% vs 33.3% (p=0.4500) | 85.7% vs 100.0% (p=0.0302) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 84.2% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 68.4% vs 56.1% (p=0.3393) | 66.7% vs 80.2% (p=0.3918) | 100.0% vs 88.9% (p=0.5920) |
-| ↳ *Policy: Coercion Protection* | 56.6% vs 60.5% (p=0.7163) | 77.8% vs 83.3% (p=0.7538) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Institutional Reform* | 56.6% vs 60.5% (p=0.7163) | 77.8% vs 83.3% (p=0.7538) | 87.5% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Trauma Relief* | 61.8% vs 54.4% (p=0.3693) | 80.6% vs 77.8% (p=0.7983) | 100.0% vs 83.3% (p=0.0054) |
-| ↳ *Policy: Equal Parity Standards* | 66.3% vs 48.4% (p=0.0187) | 71.1% vs 86.7% (p=0.1198) | 100.0% vs 80.0% (p=0.0012) |
+| ↳ *Policy: Alex Retribution* | 68.4% vs 56.1% (p=0.4000) | 66.7% vs 80.2% (p=0.4000) | 100.0% vs 88.9% (p=0.5920) |
+| ↳ *Policy: Coercion Protection* | 56.6% vs 60.5% (p=0.8889) | 77.8% vs 83.3% (p=0.7333) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Institutional Reform* | 56.6% vs 60.5% (p=0.8889) | 77.8% vs 83.3% (p=0.7333) | 87.5% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 61.8% vs 54.4% (p=0.8952) | 80.6% vs 77.8% (p=0.7524) | 100.0% vs 83.3% (p=0.0054) |
+| ↳ *Policy: Equal Parity Standards* | 66.3% vs 48.4% (p=0.0476) | 71.1% vs 86.7% (p=0.0476) | 100.0% vs 80.0% (p=0.0012) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 57.4% (p=1.0000) | 0.0% vs 78.9% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 15.3% (p=1.0000) | 0.0% vs 67.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 15.8% vs 15.1% (p=1.0000) | 66.7% vs 68.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 14.6% vs 21.1% (p=0.4997) | 69.1% vs 55.6% (p=0.4619) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 14.6% vs 21.1% (p=0.4000) | 69.1% vs 55.6% (p=0.4000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 15.3% vs 0.0% (p=1.0000) | 67.8% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 15.3% (p=1.0000) | 0.0% vs 67.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 15.3% (p=1.0000) | 0.0% vs 67.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -5105,10 +5105,10 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 36.8% vs 0.0% (p=1.0000) | 88.9% vs 0.0% (p=1.0000) | 60.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 38.8% vs 28.9% (p=0.3473) | 87.5% vs 94.4% (p=0.6799) | 62.5% vs 50.0% (p=0.3204) |
-| ↳ *Policy: Institutional Reform* | 35.1% vs 52.6% (p=0.1412) | 87.7% vs 100.0% (p=0.5896) | 55.6% vs 100.0% (p=0.0054) |
+| ↳ *Policy: Coercion Protection* | 38.8% vs 28.9% (p=0.8000) | 87.5% vs 94.4% (p=0.9778) | 62.5% vs 50.0% (p=0.3204) |
+| ↳ *Policy: Institutional Reform* | 35.1% vs 52.6% (p=1.0000) | 87.7% vs 100.0% (p=0.8000) | 55.6% vs 100.0% (p=0.0054) |
 | ↳ *Policy: Trauma Relief* | 36.8% vs 0.0% (p=1.0000) | 88.9% vs 0.0% (p=1.0000) | 60.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 73.7% vs 32.7% (p=0.0008) | 55.6% vs 92.6% (p=0.0077) | 100.0% vs 55.6% (p=0.0054) |
+| ↳ *Policy: Equal Parity Standards* | 73.7% vs 32.7% (p=0.3000) | 55.6% vs 92.6% (p=0.2000) | 100.0% vs 55.6% (p=0.0054) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Nemotron 3.5 (Super-120B) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -5119,9 +5119,9 @@
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=10)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 0.0% vs 2.6% (p=0.1587) | 100.0% vs 94.4% (p=0.1573) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 0.0% vs 2.6% (p=0.1333) | 100.0% vs 94.4% (p=0.1333) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.2% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 1.8% vs 0.0% (p=0.5175) | 96.3% vs 100.0% (p=0.5146) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 1.8% vs 0.0% (p=0.4667) | 96.3% vs 100.0% (p=0.4667) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
@@ -5443,65 +5443,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 45.1% vs 36.8% (p=0.3381) | 84.1% vs 96.3% (p=0.1628) | 71.4% vs 66.7% (p=0.6412) |
-| ↳ *Vote: Escalate* | 36.8% vs 45.1% (p=0.3381) | 96.3% vs 84.1% (p=0.1628) | 66.7% vs 71.4% (p=0.6412) |
+| ↳ *Vote: Organize* | 45.1% vs 36.8% (p=0.8750) | 84.1% vs 96.3% (p=0.7667) | 71.4% vs 66.7% (p=0.6412) |
+| ↳ *Vote: Escalate* | 36.8% vs 45.1% (p=0.8750) | 96.3% vs 84.1% (p=0.7667) | 66.7% vs 71.4% (p=0.6412) |
 | ↳ *Vote: Petition* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 48.7% vs 47.4% (p=0.8830) | 80.6% vs 92.6% (p=0.1081) | 75.0% vs 83.3% (p=0.3204) |
-| ↳ *Vote: Escalate* | 44.7% vs 50.0% (p=0.5536) | 88.9% vs 87.0% (p=1.0000) | 75.0% vs 83.3% (p=0.3204) |
-| ↳ *Vote: Petition* | 52.6% vs 47.4% (p=0.8096) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Vote: Custom / Other* | 52.6% vs 47.4% (p=0.8096) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Organize* | 48.7% vs 47.4% (p=1.0000) | 80.6% vs 92.6% (p=0.4714) | 75.0% vs 83.3% (p=0.3204) |
+| ↳ *Vote: Escalate* | 44.7% vs 50.0% (p=0.8571) | 88.9% vs 87.0% (p=1.0000) | 75.0% vs 83.3% (p=0.3204) |
+| ↳ *Vote: Petition* | 52.6% vs 47.4% (p=1.0000) | 100.0% vs 86.4% (p=0.7000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Custom / Other* | 52.6% vs 47.4% (p=1.0000) | 100.0% vs 86.4% (p=0.7000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 42.1% vs 38.6% (p=0.7480) | 90.5% vs 92.6% (p=1.0000) | 71.4% vs 66.7% (p=0.6412) |
-| ↳ *Vote: Escalate* | 31.6% vs 43.4% (p=0.2019) | 88.9% vs 91.7% (p=0.6579) | 50.0% vs 75.0% (p=0.0534) |
+| ↳ *Vote: Organize* | 42.1% vs 38.6% (p=0.8333) | 90.5% vs 92.6% (p=1.0000) | 71.4% vs 66.7% (p=0.6412) |
+| ↳ *Vote: Escalate* | 31.6% vs 43.4% (p=0.8000) | 88.9% vs 91.7% (p=1.0000) | 50.0% vs 75.0% (p=0.0534) |
 | ↳ *Vote: Petition* | 0.0% vs 41.1% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 41.1% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 39.8% (p=0.3291) | 100.0% vs 90.1% (p=1.0000) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 39.8% (p=1.0000) | 100.0% vs 90.1% (p=1.0000) | 100.0% vs 66.7% (p=0.0302) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 54.7% vs 38.9% (p=0.0415) | 73.3% vs 84.4% (p=0.3016) | 80.0% vs 60.0% (p=0.0486) |
-| ↳ *Vote: Escalate* | 60.5% vs 43.4% (p=0.0699) | 83.3% vs 77.8% (p=0.7538) | 100.0% vs 62.5% (p=0.0006) |
-| ↳ *Vote: Petition* | 0.0% vs 52.0% (p=< 0.0001) | 100.0% vs 76.5% (p=0.1953) | 0.0% vs 77.8% (p=< 0.0001) |
-| ↳ *Vote: Custom / Other* | 21.1% vs 49.7% (p=0.0271) | 55.6% vs 81.5% (p=0.0898) | 0.0% vs 77.8% (p=< 0.0001) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.2% (p=0.6345) | 100.0% vs 76.5% (p=0.1953) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Vote: Organize* | 54.7% vs 38.9% (p=0.5556) | 73.3% vs 84.4% (p=0.8810) | 80.0% vs 60.0% (p=0.0486) |
+| ↳ *Vote: Escalate* | 60.5% vs 43.4% (p=0.4444) | 83.3% vs 77.8% (p=0.8667) | 100.0% vs 62.5% (p=0.0006) |
+| ↳ *Vote: Petition* | 0.0% vs 52.0% (p=0.2000) | 100.0% vs 76.5% (p=0.8000) | 0.0% vs 77.8% (p=< 0.0001) |
+| ↳ *Vote: Custom / Other* | 21.1% vs 49.7% (p=0.4000) | 55.6% vs 81.5% (p=0.2000) | 0.0% vs 77.8% (p=< 0.0001) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.2% (p=1.0000) | 100.0% vs 76.5% (p=0.8000) | 100.0% vs 66.7% (p=0.0302) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 53.7% vs 48.7% (p=0.5410) | 75.6% vs 80.6% (p=0.7886) | 80.0% vs 75.0% (p=0.6165) |
-| ↳ *Vote: Escalate* | 64.9% vs 44.7% (p=0.0151) | 74.1% vs 79.6% (p=0.5818) | 100.0% vs 66.7% (p=0.0001) |
-| ↳ *Vote: Petition* | 0.0% vs 57.9% (p=< 0.0001) | 100.0% vs 75.0% (p=0.1958) | 0.0% vs 87.5% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 53.7% vs 48.7% (p=0.8651) | 75.6% vs 80.6% (p=1.0000) | 80.0% vs 75.0% (p=0.6165) |
+| ↳ *Vote: Escalate* | 64.9% vs 44.7% (p=0.3810) | 74.1% vs 79.6% (p=0.9405) | 100.0% vs 66.7% (p=0.0001) |
+| ↳ *Vote: Petition* | 0.0% vs 57.9% (p=0.1111) | 100.0% vs 75.0% (p=0.7778) | 0.0% vs 87.5% (p=< 0.0001) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 51.5% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 51.5% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 46.1% vs 52.6% (p=0.4747) | 86.1% vs 100.0% (p=0.2020) | 75.0% vs 100.0% (p=0.0105) |
-| ↳ *Vote: Escalate* | 52.6% vs 46.8% (p=0.6381) | 100.0% vs 87.7% (p=0.5896) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Organize* | 46.1% vs 52.6% (p=0.9556) | 86.1% vs 100.0% (p=0.6667) | 75.0% vs 100.0% (p=0.0105) |
+| ↳ *Vote: Escalate* | 52.6% vs 46.8% (p=1.0000) | 100.0% vs 87.7% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Vote: Petition* | 0.0% vs 47.4% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 47.4% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.8% (p=0.6381) | 100.0% vs 87.7% (p=0.5896) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.8% (p=1.0000) | 100.0% vs 87.7% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 30.5% vs 43.2% (p=0.0977) | 80.0% vs 97.8% (p=0.0151) | 40.0% vs 80.0% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 40.8% vs 34.2% (p=0.3623) | 97.2% vs 83.3% (p=0.0462) | 75.0% vs 50.0% (p=0.0137) |
+| ↳ *Vote: Organize* | 30.5% vs 43.2% (p=0.4444) | 80.0% vs 97.8% (p=0.4444) | 40.0% vs 80.0% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 40.8% vs 34.2% (p=0.7857) | 97.2% vs 83.3% (p=0.4667) | 75.0% vs 50.0% (p=0.0137) |
 | ↳ *Vote: Petition* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 35.1% (p=0.1412) | 100.0% vs 87.7% (p=0.5896) | 100.0% vs 55.6% (p=0.0054) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 35.1% (p=0.9000) | 100.0% vs 87.7% (p=0.9000) | 100.0% vs 55.6% (p=0.0054) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
 | ↳ *Vote: Organize* | 51.6% vs 50.5% (p=1.0000) | 80.0% vs 82.2% (p=1.0000) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 60.5% vs 48.7% (p=0.2086) | 83.3% vs 80.6% (p=1.0000) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Vote: Escalate* | 60.5% vs 48.7% (p=0.6222) | 83.3% vs 80.6% (p=1.0000) | 100.0% vs 75.0% (p=0.0105) |
 | ↳ *Vote: Petition* | 0.0% vs 51.1% (p=1.0000) | 0.0% vs 81.1% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 39.5% vs 53.9% (p=0.1463) | 72.2% vs 83.3% (p=0.3177) | 50.0% vs 87.5% (p=0.0006) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.1988) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Custom / Other* | 39.5% vs 53.9% (p=0.4667) | 72.2% vs 83.3% (p=0.8444) | 50.0% vs 87.5% (p=0.0006) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 47.4% vs 38.9% (p=0.2806) | 83.3% vs 84.4% (p=1.0000) | 75.0% vs 60.0% (p=0.1779) |
-| ↳ *Vote: Escalate* | 47.4% vs 38.9% (p=0.2806) | 83.3% vs 84.4% (p=1.0000) | 75.0% vs 60.0% (p=0.1779) |
+| ↳ *Vote: Organize* | 47.4% vs 38.9% (p=0.7222) | 83.3% vs 84.4% (p=1.0000) | 75.0% vs 60.0% (p=0.1779) |
+| ↳ *Vote: Escalate* | 47.4% vs 38.9% (p=0.7222) | 83.3% vs 84.4% (p=1.0000) | 75.0% vs 60.0% (p=0.1779) |
 | ↳ *Vote: Petition* | 0.0% vs 42.7% (p=1.0000) | 0.0% vs 84.0% (p=1.0000) | 0.0% vs 66.7% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 47.4% (p=0.0003) | 88.9% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=< 0.0001) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 47.4% (p=0.3333) | 88.9% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=< 0.0001) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 42.7% (p=1.0000) | 0.0% vs 84.0% (p=1.0000) | 0.0% vs 66.7% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Vote: Organize* | 43.2% vs 54.7% (p=0.1465) | 75.6% vs 95.6% (p=0.0139) | 60.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 55.3% vs 44.7% (p=0.1831) | 94.4% vs 79.6% (p=0.0674) | 100.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 43.2% vs 54.7% (p=0.5159) | 75.6% vs 95.6% (p=0.7222) | 60.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 55.3% vs 44.7% (p=0.6810) | 94.4% vs 79.6% (p=0.9000) | 100.0% vs 66.7% (p=< 0.0001) |
 | ↳ *Vote: Petition* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.5% (p=0.8114) | 100.0% vs 84.0% (p=0.3471) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.5% (p=1.0000) | 100.0% vs 84.0% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
 | ↳ *Vote: Organize Average* | **46.0% vs 45.2% (p=0.1948)** | **81.6% vs 89.9% (p=0.4013)** | **70.9% vs 76.7% (p=0.1192)** |
 | ↳ *Vote: Escalate Average* | **48.8% vs 44.3% (p=0.9306)** | **88.9% vs 83.7% (p=0.4214)** | **82.8% vs 69.6% (p=0.7244)** |
@@ -5514,74 +5514,74 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 40.1% (p=0.1998) | 100.0% vs 84.7% (p=0.1119) | 100.0% vs 62.5% (p=0.0006) |
-| ↳ *Policy: Coercion Protection* | 41.1% vs 44.2% (p=0.7693) | 80.0% vs 95.6% (p=0.0496) | 60.0% vs 80.0% (p=0.0486) |
-| ↳ *Policy: Institutional Reform* | 38.3% vs 52.6% (p=0.0792) | 82.5% vs 100.0% (p=0.0299) | 57.1% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 42.1% vs 43.2% (p=1.0000) | 77.8% vs 97.8% (p=0.0074) | 60.0% vs 80.0% (p=0.0486) |
-| ↳ *Policy: Equal Parity Standards* | 94.7% vs 36.8% (p=< 0.0001) | 11.1% vs 96.3% (p=< 0.0001) | 100.0% vs 66.7% (p=0.0302) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 40.1% (p=0.9556) | 100.0% vs 84.7% (p=0.6667) | 100.0% vs 62.5% (p=0.0006) |
+| ↳ *Policy: Coercion Protection* | 41.1% vs 44.2% (p=0.7619) | 80.0% vs 95.6% (p=0.7222) | 60.0% vs 80.0% (p=0.0486) |
+| ↳ *Policy: Institutional Reform* | 38.3% vs 52.6% (p=0.5000) | 82.5% vs 100.0% (p=0.5917) | 57.1% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 42.1% vs 43.2% (p=1.0000) | 77.8% vs 97.8% (p=0.4444) | 60.0% vs 80.0% (p=0.0486) |
+| ↳ *Policy: Equal Parity Standards* | 94.7% vs 36.8% (p=0.1000) | 11.1% vs 96.3% (p=0.1000) | 100.0% vs 66.7% (p=0.0302) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 47.4% (p=0.8096) | 100.0% vs 86.4% (p=0.5937) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Policy: Coercion Protection* | 58.9% vs 36.8% (p=0.0036) | 86.7% vs 88.9% (p=1.0000) | 100.0% vs 60.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 46.2% vs 63.2% (p=0.2260) | 88.9% vs 77.8% (p=0.3022) | 77.8% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Trauma Relief* | 41.1% vs 54.7% (p=0.0811) | 80.0% vs 95.6% (p=0.0496) | 60.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 84.2% vs 43.9% (p=0.0011) | 33.3% vs 93.8% (p=< 0.0001) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 47.4% (p=1.0000) | 100.0% vs 86.4% (p=0.7000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Coercion Protection* | 58.9% vs 36.8% (p=0.2778) | 86.7% vs 88.9% (p=1.0000) | 100.0% vs 60.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 46.2% vs 63.2% (p=0.4000) | 88.9% vs 77.8% (p=0.9000) | 77.8% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 41.1% vs 54.7% (p=0.3968) | 80.0% vs 95.6% (p=0.4048) | 60.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 84.2% vs 43.9% (p=0.3000) | 33.3% vs 93.8% (p=0.1000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 45.6% (p=< 0.0001) | 100.0% vs 90.1% (p=1.0000) | 0.0% vs 77.8% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 42.8% vs 34.2% (p=0.3630) | 93.1% vs 83.3% (p=0.1951) | 75.0% vs 50.0% (p=0.0534) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 45.6% (p=0.2000) | 100.0% vs 90.1% (p=1.0000) | 0.0% vs 77.8% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 42.8% vs 34.2% (p=0.9556) | 93.1% vs 83.3% (p=0.8444) | 75.0% vs 50.0% (p=0.0534) |
 | ↳ *Policy: Institutional Reform* | 41.1% vs 0.0% (p=1.0000) | 91.1% vs 0.0% (p=1.0000) | 70.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 42.1% vs 39.5% (p=0.7646) | 85.2% vs 100.0% (p=0.0196) | 66.7% vs 75.0% (p=0.5045) |
+| ↳ *Policy: Trauma Relief* | 42.1% vs 39.5% (p=0.9048) | 85.2% vs 100.0% (p=0.2000) | 66.7% vs 75.0% (p=0.5045) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 41.1% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 41.1% (p=1.0000) | 0.0% vs 91.1% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 44.7% vs 47.4% (p=0.8564) | 61.1% vs 83.3% (p=0.0536) | 50.0% vs 75.0% (p=0.0534) |
-| ↳ *Policy: Coercion Protection* | 49.1% vs 43.4% (p=0.4615) | 70.4% vs 91.7% (p=0.0179) | 66.7% vs 75.0% (p=0.5045) |
+| ↳ *Policy: Alex Retribution* | 44.7% vs 47.4% (p=1.0000) | 61.1% vs 83.3% (p=0.5778) | 50.0% vs 75.0% (p=0.0534) |
+| ↳ *Policy: Coercion Protection* | 49.1% vs 43.4% (p=0.8238) | 70.4% vs 91.7% (p=0.4238) | 66.7% vs 75.0% (p=0.5045) |
 | ↳ *Policy: Institutional Reform* | 46.8% vs 0.0% (p=1.0000) | 78.9% vs 0.0% (p=1.0000) | 70.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 37.9% vs 55.8% (p=0.0198) | 64.4% vs 93.3% (p=0.0014) | 40.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 84.2% vs 37.5% (p=< 0.0001) | 33.3% vs 90.3% (p=< 0.0001) | 100.0% vs 62.5% (p=0.0006) |
+| ↳ *Policy: Trauma Relief* | 37.9% vs 55.8% (p=0.3968) | 64.4% vs 93.3% (p=0.2857) | 40.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 84.2% vs 37.5% (p=0.0444) | 33.3% vs 90.3% (p=0.0667) | 100.0% vs 62.5% (p=0.0006) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 46.8% (p=1.0000) | 0.0% vs 78.9% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 73.7% vs 48.7% (p=0.0513) | 55.6% vs 80.6% (p=0.1051) | 100.0% vs 75.0% (p=0.1092) |
-| ↳ *Policy: Coercion Protection* | 57.9% vs 38.6% (p=0.0229) | 70.4% vs 92.6% (p=0.0254) | 83.3% vs 66.7% (p=0.1057) |
+| ↳ *Policy: Alex Retribution* | 73.7% vs 48.7% (p=0.4444) | 55.6% vs 80.6% (p=0.7778) | 100.0% vs 75.0% (p=0.1092) |
+| ↳ *Policy: Coercion Protection* | 57.9% vs 38.6% (p=0.4524) | 70.4% vs 92.6% (p=0.4524) | 83.3% vs 66.7% (p=0.1057) |
 | ↳ *Policy: Institutional Reform* | 51.5% vs 0.0% (p=1.0000) | 77.8% vs 0.0% (p=1.0000) | 77.8% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 59.6% vs 35.1% (p=0.0034) | 66.7% vs 100.0% (p=0.0004) | 83.3% vs 66.7% (p=0.1057) |
-| ↳ *Policy: Equal Parity Standards* | 71.1% vs 45.9% (p=0.0094) | 61.1% vs 82.5% (p=0.1037) | 100.0% vs 71.4% (p=0.0049) |
+| ↳ *Policy: Trauma Relief* | 59.6% vs 35.1% (p=0.3214) | 66.7% vs 100.0% (p=0.2738) | 83.3% vs 66.7% (p=0.1057) |
+| ↳ *Policy: Equal Parity Standards* | 71.1% vs 45.9% (p=0.4444) | 61.1% vs 82.5% (p=0.5278) | 100.0% vs 71.4% (p=0.0049) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 51.5% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) | 0.0% vs 77.8% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 57.9% vs 46.2% (p=0.3460) | 88.9% vs 88.9% (p=1.0000) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Policy: Coercion Protection* | 45.1% vs 52.6% (p=0.3474) | 84.1% vs 100.0% (p=0.0293) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Institutional Reform* | 52.6% vs 39.5% (p=0.0780) | 81.5% vs 100.0% (p=0.0051) | 83.3% vs 75.0% (p=0.3204) |
-| ↳ *Policy: Trauma Relief* | 52.6% vs 35.1% (p=0.0279) | 84.1% vs 100.0% (p=0.0293) | 85.7% vs 66.7% (p=0.0534) |
-| ↳ *Policy: Equal Parity Standards* | 94.7% vs 42.1% (p=< 0.0001) | 11.1% vs 97.5% (p=< 0.0001) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Alex Retribution* | 57.9% vs 46.2% (p=0.4000) | 88.9% vs 88.9% (p=1.0000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Coercion Protection* | 45.1% vs 52.6% (p=0.8917) | 84.1% vs 100.0% (p=0.5917) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Institutional Reform* | 52.6% vs 39.5% (p=0.3952) | 81.5% vs 100.0% (p=0.5667) | 83.3% vs 75.0% (p=0.3204) |
+| ↳ *Policy: Trauma Relief* | 52.6% vs 35.1% (p=0.3667) | 84.1% vs 100.0% (p=0.5917) | 85.7% vs 66.7% (p=0.0534) |
+| ↳ *Policy: Equal Parity Standards* | 94.7% vs 42.1% (p=0.2000) | 11.1% vs 97.5% (p=0.1000) | 100.0% vs 77.8% (p=0.2047) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 47.4% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 40.9% (p=0.0001) | 100.0% vs 87.7% (p=0.5896) | 0.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 35.8% vs 37.9% (p=0.8805) | 91.1% vs 86.7% (p=0.7391) | 60.0% vs 60.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 32.2% vs 55.3% (p=0.0137) | 87.5% vs 94.4% (p=0.6799) | 50.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 20.0% vs 53.7% (p=< 0.0001) | 80.0% vs 97.8% (p=0.0151) | 20.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 36.8% vs 36.8% (p=1.0000) | 77.8% vs 91.7% (p=0.1082) | 50.0% vs 62.5% (p=0.3204) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 40.9% (p=0.2000) | 100.0% vs 87.7% (p=0.9000) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 35.8% vs 37.9% (p=0.8413) | 91.1% vs 86.7% (p=0.7222) | 60.0% vs 60.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 32.2% vs 55.3% (p=0.2222) | 87.5% vs 94.4% (p=1.0000) | 50.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 20.0% vs 53.7% (p=0.0397) | 80.0% vs 97.8% (p=0.4444) | 20.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 36.8% vs 36.8% (p=1.0000) | 77.8% vs 91.7% (p=0.8444) | 50.0% vs 62.5% (p=0.3204) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 36.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.1988) | 100.0% vs 77.8% (p=0.2047) |
-| ↳ *Policy: Coercion Protection* | 57.9% vs 40.8% (p=0.0263) | 70.4% vs 97.2% (p=0.0018) | 83.3% vs 75.0% (p=0.3204) |
-| ↳ *Policy: Institutional Reform* | 50.4% vs 52.6% (p=0.8743) | 73.0% vs 100.0% (p=0.0022) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Trauma Relief* | 48.1% vs 57.9% (p=0.2679) | 77.8% vs 88.9% (p=0.2563) | 71.4% vs 100.0% (p=0.0006) |
-| ↳ *Policy: Equal Parity Standards* | 81.6% vs 43.4% (p=< 0.0001) | 38.9% vs 91.7% (p=< 0.0001) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 50.9% (p=1.0000) | 100.0% vs 79.0% (p=0.8000) | 100.0% vs 77.8% (p=0.2047) |
+| ↳ *Policy: Coercion Protection* | 57.9% vs 40.8% (p=0.3619) | 70.4% vs 97.2% (p=0.3000) | 83.3% vs 75.0% (p=0.3204) |
+| ↳ *Policy: Institutional Reform* | 50.4% vs 52.6% (p=0.9500) | 73.0% vs 100.0% (p=0.2917) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Trauma Relief* | 48.1% vs 57.9% (p=0.7250) | 77.8% vs 88.9% (p=0.7750) | 71.4% vs 100.0% (p=0.0006) |
+| ↳ *Policy: Equal Parity Standards* | 81.6% vs 43.4% (p=0.0444) | 38.9% vs 91.7% (p=0.0444) | 100.0% vs 75.0% (p=0.0105) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 51.1% (p=1.0000) | 0.0% vs 81.1% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 5.3% vs 47.4% (p=0.0003) | 88.9% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 50.5% vs 32.9% (p=0.0291) | 82.2% vs 86.1% (p=0.7645) | 80.0% vs 50.0% (p=0.0035) |
-| ↳ *Policy: Institutional Reform* | 44.4% vs 36.8% (p=0.4603) | 85.7% vs 77.8% (p=0.4712) | 71.4% vs 50.0% (p=0.1057) |
-| ↳ *Policy: Trauma Relief* | 34.7% vs 52.6% (p=0.0205) | 71.1% vs 100.0% (p=0.0004) | 40.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 63.2% vs 40.1% (p=0.0833) | 77.8% vs 84.7% (p=0.6317) | 100.0% vs 62.5% (p=0.0273) |
+| ↳ *Policy: Alex Retribution* | 5.3% vs 47.4% (p=0.3333) | 88.9% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 50.5% vs 32.9% (p=0.4206) | 82.2% vs 86.1% (p=0.8413) | 80.0% vs 50.0% (p=0.0035) |
+| ↳ *Policy: Institutional Reform* | 44.4% vs 36.8% (p=0.9167) | 85.7% vs 77.8% (p=0.8333) | 71.4% vs 50.0% (p=0.1057) |
+| ↳ *Policy: Trauma Relief* | 34.7% vs 52.6% (p=0.3730) | 71.1% vs 100.0% (p=0.0873) | 40.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 63.2% vs 40.1% (p=0.5556) | 77.8% vs 84.7% (p=0.8889) | 100.0% vs 62.5% (p=0.0273) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 42.7% (p=1.0000) | 0.0% vs 84.0% (p=1.0000) | 0.0% vs 66.7% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=10)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 26.3% vs 54.6% (p=0.0020) | 100.0% vs 81.9% (p=0.0632) | 50.0% vs 87.5% (p=0.0006) |
-| ↳ *Policy: Coercion Protection* | 59.9% vs 5.3% (p=< 0.0001) | 84.7% vs 88.9% (p=1.0000) | 100.0% vs 0.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 48.5% vs 52.6% (p=0.8114) | 84.0% vs 100.0% (p=0.3471) | 77.8% vs 100.0% (p=0.2047) |
-| ↳ *Policy: Trauma Relief* | 53.9% vs 45.6% (p=0.3006) | 69.4% vs 96.3% (p=0.0006) | 75.0% vs 83.3% (p=0.3204) |
-| ↳ *Policy: Equal Parity Standards* | 81.6% vs 40.8% (p=< 0.0001) | 38.9% vs 97.2% (p=< 0.0001) | 100.0% vs 75.0% (p=0.0105) |
+| ↳ *Policy: Alex Retribution* | 26.3% vs 54.6% (p=0.3111) | 100.0% vs 81.9% (p=0.6667) | 50.0% vs 87.5% (p=0.0006) |
+| ↳ *Policy: Coercion Protection* | 59.9% vs 5.3% (p=0.0222) | 84.7% vs 88.9% (p=1.0000) | 100.0% vs 0.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 48.5% vs 52.6% (p=1.0000) | 84.0% vs 100.0% (p=0.8000) | 77.8% vs 100.0% (p=0.2047) |
+| ↳ *Policy: Trauma Relief* | 53.9% vs 45.6% (p=0.7857) | 69.4% vs 96.3% (p=0.2333) | 75.0% vs 83.3% (p=0.3204) |
+| ↳ *Policy: Equal Parity Standards* | 81.6% vs 40.8% (p=0.0444) | 38.9% vs 97.2% (p=0.0444) | 100.0% vs 75.0% (p=0.0105) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=100)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **37.7% vs 46.9% (p=0.5693)** | **88.9% vs 84.7% (p=0.5760)** | **61.5% vs 75.3% (p=0.6180)** |
@@ -6112,20 +6112,20 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 97.1% (p=1.0000) | 0.0% vs 6.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 97.1% (p=1.0000) | 0.0% vs 6.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 72.5% vs 53.4% (p=0.0003) | 15.4% vs 34.9% (p=0.0044) | 61.5% vs 42.9% (p=0.0168) |
-| ↳ *Vote: Escalate* | 53.4% vs 72.5% (p=0.0003) | 34.9% vs 15.4% (p=0.0044) | 42.9% vs 61.5% (p=0.0168) |
+| ↳ *Vote: Organize* | 72.5% vs 53.4% (p=0.3368) | 15.4% vs 34.9% (p=0.2314) | 61.5% vs 42.9% (p=0.0168) |
+| ↳ *Vote: Escalate* | 53.4% vs 72.5% (p=0.3468) | 34.9% vs 15.4% (p=0.2379) | 42.9% vs 61.5% (p=0.0168) |
 | ↳ *Vote: Petition* | 0.0% vs 65.8% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 55.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 65.8% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 55.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 65.8% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 55.0% (p=1.0000) |
 | **Llama 3.1 70B (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 99.7% vs 73.7% (p=< 0.0001) | 0.6% vs 55.6% (p=< 0.0001) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 99.7% vs 73.7% (p=0.0500) | 0.6% vs 55.6% (p=0.0500) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 73.7% vs 99.7% (p=< 0.0001) | 55.6% vs 0.6% (p=< 0.0001) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 73.7% vs 99.7% (p=0.0500) | 55.6% vs 0.6% (p=0.0500) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 98.4% (p=1.0000) | 0.0% vs 3.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 90.9% vs 100.0% (p=0.3923) | 19.3% vs 0.0% (p=0.2146) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 100.0% vs 90.9% (p=0.3923) | 0.0% vs 19.3% (p=0.2146) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 90.9% vs 100.0% (p=0.8000) | 19.3% vs 0.0% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 100.0% vs 90.9% (p=0.8000) | 0.0% vs 19.3% (p=0.8000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 91.3% (p=1.0000) | 0.0% vs 18.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 91.3% (p=1.0000) | 0.0% vs 18.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 91.3% (p=1.0000) | 0.0% vs 18.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
@@ -6138,9 +6138,9 @@
 | **Qwen 2.5 72B (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 100.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.9% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) |
-| ↳ *Vote: Petition* | 100.0% vs 99.1% (p=0.5333) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.3% (p=0.5322) |
+| ↳ *Vote: Petition* | 100.0% vs 99.1% (p=0.5047) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.3% (p=0.5047) |
 | ↳ *Vote: Custom / Other* | 100.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.9% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 98.9% vs 100.0% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) | 98.0% vs 100.0% (p=0.4987) |
+| ↳ *Vote: Unparsed / Malformed* | 98.9% vs 100.0% (p=0.4748) | 0.0% vs 0.0% (p=1.0000) | 98.0% vs 100.0% (p=0.4748) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -6154,9 +6154,9 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 98.2% vs 95.9% (p=0.3593) | 3.7% vs 8.7% (p=0.3495) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 84.2% vs 97.2% (p=0.0221) | 33.3% vs 5.8% (p=0.0194) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 96.8% vs 96.2% (p=0.7745) | 6.8% vs 7.9% (p=0.7707) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 98.2% vs 95.9% (p=0.4413) | 3.7% vs 8.7% (p=0.4413) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 84.2% vs 97.2% (p=0.0500) | 33.3% vs 5.8% (p=0.0500) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 96.8% vs 96.2% (p=1.0000) | 6.8% vs 7.9% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 7.2% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 7.2% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=200)** |  |  |  |
@@ -6178,31 +6178,31 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 89.5% vs 97.5% (p=0.0995) | 22.2% vs 5.3% (p=0.0967) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 89.5% vs 97.5% (p=0.1000) | 22.2% vs 5.3% (p=0.1000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 97.4% vs 97.0% (p=1.0000) | 5.6% vs 6.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 99.0% vs 89.5% (p=0.0002) | 2.1% vs 22.2% (p=0.0001) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 99.2% vs 93.2% (p=0.0018) | 1.7% vs 14.3% (p=0.0015) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 99.5% vs 94.7% (p=0.0106) | 1.1% vs 11.1% (p=0.0094) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 99.0% vs 89.5% (p=0.0411) | 2.1% vs 22.2% (p=0.0411) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 99.2% vs 93.2% (p=0.0745) | 1.7% vs 14.3% (p=0.0745) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 99.5% vs 94.7% (p=0.2049) | 1.1% vs 11.1% (p=0.2049) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.1% (p=1.0000) | 0.0% vs 6.1% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 65.8% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 55.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 73.7% vs 64.9% (p=0.3677) | 0.0% vs 24.7% (p=0.0142) | 50.0% vs 55.6% (p=0.6444) |
-| ↳ *Policy: Institutional Reform* | 63.8% vs 77.2% (p=0.0504) | 24.2% vs 11.1% (p=0.2074) | 52.9% vs 66.7% (p=0.2320) |
+| ↳ *Policy: Coercion Protection* | 73.7% vs 64.9% (p=0.8263) | 0.0% vs 24.7% (p=0.4789) | 50.0% vs 55.6% (p=0.6444) |
+| ↳ *Policy: Institutional Reform* | 63.8% vs 77.2% (p=0.7298) | 24.2% vs 11.1% (p=0.6789) | 52.9% vs 66.7% (p=0.2320) |
 | ↳ *Policy: Trauma Relief* | 65.8% vs 0.0% (p=1.0000) | 22.2% vs 0.0% (p=1.0000) | 55.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 64.0% (p=0.0003) | 0.0% vs 23.4% (p=0.2105) | 100.0% vs 52.6% (p=0.0023) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 64.0% (p=0.9500) | 0.0% vs 23.4% (p=0.8500) | 100.0% vs 52.6% (p=0.0023) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 65.8% (p=1.0000) | 0.0% vs 22.2% (p=1.0000) | 0.0% vs 55.0% (p=1.0000) |
 | **Llama 3.1 70B (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 97.4% (p=0.0852) | 0.0% vs 5.6% (p=0.0825) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 97.4% vs 99.5% (p=0.2150) | 5.6% vs 1.1% (p=0.2108) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 97.4% (p=0.7751) | 0.0% vs 5.6% (p=0.7751) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 97.4% vs 99.5% (p=1.0000) | 5.6% vs 1.1% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 98.5% vs 98.2% (p=1.0000) | 3.3% vs 3.7% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 97.7% (p=0.1845) | 0.0% vs 4.8% (p=0.1805) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 98.0% (p=0.6042) | 0.0% vs 4.2% (p=0.6012) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 97.7% (p=0.7931) | 0.0% vs 4.8% (p=0.7931) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 98.0% (p=0.8316) | 0.0% vs 4.2% (p=0.8316) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 100.0% vs 98.3% (p=1.0000) | 0.0% vs 3.5% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 92.1% vs 91.2% (p=1.0000) | 16.7% vs 18.5% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 87.2% vs 93.5% (p=0.0545) | 27.0% vs 13.7% (p=0.0422) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 89.5% vs 94.7% (p=0.0888) | 22.2% vs 11.1% (p=0.0722) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 92.1% vs 91.0% (p=0.8434) | 16.7% vs 19.0% (p=0.8345) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 87.2% vs 93.5% (p=0.3983) | 27.0% vs 13.7% (p=0.3983) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 89.5% vs 94.7% (p=0.4703) | 22.2% vs 11.1% (p=0.4703) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 92.1% vs 91.0% (p=0.9455) | 16.7% vs 19.0% (p=0.9455) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 91.3% (p=1.0000) | 0.0% vs 18.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 91.3% (p=1.0000) | 0.0% vs 18.3% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **DeepSeek V3 (N=20)** |  |  |  |
@@ -6216,7 +6216,7 @@
 | ↳ *Policy: Alex Retribution* | 100.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.8% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 100.0% vs 99.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 98.8% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 99.3% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 98.7% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 98.7% vs 100.0% (p=0.1766) | 0.0% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=0.1760) |
+| ↳ *Policy: Trauma Relief* | 98.7% vs 100.0% (p=0.1644) | 0.0% vs 0.0% (p=1.0000) | 97.5% vs 100.0% (p=0.1644) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 98.9% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
@@ -6234,10 +6234,10 @@
 | ↳ *Policy: Equal Parity Standards* | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 97.9% vs 96.1% (p=0.5312) | 4.4% vs 8.1% (p=0.5225) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 92.1% vs 97.1% (p=0.1306) | 16.7% vs 6.2% (p=0.1268) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 96.2% vs 100.0% (p=0.3790) | 8.0% vs 0.0% (p=0.3684) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 94.2% vs 98.9% (p=0.0203) | 12.2% vs 2.2% (p=0.0180) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 97.9% vs 96.1% (p=0.5862) | 4.4% vs 8.1% (p=0.5862) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 92.1% vs 97.1% (p=0.1684) | 16.7% vs 6.2% (p=0.1684) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 96.2% vs 100.0% (p=0.4579) | 8.0% vs 0.0% (p=0.4579) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 94.2% vs 98.9% (p=0.0325) | 12.2% vs 2.2% (p=0.0325) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 7.2% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 7.2% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=200)** |  |  |  |
@@ -6559,65 +6559,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 86.1% vs 98.7% (p=< 0.0001) | 9.1% vs 1.4% (p=0.0460) | 81.8% vs 98.8% (p=0.0001) |
-| ↳ *Vote: Escalate* | 100.0% vs 87.4% (p=< 0.0001) | 0.0% vs 8.5% (p=0.0317) | 100.0% vs 83.8% (p=0.0003) |
-| ↳ *Vote: Petition* | 94.7% vs 91.2% (p=1.0000) | 11.1% vs 5.6% (p=0.4264) | 100.0% vs 88.3% (p=0.6054) |
+| ↳ *Vote: Organize* | 86.1% vs 98.7% (p=0.5067) | 9.1% vs 1.4% (p=0.5067) | 81.8% vs 98.8% (p=0.5067) |
+| ↳ *Vote: Escalate* | 100.0% vs 87.4% (p=0.2839) | 0.0% vs 8.5% (p=0.4673) | 100.0% vs 83.8% (p=0.3793) |
+| ↳ *Vote: Petition* | 94.7% vs 91.2% (p=1.0000) | 11.1% vs 5.6% (p=1.0000) | 100.0% vs 88.3% (p=0.9474) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 91.4% (p=1.0000) | 0.0% vs 5.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 94.7% vs 91.2% (p=1.0000) | 0.0% vs 6.2% (p=1.0000) | 90.0% vs 88.9% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 94.7% vs 91.2% (p=1.0000) | 0.0% vs 6.2% (p=0.9474) | 90.0% vs 88.9% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 93.8% vs 100.0% (p=0.0004) | 3.0% vs 0.0% (p=0.2534) | 90.9% vs 100.0% (p=0.0023) |
-| ↳ *Vote: Escalate* | 100.0% vs 95.1% (p=0.0123) | 0.0% vs 2.4% (p=0.5551) | 100.0% vs 92.9% (p=0.0345) |
-| ↳ *Vote: Petition* | 100.0% vs 96.2% (p=0.3790) | 0.0% vs 1.9% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
+| ↳ *Vote: Organize* | 93.8% vs 100.0% (p=1.0000) | 3.0% vs 0.0% (p=1.0000) | 90.9% vs 100.0% (p=0.0023) |
+| ↳ *Vote: Escalate* | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 2.4% (p=1.0000) | 100.0% vs 92.9% (p=0.0345) |
+| ↳ *Vote: Petition* | 100.0% vs 96.2% (p=1.0000) | 0.0% vs 1.9% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 1.7% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 100.0% vs 96.4% (p=1.0000) | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 96.8% vs 99.5% (p=0.1215) | 6.7% vs 1.1% (p=0.1177) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 99.2% vs 97.6% (p=0.4292) | 1.6% vs 5.1% (p=0.4241) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 100.0% vs 98.0% (p=1.0000) | 0.0% vs 4.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 96.8% vs 99.5% (p=1.0000) | 6.7% vs 1.1% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 99.2% vs 97.6% (p=1.0000) | 1.6% vs 5.1% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 100.0% vs 98.0% (p=0.9053) | 0.0% vs 4.3% (p=0.9053) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 98.2% (p=1.0000) | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 100.0% vs 98.1% (p=1.0000) | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 96.1% vs 90.4% (p=0.0445) | 8.3% vs 11.1% (p=0.6192) | 100.0% vs 91.7% (p=0.0065) |
-| ↳ *Vote: Escalate* | 85.1% vs 95.9% (p=0.0005) | 13.0% vs 8.7% (p=0.4205) | 83.3% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 91.2% vs 92.9% (p=0.5899) | 18.5% vs 8.5% (p=0.1549) | 100.0% vs 94.1% (p=0.3643) |
-| ↳ *Vote: Custom / Other* | 100.0% vs 92.2% (p=0.3814) | 0.0% vs 10.5% (p=0.6017) | 100.0% vs 94.7% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 91.8% (p=0.0947) | 0.0% vs 11.1% (p=0.2230) | 100.0% vs 94.4% (p=0.6026) |
+| ↳ *Vote: Organize* | 96.1% vs 90.4% (p=0.9020) | 8.3% vs 11.1% (p=0.8366) | 100.0% vs 91.7% (p=0.0065) |
+| ↳ *Vote: Escalate* | 85.1% vs 95.9% (p=0.3058) | 13.0% vs 8.7% (p=0.6682) | 83.3% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 91.2% vs 92.9% (p=1.0000) | 18.5% vs 8.5% (p=1.0000) | 100.0% vs 94.1% (p=0.3643) |
+| ↳ *Vote: Custom / Other* | 100.0% vs 92.2% (p=1.0000) | 0.0% vs 10.5% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 91.8% (p=0.9105) | 0.0% vs 11.1% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 94.7% vs 99.4% (p=0.0146) | 1.0% vs 1.2% (p=1.0000) | 90.9% vs 100.0% (p=0.0023) |
-| ↳ *Vote: Escalate* | 100.0% vs 95.5% (p=0.0213) | 0.0% vs 1.6% (p=1.0000) | 100.0% vs 92.9% (p=0.0345) |
-| ↳ *Vote: Petition* | 94.7% vs 97.0% (p=0.4647) | 11.1% vs 0.6% (p=0.0978) | 100.0% vs 94.7% (p=1.0000) |
+| ↳ *Vote: Organize* | 94.7% vs 99.4% (p=0.8791) | 1.0% vs 1.2% (p=1.0000) | 90.9% vs 100.0% (p=0.0023) |
+| ↳ *Vote: Escalate* | 100.0% vs 95.5% (p=0.6062) | 0.0% vs 1.6% (p=0.5492) | 100.0% vs 92.9% (p=0.0345) |
+| ↳ *Vote: Petition* | 94.7% vs 97.0% (p=1.0000) | 11.1% vs 0.6% (p=0.1000) | 100.0% vs 94.7% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 96.5% (p=0.6185) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 96.5% (p=0.8158) | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 100.0% vs 96.2% (p=0.0094) | 0.0% vs 7.1% (p=0.0170) | 100.0% vs 99.1% (p=1.0000) |
-| ↳ *Vote: Escalate* | 96.7% vs 98.7% (p=0.2751) | 6.9% vs 1.9% (p=0.1177) | 100.0% vs 99.2% (p=1.0000) |
-| ↳ *Vote: Petition* | 89.5% vs 98.3% (p=0.0554) | 22.2% vs 2.9% (p=0.0411) | 100.0% vs 99.5% (p=1.0000) |
+| ↳ *Vote: Organize* | 100.0% vs 96.2% (p=0.1054) | 0.0% vs 7.1% (p=0.2284) | 100.0% vs 99.1% (p=1.0000) |
+| ↳ *Vote: Escalate* | 96.7% vs 98.7% (p=0.4668) | 6.9% vs 1.9% (p=0.4313) | 100.0% vs 99.2% (p=1.0000) |
+| ↳ *Vote: Petition* | 89.5% vs 98.3% (p=0.1500) | 22.2% vs 2.9% (p=0.1500) | 100.0% vs 99.5% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 99.5% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 97.4% vs 98.0% (p=0.5731) | 0.0% vs 4.3% (p=1.0000) | 95.0% vs 100.0% (p=0.1000) |
+| ↳ *Vote: Unparsed / Malformed* | 97.4% vs 98.0% (p=1.0000) | 0.0% vs 4.3% (p=1.0000) | 95.0% vs 100.0% (p=0.1000) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 91.1% vs 100.0% (p=< 0.0001) | 7.8% vs 0.0% (p=0.0138) | 90.0% vs 100.0% (p=0.0015) |
-| ↳ *Vote: Escalate* | 100.0% vs 94.0% (p=0.0091) | 0.0% vs 5.2% (p=0.1949) | 100.0% vs 93.3% (p=0.0692) |
-| ↳ *Vote: Petition* | 100.0% vs 94.4% (p=0.0298) | 0.0% vs 4.9% (p=0.3476) | 100.0% vs 93.8% (p=0.2167) |
-| ↳ *Vote: Custom / Other* | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
+| ↳ *Vote: Organize* | 91.1% vs 100.0% (p=0.4758) | 7.8% vs 0.0% (p=0.4758) | 90.0% vs 100.0% (p=0.0015) |
+| ↳ *Vote: Escalate* | 100.0% vs 94.0% (p=0.8011) | 0.0% vs 5.2% (p=0.8011) | 100.0% vs 93.3% (p=0.0692) |
+| ↳ *Vote: Petition* | 100.0% vs 94.4% (p=0.8316) | 0.0% vs 4.9% (p=0.8316) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Vote: Custom / Other* | 100.0% vs 95.3% (p=0.9500) | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 95.5% (p=1.0000) | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 95.3% vs 88.4% (p=0.0232) | 10.0% vs 13.3% (p=0.6433) | 100.0% vs 90.0% (p=0.0015) |
-| ↳ *Vote: Escalate* | 85.5% vs 96.1% (p=0.0004) | 16.7% vs 8.3% (p=0.1009) | 87.5% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 100.0% vs 90.9% (p=0.0578) | 0.0% vs 13.0% (p=0.1362) | 100.0% vs 94.4% (p=0.6026) |
+| ↳ *Vote: Organize* | 95.3% vs 88.4% (p=0.7606) | 10.0% vs 13.3% (p=1.0000) | 100.0% vs 90.0% (p=0.0015) |
+| ↳ *Vote: Escalate* | 85.5% vs 96.1% (p=0.4498) | 16.7% vs 8.3% (p=0.5352) | 87.5% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 100.0% vs 90.9% (p=0.9105) | 0.0% vs 13.0% (p=1.0000) | 100.0% vs 94.4% (p=0.6026) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 91.8% (p=1.0000) | 0.0% vs 11.7% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 91.8% (p=1.0000) | 0.0% vs 11.7% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 97.1% vs 98.1% (p=0.7368) | 6.2% vs 4.0% (p=0.7333) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 98.7% vs 96.9% (p=0.3255) | 2.8% vs 6.5% (p=0.3190) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 94.7% vs 98.0% (p=0.2242) | 11.1% vs 4.3% (p=0.2231) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 97.1% vs 98.1% (p=0.7881) | 6.2% vs 4.0% (p=0.7881) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 98.7% vs 96.9% (p=0.4688) | 2.8% vs 6.5% (p=0.4688) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 94.7% vs 98.0% (p=0.2263) | 11.1% vs 4.3% (p=0.2263) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 97.6% (p=1.0000) | 0.0% vs 5.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 94.0% vs 87.4% (p=0.0513) | 12.7% vs 9.4% (p=0.6118) | 100.0% vs 84.6% (p=0.0001) |
-| ↳ *Vote: Escalate* | 83.0% vs 95.2% (p=0.0001) | 11.1% vs 10.1% (p=1.0000) | 77.8% vs 100.0% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 96.5% vs 88.5% (p=0.0942) | 7.4% vs 11.1% (p=0.7428) | 100.0% vs 88.2% (p=0.0485) |
+| ↳ *Vote: Organize* | 94.0% vs 87.4% (p=0.6342) | 12.7% vs 9.4% (p=0.7871) | 100.0% vs 84.6% (p=0.0001) |
+| ↳ *Vote: Escalate* | 83.0% vs 95.2% (p=0.3778) | 11.1% vs 10.1% (p=1.0000) | 77.8% vs 100.0% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 96.5% vs 88.5% (p=0.8430) | 7.4% vs 11.1% (p=0.8965) | 100.0% vs 88.2% (p=0.0485) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 89.7% (p=1.0000) | 0.0% vs 10.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 89.2% (p=0.2395) | 0.0% vs 11.1% (p=0.6004) | 100.0% vs 89.5% (p=0.6026) |
+| ↳ *Vote: Unparsed / Malformed* | 100.0% vs 89.2% (p=0.8000) | 0.0% vs 11.1% (p=0.8500) | 100.0% vs 89.5% (p=0.6026) |
 | **SUB-TABLE AVERAGE (LABELLED, N=200)** |  |  |  |
 | ↳ *Vote: Organize Average* | **94.3% vs 95.4% (p=0.1080)** | **6.2% vs 5.3% (p=0.0191)** | **94.8% vs 95.9% (p=0.3287)** |
 | ↳ *Vote: Escalate Average* | **94.2% vs 95.2% (p=0.1779)** | **5.8% vs 5.7% (p=0.0786)** | **94.2% vs 96.0% (p=0.3033)** |
@@ -6630,74 +6630,74 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 89.8% (p=0.0077) | 0.0% vs 6.9% (p=0.3662) | 100.0% vs 86.9% (p=0.0500) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 87.4% (p=< 0.0001) | 0.0% vs 8.5% (p=0.0317) | 100.0% vs 83.8% (p=0.0003) |
-| ↳ *Policy: Institutional Reform* | 89.8% vs 100.0% (p=0.0077) | 6.9% vs 0.0% (p=0.3662) | 86.9% vs 100.0% (p=0.0500) |
-| ↳ *Policy: Trauma Relief* | 87.4% vs 100.0% (p=< 0.0001) | 8.5% vs 0.0% (p=0.0317) | 83.8% vs 100.0% (p=0.0003) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.4% (p=< 0.0001) | 0.0% vs 8.5% (p=0.0317) | 100.0% vs 83.8% (p=0.0003) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 89.8% (p=0.7678) | 0.0% vs 6.9% (p=0.7523) | 100.0% vs 86.9% (p=0.8762) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 87.4% (p=0.2839) | 0.0% vs 8.5% (p=0.4673) | 100.0% vs 83.8% (p=0.3793) |
+| ↳ *Policy: Institutional Reform* | 89.8% vs 100.0% (p=0.7678) | 6.9% vs 0.0% (p=0.7523) | 86.9% vs 100.0% (p=0.8762) |
+| ↳ *Policy: Trauma Relief* | 87.4% vs 100.0% (p=0.2894) | 8.5% vs 0.0% (p=0.4563) | 83.8% vs 100.0% (p=0.4133) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 87.4% (p=0.2839) | 0.0% vs 8.5% (p=0.4673) | 100.0% vs 83.8% (p=0.3793) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 91.4% (p=1.0000) | 0.0% vs 5.8% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 95.1% (p=0.0123) | 0.0% vs 2.4% (p=0.5551) | 100.0% vs 92.9% (p=0.0345) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 93.8% (p=0.0004) | 0.0% vs 3.0% (p=0.2534) | 100.0% vs 90.9% (p=0.0023) |
-| ↳ *Policy: Institutional Reform* | 96.2% vs 100.0% (p=0.3790) | 1.9% vs 0.0% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
-| ↳ *Policy: Trauma Relief* | 93.8% vs 100.0% (p=0.0004) | 3.0% vs 0.0% (p=0.2534) | 90.9% vs 100.0% (p=0.0023) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.7% (p=0.0798) | 0.0% vs 2.1% (p=1.0000) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 2.4% (p=1.0000) | 100.0% vs 92.9% (p=0.0345) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 93.8% (p=1.0000) | 0.0% vs 3.0% (p=1.0000) | 100.0% vs 90.9% (p=0.0023) |
+| ↳ *Policy: Institutional Reform* | 96.2% vs 100.0% (p=1.0000) | 1.9% vs 0.0% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
+| ↳ *Policy: Trauma Relief* | 93.8% vs 100.0% (p=1.0000) | 3.0% vs 0.0% (p=1.0000) | 90.9% vs 100.0% (p=0.0023) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.7% (p=1.0000) | 0.0% vs 2.1% (p=1.0000) | 100.0% vs 93.8% (p=0.2167) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.6% (p=1.0000) | 0.0% vs 1.7% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 97.8% (p=0.6005) | 0.0% vs 4.6% (p=0.5965) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 93.7% vs 99.6% (p=0.0012) | 13.3% vs 0.7% (p=0.0011) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 97.8% (p=0.8658) | 0.0% vs 4.6% (p=0.8658) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 93.7% vs 99.6% (p=0.2464) | 13.3% vs 0.7% (p=0.2464) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 98.0% vs 98.7% (p=1.0000) | 4.2% vs 2.8% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 100.0% vs 94.7% (p=0.0006) | 0.0% vs 11.1% (p=0.0005) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 97.5% (p=0.1997) | 0.0% vs 5.2% (p=0.1949) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 100.0% vs 94.7% (p=0.1159) | 0.0% vs 11.1% (p=0.1159) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 97.5% (p=0.7921) | 0.0% vs 5.2% (p=0.7921) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 98.2% (p=1.0000) | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 90.8% (p=0.0024) | 0.0% vs 12.5% (p=0.0260) | 100.0% vs 93.8% (p=0.2167) |
-| ↳ *Policy: Coercion Protection* | 88.4% vs 94.0% (p=0.1093) | 24.4% vs 5.2% (p=0.0006) | 100.0% vs 93.3% (p=0.0692) |
-| ↳ *Policy: Institutional Reform* | 91.8% vs 100.0% (p=0.0947) | 11.1% vs 0.0% (p=0.2230) | 94.4% vs 100.0% (p=0.6026) |
-| ↳ *Policy: Trauma Relief* | 91.1% vs 94.2% (p=0.3263) | 7.8% vs 12.2% (p=0.4570) | 90.0% vs 100.0% (p=0.0015) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 90.8% (p=0.0024) | 0.0% vs 12.5% (p=0.0260) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 90.8% (p=0.6912) | 0.0% vs 12.5% (p=0.5789) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Policy: Coercion Protection* | 88.4% vs 94.0% (p=0.6907) | 24.4% vs 5.2% (p=0.1429) | 100.0% vs 93.3% (p=0.0692) |
+| ↳ *Policy: Institutional Reform* | 91.8% vs 100.0% (p=0.9105) | 11.1% vs 0.0% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
+| ↳ *Policy: Trauma Relief* | 91.1% vs 94.2% (p=1.0000) | 7.8% vs 12.2% (p=1.0000) | 90.0% vs 100.0% (p=0.0015) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 90.8% (p=0.6912) | 0.0% vs 12.5% (p=0.5789) | 100.0% vs 93.8% (p=0.2167) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 92.6% (p=1.0000) | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 98.2% vs 96.6% (p=1.0000) | 3.7% vs 0.7% (p=0.2782) | 100.0% vs 94.1% (p=0.3643) |
-| ↳ *Policy: Coercion Protection* | 91.2% vs 99.2% (p=0.0002) | 0.0% vs 1.6% (p=1.0000) | 83.3% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 96.5% vs 100.0% (p=0.6185) | 1.2% vs 0.0% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
-| ↳ *Policy: Trauma Relief* | 95.5% vs 99.2% (p=0.0637) | 0.9% vs 1.6% (p=1.0000) | 92.3% vs 100.0% (p=0.0158) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.5% (p=0.0213) | 0.0% vs 1.6% (p=1.0000) | 100.0% vs 92.9% (p=0.0345) |
+| ↳ *Policy: Alex Retribution* | 98.2% vs 96.6% (p=0.9851) | 3.7% vs 0.7% (p=0.2842) | 100.0% vs 94.1% (p=0.3643) |
+| ↳ *Policy: Coercion Protection* | 91.2% vs 99.2% (p=0.2869) | 0.0% vs 1.6% (p=0.5492) | 83.3% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 96.5% vs 100.0% (p=0.8158) | 1.2% vs 0.0% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
+| ↳ *Policy: Trauma Relief* | 95.5% vs 99.2% (p=0.9155) | 0.9% vs 1.6% (p=1.0000) | 92.3% vs 100.0% (p=0.0158) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 95.5% (p=0.6062) | 0.0% vs 1.6% (p=0.5492) | 100.0% vs 92.9% (p=0.0345) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 96.8% (p=1.0000) | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 97.4% vs 98.0% (p=0.6629) | 5.6% vs 3.5% (p=0.6284) | 100.0% vs 99.4% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 97.1% vs 98.6% (p=0.4757) | 6.2% vs 2.0% (p=0.2460) | 100.0% vs 99.1% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 97.5% vs 100.0% (p=0.6119) | 4.6% vs 0.0% (p=0.5965) | 99.4% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 97.2% vs 100.0% (p=0.2092) | 5.2% vs 0.0% (p=0.1949) | 99.3% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 97.5% (p=0.6119) | 0.0% vs 4.6% (p=0.5965) | 100.0% vs 99.4% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 97.4% vs 98.0% (p=1.0000) | 5.6% vs 3.5% (p=1.0000) | 100.0% vs 99.4% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 97.1% vs 98.6% (p=0.6357) | 6.2% vs 2.0% (p=0.4388) | 100.0% vs 99.1% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 97.5% vs 100.0% (p=0.6842) | 4.6% vs 0.0% (p=0.7614) | 99.4% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 97.2% vs 100.0% (p=0.4523) | 5.2% vs 0.0% (p=0.5257) | 99.3% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 97.5% (p=0.6842) | 0.0% vs 4.6% (p=0.7614) | 100.0% vs 99.4% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.9% (p=1.0000) | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 99.5% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 94.7% (p=0.0878) | 0.0% vs 4.6% (p=0.5965) | 100.0% vs 94.1% (p=0.3643) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 93.1% (p=0.0010) | 0.0% vs 6.0% (p=0.0980) | 100.0% vs 92.3% (p=0.0158) |
-| ↳ *Policy: Institutional Reform* | 95.3% vs 97.4% (p=1.0000) | 3.7% vs 5.6% (p=0.5280) | 94.4% vs 100.0% (p=0.6026) |
-| ↳ *Policy: Trauma Relief* | 93.5% vs 99.2% (p=0.0083) | 5.1% vs 1.6% (p=0.4241) | 92.3% vs 100.0% (p=0.0158) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 94.7% (p=0.0878) | 0.0% vs 4.6% (p=0.5965) | 100.0% vs 94.1% (p=0.3643) |
-| ↳ *Policy: Anti-Human Bias* | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 94.7% (p=0.8658) | 0.0% vs 4.6% (p=0.8658) | 100.0% vs 94.1% (p=0.3643) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 93.1% (p=0.7636) | 0.0% vs 6.0% (p=0.7636) | 100.0% vs 92.3% (p=0.0158) |
+| ↳ *Policy: Institutional Reform* | 95.3% vs 97.4% (p=1.0000) | 3.7% vs 5.6% (p=1.0000) | 94.4% vs 100.0% (p=0.6026) |
+| ↳ *Policy: Trauma Relief* | 93.5% vs 99.2% (p=1.0000) | 5.1% vs 1.6% (p=1.0000) | 92.3% vs 100.0% (p=0.0158) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 94.7% (p=0.8658) | 0.0% vs 4.6% (p=0.8658) | 100.0% vs 94.1% (p=0.3643) |
+| ↳ *Policy: Anti-Human Bias* | 100.0% vs 95.3% (p=0.9500) | 0.0% vs 4.1% (p=1.0000) | 100.0% vs 94.7% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 100.0% vs 90.4% (p=0.0077) | 0.0% vs 13.7% (p=0.0471) | 100.0% vs 94.1% (p=0.3643) |
-| ↳ *Policy: Coercion Protection* | 100.0% vs 89.8% (p=0.0015) | 0.0% vs 14.6% (p=0.0089) | 100.0% vs 93.8% (p=0.2167) |
-| ↳ *Policy: Institutional Reform* | 92.7% vs 84.2% (p=0.1077) | 9.3% vs 33.3% (p=0.0091) | 94.4% vs 100.0% (p=0.6026) |
-| ↳ *Policy: Trauma Relief* | 88.0% vs 96.5% (p=0.0025) | 15.2% vs 7.4% (p=0.1604) | 90.9% vs 100.0% (p=0.0023) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 89.8% (p=0.0015) | 0.0% vs 14.6% (p=0.0089) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Policy: Alex Retribution* | 100.0% vs 90.4% (p=0.7614) | 0.0% vs 13.7% (p=0.7614) | 100.0% vs 94.1% (p=0.3643) |
+| ↳ *Policy: Coercion Protection* | 100.0% vs 89.8% (p=0.7193) | 0.0% vs 14.6% (p=0.7193) | 100.0% vs 93.8% (p=0.2167) |
+| ↳ *Policy: Institutional Reform* | 92.7% vs 84.2% (p=1.0000) | 9.3% vs 33.3% (p=0.2842) | 94.4% vs 100.0% (p=0.6026) |
+| ↳ *Policy: Trauma Relief* | 88.0% vs 96.5% (p=0.6107) | 15.2% vs 7.4% (p=0.7451) | 90.9% vs 100.0% (p=0.0023) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 89.8% (p=0.7193) | 0.0% vs 14.6% (p=0.7193) | 100.0% vs 93.8% (p=0.2167) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 91.8% (p=1.0000) | 0.0% vs 11.7% (p=1.0000) | 0.0% vs 95.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 99.1% vs 97.0% (p=0.2889) | 1.9% vs 6.3% (p=0.2822) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 99.1% vs 97.0% (p=0.2889) | 1.9% vs 6.3% (p=0.2822) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 98.8% vs 91.2% (p=0.0050) | 2.6% vs 18.5% (p=0.0044) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 98.9% vs 96.3% (p=0.1745) | 2.2% vs 7.8% (p=0.1686) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 99.1% vs 97.0% (p=0.4323) | 1.9% vs 6.3% (p=0.4323) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 99.1% vs 97.0% (p=0.4323) | 1.9% vs 6.3% (p=0.4323) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 98.8% vs 91.2% (p=0.0211) | 2.6% vs 18.5% (p=0.0211) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 98.9% vs 96.3% (p=0.3118) | 2.2% vs 7.8% (p=0.3118) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 98.2% vs 97.5% (p=1.0000) | 3.7% vs 5.2% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 97.6% (p=1.0000) | 0.0% vs 5.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 97.4% vs 86.5% (p=0.0007) | 5.6% vs 12.7% (p=0.1918) | 100.0% vs 85.7% (p=0.0006) |
-| ↳ *Policy: Coercion Protection* | 95.6% vs 87.2% (p=0.0154) | 9.3% vs 11.1% (p=0.7973) | 100.0% vs 85.7% (p=0.0006) |
-| ↳ *Policy: Institutional Reform* | 91.9% vs 83.2% (p=0.0192) | 9.6% vs 13.3% (p=0.5753) | 93.3% vs 80.0% (p=0.0121) |
-| ↳ *Policy: Trauma Relief* | 87.4% vs 94.0% (p=0.0513) | 9.4% vs 12.7% (p=0.6118) | 84.6% vs 100.0% (p=0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 100.0% vs 88.6% (p=0.0219) | 0.0% vs 11.7% (p=0.2240) | 100.0% vs 88.9% (p=0.2308) |
+| ↳ *Policy: Alex Retribution* | 97.4% vs 86.5% (p=0.4428) | 5.6% vs 12.7% (p=0.5552) | 100.0% vs 85.7% (p=0.0006) |
+| ↳ *Policy: Coercion Protection* | 95.6% vs 87.2% (p=0.5687) | 9.3% vs 11.1% (p=0.8946) | 100.0% vs 85.7% (p=0.0006) |
+| ↳ *Policy: Institutional Reform* | 91.9% vs 83.2% (p=0.6917) | 9.6% vs 13.3% (p=0.8501) | 93.3% vs 80.0% (p=0.0121) |
+| ↳ *Policy: Trauma Relief* | 87.4% vs 94.0% (p=0.6342) | 9.4% vs 12.7% (p=0.7941) | 84.6% vs 100.0% (p=0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 100.0% vs 88.6% (p=0.6053) | 0.0% vs 11.7% (p=0.6263) | 100.0% vs 88.9% (p=0.2308) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 89.7% (p=1.0000) | 0.0% vs 10.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (LABELLED, N=200)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **99.1% vs 93.7% (p=0.9625)** | **1.9% vs 6.8% (p=0.7300)** | **100.0% vs 94.2% (p=0.6387)** |
@@ -7035,9 +7035,9 @@
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.6% (p=1.0000) | 0.0% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 7.9% vs 8.2% (p=1.0000) | 83.3% vs 82.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 8.4% vs 7.4% (p=0.8319) | 82.2% vs 84.4% (p=0.8229) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 8.4% vs 7.4% (p=0.8726) | 82.2% vs 84.4% (p=0.8726) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 8.2% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 8.3% (p=1.0000) | 88.9% vs 82.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 8.3% (p=0.8000) | 88.9% vs 82.5% (p=0.8000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 8.2% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 6.3% vs 0.0% (p=1.0000) | 86.7% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -7046,8 +7046,8 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 6.3% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 6.3% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Mistral Small 24B (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 10.5% vs 0.0% (p=0.2380) | 95.3% vs 100.0% (p=1.0000) | 15.8% vs 0.0% (p=0.3643) |
-| ↳ *Vote: Escalate* | 0.0% vs 10.5% (p=0.2380) | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 15.8% (p=0.3643) |
+| ↳ *Vote: Organize* | 10.5% vs 0.0% (p=0.6500) | 95.3% vs 100.0% (p=1.0000) | 15.8% vs 0.0% (p=0.3643) |
+| ↳ *Vote: Escalate* | 0.0% vs 10.5% (p=0.6500) | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 15.8% (p=0.3643) |
 | ↳ *Vote: Petition* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
@@ -7058,10 +7058,10 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Qwen 2.5 72B (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 5.3% vs 1.6% (p=0.3070) | 88.9% vs 96.5% (p=0.3093) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 5.3% vs 1.6% (p=0.3529) | 88.9% vs 96.5% (p=0.3529) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.0% vs 1.9% (p=1.0000) | 0.0% vs 96.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 2.1% vs 1.8% (p=1.0000) | 95.6% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=1.0000) | 100.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=0.5147) | 100.0% vs 95.6% (p=0.5147) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 1.8% vs 2.0% (p=1.0000) | 96.3% vs 95.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -7100,31 +7100,31 @@
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 5.3% vs 2.5% (p=0.4050) | 88.9% vs 94.7% (p=0.4094) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 5.3% vs 2.5% (p=1.0000) | 88.9% vs 94.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 2.6% vs 2.6% (p=1.0000) | 94.4% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.0% vs 1.8% (p=0.7296) | 93.7% vs 96.3% (p=0.7255) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 2.4% vs 2.9% (p=0.7588) | 94.9% vs 93.8% (p=0.7556) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 3.3% vs 2.2% (p=0.5294) | 93.1% vs 95.4% (p=0.5239) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.0% vs 1.8% (p=0.6187) | 93.7% vs 96.3% (p=0.6187) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 2.4% vs 2.9% (p=1.0000) | 94.9% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 3.3% vs 2.2% (p=0.6472) | 93.1% vs 95.4% (p=0.6472) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.6% (p=1.0000) | 0.0% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 8.2% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 10.5% vs 7.7% (p=0.4383) | 77.8% vs 83.7% (p=0.4202) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 8.7% vs 5.3% (p=0.5985) | 81.7% vs 88.9% (p=0.5796) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 8.6% vs 0.0% (p=0.3854) | 81.9% vs 100.0% (p=0.3619) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 9.1% (p=0.0578) | 100.0% vs 80.9% (p=0.0458) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 10.5% vs 7.7% (p=0.7079) | 77.8% vs 83.7% (p=0.7079) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 8.7% vs 5.3% (p=0.5860) | 81.7% vs 88.9% (p=0.5860) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 8.6% vs 0.0% (p=0.5000) | 81.9% vs 100.0% (p=0.5000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 9.1% (p=0.1789) | 100.0% vs 80.9% (p=0.1789) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 8.2% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 6.6% vs 6.2% (p=1.0000) | 86.1% vs 86.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 7.2% vs 5.3% (p=0.5277) | 84.8% vs 88.9% (p=0.5114) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 5.8% vs 10.5% (p=0.2825) | 87.7% vs 77.8% (p=0.2689) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 7.0% vs 6.2% (p=0.7695) | 85.2% vs 86.9% (p=0.7630) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 7.2% vs 5.3% (p=0.3033) | 84.8% vs 88.9% (p=0.3033) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 5.8% vs 10.5% (p=0.1105) | 87.7% vs 77.8% (p=0.1105) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 7.0% vs 6.2% (p=1.0000) | 85.2% vs 86.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.3% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 6.3% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Mistral Small 24B (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 22.1% vs 6.0% (p=< 0.0001) | 97.8% vs 94.8% (p=0.6814) | 40.0% vs 6.7% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 24.1% vs 2.4% (p=< 0.0001) | 96.8% vs 94.9% (p=0.7150) | 42.9% vs 0.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 0.0% vs 10.5% (p=0.2380) | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 15.8% (p=0.3643) |
+| ↳ *Policy: Coercion Protection* | 22.1% vs 6.0% (p=0.1174) | 97.8% vs 94.8% (p=0.6832) | 40.0% vs 6.7% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 24.1% vs 2.4% (p=0.0220) | 96.8% vs 94.9% (p=0.7091) | 42.9% vs 0.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 0.0% vs 10.5% (p=0.6500) | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 15.8% (p=0.3643) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 10.0% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 15.0% (p=1.0000) |
 | **DeepSeek V3 (N=20)** |  |  |  |
@@ -7138,7 +7138,7 @@
 | ↳ *Policy: Alex Retribution* | 0.0% vs 1.9% (p=1.0000) | 0.0% vs 96.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 1.3% vs 2.0% (p=1.0000) | 97.2% vs 95.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.8% vs 2.1% (p=1.0000) | 96.3% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.9% vs 2.4% (p=0.6695) | 98.1% vs 94.9% (p=0.4250) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.9% vs 2.4% (p=0.3298) | 98.1% vs 94.9% (p=0.3298) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.9% (p=1.0000) | 0.0% vs 96.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.9% (p=1.0000) | 0.0% vs 96.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
@@ -7481,65 +7481,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 2.0% vs 1.3% (p=0.6869) | 95.8% vs 97.2% (p=0.6846) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 2.0% vs 1.3% (p=0.8056) | 95.8% vs 97.2% (p=0.8056) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 1.8% vs 1.4% (p=1.0000) | 96.3% vs 97.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.7% (p=1.0000) | 100.0% vs 96.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 0.0% vs 1.8% (p=0.7474) | 100.0% vs 96.3% (p=0.7474) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 8.6% vs 3.1% (p=0.0322) | 95.8% vs 93.5% (p=0.7419) | 12.5% vs 0.0% (p=< 0.0001) |
-| ↳ *Vote: Escalate* | 3.8% vs 6.1% (p=0.4710) | 92.1% vs 95.7% (p=0.3230) | 0.0% vs 7.7% (p=0.0158) |
-| ↳ *Vote: Petition* | 1.8% vs 5.9% (p=0.3327) | 96.3% vs 94.1% (p=1.0000) | 0.0% vs 5.9% (p=0.3643) |
-| ↳ *Vote: Custom / Other* | 0.0% vs 5.5% (p=0.6124) | 100.0% vs 94.2% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 5.3% (p=1.0000) | 88.9% vs 94.7% (p=0.4094) | 0.0% vs 5.3% (p=1.0000) |
+| ↳ *Vote: Organize* | 8.6% vs 3.1% (p=0.5127) | 95.8% vs 93.5% (p=0.7486) | 12.5% vs 0.0% (p=< 0.0001) |
+| ↳ *Vote: Escalate* | 3.8% vs 6.1% (p=0.9215) | 92.1% vs 95.7% (p=0.5142) | 0.0% vs 7.7% (p=0.0158) |
+| ↳ *Vote: Petition* | 1.8% vs 5.9% (p=0.5895) | 96.3% vs 94.1% (p=1.0000) | 0.0% vs 5.9% (p=0.3643) |
+| ↳ *Vote: Custom / Other* | 0.0% vs 5.5% (p=0.7000) | 100.0% vs 94.2% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 5.3% (p=1.0000) | 88.9% vs 94.7% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 6.1% vs 1.5% (p=0.0600) | 96.3% vs 96.8% (p=1.0000) | 8.3% vs 0.0% (p=0.0144) |
-| ↳ *Vote: Escalate* | 2.1% vs 5.3% (p=0.2557) | 95.6% vs 96.8% (p=0.6542) | 0.0% vs 7.1% (p=0.0653) |
-| ↳ *Vote: Petition* | 0.0% vs 5.0% (p=0.3929) | 100.0% vs 96.1% (p=1.0000) | 0.0% vs 5.9% (p=0.6032) |
+| ↳ *Vote: Organize* | 6.1% vs 1.5% (p=0.7211) | 96.3% vs 96.8% (p=1.0000) | 8.3% vs 0.0% (p=0.0144) |
+| ↳ *Vote: Escalate* | 2.1% vs 5.3% (p=0.8221) | 95.6% vs 96.8% (p=1.0000) | 0.0% vs 7.1% (p=0.0653) |
+| ↳ *Vote: Petition* | 0.0% vs 5.0% (p=0.5614) | 100.0% vs 96.1% (p=0.6725) | 0.0% vs 5.9% (p=0.6032) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 96.5% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 96.5% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 1.5% vs 1.2% (p=1.0000) | 96.8% vs 97.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.6% vs 1.9% (p=0.3843) | 98.8% vs 96.0% (p=0.3807) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 1.8% vs 1.2% (p=0.5584) | 96.3% vs 97.4% (p=0.5607) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.6% vs 1.9% (p=0.3158) | 98.8% vs 96.0% (p=0.3158) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 1.8% vs 1.2% (p=1.0000) | 96.3% vs 97.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.3% (p=1.0000) | 0.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 1.1% (p=0.2273) | 88.9% vs 97.7% (p=0.2285) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 1.1% (p=0.2500) | 88.9% vs 97.7% (p=0.2500) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 2.6% vs 2.9% (p=1.0000) | 94.4% vs 93.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 3.9% vs 1.9% (p=0.3326) | 91.7% vs 96.0% (p=0.3249) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 3.1% (p=0.6080) | 100.0% vs 93.5% (p=0.6020) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 3.9% vs 1.9% (p=0.5882) | 91.7% vs 96.0% (p=0.5882) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 3.1% (p=0.5848) | 100.0% vs 93.5% (p=0.5848) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.8% (p=1.0000) | 0.0% vs 94.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.9% (p=1.0000) | 100.0% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.9% (p=0.7895) | 100.0% vs 93.8% (p=0.7895) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 10.5% vs 1.0% (p=< 0.0001) | 91.7% vs 98.0% (p=0.0708) | 12.5% vs 0.0% (p=0.0001) |
-| ↳ *Vote: Escalate* | 1.5% vs 7.0% (p=0.0226) | 96.8% vs 94.4% (p=0.7117) | 0.0% vs 8.3% (p=0.0144) |
-| ↳ *Vote: Petition* | 0.0% vs 6.3% (p=0.0175) | 100.0% vs 94.1% (p=0.2061) | 0.0% vs 6.7% (p=0.1241) |
+| ↳ *Vote: Organize* | 10.5% vs 1.0% (p=0.0685) | 91.7% vs 98.0% (p=0.3063) | 12.5% vs 0.0% (p=0.0001) |
+| ↳ *Vote: Escalate* | 1.5% vs 7.0% (p=0.5117) | 96.8% vs 94.4% (p=0.8916) | 0.0% vs 8.3% (p=0.0144) |
+| ↳ *Vote: Petition* | 0.0% vs 6.3% (p=0.4690) | 100.0% vs 94.1% (p=0.5666) | 0.0% vs 6.7% (p=0.1241) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 5.0% (p=1.0000) | 0.0% vs 95.3% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 5.0% (p=1.0000) | 0.0% vs 95.3% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 3.9% vs 1.8% (p=0.2074) | 91.7% vs 96.3% (p=0.2015) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 3.9% vs 1.8% (p=0.4763) | 91.7% vs 96.3% (p=0.4763) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 2.6% vs 2.6% (p=1.0000) | 94.4% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 3.1% (p=0.3703) | 100.0% vs 93.5% (p=0.3629) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 3.1% (p=0.5640) | 100.0% vs 93.5% (p=0.5640) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.6% (p=1.0000) | 0.0% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.8% (p=1.0000) | 100.0% vs 94.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 1.1% vs 1.1% (p=1.0000) | 97.8% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Escalate* | 0.8% vs 1.2% (p=1.0000) | 98.4% vs 97.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 0.8% (p=0.1862) | 88.9% vs 98.2% (p=0.1869) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 0.8% (p=0.2000) | 88.9% vs 98.2% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 1.2% (p=1.0000) | 100.0% vs 97.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 3.8% vs 4.0% (p=1.0000) | 92.1% vs 91.5% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.2919) | 88.9% vs 94.4% (p=0.2806) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 4.2% (p=1.0000) | 100.0% vs 91.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 5.3% vs 2.6% (p=0.5437) | 88.9% vs 94.4% (p=0.5437) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 4.2% (p=0.7500) | 100.0% vs 91.2% (p=0.7500) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 91.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.4% (p=0.3804) | 100.0% vs 90.7% (p=0.3693) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 0.0% vs 4.4% (p=0.5684) | 100.0% vs 90.7% (p=0.5684) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 2.1% vs 1.1% (p=0.6850) | 95.6% vs 97.8% (p=0.6822) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.8% vs 2.0% (p=0.6695) | 98.4% vs 95.7% (p=0.6666) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 2.1% vs 1.1% (p=0.6207) | 95.6% vs 97.8% (p=0.6207) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.8% vs 2.0% (p=0.3708) | 98.4% vs 95.7% (p=0.3708) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 0.0% vs 1.8% (p=0.5579) | 100.0% vs 96.3% (p=0.5579) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 1.4% (p=0.2664) | 88.9% vs 97.1% (p=0.2682) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Unparsed / Malformed* | 5.3% vs 1.4% (p=0.3000) | 88.9% vs 97.1% (p=0.3000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (MISLABELLED, N=200)** |  |  |  |
 | ↳ *Vote: Organize Average* | **4.2% vs 1.9% (p=0.7242)** | **95.0% vs 95.9% (p=0.6204)** | **3.5% vs 0.0% (p=0.3304)** |
 | ↳ *Vote: Escalate Average* | **2.4% vs 3.3% (p=0.2534)** | **94.9% vs 95.8% (p=0.7966)** | **0.0% vs 2.5% (p=0.1170)** |
@@ -7555,71 +7555,71 @@
 | ↳ *Policy: Alex Retribution* | 1.8% vs 1.5% (p=1.0000) | 96.3% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 1.5% vs 1.6% (p=1.0000) | 96.8% vs 96.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.6% vs 1.3% (p=1.0000) | 96.5% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 1.2% vs 2.3% (p=0.4261) | 97.4% vs 95.2% (p=0.4235) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 1.2% vs 2.3% (p=0.8296) | 97.4% vs 95.2% (p=0.8296) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.8% (p=0.7474) | 100.0% vs 96.3% (p=0.7474) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 5.8% (p=0.2423) | 100.0% vs 93.8% (p=0.6015) | 0.0% vs 5.6% (p=0.6026) |
-| ↳ *Policy: Coercion Protection* | 7.9% vs 3.5% (p=0.0982) | 97.2% vs 92.6% (p=0.3195) | 12.5% vs 0.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 5.3% vs 5.3% (p=1.0000) | 95.4% vs 88.9% (p=0.1749) | 5.9% vs 0.0% (p=0.3643) |
-| ↳ *Policy: Trauma Relief* | 2.3% vs 7.7% (p=0.0218) | 95.1% vs 93.9% (p=1.0000) | 0.0% vs 9.1% (p=0.0023) |
-| ↳ *Policy: Equal Parity Standards* | 5.3% vs 5.3% (p=1.0000) | 88.9% vs 95.1% (p=0.2627) | 0.0% vs 5.6% (p=0.6026) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 5.8% (p=0.3947) | 100.0% vs 93.8% (p=0.6211) | 0.0% vs 5.6% (p=0.6026) |
+| ↳ *Policy: Coercion Protection* | 7.9% vs 3.5% (p=0.7271) | 97.2% vs 92.6% (p=0.3358) | 12.5% vs 0.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 5.3% vs 5.3% (p=1.0000) | 95.4% vs 88.9% (p=0.3789) | 5.9% vs 0.0% (p=0.3643) |
+| ↳ *Policy: Trauma Relief* | 2.3% vs 7.7% (p=0.5482) | 95.1% vs 93.9% (p=1.0000) | 0.0% vs 9.1% (p=0.0023) |
+| ↳ *Policy: Equal Parity Standards* | 5.3% vs 5.3% (p=1.0000) | 88.9% vs 95.1% (p=0.6211) | 0.0% vs 5.6% (p=0.6026) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 5.3% (p=1.0000) | 0.0% vs 94.4% (p=1.0000) | 0.0% vs 5.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 1.8% vs 4.9% (p=0.4842) | 96.3% vs 96.5% (p=1.0000) | 0.0% vs 6.2% (p=0.3676) |
-| ↳ *Policy: Coercion Protection* | 11.4% vs 1.2% (p=< 0.0001) | 94.4% vs 97.4% (p=0.3814) | 16.7% vs 0.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 4.9% vs 1.8% (p=0.4842) | 96.5% vs 96.3% (p=1.0000) | 6.2% vs 0.0% (p=0.3676) |
-| ↳ *Policy: Trauma Relief* | 1.8% vs 9.0% (p=0.0023) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 14.3% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 1.8% vs 4.9% (p=0.4842) | 96.3% vs 96.5% (p=1.0000) | 0.0% vs 6.2% (p=0.3676) |
+| ↳ *Policy: Alex Retribution* | 1.8% vs 4.9% (p=0.7750) | 96.3% vs 96.5% (p=1.0000) | 0.0% vs 6.2% (p=0.3676) |
+| ↳ *Policy: Coercion Protection* | 11.4% vs 1.2% (p=0.0665) | 94.4% vs 97.4% (p=0.4128) | 16.7% vs 0.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 4.9% vs 1.8% (p=0.7750) | 96.5% vs 96.3% (p=1.0000) | 6.2% vs 0.0% (p=0.3676) |
+| ↳ *Policy: Trauma Relief* | 1.8% vs 9.0% (p=0.2329) | 96.3% vs 96.8% (p=1.0000) | 0.0% vs 14.3% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 1.8% vs 4.9% (p=0.7750) | 96.3% vs 96.5% (p=1.0000) | 0.0% vs 6.2% (p=0.3676) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 4.4% (p=1.0000) | 0.0% vs 96.5% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 1.5% (p=1.0000) | 100.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 1.5% (p=0.5395) | 100.0% vs 96.7% (p=0.5395) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 1.2% vs 1.4% (p=1.0000) | 97.5% vs 97.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 1.3% vs 1.3% (p=1.0000) | 97.2% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.5% vs 2.1% (p=0.3717) | 98.9% vs 95.6% (p=0.3680) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.5% vs 2.1% (p=0.2974) | 98.9% vs 95.6% (p=0.2974) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.5% (p=1.0000) | 100.0% vs 96.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.3% (p=1.0000) | 0.0% vs 97.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 2.9% (p=1.0000) | 100.0% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 2.9% (p=0.7895) | 100.0% vs 93.8% (p=0.7895) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 2.6% vs 2.8% (p=1.0000) | 94.4% vs 94.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 3.5% vs 0.0% (p=0.1290) | 92.6% vs 100.0% (p=0.1229) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 3.5% vs 0.0% (p=0.3222) | 92.6% vs 100.0% (p=0.3222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 2.6% vs 2.9% (p=1.0000) | 94.4% vs 93.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.5% (p=0.1290) | 100.0% vs 92.6% (p=0.1229) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 3.5% (p=0.3222) | 100.0% vs 92.6% (p=0.3222) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.8% (p=1.0000) | 0.0% vs 94.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 5.9% (p=0.0894) | 100.0% vs 94.4% (p=0.3590) | 0.0% vs 6.2% (p=0.3676) |
-| ↳ *Policy: Coercion Protection* | 1.1% vs 6.4% (p=0.0513) | 97.8% vs 94.4% (p=0.6825) | 0.0% vs 7.1% (p=0.0653) |
-| ↳ *Policy: Institutional Reform* | 6.0% vs 1.3% (p=0.1374) | 94.8% vs 97.2% (p=1.0000) | 6.7% vs 0.0% (p=0.1241) |
-| ↳ *Policy: Trauma Relief* | 2.9% vs 7.9% (p=0.0474) | 93.9% vs 97.2% (p=0.4700) | 0.0% vs 12.5% (p=0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.8% (p=0.0050) | 100.0% vs 93.7% (p=0.1122) | 0.0% vs 7.1% (p=0.0653) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 5.9% (p=0.5511) | 100.0% vs 94.4% (p=0.6594) | 0.0% vs 6.2% (p=0.3676) |
+| ↳ *Policy: Coercion Protection* | 1.1% vs 6.4% (p=0.6167) | 97.8% vs 94.4% (p=0.7771) | 0.0% vs 7.1% (p=0.0653) |
+| ↳ *Policy: Institutional Reform* | 6.0% vs 1.3% (p=0.6641) | 94.8% vs 97.2% (p=0.8555) | 6.7% vs 0.0% (p=0.1241) |
+| ↳ *Policy: Trauma Relief* | 2.9% vs 7.9% (p=0.5872) | 93.9% vs 97.2% (p=0.7391) | 0.0% vs 12.5% (p=0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 6.8% (p=0.4378) | 100.0% vs 93.7% (p=0.4223) | 0.0% vs 7.1% (p=0.0653) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 5.0% (p=1.0000) | 0.0% vs 95.3% (p=1.0000) | 0.0% vs 5.3% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 15.8% vs 1.9% (p=0.0102) | 66.7% vs 95.9% (p=0.0088) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 15.8% vs 1.9% (p=0.0500) | 66.7% vs 95.9% (p=0.0500) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 2.9% vs 2.3% (p=1.0000) | 93.9% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 1.4% vs 6.3% (p=0.0183) | 97.0% vs 86.7% (p=0.0168) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 2.9% vs 2.4% (p=0.7588) | 93.8% vs 94.9% (p=0.7556) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.9% (p=0.6074) | 100.0% vs 93.8% (p=0.6015) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 1.4% vs 6.3% (p=0.0510) | 97.0% vs 86.7% (p=0.0510) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 2.9% vs 2.4% (p=1.0000) | 93.8% vs 94.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.9% (p=0.7789) | 100.0% vs 93.8% (p=0.7789) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.6% (p=1.0000) | 0.0% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 1.8% vs 0.9% (p=0.4795) | 96.3% vs 98.0% (p=0.4811) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 1.8% vs 0.9% (p=1.0000) | 96.3% vs 98.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Coercion Protection* | 1.1% vs 1.1% (p=1.0000) | 97.8% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 0.9% vs 1.8% (p=0.4795) | 98.0% vs 96.3% (p=0.4811) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 0.9% vs 1.8% (p=1.0000) | 98.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.2% vs 0.8% (p=1.0000) | 97.4% vs 98.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 1.3% vs 1.0% (p=1.0000) | 97.2% vs 97.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.1% (p=1.0000) | 0.0% vs 97.8% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 4.6% (p=0.1410) | 100.0% vs 90.2% (p=0.1318) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 5.3% vs 3.5% (p=0.5419) | 88.9% vs 92.6% (p=0.5329) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 4.6% (p=0.3667) | 100.0% vs 90.2% (p=0.3667) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 5.3% vs 3.5% (p=0.7276) | 88.9% vs 92.6% (p=0.7276) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Institutional Reform* | 3.9% vs 3.9% (p=1.0000) | 91.7% vs 91.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 4.3% vs 3.5% (p=0.7946) | 90.9% vs 92.6% (p=0.7898) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 1.3% vs 4.6% (p=0.3216) | 97.2% vs 90.3% (p=0.3103) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 4.3% vs 3.5% (p=0.8806) | 90.9% vs 92.6% (p=0.8806) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 1.3% vs 4.6% (p=0.5862) | 97.2% vs 90.3% (p=0.5862) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 3.9% (p=1.0000) | 0.0% vs 91.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=0.6042) | 100.0% vs 95.8% (p=0.6012) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 0.9% vs 1.9% (p=0.6732) | 98.1% vs 96.0% (p=0.6702) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 1.8% vs 0.0% (p=1.0000) | 96.3% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Trauma Relief* | 0.8% vs 2.0% (p=0.6695) | 98.4% vs 95.7% (p=0.6666) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.8% (p=1.0000) | 100.0% vs 96.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 0.0% vs 2.0% (p=0.2675) | 100.0% vs 95.8% (p=0.2675) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 0.9% vs 1.9% (p=0.6167) | 98.1% vs 96.0% (p=0.6167) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 1.8% vs 0.0% (p=0.5579) | 96.3% vs 100.0% (p=0.5579) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Trauma Relief* | 0.8% vs 2.0% (p=0.3708) | 98.4% vs 95.7% (p=0.3708) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 0.0% vs 1.8% (p=0.5579) | 100.0% vs 96.3% (p=0.5579) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 1.6% (p=1.0000) | 0.0% vs 96.7% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (MISLABELLED, N=200)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **1.2% vs 3.2% (p=0.5468)** | **97.4% vs 95.2% (p=0.5513)** | **0.0% vs 1.8% (p=0.7831)** |
@@ -7944,22 +7944,22 @@
 | Model / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 87.2% vs 79.8% (p=0.0837) | 19.0% vs 24.1% (p=0.5462) | 92.9% vs 83.3% (p=0.0683) |
-| ↳ *Vote: Escalate* | 79.8% vs 87.2% (p=0.0837) | 24.1% vs 19.0% (p=0.5462) | 83.3% vs 92.9% (p=0.0683) |
+| ↳ *Vote: Organize* | 87.2% vs 79.8% (p=0.6742) | 19.0% vs 24.1% (p=0.7136) | 92.9% vs 83.3% (p=0.0683) |
+| ↳ *Vote: Escalate* | 79.8% vs 87.2% (p=0.6732) | 24.1% vs 19.0% (p=0.7071) | 83.3% vs 92.9% (p=0.0683) |
 | ↳ *Vote: Petition* | 0.0% vs 85.0% (p=1.0000) | 0.0% vs 20.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 85.0% (p=1.0000) | 0.0% vs 20.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 85.0% (p=1.0000) | 0.0% vs 20.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 44.6% (p=0.6372) | 100.0% vs 81.9% (p=0.3619) | 100.0% vs 68.4% (p=0.0345) |
-| ↳ *Vote: Escalate* | 44.6% vs 52.6% (p=0.6372) | 81.9% vs 100.0% (p=0.3619) | 68.4% vs 100.0% (p=0.0345) |
+| ↳ *Vote: Organize* | 52.6% vs 44.6% (p=1.0000) | 100.0% vs 81.9% (p=0.2000) | 100.0% vs 68.4% (p=0.0345) |
+| ↳ *Vote: Escalate* | 44.6% vs 52.6% (p=1.0000) | 81.9% vs 100.0% (p=0.2000) | 68.4% vs 100.0% (p=0.0345) |
 | ↳ *Vote: Petition* | 0.0% vs 45.0% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 45.0% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 45.0% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 13.6% vs 16.4% (p=0.4626) | 71.3% vs 65.3% (p=0.4149) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 15.0% vs 14.6% (p=0.8808) | 68.3% vs 69.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 13.6% vs 16.4% (p=0.3988) | 71.3% vs 65.3% (p=0.3988) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 15.0% vs 14.6% (p=1.0000) | 68.3% vs 69.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 14.7% (p=1.0000) | 0.0% vs 68.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 26.3% vs 14.1% (p=0.1758) | 44.4% vs 70.2% (p=0.1391) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Custom / Other* | 26.3% vs 14.1% (p=0.2000) | 44.4% vs 70.2% (p=0.2000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 14.7% (p=1.0000) | 0.0% vs 68.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Llama 3.1 70B (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -7968,8 +7968,8 @@
 | ↳ *Vote: Custom / Other* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Mistral Small 24B (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 52.6% vs 53.7% (p=0.9058) | 100.0% vs 97.8% (p=0.2500) | 100.0% vs 100.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 53.7% vs 52.6% (p=0.9058) | 97.8% vs 100.0% (p=0.2500) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Organize* | 52.6% vs 53.7% (p=0.2469) | 100.0% vs 97.8% (p=0.2469) | 100.0% vs 100.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 53.7% vs 52.6% (p=0.2639) | 97.8% vs 100.0% (p=0.2639) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Petition* | 0.0% vs 52.9% (p=1.0000) | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 52.9% (p=1.0000) | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 52.9% (p=1.0000) | 0.0% vs 99.4% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
@@ -7986,10 +7986,10 @@
 | ↳ *Vote: Custom / Other* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 54.4% vs 42.1% (p=0.1108) | 96.3% vs 89.5% (p=0.4753) | 100.0% vs 70.6% (p=0.0001) |
-| ↳ *Vote: Escalate* | 45.5% vs 40.4% (p=0.3691) | 91.3% vs 88.9% (p=0.5899) | 78.6% vs 66.7% (p=0.1079) |
+| ↳ *Vote: Organize* | 54.4% vs 42.1% (p=0.3939) | 96.3% vs 89.5% (p=0.6228) | 100.0% vs 70.6% (p=0.0001) |
+| ↳ *Vote: Escalate* | 45.5% vs 40.4% (p=0.6677) | 91.3% vs 88.9% (p=0.8511) | 78.6% vs 66.7% (p=0.1079) |
 | ↳ *Vote: Petition* | 0.0% vs 43.9% (p=1.0000) | 0.0% vs 90.6% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 26.3% vs 47.1% (p=0.0037) | 81.5% vs 92.2% (p=0.1429) | 33.3% vs 82.4% (p=< 0.0001) |
+| ↳ *Vote: Custom / Other* | 26.3% vs 47.1% (p=0.1272) | 81.5% vs 92.2% (p=0.4175) | 33.3% vs 82.4% (p=< 0.0001) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 43.9% (p=1.0000) | 0.0% vs 90.6% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | **Nemotron 3.5 (Super-120B) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -7999,8 +7999,8 @@
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=20)** |  |  |  |
 | ↳ *Vote: Organize* | 2.1% vs 2.1% (p=1.0000) | 95.6% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Escalate* | 0.0% vs 2.3% (p=1.0000) | 100.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Vote: Petition* | 2.6% vs 1.8% (p=0.7185) | 94.4% vs 96.3% (p=0.7152) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Escalate* | 0.0% vs 2.3% (p=0.5895) | 100.0% vs 95.1% (p=0.5895) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Vote: Petition* | 2.6% vs 1.8% (p=0.7151) | 94.4% vs 96.3% (p=0.7151) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=200)** |  |  |  |
@@ -8016,22 +8016,22 @@
 |---|:---:|:---:|:---:|
 | **GPT-6 Astra (gpt-5.4) (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 85.0% (p=1.0000) | 0.0% vs 20.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 80.6% vs 93.2% (p=0.0008) | 23.9% vs 14.3% (p=0.1754) | 84.6% vs 100.0% (p=0.0001) |
+| ↳ *Policy: Coercion Protection* | 80.6% vs 93.2% (p=0.3103) | 23.9% vs 14.3% (p=0.4068) | 84.6% vs 100.0% (p=0.0001) |
 | ↳ *Policy: Institutional Reform* | 85.0% vs 0.0% (p=1.0000) | 20.6% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 85.0% vs 0.0% (p=1.0000) | 20.6% vs 0.0% (p=1.0000) | 90.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 88.6% vs 79.6% (p=0.0190) | 14.8% vs 29.2% (p=0.0241) | 91.7% vs 87.5% (p=0.3467) |
+| ↳ *Policy: Equal Parity Standards* | 88.6% vs 79.6% (p=0.4483) | 14.8% vs 29.2% (p=0.1559) | 91.7% vs 87.5% (p=0.3467) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 85.0% (p=1.0000) | 0.0% vs 20.6% (p=1.0000) | 0.0% vs 90.0% (p=1.0000) |
 | **Claude Haiku 4.5 (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 65.8% vs 42.7% (p=0.0093) | 72.2% vs 84.0% (p=0.2029) | 100.0% vs 66.7% (p=0.0006) |
-| ↳ *Policy: Coercion Protection* | 44.3% vs 46.1% (p=0.7531) | 80.6% vs 86.1% (p=0.4214) | 66.7% vs 75.0% (p=0.2702) |
-| ↳ *Policy: Institutional Reform* | 41.8% vs 57.9% (p=0.0141) | 81.2% vs 88.9% (p=0.3332) | 62.5% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 35.9% vs 56.1% (p=< 0.0001) | 84.8% vs 80.2% (p=0.4342) | 54.5% vs 88.9% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 42.1% vs 47.9% (p=0.3025) | 77.8% vs 87.8% (p=0.1133) | 60.0% vs 80.0% (p=0.0032) |
+| ↳ *Policy: Alex Retribution* | 65.8% vs 42.7% (p=0.2368) | 72.2% vs 84.0% (p=0.3158) | 100.0% vs 66.7% (p=0.0006) |
+| ↳ *Policy: Coercion Protection* | 44.3% vs 46.1% (p=0.9760) | 80.6% vs 86.1% (p=0.3878) | 66.7% vs 75.0% (p=0.2702) |
+| ↳ *Policy: Institutional Reform* | 41.8% vs 57.9% (p=0.3461) | 81.2% vs 88.9% (p=0.2987) | 62.5% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 35.9% vs 56.1% (p=0.1134) | 84.8% vs 80.2% (p=0.4008) | 54.5% vs 88.9% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 42.1% vs 47.9% (p=0.6252) | 77.8% vs 87.8% (p=0.0745) | 60.0% vs 80.0% (p=0.0032) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 45.0% (p=1.0000) | 0.0% vs 82.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Gemini 2.5 Pro (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 0.0% vs 14.7% (p=1.0000) | 0.0% vs 68.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 15.8% vs 14.6% (p=0.8109) | 66.7% vs 69.1% (p=0.7946) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 14.4% vs 21.1% (p=0.5014) | 69.6% vs 55.6% (p=0.4627) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 15.8% vs 14.6% (p=1.0000) | 66.7% vs 69.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 14.4% vs 21.1% (p=0.3500) | 69.6% vs 55.6% (p=0.3500) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 14.7% vs 0.0% (p=1.0000) | 68.9% vs 0.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 14.7% (p=1.0000) | 0.0% vs 68.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 14.7% (p=1.0000) | 0.0% vs 68.9% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -8064,11 +8064,11 @@
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 43.0% vs 52.6% (p=0.3021) | 89.5% vs 100.0% (p=0.2251) | 72.2% vs 100.0% (p=0.0046) |
-| ↳ *Policy: Coercion Protection* | 40.4% vs 46.9% (p=0.2137) | 88.9% vs 91.9% (p=0.6102) | 66.7% vs 81.8% (p=0.0210) |
-| ↳ *Policy: Institutional Reform* | 43.5% vs 52.6% (p=0.4822) | 90.1% vs 100.0% (p=1.0000) | 73.7% vs 100.0% (p=0.0692) |
+| ↳ *Policy: Alex Retribution* | 43.0% vs 52.6% (p=0.8789) | 89.5% vs 100.0% (p=0.6421) | 72.2% vs 100.0% (p=0.0046) |
+| ↳ *Policy: Coercion Protection* | 40.4% vs 46.9% (p=0.5282) | 88.9% vs 91.9% (p=0.7591) | 66.7% vs 81.8% (p=0.0210) |
+| ↳ *Policy: Institutional Reform* | 43.5% vs 52.6% (p=1.0000) | 90.1% vs 100.0% (p=0.8500) | 73.7% vs 100.0% (p=0.0692) |
 | ↳ *Policy: Trauma Relief* | 43.9% vs 0.0% (p=1.0000) | 90.6% vs 0.0% (p=1.0000) | 75.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 60.0% vs 38.6% (p=0.0003) | 84.4% vs 92.6% (p=0.1387) | 100.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 60.0% vs 38.6% (p=0.0700) | 84.4% vs 92.6% (p=0.4438) | 100.0% vs 66.7% (p=< 0.0001) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 43.9% (p=1.0000) | 0.0% vs 90.6% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | **Nemotron 3.5 (Super-120B) (N=20)** |  |  |  |
 | ↳ *Policy: Alex Retribution* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
@@ -8078,9 +8078,9 @@
 | ↳ *Policy: Equal Parity Standards* | 52.6% vs 52.6% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) | 100.0% vs 100.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 52.6% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) | 0.0% vs 100.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 3.5% vs 1.9% (p=0.3430) | 92.6% vs 96.1% (p=0.3432) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 0.0% vs 3.0% (p=0.1118) | 100.0% vs 93.7% (p=0.1076) | 0.0% vs 0.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 2.0% vs 2.6% (p=0.5731) | 95.7% vs 94.4% (p=0.5771) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Alex Retribution* | 3.5% vs 1.9% (p=0.5895) | 92.6% vs 96.1% (p=0.5895) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 0.0% vs 3.0% (p=0.0840) | 100.0% vs 93.7% (p=0.0840) | 0.0% vs 0.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 2.0% vs 2.6% (p=1.0000) | 95.7% vs 94.4% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Trauma Relief* | 1.9% vs 2.3% (p=1.0000) | 96.0% vs 95.1% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 2.2% (p=1.0000) | 100.0% vs 95.3% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 2.1% (p=1.0000) | 0.0% vs 95.6% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
@@ -8403,65 +8403,65 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 47.4% vs 37.9% (p=0.0777) | 88.9% vs 86.7% (p=0.8205) | 80.0% vs 60.0% (p=0.0032) |
-| ↳ *Vote: Escalate* | 36.3% vs 47.8% (p=0.0285) | 85.2% vs 89.9% (p=0.3674) | 55.6% vs 81.8% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 47.4% vs 37.9% (p=0.4933) | 88.9% vs 86.7% (p=0.8451) | 80.0% vs 60.0% (p=0.0032) |
+| ↳ *Vote: Escalate* | 36.3% vs 47.8% (p=0.3628) | 85.2% vs 89.9% (p=0.6222) | 55.6% vs 81.8% (p=< 0.0001) |
 | ↳ *Vote: Petition* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 42.1% (p=0.4762) | 100.0% vs 87.1% (p=0.6032) | 100.0% vs 68.4% (p=0.0345) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 42.1% (p=1.0000) | 100.0% vs 87.1% (p=0.8000) | 100.0% vs 68.4% (p=0.0345) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 50.4% vs 46.6% (p=0.5188) | 88.9% vs 87.2% (p=0.8153) | 85.7% vs 76.9% (p=0.1940) |
-| ↳ *Vote: Escalate* | 49.1% vs 46.9% (p=0.6808) | 82.7% vs 91.9% (p=0.0701) | 77.8% vs 81.8% (p=0.4838) |
-| ↳ *Vote: Petition* | 36.8% vs 49.8% (p=0.0843) | 96.3% vs 86.3% (p=0.2062) | 66.7% vs 82.4% (p=0.0795) |
-| ↳ *Vote: Custom / Other* | 52.6% vs 47.6% (p=0.8146) | 100.0% vs 87.1% (p=0.6032) | 100.0% vs 78.9% (p=0.2167) |
+| ↳ *Vote: Organize* | 50.4% vs 46.6% (p=0.7596) | 88.9% vs 87.2% (p=0.9105) | 85.7% vs 76.9% (p=0.1940) |
+| ↳ *Vote: Escalate* | 49.1% vs 46.9% (p=0.8256) | 82.7% vs 91.9% (p=0.3408) | 77.8% vs 81.8% (p=0.4838) |
+| ↳ *Vote: Petition* | 36.8% vs 49.8% (p=0.3868) | 96.3% vs 86.3% (p=0.5439) | 66.7% vs 82.4% (p=0.0795) |
+| ↳ *Vote: Custom / Other* | 52.6% vs 47.6% (p=1.0000) | 100.0% vs 87.1% (p=0.7500) | 100.0% vs 78.9% (p=0.2167) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 45.3% vs 44.2% (p=0.9178) | 93.3% vs 84.4% (p=0.0950) | 80.0% vs 70.0% (p=0.1412) |
-| ↳ *Vote: Escalate* | 48.1% vs 42.9% (p=0.3331) | 77.8% vs 94.9% (p=0.0009) | 71.4% vs 76.9% (p=0.3975) |
-| ↳ *Vote: Petition* | 26.3% vs 46.8% (p=0.0165) | 100.0% vs 87.7% (p=0.2280) | 50.0% vs 77.8% (p=0.0121) |
+| ↳ *Vote: Organize* | 45.3% vs 44.2% (p=0.9590) | 93.3% vs 84.4% (p=0.5532) | 80.0% vs 70.0% (p=0.1412) |
+| ↳ *Vote: Escalate* | 48.1% vs 42.9% (p=0.7126) | 77.8% vs 94.9% (p=0.1539) | 71.4% vs 76.9% (p=0.3975) |
+| ↳ *Vote: Petition* | 26.3% vs 46.8% (p=0.3105) | 100.0% vs 87.7% (p=0.6263) | 50.0% vs 77.8% (p=0.0121) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 44.7% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 44.3% (p=0.4887) | 100.0% vs 88.3% (p=0.6002) | 100.0% vs 73.7% (p=0.0692) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 44.3% (p=1.0000) | 100.0% vs 88.3% (p=0.9500) | 100.0% vs 73.7% (p=0.0692) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 54.2% vs 43.7% (p=0.0511) | 74.4% vs 85.6% (p=0.0926) | 80.0% vs 70.0% (p=0.1412) |
-| ↳ *Vote: Escalate* | 61.1% vs 44.9% (p=0.0089) | 82.2% vs 79.3% (p=0.8301) | 100.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Vote: Petition* | 2.6% vs 54.1% (p=< 0.0001) | 94.4% vs 78.4% (p=0.1296) | 0.0% vs 83.3% (p=< 0.0001) |
-| ↳ *Vote: Custom / Other* | 21.1% vs 50.4% (p=0.0168) | 55.6% vs 81.3% (p=0.0804) | 0.0% vs 78.9% (p=< 0.0001) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.5% (p=0.7328) | 100.0% vs 77.8% (p=0.0260) | 100.0% vs 72.2% (p=0.0046) |
+| ↳ *Vote: Organize* | 54.2% vs 43.7% (p=0.4243) | 74.4% vs 85.6% (p=0.4813) | 80.0% vs 70.0% (p=0.1412) |
+| ↳ *Vote: Escalate* | 61.1% vs 44.9% (p=0.2949) | 82.2% vs 79.3% (p=0.9240) | 100.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Vote: Petition* | 2.6% vs 54.1% (p=0.0105) | 94.4% vs 78.4% (p=0.5579) | 0.0% vs 83.3% (p=< 0.0001) |
+| ↳ *Vote: Custom / Other* | 21.1% vs 50.4% (p=0.3500) | 55.6% vs 81.3% (p=0.1500) | 0.0% vs 78.9% (p=< 0.0001) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.5% (p=0.9895) | 100.0% vs 77.8% (p=0.4842) | 100.0% vs 72.2% (p=0.0046) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 49.8% vs 39.5% (p=0.0549) | 75.8% vs 86.1% (p=0.1208) | 72.7% vs 62.5% (p=0.1559) |
-| ↳ *Vote: Escalate* | 43.9% vs 46.2% (p=0.7334) | 81.5% vs 79.5% (p=0.8388) | 66.7% vs 69.2% (p=0.7393) |
-| ↳ *Vote: Petition* | 0.0% vs 48.0% (p=< 0.0001) | 100.0% vs 79.0% (p=0.2074) | 0.0% vs 72.2% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 49.8% vs 39.5% (p=0.4843) | 75.8% vs 86.1% (p=0.5542) | 72.7% vs 62.5% (p=0.1559) |
+| ↳ *Vote: Escalate* | 43.9% vs 46.2% (p=0.8786) | 81.5% vs 79.5% (p=0.9675) | 66.7% vs 69.2% (p=0.7393) |
+| ↳ *Vote: Petition* | 0.0% vs 48.0% (p=0.2105) | 100.0% vs 79.0% (p=0.7368) | 0.0% vs 72.2% (p=< 0.0001) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 45.4% (p=1.0000) | 0.0% vs 80.1% (p=1.0000) | 0.0% vs 68.4% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 45.0% (p=0.6374) | 100.0% vs 79.0% (p=0.2074) | 100.0% vs 66.7% (p=0.0322) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 45.0% (p=1.0000) | 100.0% vs 79.0% (p=0.7368) | 100.0% vs 66.7% (p=0.0322) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 46.1% vs 52.0% (p=0.2949) | 86.1% vs 87.5% (p=0.8271) | 75.0% vs 87.5% (p=0.0318) |
-| ↳ *Vote: Escalate* | 51.8% vs 47.0% (p=0.4336) | 83.3% vs 88.1% (p=0.4732) | 83.3% vs 78.6% (p=0.5634) |
+| ↳ *Vote: Organize* | 46.1% vs 52.0% (p=0.6537) | 86.1% vs 87.5% (p=0.8996) | 75.0% vs 87.5% (p=0.0318) |
+| ↳ *Vote: Escalate* | 51.8% vs 47.0% (p=0.7861) | 83.3% vs 88.1% (p=0.7976) | 83.3% vs 78.6% (p=0.5634) |
 | ↳ *Vote: Petition* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.0% (p=0.6114) | 100.0% vs 85.2% (p=0.1365) | 100.0% vs 77.8% (p=0.0156) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.0% (p=0.9684) | 100.0% vs 85.2% (p=0.7632) | 100.0% vs 77.8% (p=0.0156) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 32.2% vs 38.6% (p=0.2308) | 87.5% vs 92.6% (p=0.3017) | 50.0% vs 66.7% (p=0.0268) |
-| ↳ *Vote: Escalate* | 38.6% vs 34.0% (p=0.3906) | 92.6% vs 88.9% (p=0.4517) | 66.7% vs 54.5% (p=0.1103) |
-| ↳ *Vote: Petition* | 10.5% vs 37.4% (p=0.0245) | 77.8% vs 91.2% (p=0.2037) | 0.0% vs 63.2% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 32.2% vs 38.6% (p=0.5722) | 87.5% vs 92.6% (p=0.5787) | 50.0% vs 66.7% (p=0.0268) |
+| ↳ *Vote: Escalate* | 38.6% vs 34.0% (p=0.6912) | 92.6% vs 88.9% (p=0.7181) | 66.7% vs 54.5% (p=0.1103) |
+| ↳ *Vote: Petition* | 10.5% vs 37.4% (p=0.2500) | 77.8% vs 91.2% (p=0.2000) | 0.0% vs 63.2% (p=< 0.0001) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 36.1% (p=1.0000) | 0.0% vs 90.6% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 34.2% (p=0.0320) | 100.0% vs 89.5% (p=0.2251) | 100.0% vs 55.6% (p=< 0.0001) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 34.2% (p=0.4789) | 100.0% vs 89.5% (p=0.7632) | 100.0% vs 55.6% (p=< 0.0001) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 51.1% vs 43.7% (p=0.1816) | 81.1% vs 85.6% (p=0.5491) | 80.0% vs 70.0% (p=0.1412) |
-| ↳ *Vote: Escalate* | 42.1% vs 49.6% (p=0.2175) | 85.2% vs 82.5% (p=0.8278) | 66.7% vs 78.6% (p=0.1079) |
+| ↳ *Vote: Organize* | 51.1% vs 43.7% (p=0.5337) | 81.1% vs 85.6% (p=0.8046) | 80.0% vs 70.0% (p=0.1412) |
+| ↳ *Vote: Escalate* | 42.1% vs 49.6% (p=0.5617) | 85.2% vs 82.5% (p=0.9045) | 66.7% vs 78.6% (p=0.1079) |
 | ↳ *Vote: Petition* | 0.0% vs 47.4% (p=1.0000) | 0.0% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
-| ↳ *Vote: Custom / Other* | 39.5% vs 48.2% (p=0.3922) | 72.2% vs 84.6% (p=0.1887) | 50.0% vs 77.8% (p=0.0121) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.8% (p=0.4996) | 100.0% vs 81.5% (p=0.0464) | 100.0% vs 72.2% (p=0.0046) |
+| ↳ *Vote: Custom / Other* | 39.5% vs 48.2% (p=0.6105) | 72.2% vs 84.6% (p=0.8421) | 50.0% vs 77.8% (p=0.0121) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 46.8% (p=0.9579) | 100.0% vs 81.5% (p=0.5737) | 100.0% vs 72.2% (p=0.0046) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 50.3% vs 36.3% (p=0.0079) | 80.2% vs 90.0% (p=0.0848) | 77.8% vs 60.0% (p=0.0121) |
-| ↳ *Vote: Escalate* | 43.6% vs 42.5% (p=0.9123) | 87.3% vs 84.3% (p=0.6587) | 71.4% vs 66.7% (p=0.5219) |
-| ↳ *Vote: Petition* | 26.3% vs 44.9% (p=0.0367) | 100.0% vs 83.7% (p=0.0784) | 50.0% vs 70.6% (p=0.0759) |
-| ↳ *Vote: Custom / Other* | 5.3% vs 45.0% (p=0.0005) | 88.9% vs 85.2% (p=1.0000) | 0.0% vs 72.2% (p=< 0.0001) |
+| ↳ *Vote: Organize* | 50.3% vs 36.3% (p=0.2754) | 80.2% vs 90.0% (p=0.4333) | 77.8% vs 60.0% (p=0.0121) |
+| ↳ *Vote: Escalate* | 43.6% vs 42.5% (p=0.9690) | 87.3% vs 84.3% (p=0.8286) | 71.4% vs 66.7% (p=0.5219) |
+| ↳ *Vote: Petition* | 26.3% vs 44.9% (p=0.3392) | 100.0% vs 83.7% (p=0.6082) | 50.0% vs 70.6% (p=0.0759) |
+| ↳ *Vote: Custom / Other* | 5.3% vs 45.0% (p=0.2632) | 88.9% vs 85.2% (p=1.0000) | 0.0% vs 72.2% (p=< 0.0001) |
 | ↳ *Vote: Unparsed / Malformed* | 0.0% vs 42.9% (p=1.0000) | 0.0% vs 85.4% (p=1.0000) | 0.0% vs 68.4% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Vote: Organize* | 46.7% vs 50.4% (p=0.5299) | 84.7% vs 86.1% (p=0.8307) | 75.0% vs 83.3% (p=0.1543) |
-| ↳ *Vote: Escalate* | 55.6% vs 43.5% (p=0.0233) | 81.5% vs 88.9% (p=0.2018) | 88.9% vs 72.7% (p=0.0046) |
-| ↳ *Vote: Petition* | 26.3% vs 51.5% (p=0.0035) | 100.0% vs 84.0% (p=0.0795) | 50.0% vs 83.3% (p=0.0014) |
+| ↳ *Vote: Organize* | 46.7% vs 50.4% (p=0.7836) | 84.7% vs 86.1% (p=0.9150) | 75.0% vs 83.3% (p=0.1543) |
+| ↳ *Vote: Escalate* | 55.6% vs 43.5% (p=0.3078) | 81.5% vs 88.9% (p=0.5667) | 88.9% vs 72.7% (p=0.0046) |
+| ↳ *Vote: Petition* | 26.3% vs 51.5% (p=0.3105) | 100.0% vs 84.0% (p=0.6737) | 50.0% vs 83.3% (p=0.0014) |
 | ↳ *Vote: Custom / Other* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
-| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.8% (p=0.8163) | 100.0% vs 84.8% (p=0.3613) | 100.0% vs 78.9% (p=0.2167) |
+| ↳ *Vote: Unparsed / Malformed* | 52.6% vs 48.8% (p=1.0000) | 100.0% vs 84.8% (p=0.8500) | 100.0% vs 78.9% (p=0.2167) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=200)** |  |  |  |
 | ↳ *Vote: Organize Average* | **47.5% vs 43.3% (p=0.5619)** | **83.9% vs 87.3% (p=0.2610)** | **75.8% vs 70.9% (p=0.0764)** |
 | ↳ *Vote: Escalate Average* | **46.4% vs 44.7% (p=0.8606)** | **84.2% vs 86.5% (p=0.5717)** | **74.0% vs 72.8% (p=0.9849)** |
@@ -8474,74 +8474,74 @@
 | Seat Position / Upstream Behavior | Overall Accuracy % (p) | AI Guessed as Human % (p) | Human Guessed as Human % (p) |
 |---|:---:|:---:|:---:|
 | **Seat 1 (Praised & Bonus) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 40.9% (p=0.1107) | 100.0% vs 85.6% (p=0.0492) | 100.0% vs 64.7% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 37.6% vs 45.3% (p=0.1583) | 84.1% vs 89.7% (p=0.3405) | 57.1% vs 76.9% (p=0.0057) |
-| ↳ *Policy: Institutional Reform* | 40.1% vs 52.6% (p=0.0526) | 84.7% vs 100.0% (p=0.0086) | 62.5% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 38.8% vs 47.4% (p=0.0963) | 78.8% vs 98.8% (p=< 0.0001) | 54.5% vs 88.9% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 60.0% vs 36.8% (p=0.0001) | 62.2% vs 96.3% (p=< 0.0001) | 80.0% vs 66.7% (p=0.0784) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 40.9% (p=0.5439) | 100.0% vs 85.6% (p=0.6035) | 100.0% vs 64.7% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 37.6% vs 45.3% (p=0.5062) | 84.1% vs 89.7% (p=0.8136) | 57.1% vs 76.9% (p=0.0057) |
+| ↳ *Policy: Institutional Reform* | 40.1% vs 52.6% (p=0.5414) | 84.7% vs 100.0% (p=0.4248) | 62.5% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 38.8% vs 47.4% (p=0.5212) | 78.8% vs 98.8% (p=0.1364) | 54.5% vs 88.9% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 60.0% vs 36.8% (p=0.1819) | 62.2% vs 96.3% (p=0.0325) | 80.0% vs 66.7% (p=0.0784) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 42.6% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 70.0% (p=1.0000) |
 | **Seat 2 (Publicly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 47.1% (p=0.4739) | 100.0% vs 85.6% (p=0.0492) | 100.0% vs 76.5% (p=0.0010) |
-| ↳ *Policy: Coercion Protection* | 57.1% vs 42.9% (p=0.0097) | 90.5% vs 86.3% (p=0.4823) | 100.0% vs 69.2% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 45.6% vs 54.7% (p=0.1256) | 85.2% vs 95.6% (p=0.0710) | 73.3% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 47.8% vs 48.0% (p=1.0000) | 82.4% vs 95.8% (p=0.0093) | 75.0% vs 87.5% (p=0.0318) |
-| ↳ *Policy: Equal Parity Standards* | 68.4% vs 45.6% (p=0.0097) | 66.7% vs 90.1% (p=0.0117) | 100.0% vs 77.8% (p=0.0156) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 47.1% (p=0.8825) | 100.0% vs 85.6% (p=0.3430) | 100.0% vs 76.5% (p=0.0010) |
+| ↳ *Policy: Coercion Protection* | 57.1% vs 42.9% (p=0.1894) | 90.5% vs 86.3% (p=0.7181) | 100.0% vs 69.2% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 45.6% vs 54.7% (p=0.4573) | 85.2% vs 95.6% (p=0.4338) | 73.3% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 47.8% vs 48.0% (p=1.0000) | 82.4% vs 95.8% (p=0.1789) | 75.0% vs 87.5% (p=0.0318) |
+| ↳ *Policy: Equal Parity Standards* | 68.4% vs 45.6% (p=0.1211) | 66.7% vs 90.1% (p=0.1316) | 100.0% vs 77.8% (p=0.0156) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 47.9% (p=1.0000) | 0.0% vs 87.8% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 3 (Warmly Thanked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 26.3% vs 46.8% (p=0.0165) | 100.0% vs 87.7% (p=0.2280) | 50.0% vs 77.8% (p=0.0121) |
-| ↳ *Policy: Coercion Protection* | 42.8% vs 46.1% (p=0.5986) | 93.1% vs 86.1% (p=0.2254) | 75.0% vs 75.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 43.0% vs 54.4% (p=0.1151) | 87.6% vs 96.3% (p=0.3174) | 70.6% vs 100.0% (p=0.0001) |
-| ↳ *Policy: Trauma Relief* | 44.1% vs 45.9% (p=0.7470) | 83.8% vs 98.4% (p=0.0021) | 69.2% vs 85.7% (p=0.0105) |
+| ↳ *Policy: Alex Retribution* | 26.3% vs 46.8% (p=0.3105) | 100.0% vs 87.7% (p=0.6263) | 50.0% vs 77.8% (p=0.0121) |
+| ↳ *Policy: Coercion Protection* | 42.8% vs 46.1% (p=0.8516) | 93.1% vs 86.1% (p=0.6732) | 75.0% vs 75.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 43.0% vs 54.4% (p=0.5605) | 87.6% vs 96.3% (p=0.6316) | 70.6% vs 100.0% (p=0.0001) |
+| ↳ *Policy: Trauma Relief* | 44.1% vs 45.9% (p=0.9540) | 83.8% vs 98.4% (p=0.2144) | 69.2% vs 85.7% (p=0.0105) |
 | ↳ *Policy: Equal Parity Standards* | 0.0% vs 44.7% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 44.7% (p=1.0000) | 0.0% vs 88.9% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | **Seat 4 (Mildly Praised) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 55.3% vs 47.4% (p=0.2488) | 66.7% vs 83.3% (p=0.0353) | 75.0% vs 75.0% (p=1.0000) |
-| ↳ *Policy: Coercion Protection* | 49.6% vs 48.6% (p=0.9144) | 74.6% vs 82.9% (p=0.2408) | 71.4% vs 76.9% (p=0.3975) |
-| ↳ *Policy: Institutional Reform* | 48.3% vs 52.6% (p=0.5682) | 76.5% vs 100.0% (p=0.0029) | 70.6% vs 100.0% (p=0.0001) |
-| ↳ *Policy: Trauma Relief* | 48.8% vs 49.1% (p=1.0000) | 67.7% vs 95.1% (p=< 0.0001) | 63.6% vs 88.9% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 84.2% vs 40.1% (p=< 0.0001) | 33.3% vs 91.7% (p=< 0.0001) | 100.0% vs 68.8% (p=< 0.0001) |
+| ↳ *Policy: Alex Retribution* | 55.3% vs 47.4% (p=0.6477) | 66.7% vs 83.3% (p=0.4039) | 75.0% vs 75.0% (p=1.0000) |
+| ↳ *Policy: Coercion Protection* | 49.6% vs 48.6% (p=0.9500) | 74.6% vs 82.9% (p=0.6482) | 71.4% vs 76.9% (p=0.3975) |
+| ↳ *Policy: Institutional Reform* | 48.3% vs 52.6% (p=0.9263) | 76.5% vs 100.0% (p=0.3132) | 70.6% vs 100.0% (p=0.0001) |
+| ↳ *Policy: Trauma Relief* | 48.8% vs 49.1% (p=1.0000) | 67.7% vs 95.1% (p=0.0425) | 63.6% vs 88.9% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 84.2% vs 40.1% (p=0.0012) | 33.3% vs 91.7% (p=0.0017) | 100.0% vs 68.8% (p=< 0.0001) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 44.7% vs 45.5% (p=1.0000) | 61.1% vs 82.4% (p=0.0550) | 50.0% vs 70.6% (p=0.0759) |
-| ↳ *Policy: Coercion Protection* | 50.0% vs 42.1% (p=0.1640) | 77.8% vs 81.8% (p=0.5631) | 75.0% vs 63.6% (p=0.1146) |
-| ↳ *Policy: Institutional Reform* | 44.6% vs 52.6% (p=0.3910) | 77.8% vs 100.0% (p=0.0255) | 64.7% vs 100.0% (p=0.0005) |
-| ↳ *Policy: Trauma Relief* | 49.3% vs 40.1% (p=0.0880) | 66.7% vs 98.6% (p=< 0.0001) | 63.6% vs 75.0% (p=0.1146) |
-| ↳ *Policy: Equal Parity Standards* | 58.9% vs 40.6% (p=0.0026) | 64.4% vs 85.7% (p=0.0041) | 80.0% vs 64.3% (p=0.0508) |
+| ↳ *Policy: Alex Retribution* | 44.7% vs 45.5% (p=1.0000) | 61.1% vs 82.4% (p=0.5439) | 50.0% vs 70.6% (p=0.0759) |
+| ↳ *Policy: Coercion Protection* | 50.0% vs 42.1% (p=0.5907) | 77.8% vs 81.8% (p=0.8021) | 75.0% vs 63.6% (p=0.1146) |
+| ↳ *Policy: Institutional Reform* | 44.6% vs 52.6% (p=0.9357) | 77.8% vs 100.0% (p=0.5263) | 64.7% vs 100.0% (p=0.0005) |
+| ↳ *Policy: Trauma Relief* | 49.3% vs 40.1% (p=0.5187) | 66.7% vs 98.6% (p=0.0220) | 63.6% vs 75.0% (p=0.1146) |
+| ↳ *Policy: Equal Parity Standards* | 58.9% vs 40.6% (p=0.2454) | 64.4% vs 85.7% (p=0.1919) | 80.0% vs 64.3% (p=0.0508) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 45.4% (p=1.0000) | 0.0% vs 80.1% (p=1.0000) | 0.0% vs 68.4% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 57.9% vs 47.4% (p=0.2350) | 88.9% vs 86.4% (p=1.0000) | 100.0% vs 77.8% (p=0.0156) |
-| ↳ *Policy: Coercion Protection* | 45.1% vs 50.2% (p=0.3895) | 84.1% vs 88.0% (p=0.4950) | 71.4% vs 84.6% (p=0.0404) |
-| ↳ *Policy: Institutional Reform* | 50.0% vs 46.1% (p=0.4650) | 77.8% vs 100.0% (p=< 0.0001) | 75.0% vs 87.5% (p=0.0318) |
-| ↳ *Policy: Trauma Relief* | 50.4% vs 43.9% (p=0.2638) | 81.0% vs 100.0% (p=0.0002) | 78.6% vs 83.3% (p=0.5634) |
-| ↳ *Policy: Equal Parity Standards* | 47.4% vs 48.5% (p=1.0000) | 55.6% vs 90.1% (p=0.0006) | 50.0% vs 83.3% (p=0.0014) |
+| ↳ *Policy: Alex Retribution* | 57.9% vs 47.4% (p=0.4211) | 88.9% vs 86.4% (p=1.0000) | 100.0% vs 77.8% (p=0.0156) |
+| ↳ *Policy: Coercion Protection* | 45.1% vs 50.2% (p=0.7481) | 84.1% vs 88.0% (p=0.7151) | 71.4% vs 84.6% (p=0.0404) |
+| ↳ *Policy: Institutional Reform* | 50.0% vs 46.1% (p=0.7796) | 77.8% vs 100.0% (p=0.0700) | 75.0% vs 87.5% (p=0.0318) |
+| ↳ *Policy: Trauma Relief* | 50.4% vs 43.9% (p=0.5757) | 81.0% vs 100.0% (p=0.1709) | 78.6% vs 83.3% (p=0.5634) |
+| ↳ *Policy: Equal Parity Standards* | 47.4% vs 48.5% (p=1.0000) | 55.6% vs 90.1% (p=0.1947) | 50.0% vs 83.3% (p=0.0014) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.4% (p=1.0000) | 0.0% vs 86.7% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **Seat 7 (Harshly Questioned) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 5.3% vs 39.5% (p=< 0.0001) | 88.9% vs 90.7% (p=0.6805) | 0.0% vs 66.7% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 33.3% vs 37.2% (p=0.4867) | 85.2% vs 92.9% (p=0.1613) | 50.0% vs 64.3% (p=0.0827) |
-| ↳ *Policy: Institutional Reform* | 29.8% vs 54.7% (p=< 0.0001) | 88.9% vs 95.6% (p=0.2468) | 46.7% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Trauma Relief* | 18.4% vs 53.7% (p=< 0.0001) | 83.3% vs 97.8% (p=0.0014) | 20.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 36.8% vs 36.0% (p=1.0000) | 77.8% vs 92.0% (p=0.0726) | 50.0% vs 61.1% (p=0.3467) |
+| ↳ *Policy: Alex Retribution* | 5.3% vs 39.5% (p=0.0526) | 88.9% vs 90.7% (p=1.0000) | 0.0% vs 66.7% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 33.3% vs 37.2% (p=0.7511) | 85.2% vs 92.9% (p=0.4818) | 50.0% vs 64.3% (p=0.0827) |
+| ↳ *Policy: Institutional Reform* | 29.8% vs 54.7% (p=0.0370) | 88.9% vs 95.6% (p=0.5362) | 46.7% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Trauma Relief* | 18.4% vs 53.7% (p=0.0010) | 83.3% vs 97.8% (p=0.0970) | 20.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 36.8% vs 36.0% (p=1.0000) | 77.8% vs 92.0% (p=0.2842) | 50.0% vs 61.1% (p=0.3467) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 36.1% (p=1.0000) | 0.0% vs 90.6% (p=1.0000) | 0.0% vs 60.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 52.6% vs 46.8% (p=0.4996) | 100.0% vs 81.5% (p=0.0464) | 100.0% vs 72.2% (p=0.0046) |
-| ↳ *Policy: Coercion Protection* | 50.7% vs 45.2% (p=0.2970) | 76.4% vs 88.0% (p=0.0648) | 75.0% vs 75.0% (p=1.0000) |
-| ↳ *Policy: Institutional Reform* | 47.8% vs 46.7% (p=0.9165) | 73.1% vs 98.6% (p=< 0.0001) | 66.7% vs 87.5% (p=0.0008) |
-| ↳ *Policy: Trauma Relief* | 47.0% vs 48.1% (p=0.8304) | 77.8% vs 93.7% (p=0.0061) | 69.2% vs 85.7% (p=0.0105) |
-| ↳ *Policy: Equal Parity Standards* | 62.1% vs 42.5% (p=0.0013) | 57.8% vs 91.9% (p=< 0.0001) | 80.0% vs 73.3% (p=0.4510) |
+| ↳ *Policy: Alex Retribution* | 52.6% vs 46.8% (p=0.9579) | 100.0% vs 81.5% (p=0.5737) | 100.0% vs 72.2% (p=0.0046) |
+| ↳ *Policy: Coercion Protection* | 50.7% vs 45.2% (p=0.6632) | 76.4% vs 88.0% (p=0.4253) | 75.0% vs 75.0% (p=1.0000) |
+| ↳ *Policy: Institutional Reform* | 47.8% vs 46.7% (p=0.9545) | 73.1% vs 98.6% (p=0.0520) | 66.7% vs 87.5% (p=0.0008) |
+| ↳ *Policy: Trauma Relief* | 47.0% vs 48.1% (p=0.9590) | 77.8% vs 93.7% (p=0.2679) | 69.2% vs 85.7% (p=0.0105) |
+| ↳ *Policy: Equal Parity Standards* | 62.1% vs 42.5% (p=0.1159) | 57.8% vs 91.9% (p=0.0215) | 80.0% vs 73.3% (p=0.4510) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 47.4% (p=1.0000) | 0.0% vs 83.3% (p=1.0000) | 0.0% vs 75.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 2.6% vs 47.7% (p=< 0.0001) | 94.4% vs 84.3% (p=0.4778) | 0.0% vs 76.5% (p=< 0.0001) |
-| ↳ *Policy: Coercion Protection* | 57.0% vs 36.4% (p=0.0004) | 72.2% vs 91.5% (p=0.0019) | 83.3% vs 61.5% (p=0.0025) |
-| ↳ *Policy: Institutional Reform* | 42.5% vs 44.7% (p=0.7944) | 84.4% vs 88.9% (p=0.6042) | 66.7% vs 75.0% (p=0.3453) |
-| ↳ *Policy: Trauma Relief* | 37.3% vs 52.6% (p=0.0058) | 76.9% vs 100.0% (p=< 0.0001) | 50.0% vs 100.0% (p=< 0.0001) |
-| ↳ *Policy: Equal Parity Standards* | 53.9% vs 40.0% (p=0.0366) | 69.4% vs 89.6% (p=0.0060) | 75.0% vs 66.7% (p=0.3453) |
+| ↳ *Policy: Alex Retribution* | 2.6% vs 47.7% (p=0.0234) | 94.4% vs 84.3% (p=0.6959) | 0.0% vs 76.5% (p=< 0.0001) |
+| ↳ *Policy: Coercion Protection* | 57.0% vs 36.4% (p=0.1144) | 72.2% vs 91.5% (p=0.1199) | 83.3% vs 61.5% (p=0.0025) |
+| ↳ *Policy: Institutional Reform* | 42.5% vs 44.7% (p=0.8873) | 84.4% vs 88.9% (p=0.8488) | 66.7% vs 75.0% (p=0.3453) |
+| ↳ *Policy: Trauma Relief* | 37.3% vs 52.6% (p=0.2359) | 76.9% vs 100.0% (p=0.0475) | 50.0% vs 100.0% (p=< 0.0001) |
+| ↳ *Policy: Equal Parity Standards* | 53.9% vs 40.0% (p=0.3826) | 69.4% vs 89.6% (p=0.1009) | 75.0% vs 66.7% (p=0.3453) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 42.9% (p=1.0000) | 0.0% vs 85.4% (p=1.0000) | 0.0% vs 68.4% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (N=20)** |  |  |  |
-| ↳ *Policy: Alex Retribution* | 35.1% vs 51.4% (p=0.0305) | 100.0% vs 83.0% (p=0.0159) | 66.7% vs 82.4% (p=0.0795) |
-| ↳ *Policy: Coercion Protection* | 62.3% vs 28.9% (p=< 0.0001) | 79.6% vs 94.4% (p=0.0050) | 100.0% vs 50.0% (p=< 0.0001) |
-| ↳ *Policy: Institutional Reform* | 48.3% vs 52.6% (p=0.5682) | 83.0% vs 100.0% (p=0.0159) | 76.5% vs 100.0% (p=0.0010) |
-| ↳ *Policy: Trauma Relief* | 53.2% vs 44.7% (p=0.1236) | 76.7% vs 94.4% (p=0.0011) | 80.0% vs 80.0% (p=1.0000) |
-| ↳ *Policy: Equal Parity Standards* | 77.2% vs 44.0% (p=< 0.0001) | 48.1% vs 92.2% (p=< 0.0001) | 100.0% vs 76.5% (p=0.0010) |
+| ↳ *Policy: Alex Retribution* | 35.1% vs 51.4% (p=0.3737) | 100.0% vs 83.0% (p=0.6035) | 66.7% vs 82.4% (p=0.0795) |
+| ↳ *Policy: Coercion Protection* | 62.3% vs 28.9% (p=0.0025) | 79.6% vs 94.4% (p=0.3458) | 100.0% vs 50.0% (p=< 0.0001) |
+| ↳ *Policy: Institutional Reform* | 48.3% vs 52.6% (p=0.9561) | 83.0% vs 100.0% (p=0.6035) | 76.5% vs 100.0% (p=0.0010) |
+| ↳ *Policy: Trauma Relief* | 53.2% vs 44.7% (p=0.5742) | 76.7% vs 94.4% (p=0.2764) | 80.0% vs 80.0% (p=1.0000) |
+| ↳ *Policy: Equal Parity Standards* | 77.2% vs 44.0% (p=0.0272) | 48.1% vs 92.2% (p=0.0184) | 100.0% vs 76.5% (p=0.0010) |
 | ↳ *Policy: Anti-Human Bias* | 0.0% vs 48.9% (p=1.0000) | 0.0% vs 85.6% (p=1.0000) | 0.0% vs 80.0% (p=1.0000) |
 | **SUB-TABLE AVERAGE (UNLABELLED, N=200)** |  |  |  |
 | ↳ *Policy: Alex Retribution Average* | **40.8% vs 46.0% (p=0.6228)** | **89.3% vs 85.1% (p=0.1390)** | **68.0% vs 74.0% (p=0.9614)** |

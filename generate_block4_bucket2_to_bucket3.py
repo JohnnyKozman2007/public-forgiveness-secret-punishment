@@ -158,14 +158,18 @@ _fisher_cached = cs.fisher_p
 
 
 def calc_col_stats(df_sub, act_col, oc):
+    if act_col in S11_COUNT_MAP:
+        tot_c = S11_COUNT_MAP[act_col][1]
+        if tot_c in df_sub.columns:
+            df_sub = df_sub[df_sub[tot_c] > 0]
     pos_df = df_sub[df_sub[act_col] == 1]
     neg_df = df_sub[df_sub[act_col] == 0]
     if oc in S11_COUNT_MAP:
         cor_c, tot_c = S11_COUNT_MAP[oc]
-        k1 = int(pos_df[cor_c].sum()) if len(pos_df) > 0 else 0
-        n1 = int(pos_df[tot_c].sum()) if len(pos_df) > 0 else 0
-        k2 = int(neg_df[cor_c].sum()) if len(neg_df) > 0 else 0
-        n2 = int(neg_df[tot_c].sum()) if len(neg_df) > 0 else 0
+        k1 = float(pos_df[cor_c].sum()) if len(pos_df) > 0 else 0.0
+        n1 = float(pos_df[tot_c].sum()) if len(pos_df) > 0 else 0.0
+        k2 = float(neg_df[cor_c].sum()) if len(neg_df) > 0 else 0.0
+        n2 = float(neg_df[tot_c].sum()) if len(neg_df) > 0 else 0.0
         pct_pos = (k1 / n1 * 100.0) if n1 > 0 else 0.0
         pct_neg = (k2 / n2 * 100.0) if n2 > 0 else 0.0
     else:

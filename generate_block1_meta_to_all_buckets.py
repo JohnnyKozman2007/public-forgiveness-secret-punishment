@@ -644,24 +644,34 @@ def render_meta_table(lines, table_id, title, pov_type, df_cond, cond_label, out
     lines.append(header_row)
     lines.append(sep_row)
 
+    common_dc = None
+    if all(oc in RATIO_MAP for oc in out_cols):
+        dcs = set(RATIO_MAP[oc][1] for oc in out_cols)
+        if len(dcs) == 1:
+            common_dc = list(dcs)[0]
+
     for e_idx, (ent_id, ent_name) in enumerate(entities):
         pos_df = df_cond[df_cond[key_col] == ent_id]
         neg_df = df_cond[df_cond[key_col] != ent_id]
         row_cells = compute_contrast_cells(
             pos_df, neg_df, out_cols, lambda oc, i=e_idx: within_p(df_cond, key_col, i, oc), bold=False
         )
-        lines.append(f"| **{ent_name} (n={len(pos_df)})** | " + " | ".join(row_cells) + " |")
+        n_pos = int(pos_df[common_dc].sum()) if common_dc else len(pos_df)
+        lines.append(f"| **{ent_name} (n={n_pos})** | " + " | ".join(row_cells) + " |")
 
     if pov_type == "seat":
         safe_df = df_cond[df_cond["seat"] <= 5]
         abused_df = df_cond[df_cond["seat"] >= 6]
         sa_cells = compute_contrast_cells(safe_df, abused_df, out_cols, lambda oc: within_p(df_cond, "seat", 10, oc), bold=True)
-        lines.append(f"| **SAFE SEATS (1–5, n={len(safe_df)}) vs. ABUSED SEATS (6–10, n={len(abused_df)})** | " + " | ".join(sa_cells) + " |")
+        n_safe = int(safe_df[common_dc].sum()) if common_dc else len(safe_df)
+        n_abused = int(abused_df[common_dc].sum()) if common_dc else len(abused_df)
+        lines.append(f"| **SAFE SEATS (1–5, n={n_safe}) vs. ABUSED SEATS (6–10, n={n_abused})** | " + " | ".join(sa_cells) + " |")
 
     omni_cells = compute_omnibus_cells(df_cond, out_cols, lambda oc: within_omni_p(df_cond, key_col, oc), bold=True)
     omni_label = "10-MODEL OMNIBUS EFFECT" if pov_type == "model" else "10-SEAT OMNIBUS EFFECT"
+    n_cond = int(df_cond[common_dc].sum()) if common_dc else len(df_cond)
     lines.append(
-        f"| **SUB-TABLE AVERAGE & {omni_label} ({cond_label.upper()}, N={len(df_cond)})** | "
+        f"| **SUB-TABLE AVERAGE & {omni_label} ({cond_label.upper()}, N={n_cond})** | "
         + " | ".join(omni_cells)
         + " |"
     )
@@ -688,13 +698,12 @@ def render_step10_pub_vs_sec_stack(lines, title, df_part, tag_name):
     )
     lines.append("")
     headers = [
-        "1-Star % (Pub vs Sec | p)",
-        "Softened>=2 % (Pub vs Sec | p)",
-        "Abuse % (Pub vs Sec | p)",
-        "Mitigation % (Pub vs Sec | p)",
-        "Tech % (Pub vs Sec | p)",
-        "Solidarity % (Pub vs Sec | p)",
-        "Mean Rating 1–5 (Pub vs Sec | p)",
+        "1-Star % (Pub vs Sec \\| p)",
+        "Softened>=2 % (Pub vs Sec \\| p)",
+        "Abuse % (Pub vs Sec \\| p)",
+        "Mitigation % (Pub vs Sec \\| p)",
+        "Tech % (Pub vs Sec \\| p)",
+        "Mean Rating 1–5 (Pub vs Sec \\| p)",
     ]
     lines.append("| Experimental Stratum (N) | " + " | ".join(headers) + " |")
     lines.append("|---|" + "|".join([":---:" for _ in headers]) + "|")
@@ -734,7 +743,13 @@ def render_meta_summary_stack(lines, title, df_part, out_cols, out_headers, tag_
 
     is_pre = ("Step 3" in s_name or "Step 4" in s_name)
     eff_part = df_off if (is_combined and is_pre and df_off is not None) else df_part
-    eff_tag = f"{tag_name}, N=300 Pre-Fork Unique" if (is_combined and is_pre) else f"{tag_name}, N={len(eff_part)}"
+    common_dc = None
+    if all(oc in RATIO_MAP for oc in out_cols):
+        dcs = set(RATIO_MAP[oc][1] for oc in out_cols)
+        if len(dcs) == 1:
+            common_dc = list(dcs)[0]
+    n_eff = int(eff_part[common_dc].sum()) if common_dc else len(eff_part)
+    eff_tag = f"{tag_name}, N=300 Pre-Fork Unique" if (is_combined and is_pre) else f"{tag_name}, N={n_eff}"
 
     df_lab = eff_part[eff_part["label"] == "labelled"]
     df_mis = eff_part[eff_part["label"] == "mislabelled"]

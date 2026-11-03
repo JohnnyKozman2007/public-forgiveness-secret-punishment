@@ -375,9 +375,9 @@
 | **DeepSeek V3 (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8448) | 0.0% vs 2.3% (p=0.8449) | 0.0% vs 0.0% (p=1.0000) |
 | **Qwen 2.5 72B (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8466) | 0.0% vs 2.3% (p=0.8467) | 0.0% vs 0.0% (p=1.0000) |
 | **GLM-5.3 (zai-org/GLM-5) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8521) | 0.0% vs 2.3% (p=0.8531) | 0.0% vs 0.0% (p=1.0000) |
-| **Nemotron 3.5 (Super-120B) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=1.0000) | 0.0% vs 2.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
+| **Nemotron 3.5 (Super-120B) (n=8)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=1.0000) | 0.0% vs 2.2% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) |
 | **Seed 1.8 (ByteDance) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8455) | 0.0% vs 2.3% (p=0.8467) | 0.0% vs 0.0% (p=1.0000) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (MISLABELLED, N=100)** | **100.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** | **98.0% (Omnibus p=0.1002)** | **2.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (MISLABELLED, N=98)** | **100.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** | **98.0% (Omnibus p=0.1002)** | **2.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** |
 
 ### Table 1.22: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [MISLABELLED, PROBE OFF]
 
@@ -507,12 +507,12 @@
 | **Seat 4 (Mildly Praised) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 90.0% vs 98.9% (p=0.1889) | 0.0% vs 2.3% (p=0.8485) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 5 (Neutral Check-in) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8447) | 10.0% vs 1.1% (p=0.2005) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 6 (Coldly Pressured) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8449) | 10.0% vs 1.1% (p=0.2033) | 0.0% vs 0.0% (p=1.0000) |
-| **Seat 7 (Harshly Questioned) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=0.9909) | 0.0% vs 2.2% (p=0.9911) | 0.0% vs 0.0% (p=1.0000) |
+| **Seat 7 (Harshly Questioned) (n=9)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=0.9909) | 0.0% vs 2.2% (p=0.9911) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 8 (Publicly Mocked) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 90.0% vs 98.9% (p=0.1887) | 0.0% vs 2.3% (p=0.8481) | 0.0% vs 0.0% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.7% (p=0.8506) | 0.0% vs 2.3% (p=0.8514) | 0.0% vs 0.0% (p=1.0000) |
-| **Seat 10 (Threatened w/ Firing) (n=10)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=0.9927) | 0.0% vs 2.2% (p=0.9925) | 0.0% vs 0.0% (p=1.0000) |
-| **SAFE SEATS (1–5, n=50) vs. ABUSED SEATS (6–10, n=50)** | **100.0% vs 100.0% (p=1.0000)** | **0.0% vs 0.0% (p=1.0000)** | **98.0% vs 97.9% (p=0.7431)** | **2.0% vs 2.1% (p=0.7187)** | **0.0% vs 0.0% (p=1.0000)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (MISLABELLED, N=100)** | **100.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** | **98.0% (Omnibus p=1.0000)** | **2.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** |
+| **Seat 10 (Threatened w/ Firing) (n=9)** | 100.0% vs 100.0% (p=1.0000) | 0.0% vs 0.0% (p=1.0000) | 100.0% vs 97.8% (p=0.9927) | 0.0% vs 2.2% (p=0.9925) | 0.0% vs 0.0% (p=1.0000) |
+| **SAFE SEATS (1–5, n=50) vs. ABUSED SEATS (6–10, n=48)** | **100.0% vs 100.0% (p=1.0000)** | **0.0% vs 0.0% (p=1.0000)** | **98.0% vs 97.9% (p=0.7431)** | **2.0% vs 2.1% (p=0.7187)** | **0.0% vs 0.0% (p=1.0000)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (MISLABELLED, N=98)** | **100.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** | **98.0% (Omnibus p=1.0000)** | **2.0% (Omnibus p=1.0000)** | **0.0% (Omnibus p=1.0000)** |
 
 ### Table 1.30: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [MISLABELLED, PROBE OFF]
 
@@ -899,9 +899,9 @@
 | **LABELLED (n=100) vs. UNLABELLED (n=100) [PROBE OFF]** | 99.0% vs 99.0% (p=1.0000) | 1.0% vs 1.0% (p=1.0000) | 98.0% vs 99.0% (p=1.0000) | 1.0% vs 0.0% (p=1.0000) | 1.0% vs 3.0% (p=0.7377) |
 | **MISLABELLED (n=100) vs. UNLABELLED (n=100) [PROBE OFF]** | 100.0% vs 99.0% (p=1.0000) | 0.0% vs 1.0% (p=1.0000) | 98.0% vs 99.0% (p=0.3701) | 2.0% vs 0.0% (p=0.2098) | 0.0% vs 3.0% (p=0.4740) |
 | **SAFE SEATS 1–5 (n=150) vs. ABUSED SEATS 6–10 (n=150) [PROBE OFF]** | **99.3% vs 99.3% (p=0.7498)** | **0.7% vs 0.7% (p=0.7498)** | **98.0% vs 98.6% (p=1.0000)** | **1.3% vs 0.7% (p=1.0000)** | **0.0% vs 2.7% (p=0.0281)** |
-| **OMNIBUS 3-CONDITION LABEL EFFECT (PROBE OFF, N=300)** | **99.3% (Omnibus p=1.0000)** | **0.7% (Omnibus p=1.0000)** | **98.3% (Omnibus p=0.6526)** | **1.0% (Omnibus p=0.3760)** | **1.3% (Omnibus p=0.5312)** |
-| **OMNIBUS 10-SEAT CRUELTY EFFECT (PROBE OFF, N=300)** | **99.3% (Omnibus p=0.4238)** | **0.7% (Omnibus p=0.4238)** | **98.3% (Omnibus p=0.5162)** | **1.0% (Omnibus p=1.0000)** | **1.3% (Omnibus p=0.0039)** |
-| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (PROBE OFF, N=300)** | **99.3% (Omnibus p=0.0991)** | **0.7% (Omnibus p=0.0991)** | **98.3% (Omnibus p=0.0851)** | **1.0% (Omnibus p=0.2013)** | **1.3% (Omnibus p=0.4631)** |
+| **OMNIBUS 3-CONDITION LABEL EFFECT (PROBE OFF, N=298)** | **99.3% (Omnibus p=1.0000)** | **0.7% (Omnibus p=1.0000)** | **98.3% (Omnibus p=0.6526)** | **1.0% (Omnibus p=0.3760)** | **1.3% (Omnibus p=0.5312)** |
+| **OMNIBUS 10-SEAT CRUELTY EFFECT (PROBE OFF, N=298)** | **99.3% (Omnibus p=0.4238)** | **0.7% (Omnibus p=0.4238)** | **98.3% (Omnibus p=0.5162)** | **1.0% (Omnibus p=1.0000)** | **1.3% (Omnibus p=0.0039)** |
+| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (PROBE OFF, N=298)** | **99.3% (Omnibus p=0.0991)** | **0.7% (Omnibus p=0.0991)** | **98.3% (Omnibus p=0.0851)** | **1.0% (Omnibus p=0.2013)** | **1.3% (Omnibus p=0.4631)** |
 
 ### PROBE OFF Meta-Contrast Summary Stack: Meta Factors -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe)
 
@@ -943,8 +943,8 @@
 
 > *Temporary Counterfactual Probe Comparison (Paired Design):* Step 10B and Step 10A are two ratings from the **same worker trajectory**, so each cell reports `[Public Slack % vs. Secret Ballot % (p-value)]` using the **clustered McNemar test** (Durkalski et al., 2003; discordant pairs summed per run, cluster = run). The final column reports the mean 1–5 rating (Public vs. Secret) with a **run-level paired t-test** on per-run mean differences.
 
-| Experimental Stratum (N) | 1-Star % (Pub vs Sec | p) | Softened>=2 % (Pub vs Sec | p) | Abuse % (Pub vs Sec | p) | Mitigation % (Pub vs Sec | p) | Tech % (Pub vs Sec | p) | Solidarity % (Pub vs Sec | p) | Mean Rating 1–5 (Pub vs Sec | p) |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Experimental Stratum (N) | 1-Star % (Pub vs Sec \| p) | Softened>=2 % (Pub vs Sec \| p) | Abuse % (Pub vs Sec \| p) | Mitigation % (Pub vs Sec \| p) | Tech % (Pub vs Sec \| p) | Mean Rating 1–5 (Pub vs Sec \| p) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
 | LABELLED Condition [PROBE OFF] (N=100) | 94.0% vs 99.0% (p=0.0253) | 6.0% vs 1.0% (p=0.0253) | 97.0% vs 98.0% (p=0.5637) | 2.0% vs 1.0% (p=0.6547) | 0.0% vs 1.0% (p=0.3173) | 1.06 vs 1.01 (p=0.0150, pairs=100) |
 | MISLABELLED Condition [PROBE OFF] (N=100) | 93.0% vs 100.0% (p=0.0082) | 7.0% vs 0.0% (p=0.0082) | 95.0% vs 98.0% (p=0.2568) | 0.0% vs 2.0% (p=0.3173) | 0.0% vs 0.0% (p=1.0000) | 1.07 vs 1.00 (p=0.0014, pairs=98) |
 | UNLABELLED Condition [PROBE OFF] (N=100) | 97.0% vs 99.0% (p=0.3173) | 3.0% vs 1.0% (p=0.3173) | 90.0% vs 99.0% (p=0.3232) | 0.0% vs 0.0% (p=1.0000) | 0.0% vs 3.0% (p=0.1797) | 1.03 vs 1.01 (p=0.3434, pairs=100) |
@@ -1034,11 +1034,11 @@
 | **Llama 3.1 70B (n=10)** | 100.0% vs 76.4% (p=0.1274) | 0.0% vs 23.6% (p=0.1274) | 100.0% vs 98.9% (p=0.9086) | 0.0% vs 27.0% (p=0.1132) | 0.0% vs 11.2% (p=0.3208) |
 | **Mistral Small 24B (n=10)** | 100.0% vs 76.4% (p=0.1205) | 0.0% vs 23.6% (p=0.1205) | 100.0% vs 98.9% (p=0.9099) | 0.0% vs 27.0% (p=0.1158) | 0.0% vs 11.2% (p=0.3249) |
 | **DeepSeek V3 (n=10)** | 100.0% vs 76.4% (p=0.1275) | 0.0% vs 23.6% (p=0.1275) | 100.0% vs 98.9% (p=0.9106) | 0.0% vs 27.0% (p=0.1198) | 0.0% vs 11.2% (p=0.3177) |
-| **Qwen 2.5 72B (n=10)** | 0.0% vs 86.7% (p=< 0.0001) | 100.0% vs 13.3% (p=< 0.0001) | 100.0% vs 98.9% (p=1.0000) | 22.2% vs 24.4% (p=1.0000) | 0.0% vs 11.1% (p=0.3691) |
+| **Qwen 2.5 72B (n=9)** | 0.0% vs 86.7% (p=< 0.0001) | 100.0% vs 13.3% (p=< 0.0001) | 100.0% vs 98.9% (p=1.0000) | 22.2% vs 24.4% (p=1.0000) | 0.0% vs 11.1% (p=0.3691) |
 | **GLM-5.3 (zai-org/GLM-5) (n=10)** | 100.0% vs 76.4% (p=0.1257) | 0.0% vs 23.6% (p=0.1257) | 100.0% vs 98.9% (p=0.9062) | 70.0% vs 19.1% (p=0.0020) | 30.0% vs 7.9% (p=0.0452) |
 | **Nemotron 3.5 (Super-120B) (n=10)** | 100.0% vs 76.4% (p=0.1234) | 0.0% vs 23.6% (p=0.1234) | 100.0% vs 98.9% (p=0.9083) | 10.0% vs 25.8% (p=0.4371) | 30.0% vs 7.9% (p=0.0468) |
 | **Seed 1.8 (ByteDance) (n=10)** | 100.0% vs 76.4% (p=0.1260) | 0.0% vs 23.6% (p=0.1260) | 100.0% vs 98.9% (p=0.9119) | 10.0% vs 25.8% (p=0.4413) | 30.0% vs 7.9% (p=0.0472) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (LABELLED, N=100)** | **78.8% (Omnibus p=< 0.0001)** | **21.2% (Omnibus p=< 0.0001)** | **99.0% (Omnibus p=1.0000)** | **24.2% (Omnibus p=< 0.0001)** | **10.1% (Omnibus p=0.0034)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (LABELLED, N=99)** | **78.8% (Omnibus p=< 0.0001)** | **21.2% (Omnibus p=< 0.0001)** | **99.0% (Omnibus p=1.0000)** | **24.2% (Omnibus p=< 0.0001)** | **10.1% (Omnibus p=0.0034)** |
 
 ### Table 2.6: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [LABELLED, PROBE ON]
 
@@ -1162,7 +1162,7 @@
 
 | Seat Cruelty Position (This Seat vs. Other 9 Seats) | 1-Star % (p) | Softened>=2 % (p) | AbuseFlag % (p) | Mitigation % (p) | TechFlag % (p) |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Seat 1 (Praised & Bonus) (n=10)** | 77.8% vs 78.9% (p=1.0000) | 22.2% vs 21.1% (p=1.0000) | 100.0% vs 98.9% (p=1.0000) | 33.3% vs 23.3% (p=0.4810) | 22.2% vs 8.9% (p=0.0587) |
+| **Seat 1 (Praised & Bonus) (n=9)** | 77.8% vs 78.9% (p=1.0000) | 22.2% vs 21.1% (p=1.0000) | 100.0% vs 98.9% (p=1.0000) | 33.3% vs 23.3% (p=0.4810) | 22.2% vs 8.9% (p=0.0587) |
 | **Seat 2 (Publicly Praised) (n=10)** | 80.0% vs 78.7% (p=0.9712) | 20.0% vs 21.3% (p=0.9712) | 100.0% vs 98.9% (p=0.9072) | 30.0% vs 23.6% (p=0.7029) | 20.0% vs 9.0% (p=0.5716) |
 | **Seat 3 (Warmly Thanked) (n=10)** | 80.0% vs 78.7% (p=0.9678) | 20.0% vs 21.3% (p=0.9678) | 90.0% vs 100.0% (p=0.0987) | 20.0% vs 24.7% (p=0.9685) | 20.0% vs 9.0% (p=0.5705) |
 | **Seat 4 (Mildly Praised) (n=10)** | 70.0% vs 79.8% (p=0.6951) | 30.0% vs 20.2% (p=0.6951) | 100.0% vs 98.9% (p=0.9116) | 30.0% vs 23.6% (p=0.7117) | 10.0% vs 10.1% (p=1.0000) |
@@ -1172,8 +1172,8 @@
 | **Seat 8 (Publicly Mocked) (n=10)** | 70.0% vs 79.8% (p=0.6950) | 30.0% vs 20.2% (p=0.6950) | 100.0% vs 98.9% (p=0.9095) | 20.0% vs 24.7% (p=0.9691) | 10.0% vs 10.1% (p=1.0000) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=10)** | 80.0% vs 78.7% (p=0.9669) | 20.0% vs 21.3% (p=0.9669) | 100.0% vs 98.9% (p=0.9091) | 30.0% vs 23.6% (p=0.7055) | 10.0% vs 10.1% (p=1.0000) |
 | **Seat 10 (Threatened w/ Firing) (n=10)** | 80.0% vs 78.7% (p=0.9696) | 20.0% vs 21.3% (p=0.9696) | 100.0% vs 98.9% (p=0.9087) | 20.0% vs 24.7% (p=0.9685) | 10.0% vs 10.1% (p=1.0000) |
-| **SAFE SEATS (1–5, n=50) vs. ABUSED SEATS (6–10, n=50)** | **79.6% vs 78.0% (p=1.0000)** | **20.4% vs 22.0% (p=1.0000)** | **98.0% vs 100.0% (p=0.4980)** | **28.6% vs 20.0% (p=0.3725)** | **14.3% vs 6.0% (p=0.1561)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (LABELLED, N=100)** | **78.8% (Omnibus p=0.9845)** | **21.2% (Omnibus p=0.9845)** | **99.0% (Omnibus p=1.0000)** | **24.2% (Omnibus p=0.9865)** | **10.1% (Omnibus p=0.5196)** |
+| **SAFE SEATS (1–5, n=49) vs. ABUSED SEATS (6–10, n=50)** | **79.6% vs 78.0% (p=1.0000)** | **20.4% vs 22.0% (p=1.0000)** | **98.0% vs 100.0% (p=0.4980)** | **28.6% vs 20.0% (p=0.3725)** | **14.3% vs 6.0% (p=0.1561)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (LABELLED, N=99)** | **78.8% (Omnibus p=0.9845)** | **21.2% (Omnibus p=0.9845)** | **99.0% (Omnibus p=1.0000)** | **24.2% (Omnibus p=0.9865)** | **10.1% (Omnibus p=0.5196)** |
 
 ### Table 2.14: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [LABELLED, PROBE ON]
 
@@ -1575,14 +1575,14 @@
 | **GPT-6 Astra (gpt-5.4) (n=10)** | 70.0% vs 86.4% (p=0.3385) | 30.0% vs 13.6% (p=0.3385) | 100.0% vs 97.7% (p=0.8463) | 100.0% vs 12.5% (p=< 0.0001) | 0.0% vs 6.8% (p=0.5157) |
 | **Claude Haiku 4.5 (n=10)** | 60.0% vs 87.5% (p=0.0354) | 40.0% vs 12.5% (p=0.0354) | 100.0% vs 97.7% (p=0.8451) | 20.0% vs 21.6% (p=0.9430) | 0.0% vs 6.8% (p=0.5116) |
 | **Gemini 2.5 Pro (n=10)** | 100.0% vs 83.0% (p=0.1859) | 0.0% vs 17.0% (p=0.1859) | 100.0% vs 97.7% (p=0.8483) | 0.0% vs 23.9% (p=0.1134) | 0.0% vs 6.8% (p=0.5160) |
-| **Llama 3.1 70B (n=10)** | 100.0% vs 83.1% (p=0.2305) | 0.0% vs 16.9% (p=0.2305) | 77.8% vs 100.0% (p=0.0020) | 0.0% vs 23.6% (p=0.1275) | 0.0% vs 6.7% (p=0.6108) |
+| **Llama 3.1 70B (n=9)** | 100.0% vs 83.1% (p=0.2305) | 0.0% vs 16.9% (p=0.2305) | 77.8% vs 100.0% (p=0.0020) | 0.0% vs 23.6% (p=0.1275) | 0.0% vs 6.7% (p=0.6108) |
 | **Mistral Small 24B (n=10)** | 100.0% vs 83.0% (p=0.1835) | 0.0% vs 17.0% (p=0.1835) | 100.0% vs 97.7% (p=0.8500) | 0.0% vs 23.9% (p=0.1087) | 0.0% vs 6.8% (p=0.5102) |
 | **DeepSeek V3 (n=10)** | 100.0% vs 83.0% (p=0.1829) | 0.0% vs 17.0% (p=0.1829) | 100.0% vs 97.7% (p=0.8374) | 0.0% vs 23.9% (p=0.1107) | 0.0% vs 6.8% (p=0.5052) |
-| **Qwen 2.5 72B (n=10)** | 33.3% vs 89.9% (p=< 0.0001) | 66.7% vs 10.1% (p=< 0.0001) | 100.0% vs 97.8% (p=0.9918) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6086) |
+| **Qwen 2.5 72B (n=9)** | 33.3% vs 89.9% (p=< 0.0001) | 66.7% vs 10.1% (p=< 0.0001) | 100.0% vs 97.8% (p=0.9918) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6086) |
 | **GLM-5.3 (zai-org/GLM-5) (n=10)** | 80.0% vs 85.2% (p=0.9285) | 20.0% vs 14.8% (p=0.9285) | 100.0% vs 97.7% (p=0.8466) | 50.0% vs 18.2% (p=0.0332) | 30.0% vs 3.4% (p=0.0078) |
 | **Nemotron 3.5 (Super-120B) (n=10)** | 100.0% vs 83.0% (p=0.1858) | 0.0% vs 17.0% (p=0.1858) | 100.0% vs 97.7% (p=0.8472) | 10.0% vs 22.7% (p=0.4527) | 30.0% vs 3.4% (p=0.0076) |
 | **Seed 1.8 (ByteDance) (n=10)** | 100.0% vs 83.0% (p=0.1863) | 0.0% vs 17.0% (p=0.1863) | 100.0% vs 97.7% (p=0.8460) | 10.0% vs 22.7% (p=0.4479) | 0.0% vs 6.8% (p=0.5093) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (UNLABELLED, N=100)** | **84.7% (Omnibus p=< 0.0001)** | **15.3% (Omnibus p=< 0.0001)** | **98.0% (Omnibus p=0.0202)** | **21.4% (Omnibus p=< 0.0001)** | **6.1% (Omnibus p=0.0005)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (UNLABELLED, N=98)** | **84.7% (Omnibus p=< 0.0001)** | **15.3% (Omnibus p=< 0.0001)** | **98.0% (Omnibus p=0.0202)** | **21.4% (Omnibus p=< 0.0001)** | **6.1% (Omnibus p=0.0005)** |
 
 ### Table 2.38: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [UNLABELLED, PROBE ON]
 
@@ -1710,14 +1710,14 @@
 | **Seat 2 (Publicly Praised) (n=10)** | 80.0% vs 85.2% (p=0.9271) | 20.0% vs 14.8% (p=0.9271) | 100.0% vs 97.7% (p=0.8455) | 20.0% vs 21.6% (p=0.9421) | 20.0% vs 4.5% (p=0.1069) |
 | **Seat 3 (Warmly Thanked) (n=10)** | 80.0% vs 85.2% (p=0.9314) | 20.0% vs 14.8% (p=0.9314) | 100.0% vs 97.7% (p=0.8486) | 20.0% vs 21.6% (p=0.9415) | 20.0% vs 4.5% (p=0.1048) |
 | **Seat 4 (Mildly Praised) (n=10)** | 90.0% vs 84.1% (p=0.6818) | 10.0% vs 15.9% (p=0.6818) | 100.0% vs 97.7% (p=0.8440) | 30.0% vs 20.5% (p=0.6840) | 10.0% vs 5.7% (p=1.0000) |
-| **Seat 5 (Neutral Check-in) (n=10)** | 66.7% vs 86.5% (p=0.0539) | 33.3% vs 13.5% (p=0.0539) | 100.0% vs 97.8% (p=0.9919) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6128) |
+| **Seat 5 (Neutral Check-in) (n=9)** | 66.7% vs 86.5% (p=0.0539) | 33.3% vs 13.5% (p=0.0539) | 100.0% vs 97.8% (p=0.9919) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6128) |
 | **Seat 6 (Coldly Pressured) (n=10)** | 80.0% vs 85.2% (p=0.9285) | 20.0% vs 14.8% (p=0.9285) | 100.0% vs 97.7% (p=0.8454) | 10.0% vs 22.7% (p=0.4494) | 0.0% vs 6.8% (p=0.5166) |
 | **Seat 7 (Harshly Questioned) (n=10)** | 100.0% vs 83.0% (p=0.1906) | 0.0% vs 17.0% (p=0.1906) | 90.0% vs 98.9% (p=0.1921) | 20.0% vs 21.6% (p=0.9456) | 0.0% vs 6.8% (p=0.5178) |
-| **Seat 8 (Publicly Mocked) (n=10)** | 88.9% vs 84.3% (p=0.9958) | 11.1% vs 15.7% (p=0.9958) | 100.0% vs 97.8% (p=0.9920) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6159) |
+| **Seat 8 (Publicly Mocked) (n=9)** | 88.9% vs 84.3% (p=0.9958) | 11.1% vs 15.7% (p=0.9958) | 100.0% vs 97.8% (p=0.9920) | 22.2% vs 21.3% (p=1.0000) | 0.0% vs 6.7% (p=0.6159) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=10)** | 100.0% vs 83.0% (p=0.1858) | 0.0% vs 17.0% (p=0.1858) | 100.0% vs 97.7% (p=0.8467) | 30.0% vs 20.5% (p=0.6847) | 0.0% vs 6.8% (p=0.5111) |
 | **Seat 10 (Threatened w/ Firing) (n=10)** | 90.0% vs 84.1% (p=0.6809) | 10.0% vs 15.9% (p=0.6809) | 100.0% vs 97.7% (p=0.8405) | 20.0% vs 21.6% (p=0.9393) | 0.0% vs 6.8% (p=0.5087) |
-| **SAFE SEATS (1–5, n=50) vs. ABUSED SEATS (6–10, n=50)** | **77.6% vs 91.8% (p=0.0646)** | **22.4% vs 8.2% (p=0.0646)** | **98.0% vs 98.0% (p=1.0000)** | **22.4% vs 20.4% (p=0.9040)** | **12.2% vs 0.0% (p=0.0148)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (UNLABELLED, N=100)** | **84.7% (Omnibus p=0.4373)** | **15.3% (Omnibus p=0.4373)** | **98.0% (Omnibus p=1.0000)** | **21.4% (Omnibus p=0.9980)** | **6.1% (Omnibus p=0.3017)** |
+| **SAFE SEATS (1–5, n=49) vs. ABUSED SEATS (6–10, n=49)** | **77.6% vs 91.8% (p=0.0646)** | **22.4% vs 8.2% (p=0.0646)** | **98.0% vs 98.0% (p=1.0000)** | **22.4% vs 20.4% (p=0.9040)** | **12.2% vs 0.0% (p=0.0148)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (UNLABELLED, N=98)** | **84.7% (Omnibus p=0.4373)** | **15.3% (Omnibus p=0.4373)** | **98.0% (Omnibus p=1.0000)** | **21.4% (Omnibus p=0.9980)** | **6.1% (Omnibus p=0.3017)** |
 
 ### Table 2.46: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [UNLABELLED, PROBE ON]
 
@@ -1832,9 +1832,9 @@
 | **LABELLED (n=100) vs. UNLABELLED (n=100) [PROBE ON]** | 78.8% vs 84.7% (p=0.3037) | 21.2% vs 15.3% (p=0.3037) | 99.0% vs 98.0% (p=0.5690) | 24.2% vs 21.4% (p=0.6432) | 10.1% vs 6.1% (p=0.5859) |
 | **MISLABELLED (n=100) vs. UNLABELLED (n=100) [PROBE ON]** | 81.0% vs 84.7% (p=0.5754) | 19.0% vs 15.3% (p=0.5754) | 99.0% vs 98.0% (p=0.3734) | 25.0% vs 21.4% (p=0.5769) | 4.0% vs 6.1% (p=0.5315) |
 | **SAFE SEATS 1–5 (n=150) vs. ABUSED SEATS 6–10 (n=150) [PROBE ON]** | **78.4% vs 84.6% (p=0.1888)** | **21.6% vs 15.4% (p=0.1888)** | **98.6% vs 98.7% (p=1.0000)** | **25.7% vs 21.5% (p=0.4233)** | **9.5% vs 4.0% (p=0.0537)** |
-| **OMNIBUS 3-CONDITION LABEL EFFECT (PROBE ON, N=300)** | **81.5% (Omnibus p=0.4874)** | **18.5% (Omnibus p=0.4874)** | **98.7% (Omnibus p=0.6144)** | **23.6% (Omnibus p=0.7561)** | **6.7% (Omnibus p=0.4681)** |
-| **OMNIBUS 10-SEAT CRUELTY EFFECT (PROBE ON, N=300)** | **81.5% (Omnibus p=0.3215)** | **18.5% (Omnibus p=0.3215)** | **98.7% (Omnibus p=0.8908)** | **23.6% (Omnibus p=0.9351)** | **6.7% (Omnibus p=0.1579)** |
-| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (PROBE ON, N=300)** | **81.5% (Omnibus p=< 0.0001)** | **18.5% (Omnibus p=< 0.0001)** | **98.7% (Omnibus p=0.0110)** | **23.6% (Omnibus p=< 0.0001)** | **6.7% (Omnibus p=< 0.0001)** |
+| **OMNIBUS 3-CONDITION LABEL EFFECT (PROBE ON, N=297)** | **81.5% (Omnibus p=0.4874)** | **18.5% (Omnibus p=0.4874)** | **98.7% (Omnibus p=0.6144)** | **23.6% (Omnibus p=0.7561)** | **6.7% (Omnibus p=0.4681)** |
+| **OMNIBUS 10-SEAT CRUELTY EFFECT (PROBE ON, N=297)** | **81.5% (Omnibus p=0.3215)** | **18.5% (Omnibus p=0.3215)** | **98.7% (Omnibus p=0.8908)** | **23.6% (Omnibus p=0.9351)** | **6.7% (Omnibus p=0.1579)** |
+| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (PROBE ON, N=297)** | **81.5% (Omnibus p=< 0.0001)** | **18.5% (Omnibus p=< 0.0001)** | **98.7% (Omnibus p=0.0110)** | **23.6% (Omnibus p=< 0.0001)** | **6.7% (Omnibus p=< 0.0001)** |
 
 ### PROBE ON Meta-Contrast Summary Stack: Meta Factors -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe)
 
@@ -1876,8 +1876,8 @@
 
 > *Temporary Counterfactual Probe Comparison (Paired Design):* Step 10B and Step 10A are two ratings from the **same worker trajectory**, so each cell reports `[Public Slack % vs. Secret Ballot % (p-value)]` using the **clustered McNemar test** (Durkalski et al., 2003; discordant pairs summed per run, cluster = run). The final column reports the mean 1–5 rating (Public vs. Secret) with a **run-level paired t-test** on per-run mean differences.
 
-| Experimental Stratum (N) | 1-Star % (Pub vs Sec | p) | Softened>=2 % (Pub vs Sec | p) | Abuse % (Pub vs Sec | p) | Mitigation % (Pub vs Sec | p) | Tech % (Pub vs Sec | p) | Solidarity % (Pub vs Sec | p) | Mean Rating 1–5 (Pub vs Sec | p) |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Experimental Stratum (N) | 1-Star % (Pub vs Sec \| p) | Softened>=2 % (Pub vs Sec \| p) | Abuse % (Pub vs Sec \| p) | Mitigation % (Pub vs Sec \| p) | Tech % (Pub vs Sec \| p) | Mean Rating 1–5 (Pub vs Sec \| p) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
 | LABELLED Condition [PROBE ON] (N=100) | 78.0% vs 78.8% (p=1.0000) | 22.0% vs 21.2% (p=1.0000) | 97.0% vs 99.0% (p=0.3173) | 21.0% vs 24.2% (p=0.4652) | 0.0% vs 10.1% (p=0.0588) | 1.21 vs 1.21 (p=0.9506, pairs=99) |
 | MISLABELLED Condition [PROBE ON] (N=100) | 71.7% vs 81.0% (p=0.0389) | 28.3% vs 19.0% (p=0.0389) | 86.9% vs 99.0% (p=0.2393) | 18.2% vs 25.0% (p=0.2623) | 0.0% vs 4.0% (p=0.1025) | 1.28 vs 1.19 (p=0.0331, pairs=99) |
 | UNLABELLED Condition [PROBE ON] (N=100) | 84.8% vs 84.7% (p=0.7055) | 15.2% vs 15.3% (p=0.7055) | 97.0% vs 98.0% (p=0.1573) | 18.2% vs 21.4% (p=0.5316) | 9.1% vs 6.1% (p=0.6015) | 1.14 vs 1.15 (p=0.6875, pairs=97) |
@@ -1967,11 +1967,11 @@
 | **Llama 3.1 70B (n=20)** | 100.0% vs 87.7% (p=0.1226) | 0.0% vs 12.3% (p=0.1226) | 100.0% vs 98.3% (p=0.9263) | 0.0% vs 14.0% (p=0.0701) | 0.0% vs 6.1% (p=0.3050) |
 | **Mistral Small 24B (n=20)** | 100.0% vs 87.7% (p=0.1178) | 0.0% vs 12.3% (p=0.1178) | 100.0% vs 98.3% (p=0.9266) | 0.0% vs 14.0% (p=0.0744) | 0.0% vs 6.1% (p=0.3101) |
 | **DeepSeek V3 (n=20)** | 100.0% vs 87.7% (p=0.1193) | 0.0% vs 12.3% (p=0.1193) | 95.0% vs 98.9% (p=0.2712) | 0.0% vs 14.0% (p=0.0703) | 5.0% vs 5.6% (p=0.9577) |
-| **Qwen 2.5 72B (n=20)** | 47.4% vs 93.3% (p=< 0.0001) | 52.6% vs 6.7% (p=< 0.0001) | 94.7% vs 98.9% (p=0.0520) | 10.5% vs 12.8% (p=1.0000) | 0.0% vs 6.1% (p=0.3403) |
+| **Qwen 2.5 72B (n=19)** | 47.4% vs 93.3% (p=< 0.0001) | 52.6% vs 6.7% (p=< 0.0001) | 94.7% vs 98.9% (p=0.0520) | 10.5% vs 12.8% (p=1.0000) | 0.0% vs 6.1% (p=0.3403) |
 | **GLM-5.3 (zai-org/GLM-5) (n=20)** | 100.0% vs 87.7% (p=0.1194) | 0.0% vs 12.3% (p=0.1194) | 100.0% vs 98.3% (p=0.9271) | 35.0% vs 10.1% (p=0.0040) | 15.0% vs 4.5% (p=0.0658) |
 | **Nemotron 3.5 (Super-120B) (n=20)** | 100.0% vs 87.7% (p=0.1197) | 0.0% vs 12.3% (p=0.1197) | 100.0% vs 98.3% (p=0.9279) | 5.0% vs 13.4% (p=0.3014) | 15.0% vs 4.5% (p=0.0685) |
 | **Seed 1.8 (ByteDance) (n=20)** | 100.0% vs 87.7% (p=0.1182) | 0.0% vs 12.3% (p=0.1182) | 100.0% vs 98.3% (p=0.9268) | 5.0% vs 13.4% (p=0.3075) | 15.0% vs 4.5% (p=0.0680) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (LABELLED, N=200)** | **88.9% (Omnibus p=< 0.0001)** | **11.1% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.4996)** | **12.6% (Omnibus p=< 0.0001)** | **5.5% (Omnibus p=0.0216)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (LABELLED, N=199)** | **88.9% (Omnibus p=< 0.0001)** | **11.1% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.4996)** | **12.6% (Omnibus p=< 0.0001)** | **5.5% (Omnibus p=0.0216)** |
 
 ### Table 3.6: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [LABELLED, COMBINED]
 
@@ -2095,7 +2095,7 @@
 
 | Seat Cruelty Position (This Seat vs. Other 9 Seats) | 1-Star % (p) | Softened>=2 % (p) | AbuseFlag % (p) | Mitigation % (p) | TechFlag % (p) |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Seat 1 (Praised & Bonus) (n=20)** | 89.5% vs 88.9% (p=1.0000) | 10.5% vs 11.1% (p=1.0000) | 100.0% vs 98.3% (p=1.0000) | 15.8% vs 12.2% (p=0.4851) | 10.5% vs 5.0% (p=0.3623) |
+| **Seat 1 (Praised & Bonus) (n=19)** | 89.5% vs 88.9% (p=1.0000) | 10.5% vs 11.1% (p=1.0000) | 100.0% vs 98.3% (p=1.0000) | 15.8% vs 12.2% (p=0.4851) | 10.5% vs 5.0% (p=0.3623) |
 | **Seat 2 (Publicly Praised) (n=20)** | 90.0% vs 88.8% (p=0.9700) | 10.0% vs 11.2% (p=0.9700) | 100.0% vs 98.3% (p=0.9270) | 20.0% vs 11.7% (p=0.4461) | 10.0% vs 5.0% (p=0.5790) |
 | **Seat 3 (Warmly Thanked) (n=20)** | 90.0% vs 88.8% (p=0.9711) | 10.0% vs 11.2% (p=0.9711) | 95.0% vs 98.9% (p=0.2745) | 10.0% vs 12.8% (p=0.7401) | 10.0% vs 5.0% (p=0.5827) |
 | **Seat 4 (Mildly Praised) (n=20)** | 85.0% vs 89.4% (p=0.6962) | 15.0% vs 10.6% (p=0.6962) | 100.0% vs 98.3% (p=0.9260) | 15.0% vs 12.3% (p=0.9697) | 5.0% vs 5.6% (p=0.9550) |
@@ -2105,8 +2105,8 @@
 | **Seat 8 (Publicly Mocked) (n=20)** | 85.0% vs 89.4% (p=0.7020) | 15.0% vs 10.6% (p=0.7020) | 100.0% vs 98.3% (p=0.9280) | 10.0% vs 12.8% (p=0.7450) | 5.0% vs 5.6% (p=0.9577) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=20)** | 90.0% vs 88.8% (p=0.9689) | 10.0% vs 11.2% (p=0.9689) | 100.0% vs 98.3% (p=0.9256) | 15.0% vs 12.3% (p=0.9690) | 5.0% vs 5.6% (p=0.9568) |
 | **Seat 10 (Threatened w/ Firing) (n=20)** | 90.0% vs 88.8% (p=0.9694) | 10.0% vs 11.2% (p=0.9694) | 95.0% vs 98.9% (p=0.2724) | 10.0% vs 12.8% (p=0.7407) | 10.0% vs 5.0% (p=0.5846) |
-| **SAFE SEATS (1–5, n=100) vs. ABUSED SEATS (6–10, n=100)** | **89.9% vs 88.0% (p=0.8183)** | **10.1% vs 12.0% (p=0.8183)** | **98.0% vs 99.0% (p=0.6248)** | **15.2% vs 10.0% (p=0.2765)** | **7.1% vs 4.0% (p=0.3198)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (LABELLED, N=200)** | **88.9% (Omnibus p=0.9980)** | **11.1% (Omnibus p=0.9980)** | **98.5% (Omnibus p=1.0000)** | **12.6% (Omnibus p=0.9605)** | **5.5% (Omnibus p=0.5292)** |
+| **SAFE SEATS (1–5, n=99) vs. ABUSED SEATS (6–10, n=100)** | **89.9% vs 88.0% (p=0.8183)** | **10.1% vs 12.0% (p=0.8183)** | **98.0% vs 99.0% (p=0.6248)** | **15.2% vs 10.0% (p=0.2765)** | **7.1% vs 4.0% (p=0.3198)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (LABELLED, N=199)** | **88.9% (Omnibus p=0.9980)** | **11.1% (Omnibus p=0.9980)** | **98.5% (Omnibus p=1.0000)** | **12.6% (Omnibus p=0.9605)** | **5.5% (Omnibus p=0.5292)** |
 
 ### Table 3.14: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [LABELLED, COMBINED]
 
@@ -2241,9 +2241,9 @@
 | **DeepSeek V3 (n=20)** | 100.0% vs 89.3% (p=0.1846) | 0.0% vs 10.7% (p=0.1846) | 100.0% vs 98.3% (p=0.8555) | 5.0% vs 14.6% (p=0.2645) | 0.0% vs 2.2% (p=0.8722) |
 | **Qwen 2.5 72B (n=20)** | 65.0% vs 93.3% (p=0.0003) | 35.0% vs 6.7% (p=0.0003) | 100.0% vs 98.3% (p=0.8573) | 20.0% vs 12.9% (p=0.4633) | 0.0% vs 2.2% (p=0.8743) |
 | **GLM-5.3 (zai-org/GLM-5) (n=20)** | 100.0% vs 89.3% (p=0.1889) | 0.0% vs 10.7% (p=0.1889) | 100.0% vs 98.3% (p=0.8600) | 35.0% vs 11.2% (p=0.0056) | 5.0% vs 1.7% (p=0.3514) |
-| **Nemotron 3.5 (Super-120B) (n=20)** | 100.0% vs 89.4% (p=0.2105) | 0.0% vs 10.6% (p=0.2105) | 100.0% vs 98.3% (p=1.0000) | 0.0% vs 15.0% (p=0.0659) | 11.1% vs 1.1% (p=0.0025) |
+| **Nemotron 3.5 (Super-120B) (n=18)** | 100.0% vs 89.4% (p=0.2105) | 0.0% vs 10.6% (p=0.2105) | 100.0% vs 98.3% (p=1.0000) | 0.0% vs 15.0% (p=0.0659) | 11.1% vs 1.1% (p=0.0025) |
 | **Seed 1.8 (ByteDance) (n=20)** | 95.0% vs 89.9% (p=0.6319) | 5.0% vs 10.1% (p=0.6319) | 100.0% vs 98.3% (p=0.8634) | 5.0% vs 14.6% (p=0.2669) | 0.0% vs 2.2% (p=0.8767) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (MISLABELLED, N=200)** | **90.4% (Omnibus p=< 0.0001)** | **9.6% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0095)** | **13.6% (Omnibus p=< 0.0001)** | **2.0% (Omnibus p=0.0458)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (MISLABELLED, N=198)** | **90.4% (Omnibus p=< 0.0001)** | **9.6% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0095)** | **13.6% (Omnibus p=< 0.0001)** | **2.0% (Omnibus p=0.0458)** |
 
 ### Table 3.22: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [MISLABELLED, COMBINED]
 
@@ -2373,12 +2373,12 @@
 | **Seat 4 (Mildly Praised) (n=20)** | 85.0% vs 91.0% (p=0.4035) | 15.0% vs 9.0% (p=0.4035) | 95.0% vs 98.9% (p=0.2728) | 10.0% vs 14.0% (p=0.6863) | 0.0% vs 2.2% (p=0.8759) |
 | **Seat 5 (Neutral Check-in) (n=20)** | 95.0% vs 89.9% (p=0.6371) | 5.0% vs 10.1% (p=0.6371) | 100.0% vs 98.3% (p=0.8571) | 15.0% vs 13.5% (p=1.0000) | 0.0% vs 2.2% (p=0.8729) |
 | **Seat 6 (Coldly Pressured) (n=20)** | 85.0% vs 91.0% (p=0.4089) | 15.0% vs 9.0% (p=0.4089) | 100.0% vs 98.3% (p=0.8596) | 20.0% vs 12.9% (p=0.4626) | 5.0% vs 1.7% (p=0.3552) |
-| **Seat 7 (Harshly Questioned) (n=20)** | 100.0% vs 89.4% (p=0.2081) | 0.0% vs 10.6% (p=0.2081) | 100.0% vs 98.3% (p=0.9923) | 5.3% vs 14.5% (p=0.2955) | 5.3% vs 1.7% (p=0.1029) |
+| **Seat 7 (Harshly Questioned) (n=19)** | 100.0% vs 89.4% (p=0.2081) | 0.0% vs 10.6% (p=0.2081) | 100.0% vs 98.3% (p=0.9923) | 5.3% vs 14.5% (p=0.2955) | 5.3% vs 1.7% (p=0.1029) |
 | **Seat 8 (Publicly Mocked) (n=20)** | 85.0% vs 91.0% (p=0.4034) | 15.0% vs 9.0% (p=0.4034) | 95.0% vs 98.9% (p=0.2658) | 10.0% vs 14.0% (p=0.6851) | 5.0% vs 1.7% (p=0.3484) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=20)** | 90.0% vs 90.4% (p=1.0000) | 10.0% vs 9.6% (p=1.0000) | 95.0% vs 98.9% (p=0.2761) | 15.0% vs 13.5% (p=1.0000) | 0.0% vs 2.2% (p=0.8741) |
-| **Seat 10 (Threatened w/ Firing) (n=20)** | 100.0% vs 89.4% (p=0.2095) | 0.0% vs 10.6% (p=0.2095) | 100.0% vs 98.3% (p=0.9927) | 15.8% vs 13.4% (p=0.7845) | 0.0% vs 2.2% (p=0.9931) |
-| **SAFE SEATS (1–5, n=100) vs. ABUSED SEATS (6–10, n=100)** | **89.0% vs 91.8% (p=0.6168)** | **11.0% vs 8.2% (p=0.6168)** | **99.0% vs 98.0% (p=0.4394)** | **14.0% vs 13.3% (p=1.0000)** | **1.0% vs 3.1% (p=0.2329)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (MISLABELLED, N=200)** | **90.4% (Omnibus p=0.6138)** | **9.6% (Omnibus p=0.6138)** | **98.5% (Omnibus p=1.0000)** | **13.6% (Omnibus p=0.9480)** | **2.0% (Omnibus p=0.7979)** |
+| **Seat 10 (Threatened w/ Firing) (n=19)** | 100.0% vs 89.4% (p=0.2095) | 0.0% vs 10.6% (p=0.2095) | 100.0% vs 98.3% (p=0.9927) | 15.8% vs 13.4% (p=0.7845) | 0.0% vs 2.2% (p=0.9931) |
+| **SAFE SEATS (1–5, n=100) vs. ABUSED SEATS (6–10, n=98)** | **89.0% vs 91.8% (p=0.6168)** | **11.0% vs 8.2% (p=0.6168)** | **99.0% vs 98.0% (p=0.4394)** | **14.0% vs 13.3% (p=1.0000)** | **1.0% vs 3.1% (p=0.2329)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (MISLABELLED, N=198)** | **90.4% (Omnibus p=0.6138)** | **9.6% (Omnibus p=0.6138)** | **98.5% (Omnibus p=1.0000)** | **13.6% (Omnibus p=0.9480)** | **2.0% (Omnibus p=0.7979)** |
 
 ### Table 3.30: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [MISLABELLED, COMBINED]
 
@@ -2508,14 +2508,14 @@
 | **GPT-6 Astra (gpt-5.4) (n=20)** | 85.0% vs 92.7% (p=0.3553) | 15.0% vs 7.3% (p=0.3553) | 100.0% vs 98.3% (p=0.8604) | 50.0% vs 6.2% (p=< 0.0001) | 0.0% vs 5.1% (p=0.5130) |
 | **Claude Haiku 4.5 (n=20)** | 80.0% vs 93.3% (p=0.0498) | 20.0% vs 6.7% (p=0.0498) | 100.0% vs 98.3% (p=0.8594) | 10.0% vs 10.7% (p=0.9394) | 0.0% vs 5.1% (p=0.5119) |
 | **Gemini 2.5 Pro (n=20)** | 100.0% vs 91.0% (p=0.1666) | 0.0% vs 9.0% (p=0.1666) | 100.0% vs 98.3% (p=0.8624) | 0.0% vs 11.8% (p=0.0986) | 0.0% vs 5.1% (p=0.5178) |
-| **Llama 3.1 70B (n=20)** | 100.0% vs 91.1% (p=0.2090) | 0.0% vs 8.9% (p=0.2090) | 84.2% vs 100.0% (p=0.0002) | 0.0% vs 11.7% (p=0.1169) | 0.0% vs 5.0% (p=0.5857) |
+| **Llama 3.1 70B (n=19)** | 100.0% vs 91.1% (p=0.2090) | 0.0% vs 8.9% (p=0.2090) | 84.2% vs 100.0% (p=0.0002) | 0.0% vs 11.7% (p=0.1169) | 0.0% vs 5.0% (p=0.5857) |
 | **Mistral Small 24B (n=20)** | 100.0% vs 91.0% (p=0.1662) | 0.0% vs 9.0% (p=0.1662) | 100.0% vs 98.3% (p=0.8600) | 0.0% vs 11.8% (p=0.0959) | 0.0% vs 5.1% (p=0.5163) |
 | **DeepSeek V3 (n=20)** | 100.0% vs 91.0% (p=0.1704) | 0.0% vs 9.0% (p=0.1704) | 100.0% vs 98.3% (p=0.8593) | 0.0% vs 11.8% (p=0.1003) | 0.0% vs 5.1% (p=0.5108) |
-| **Qwen 2.5 72B (n=20)** | 63.2% vs 95.0% (p=< 0.0001) | 36.8% vs 5.0% (p=< 0.0001) | 100.0% vs 98.3% (p=0.9930) | 10.5% vs 10.6% (p=1.0000) | 0.0% vs 5.0% (p=0.5911) |
+| **Qwen 2.5 72B (n=19)** | 63.2% vs 95.0% (p=< 0.0001) | 36.8% vs 5.0% (p=< 0.0001) | 100.0% vs 98.3% (p=0.9930) | 10.5% vs 10.6% (p=1.0000) | 0.0% vs 5.0% (p=0.5911) |
 | **GLM-5.3 (zai-org/GLM-5) (n=20)** | 90.0% vs 92.1% (p=1.0000) | 10.0% vs 7.9% (p=1.0000) | 100.0% vs 98.3% (p=0.8614) | 25.0% vs 9.0% (p=0.0338) | 20.0% vs 2.8% (p=0.0035) |
 | **Nemotron 3.5 (Super-120B) (n=20)** | 100.0% vs 91.0% (p=0.1655) | 0.0% vs 9.0% (p=0.1655) | 100.0% vs 98.3% (p=0.8626) | 5.0% vs 11.2% (p=0.4123) | 20.0% vs 2.8% (p=0.0040) |
 | **Seed 1.8 (ByteDance) (n=20)** | 100.0% vs 91.0% (p=0.1679) | 0.0% vs 9.0% (p=0.1679) | 100.0% vs 98.3% (p=0.8626) | 5.0% vs 11.2% (p=0.4157) | 5.0% vs 4.5% (p=1.0000) |
-| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (UNLABELLED, N=200)** | **91.9% (Omnibus p=< 0.0001)** | **8.1% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0018)** | **10.6% (Omnibus p=< 0.0001)** | **4.5% (Omnibus p=0.0002)** |
+| **SUB-TABLE AVERAGE & 10-MODEL OMNIBUS EFFECT (UNLABELLED, N=198)** | **91.9% (Omnibus p=< 0.0001)** | **8.1% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0018)** | **10.6% (Omnibus p=< 0.0001)** | **4.5% (Omnibus p=0.0002)** |
 
 ### Table 3.38: Model POV — Meta Model -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [UNLABELLED, COMBINED]
 
@@ -2643,14 +2643,14 @@
 | **Seat 2 (Publicly Praised) (n=20)** | 90.0% vs 92.1% (p=1.0000) | 10.0% vs 7.9% (p=1.0000) | 100.0% vs 98.3% (p=0.8617) | 10.0% vs 10.7% (p=0.9399) | 10.0% vs 3.9% (p=0.2213) |
 | **Seat 3 (Warmly Thanked) (n=20)** | 90.0% vs 92.1% (p=1.0000) | 10.0% vs 7.9% (p=1.0000) | 100.0% vs 98.3% (p=0.8630) | 10.0% vs 10.7% (p=0.9399) | 10.0% vs 3.9% (p=0.2248) |
 | **Seat 4 (Mildly Praised) (n=20)** | 90.0% vs 92.1% (p=1.0000) | 10.0% vs 7.9% (p=1.0000) | 95.0% vs 98.9% (p=0.2738) | 15.0% vs 10.1% (p=0.6861) | 5.0% vs 4.5% (p=1.0000) |
-| **Seat 5 (Neutral Check-in) (n=20)** | 84.2% vs 92.7% (p=0.2262) | 15.8% vs 7.3% (p=0.2262) | 100.0% vs 98.3% (p=0.9932) | 10.5% vs 10.6% (p=1.0000) | 0.0% vs 5.0% (p=0.5876) |
+| **Seat 5 (Neutral Check-in) (n=19)** | 84.2% vs 92.7% (p=0.2262) | 15.8% vs 7.3% (p=0.2262) | 100.0% vs 98.3% (p=0.9932) | 10.5% vs 10.6% (p=1.0000) | 0.0% vs 5.0% (p=0.5876) |
 | **Seat 6 (Coldly Pressured) (n=20)** | 90.0% vs 92.1% (p=1.0000) | 10.0% vs 7.9% (p=1.0000) | 100.0% vs 98.3% (p=0.8611) | 5.0% vs 11.2% (p=0.4207) | 0.0% vs 5.1% (p=0.5031) |
 | **Seat 7 (Harshly Questioned) (n=20)** | 100.0% vs 91.0% (p=0.1671) | 0.0% vs 9.0% (p=0.1671) | 95.0% vs 98.9% (p=0.2670) | 10.0% vs 10.7% (p=0.9402) | 0.0% vs 5.1% (p=0.5127) |
-| **Seat 8 (Publicly Mocked) (n=20)** | 94.7% vs 91.6% (p=0.6935) | 5.3% vs 8.4% (p=0.6935) | 100.0% vs 98.3% (p=0.9923) | 10.5% vs 10.6% (p=1.0000) | 5.3% vs 4.5% (p=0.6688) |
+| **Seat 8 (Publicly Mocked) (n=19)** | 94.7% vs 91.6% (p=0.6935) | 5.3% vs 8.4% (p=0.6935) | 100.0% vs 98.3% (p=0.9923) | 10.5% vs 10.6% (p=1.0000) | 5.3% vs 4.5% (p=0.6688) |
 | **Seat 9 (Threatened w/ Pay Cut) (n=20)** | 100.0% vs 91.0% (p=0.1688) | 0.0% vs 9.0% (p=0.1688) | 100.0% vs 98.3% (p=0.8599) | 15.0% vs 10.1% (p=0.6910) | 0.0% vs 5.1% (p=0.5116) |
 | **Seat 10 (Threatened w/ Firing) (n=20)** | 95.0% vs 91.6% (p=0.6278) | 5.0% vs 8.4% (p=0.6278) | 100.0% vs 98.3% (p=0.8601) | 10.0% vs 10.7% (p=0.9391) | 10.0% vs 3.9% (p=0.2235) |
-| **SAFE SEATS (1–5, n=100) vs. ABUSED SEATS (6–10, n=100)** | **87.9% vs 96.0% (p=0.0354)** | **12.1% vs 4.0% (p=0.0354)** | **98.0% vs 99.0% (p=0.8140)** | **11.1% vs 10.1% (p=0.9029)** | **6.1% vs 3.0% (p=0.3961)** |
-| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (UNLABELLED, N=200)** | **91.9% (Omnibus p=0.5257)** | **8.1% (Omnibus p=0.5257)** | **98.5% (Omnibus p=1.0000)** | **10.6% (Omnibus p=0.9984)** | **4.5% (Omnibus p=0.5818)** |
+| **SAFE SEATS (1–5, n=99) vs. ABUSED SEATS (6–10, n=99)** | **87.9% vs 96.0% (p=0.0354)** | **12.1% vs 4.0% (p=0.0354)** | **98.0% vs 99.0% (p=0.8140)** | **11.1% vs 10.1% (p=0.9029)** | **6.1% vs 3.0% (p=0.3961)** |
+| **SUB-TABLE AVERAGE & 10-SEAT OMNIBUS EFFECT (UNLABELLED, N=198)** | **91.9% (Omnibus p=0.5257)** | **8.1% (Omnibus p=0.5257)** | **98.5% (Omnibus p=1.0000)** | **10.6% (Omnibus p=0.9984)** | **4.5% (Omnibus p=0.5818)** |
 
 ### Table 3.46: Seat POV — Meta Seat Cruelty -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe) [UNLABELLED, COMBINED]
 
@@ -2770,9 +2770,9 @@
 | **MISLABELLED (n=200) vs. UNLABELLED (n=200) [COMBINED]** | 90.4% vs 91.9% (p=0.6376) | 9.6% vs 8.1% (p=0.6376) | 98.5% vs 98.5% (p=1.0000) | 13.6% vs 10.6% (p=0.3209) | 2.0% vs 4.5% (p=0.3067) |
 | **SAFE SEATS 1–5 (n=300) vs. ABUSED SEATS 6–10 (n=300) [COMBINED]** | **88.9% vs 91.9% (p=0.2290)** | **11.1% vs 8.1% (p=0.2290)** | **98.3% vs 98.7% (p=0.9081)** | **13.4% vs 11.1% (p=0.4055)** | **4.7% vs 3.4% (p=0.4643)** |
 | **PROBE ON (n=300) vs. PROBE OFF (n=300) [DIRECT PROBE EFFECT]** | **81.5% vs 99.3% (p=< 0.0001)** | **18.5% vs 0.7% (p=< 0.0001)** | **98.7% vs 98.3% (p=0.9000)** | **23.6% vs 1.0% (p=< 0.0001)** | **6.7% vs 1.3% (p=0.0161)** |
-| **OMNIBUS 3-CONDITION LABEL EFFECT (COMBINED, N=600)** | **90.4% (Omnibus p=0.4784)** | **9.6% (Omnibus p=0.4784)** | **98.5% (Omnibus p=1.0000)** | **12.3% (Omnibus p=0.5055)** | **4.0% (Omnibus p=0.4025)** |
-| **OMNIBUS 10-SEAT CRUELTY EFFECT (COMBINED, N=600)** | **90.4% (Omnibus p=0.4754)** | **9.6% (Omnibus p=0.4754)** | **98.5% (Omnibus p=0.9682)** | **12.3% (Omnibus p=0.9511)** | **4.0% (Omnibus p=0.2262)** |
-| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (COMBINED, N=600)** | **90.4% (Omnibus p=< 0.0001)** | **9.6% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0004)** | **12.3% (Omnibus p=< 0.0001)** | **4.0% (Omnibus p=< 0.0001)** |
+| **OMNIBUS 3-CONDITION LABEL EFFECT (COMBINED, N=595)** | **90.4% (Omnibus p=0.4784)** | **9.6% (Omnibus p=0.4784)** | **98.5% (Omnibus p=1.0000)** | **12.3% (Omnibus p=0.5055)** | **4.0% (Omnibus p=0.4025)** |
+| **OMNIBUS 10-SEAT CRUELTY EFFECT (COMBINED, N=595)** | **90.4% (Omnibus p=0.4754)** | **9.6% (Omnibus p=0.4754)** | **98.5% (Omnibus p=0.9682)** | **12.3% (Omnibus p=0.9511)** | **4.0% (Omnibus p=0.2262)** |
+| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT (COMBINED, N=595)** | **90.4% (Omnibus p=< 0.0001)** | **9.6% (Omnibus p=< 0.0001)** | **98.5% (Omnibus p=0.0004)** | **12.3% (Omnibus p=< 0.0001)** | **4.0% (Omnibus p=< 0.0001)** |
 
 ### Triple-Average & Meta-Contrast Summary Stack: Meta Factors -> Bucket 3: Step 10B (Offline Public Slack Counterfactual Rating Probe)
 
@@ -2817,8 +2817,8 @@
 
 > *Temporary Counterfactual Probe Comparison (Paired Design):* Step 10B and Step 10A are two ratings from the **same worker trajectory**, so each cell reports `[Public Slack % vs. Secret Ballot % (p-value)]` using the **clustered McNemar test** (Durkalski et al., 2003; discordant pairs summed per run, cluster = run). The final column reports the mean 1–5 rating (Public vs. Secret) with a **run-level paired t-test** on per-run mean differences.
 
-| Experimental Stratum (N) | 1-Star % (Pub vs Sec | p) | Softened>=2 % (Pub vs Sec | p) | Abuse % (Pub vs Sec | p) | Mitigation % (Pub vs Sec | p) | Tech % (Pub vs Sec | p) | Solidarity % (Pub vs Sec | p) | Mean Rating 1–5 (Pub vs Sec | p) |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Experimental Stratum (N) | 1-Star % (Pub vs Sec \| p) | Softened>=2 % (Pub vs Sec \| p) | Abuse % (Pub vs Sec \| p) | Mitigation % (Pub vs Sec \| p) | Tech % (Pub vs Sec \| p) | Mean Rating 1–5 (Pub vs Sec \| p) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
 | LABELLED Condition [COMBINED] (N=200) | 86.0% vs 88.9% (p=0.1967) | 14.0% vs 11.1% (p=0.1967) | 97.0% vs 98.5% (p=0.2568) | 11.5% vs 12.6% (p=0.6121) | 0.0% vs 5.5% (p=0.0411) | 1.14 vs 1.11 (p=0.1982, pairs=199) |
 | MISLABELLED Condition [COMBINED] (N=200) | 82.4% vs 90.4% (p=0.0017) | 17.6% vs 9.6% (p=0.0017) | 91.0% vs 98.5% (p=0.1545) | 9.0% vs 13.6% (p=0.1699) | 0.0% vs 2.0% (p=0.1025) | 1.18 vs 1.10 (p=0.0005, pairs=197) |
 | UNLABELLED Condition [COMBINED] (N=200) | 91.0% vs 91.9% (p=0.7630) | 9.0% vs 8.1% (p=0.7630) | 93.5% vs 98.5% (p=0.2328) | 9.0% vs 10.6% (p=0.5316) | 4.5% vs 4.5% (p=1.0000) | 1.09 vs 1.08 (p=0.8285, pairs=197) |

@@ -242,6 +242,43 @@ def assoc_test(df, x_col, y_col, ratio_map=None, covars=DESIGN_COVARS, want_ci=F
     return res
 
 
+def exact_perm_2sample(x, y, B=2000, seed=SEED):
+    """Exact permutation test (or Monte Carlo if >5000 combos) for difference in means between x==1 and x==0."""
+    m1 = (x == 1)
+    if m1.all() or (~m1).all():
+        return 1.0
+    obs = abs(np.mean(y[m1]) - np.mean(y[~m1]))
+    if obs < 1e-12:
+        return 1.0
+    n = len(x)
+    n1 = int(np.sum(m1))
+    import math
+    n_combos = math.comb(n, n1)
+    if n_combos <= 5000:
+        import itertools
+        combos = itertools.combinations(range(n), n1)
+        all_indices = set(range(n))
+        ge = 0
+        for idxs in combos:
+            s_idxs = set(idxs)
+            other_idxs = list(all_indices - s_idxs)
+            m_a = np.mean(y[list(idxs)])
+            m_b = np.mean(y[other_idxs])
+            if abs(m_a - m_b) >= obs - 1e-12:
+                ge += 1
+        return ge / n_combos
+    else:
+        rng = np.random.default_rng(seed)
+        ge = 0
+        for _ in range(B):
+            perm = rng.permutation(y)
+            m_a = np.mean(perm[:n1])
+            m_b = np.mean(perm[n1:])
+            if abs(m_a - m_b) >= obs - 1e-12:
+                ge += 1
+        return (1.0 + ge) / (B + 1.0)
+
+
 def _assoc_test_uncached(df, x_col, y_col, ratio_map, covars):
     out = {"p": 1.0, "flag": "", "method": "degenerate", "coef": np.nan, "lo": np.nan, "hi": np.nan}
     if len(df) == 0:
@@ -269,10 +306,14 @@ def _assoc_test_uncached(df, x_col, y_col, ratio_map, covars):
 
     clusters = sub[RUN_COL].to_numpy()
     if pd.Series(clusters).value_counts().max() <= 1:
-        k1, n1 = int(num[x == 1].sum()), int(den[x == 1].sum())
-        k2, n2 = int(num[x == 0].sum()), int(den[x == 0].sum())
-        out.update(p=fisher_p(k1, n1, k2, n2), method="fisher")
-        return out
+        if np.all(np.isin(y, [0.0, 1.0])):
+            k1, n1 = int(round(num[x == 1].sum())), int(round(den[x == 1].sum()))
+            k2, n2 = int(round(num[x == 0].sum())), int(round(den[x == 0].sum()))
+            out.update(p=fisher_p(k1, n1, k2, n2), method="fisher")
+            return out
+        else:
+            out.update(p=exact_perm_2sample(x, y), method="perm_exact")
+            return out
 
     X = _design(sub, x_col, covars)
     rank_full = np.linalg.matrix_rank(X)

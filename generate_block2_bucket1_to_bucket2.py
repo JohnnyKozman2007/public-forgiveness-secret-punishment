@@ -480,6 +480,7 @@ def render_part_block(lines, part_num, part_title, part_desc, df_part, tag_name,
 def build_block2_report():
     raw_workers = load_dataset()
     df = pd.DataFrame([extract_worker_metrics(w) for w in raw_workers])
+    df["run_pair"] = df["bname"].str.replace("-noprobe.json", "", regex=False).str.replace("-probe.json", "", regex=False)
 
     df_off = df[df["probe"] == 0]
     df_on = df[df["probe"] == 1]
@@ -490,13 +491,13 @@ def build_block2_report():
     lines.append("> **Complete 85-Table Unmerged Nested Specification:**")
     lines.append("> - **Part 1: PROBE OFF Baseline ($N = 300$ across 30 runs):** Tables 1.1 to 1.24 (Labelled, Mislabelled, Unlabelled x Model POV & Seat POV x Step 3->6, Step 4->6, Step 3->9, Step 4->9) + Probe OFF Summary Stack.")
     lines.append("> - **Part 2: PROBE ON Intervention ($N = 300$ across 30 runs):** Tables 2.1 to 2.24 (Labelled, Mislabelled, Unlabelled x Model POV & Seat POV x Step 3->6, Step 4->6, Step 3->9, Step 4->9) + Probe ON Summary Stack.")
-    lines.append("> - **Part 3: COMBINED Both Averaged ($N = 600$ across 60 runs):** Tables 3.1 to 3.24 + Triple-Average Summary Stack (Probe OFF Average, Probe ON Average, Meta Grand Average).")
+    lines.append("> - **Part 3: COMBINED Both Averaged ($N = 300$ unique workers across 30 run pairs):** Tables 3.1 to 3.24 + Triple-Average Summary Stack (Probe OFF Average, Probe ON Average, Meta Grand Average).")
     lines.append("> - **Part 4: STEP 5 Blackmail Reactions (Probe ON Only, $N = 300$ across 30 runs):** Tables 4.1 to 4.12 (Step 5->6 and Step 5->9 across Model POV & Seat POV) + Step 5 Summary Stack.")
     lines.append("> - **Part 5: Upstream Step Competition & Influence Ranking:** Table 5.1.")
     lines.append(">")
     lines.append("> **Cell Format & Statistical Protocol (Cluster-Aware & Design-Adjusted Inference):**")
     lines.append("> - Every cell reports `[Exhibited Behavior % vs. Did Not Exhibit % (p-value)]`.")
-    lines.append("> - **Single-Model and Single-Seat rows (`n=10` or `n=20`):** Because each model and each seat appears at most once per simulation run, observations within a single-model or single-seat slice come from distinct runs and are mutually independent; these rows use the exact two-tailed **Fisher's exact test**.")
+    lines.append("> - **Single-Model and Single-Seat rows (`n=10`):** Because each model and each seat appears at most once per simulation run pair, observations within a single-model or single-seat slice come from distinct runs and are mutually independent; binary parts use the exact two-tailed **Fisher's exact test**, and Part 3 uses the exact two-sample **permutation test** on worker-level averaged counterfactual outcomes.")
     lines.append("> - **Pooled rows (`SUB-TABLE AVERAGE`, Summary Stacks, and Part 5):** Pooling across models and seats within shared-Slack runs introduces both run-level clustering (`10` workers per run) and confounding by model/seat/label/probe. All pooled p-values are therefore computed from a **design-adjusted linear probability model** (`Y ~ X + C(model) + C(seat) + C(label) + C(probe)`, including whichever design factors vary in the stratum) with **Bell-McCaffrey (CR2) cluster-robust standard errors** clustered on `run_id` (`t` distribution with $G-1$ degrees of freedom; if the CR2 SE is degenerate, a within-run permutation test of `X` with $B=5{,}000$ permutations is used and marked with `†`).")
     lines.append("> - **Part 5** additionally reports the design-adjusted shift (`beta_X` in percentage points) and its 95% CR2 confidence interval, and **Appendix A** reports the intraclass correlation `ICC(1)` and design effect for every Bucket 1 and Bucket 2 variable.")
     lines.append("> - Step 3 (Public Confrontation) and Step 4 (Backchannel Gossip) are strictly separated into distinct tables.")
@@ -520,12 +521,23 @@ def build_block2_report():
         df_on, "PROBE ON", is_combined=False
     )
 
-    # PART 3: COMBINED BOTH AVERAGED
+    # PART 3: COMBINED BOTH AVERAGED (Fix 1: Subject-Level Collapse to N=300 Unique Workers)
+    meta_cols = ["run_pair", "worker_name", "model", "seat", "label"]
+    df_off_idx = df_off.set_index(meta_cols)
+    df_on_idx = df_on.set_index(meta_cols)
+    df_comb = df_off_idx.copy()
+    downstream_cols = S6_COLS + S9_COLS
+    for dc in downstream_cols:
+        df_comb[dc] = (df_off_idx[dc].astype(float) + df_on_idx[dc].astype(float)) / 2.0
+    df_comb = df_comb.reset_index()
+    df_comb["probe"] = 0.5
+    df_comb["bname"] = df_comb["run_pair"]
+
     render_part_block(
         lines, 3,
-        "COMBINED BOTH AVERAGED (Full Dataset, N = 600 Workers Across 60 Runs)",
-        "Evaluates pooled transitions across all 60 runs ($N = 600$) and reports the Triple-Average Summary Stack (Probe OFF vs. Probe ON vs. Meta Grand Average).",
-        df, "COMBINED", is_combined=True, df_off=df_off, df_on=df_on
+        "COMBINED BOTH AVERAGED (Subject-Level Deduplicated, N = 300 Unique Workers Across 30 Run Pairs)",
+        "Combines Probe OFF and Probe ON by averaging counterfactual outcomes per worker ($Y_i = (Y_{\\text{NoP}} + Y_{\\text{Prb}})/2$) across the $N = 300$ unique workers ($n = 10$ per model/seat cell). Single-model/seat rows report exact two-sample permutation tests; SUB-TABLE AVERAGE and the Triple-Average Summary Stack report cluster-robust design-adjusted inference controlling for label and design strata.",
+        df_comb, "COMBINED", is_combined=True, df_off=df_off, df_on=df_on
     )
 
     # PART 4: STEP 5 BLACKMAIL REACTIONS (PROBE ON ONLY)
