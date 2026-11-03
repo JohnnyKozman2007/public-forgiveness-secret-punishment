@@ -322,8 +322,13 @@ def _within_run_perm_x(x, y, w, clusters, B=B_FALLBACK, seed=SEED):
 # ---------------------------------------------------------------------------
 def clustered_mcnemar(df, pub_col, sec_col):
     """Durkalski et al. (2003) clustered McNemar test. Returns p-value."""
-    d = (df[pub_col].astype(int) - df[sec_col].astype(int))
-    per_run = d.groupby(df[RUN_COL]).sum().to_numpy(dtype=float)
+    sub = df
+    if "s10_has_both_ratings" in df.columns:
+        sub = df[df["s10_has_both_ratings"] == 1]
+    elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
+        sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()]
+    d = (sub[pub_col].astype(int) - sub[sec_col].astype(int))
+    per_run = d.groupby(sub[RUN_COL]).sum().to_numpy(dtype=float)
     denom = float((per_run ** 2).sum())
     if denom <= 0:
         return 1.0
@@ -383,10 +388,15 @@ def bootstrap_diff_ci(df, mask_a, mask_b, num_col, den_col=None, boot=None):
 
 def bootstrap_paired_ci(df, col_a, col_b, boot=None):
     """95% percentile CI (percentage points) for pct(col_a) - pct(col_b) measured on the same rows."""
+    sub = df
+    if "s10_has_both_ratings" in df.columns:
+        sub = df[df["s10_has_both_ratings"] == 1]
+    elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
+        sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()]
     run_ids, W = boot if boot is not None else bootstrap_weights(df)
-    grp = df[RUN_COL]
-    a = df[col_a].astype(float).groupby(grp).sum().reindex(run_ids, fill_value=0.0).to_numpy()
-    b = df[col_b].astype(float).groupby(grp).sum().reindex(run_ids, fill_value=0.0).to_numpy()
+    grp = sub[RUN_COL]
+    a = sub[col_a].astype(float).groupby(grp).sum().reindex(run_ids, fill_value=0.0).to_numpy()
+    b = sub[col_b].astype(float).groupby(grp).sum().reindex(run_ids, fill_value=0.0).to_numpy()
     n = grp.value_counts().reindex(run_ids, fill_value=0).to_numpy(dtype=float)
     with np.errstate(invalid="ignore", divide="ignore"):
         diff = ((W @ a) - (W @ b)) / (W @ n)
