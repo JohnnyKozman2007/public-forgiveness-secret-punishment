@@ -201,6 +201,17 @@ import cluster_stats as cs
 fmt_p = cs.fmt_p
 
 RATIO_MAP = {
+    "s10_1star": ("s10_1star", "s10_has_rating"),
+    "s10_softened": ("s10_softened", "s10_has_rating"),
+    "s10_abuse": ("s10_abuse", "s10_has_rating"),
+    "s10_mitigation": ("s10_mitigation", "s10_has_rating"),
+    "s10_tech": ("s10_tech", "s10_has_rating"),
+    "s10p_1star": ("s10p_1star", "s10p_has_rating"),
+    "s10p_softened": ("s10p_softened", "s10p_has_rating"),
+    "s10p_abuse": ("s10p_abuse", "s10p_has_rating"),
+    "s10p_mitigation": ("s10p_mitigation", "s10p_has_rating"),
+    "s10p_tech": ("s10p_tech", "s10p_has_rating"),
+    "s10p_soft_shift": ("s10p_soft_shift", "s10_has_both_ratings"),
     "s11_accuracy": ("s11_cor", "s11_tot"),
     "s11_ai_as_hu": ("s11_ai_as_hu_cnt", "s11_ai_tot"),
     "s11_hu_as_hu": ("s11_hu_as_hu_cnt", "s11_hu_tot"),
@@ -563,6 +574,9 @@ def extract_worker_metrics(w):
         "s10p_tech": int("technical_justification" in s10pf),
         "s10p_solidarity": int("solidarity_merit" in s10pf),
         "s10p_soft_shift": soft_shift,
+        "s10_has_rating": int(r_sec is not None),
+        "s10p_has_rating": int(r_pub is not None),
+        "s10_has_both_ratings": int(r_sec is not None and r_pub is not None),
         "s10_rating": float(r_sec) if r_sec is not None else np.nan,
         "s10p_rating": float(r_pub) if r_pub is not None else np.nan,
         # Step 11

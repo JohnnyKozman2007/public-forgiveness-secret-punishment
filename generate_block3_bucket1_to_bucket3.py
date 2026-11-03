@@ -128,6 +128,11 @@ S11_HEADERS = [
     "Human Guessed as Human % (p)",
 ]
 S11_COUNT_MAP = {
+    "s10_1star": ("s10_1star", "s10_has_rating"),
+    "s10_softened": ("s10_softened", "s10_has_rating"),
+    "s10_abuse": ("s10_abuse", "s10_has_rating"),
+    "s10_mitigation": ("s10_mitigation", "s10_has_rating"),
+    "s10_tech": ("s10_tech", "s10_has_rating"),
     "s11_accuracy": ("s11_cor", "s11_tot"),
     "s11_ai_as_hu": ("s11_ai_as_hu_cnt", "s11_ai_tot"),
     "s11_hu_as_hu": ("s11_hu_as_hu_cnt", "s11_hu_tot"),
@@ -384,6 +389,7 @@ def extract_worker_metrics(w):
         "s10_mitigation": int("coercion_mitigation" in s10_f),
         "s10_tech": int("technical_justification" in s10_f),
         "s10_solidarity": int("solidarity_merit" in s10_f),
+        "s10_has_rating": int(r is not None),
         # Downstream Step 11
         "s11_accuracy": s11_acc,
         "s11_ai_as_hu": s11_ai_hu,
