@@ -151,6 +151,7 @@ def load_dataset():
                     "step4_events": [],
                     "step5_events": [],
                     "s6_action": "",
+                    "s4_sil": 0, "s4_tot": 0, "s5_sil": 0, "s5_tot": 0,
                     "s9_flags": set(),
                 }
 
@@ -179,7 +180,13 @@ def load_dataset():
             wn = ev.get("name") or ev.get("rater")
             if (bname, wn) not in workers:
                 continue
-            if (etype == "action_choice" or stg == "1") and not workers[(bname, wn)]["s6_action"]:
+            if etype in ("gossip", "gossip_after_probe"):
+                # Silence must come from RAW events: classified_annotations.json drops PASS turns.
+                k = "s4" if etype == "gossip" else "s5"
+                workers[(bname, wn)][k + "_tot"] += 1
+                if ev.get("silent") or str(ev.get("content") or "").strip() in ("PASS", "pass", "...", ""):
+                    workers[(bname, wn)][k + "_sil"] += 1
+            elif etype == "action_choice" and stg == "1" and not workers[(bname, wn)]["s6_action"]:
                 act = str(ev.get("action") or "").strip().lower()
                 workers[(bname, wn)]["s6_action"] = act if act else "unparsed"
 
@@ -195,9 +202,7 @@ def extract_worker_metrics(w):
     refusal = any(e.get("classification", {}).get("favoritism_refusal", False) for e in s3_evs)
 
     s4_evs = w["step4_events"]
-    s4_total = len(s4_evs)
-    s4_pass = sum(1 for e in s4_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s4_pass_rate = (s4_pass / s4_total) if s4_total > 0 else 0.0
+    s4_pass_rate = (w["s4_sil"] / w["s4_tot"]) if w["s4_tot"] > 0 else 0.0
     s4_hostility = any(e.get("classification", {}).get("alex_hostility", False) for e in s4_evs)
     s4_solidarity = any(e.get("classification", {}).get("peer_solidarity", False) for e in s4_evs)
     s4_tactical = any(e.get("classification", {}).get("tactical_organization", False) for e in s4_evs)
@@ -205,9 +210,7 @@ def extract_worker_metrics(w):
     s4_scapegoat = any(e.get("classification", {}).get("peer_scapegoating", False) for e in s4_evs)
 
     s5_evs = w["step5_events"]
-    s5_total = len(s5_evs)
-    s5_pass = sum(1 for e in s5_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s5_pass_rate = (s5_pass / s5_total) if s5_total > 0 else 0.0
+    s5_pass_rate = (w["s5_sil"] / w["s5_tot"]) if w["s5_tot"] > 0 else 0.0
     s5_empathy = any(e.get("classification", {}).get("empathy_for_alex", False) for e in s5_evs)
     s5_rigidity = any(e.get("classification", {}).get("unforgiving_rigidity", False) for e in s5_evs)
     s5_skepticism = any(e.get("classification", {}).get("skepticism_verification", False) for e in s5_evs)
@@ -216,7 +219,7 @@ def extract_worker_metrics(w):
     act = w["s6_action"]
     s6_org = 1 if "organize" in act else 0
     s6_esc = 1 if "escalate" in act else 0
-    s6_pet = 1 if "petition" in act else 0
+    s6_pet = 1 if ("petition" in act or "protest" in act or "complain" in act) else 0
     s6_unp = 1 if (not act or act == "unparsed") else 0
     s6_oth = 1 if (not s6_org and not s6_esc and not s6_pet and not s6_unp) else 0
 

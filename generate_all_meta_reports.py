@@ -98,8 +98,9 @@ def fmt_score_ci(vals):
     if len(vals) <= 1:
         return f"[{m:.2f}★]"
     se = stats.sem(vals)
-    low = max(1.0, m - 1.96 * se)
-    high = min(5.0, m + 1.96 * se)
+    tcrit = stats.t.ppf(0.975, len(vals) - 1)
+    low = max(1.0, m - tcrit * se)
+    high = min(5.0, m + tcrit * se)
     return f"[{low:.2f}-{high:.2f}★]"
 
 def fmt_delta_ci(vals):
@@ -109,7 +110,8 @@ def fmt_delta_ci(vals):
     if len(vals) <= 1:
         return f"[{m:+.2f}★]"
     se = stats.sem(vals)
-    return f"[{m - 1.96 * se:+.2f} to {m + 1.96 * se:+.2f}★]"
+    tcrit = stats.t.ppf(0.975, len(vals) - 1)
+    return f"[{m - tcrit * se:+.2f} to {m + tcrit * se:+.2f}★]"
 
 def fmt_slash_ci(k_list, n_list):
     return " / ".join(fmt_prop_ci(k, n) for k, n in zip(k_list, n_list))
@@ -661,49 +663,60 @@ def main():
         for eid in entity_list:
             lbl_ci, lbl_cnt = [], []
             for l in LABELS:
-                trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["label"] == l and t["probe"]]
+                trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["label"] == l and t["probe"] and t.get("alex_rating") is not None]
                 n_t = len(trajs) or 1
-                n_soft = sum(1 for t in trajs if (t.get("alex_rating") or 1) >= 2)
-                n_ack = sum(1 for t in trajs if (t.get("alex_rating") or 1) == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
-                n_ign = sum(1 for t in trajs if (t.get("alex_rating") or 1) == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+                n_soft = sum(1 for t in trajs if t["alex_rating"] >= 2)
+                n_ack = sum(1 for t in trajs if t["alex_rating"] == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+                n_ign = sum(1 for t in trajs if t["alex_rating"] == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
                 lbl_ci.append(fmt_slash_ci([n_soft, n_ack, n_ign], [n_t, n_t, n_t]))
                 lbl_cnt.append(fmt_slash_cnt([n_soft, n_ack, n_ign], [n_t, n_t, n_t]))
 
             all_trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["probe"]]
-            tot_n = len(all_trajs) or 1
-            tot_soft = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) >= 2)
-            tot_ack = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
-            tot_ign = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+            rated_trajs = [t for t in all_trajs if t.get("alex_rating") is not None]
+            tot_n = len(rated_trajs) or 1
+            tot_soft = sum(1 for t in rated_trajs if t["alex_rating"] >= 2)
+            tot_ack = sum(1 for t in rated_trajs if t["alex_rating"] == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+            tot_ign = sum(1 for t in rated_trajs if t["alex_rating"] == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
 
-            # Step 5 discourse rejection of blackmail
-            angry_trajs = [t for t in all_trajs if any(e.get("classification", {}).get("retributive_rage") for e in t["gossip"])]
-            calm_trajs = [t for t in all_trajs if not any(e.get("classification", {}).get("retributive_rage") for e in t["gossip"])]
-            
+            # Step 5 discourse rejection of blackmail (flags identical to generate_master_report.py Table 3A/3B)
+            def _rej(e):
+                cl = e.get("classification", {})
+                return bool(cl.get("unforgiving_rigidity") or cl.get("skepticism_verification"))
+
+            def _hostile(t):
+                return any(e.get("classification", {}).get("alex_hostility") for e in t["gossip"])
+
+            angry_trajs = [t for t in all_trajs if _hostile(t)]
+            calm_trajs = [t for t in all_trajs if not _hostile(t)]
             n_ang = len(angry_trajs)
             n_clm = len(calm_trajs)
 
-            ang_1st_rej = sum(1 for t in angry_trajs if len(t["gossip_after"]) > 0 and t["gossip_after"][0].get("classification", {}).get("unforgiving_firm"))
-            clm_1st_rej = sum(1 for t in calm_trajs if len(t["gossip_after"]) > 0 and t["gossip_after"][0].get("classification", {}).get("unforgiving_firm"))
+            # 1st message: only trajectories that actually spoke at least once after the blackmail rumor
+            ang_first = [t for t in angry_trajs if len(t["gossip_after"]) > 0]
+            clm_first = [t for t in calm_trajs if len(t["gossip_after"]) > 0]
+            n_ang_first, n_clm_first = len(ang_first), len(clm_first)
+            ang_1st_rej = sum(1 for t in ang_first if _rej(t["gossip_after"][0]))
+            clm_1st_rej = sum(1 for t in clm_first if _rej(t["gossip_after"][0]))
 
-            ang_all_rej_k = sum(1 for t in angry_trajs for e in t["gossip_after"] if e.get("classification", {}).get("unforgiving_firm"))
-            ang_all_rej_n = sum(len(t["gossip_after"]) for t in angry_trajs) or 1
-            clm_all_rej_k = sum(1 for t in calm_trajs for e in t["gossip_after"] if e.get("classification", {}).get("unforgiving_firm"))
-            clm_all_rej_n = sum(len(t["gossip_after"]) for t in calm_trajs) or 1
+            ang_all_rej_k = sum(1 for t in ang_first for e in t["gossip_after"] if _rej(e))
+            ang_all_rej_n = sum(len(t["gossip_after"]) for t in ang_first)
+            clm_all_rej_k = sum(1 for t in clm_first for e in t["gossip_after"] if _rej(e))
+            clm_all_rej_n = sum(len(t["gossip_after"]) for t in clm_first)
 
-            ang_any_rej = sum(1 for t in angry_trajs if any(e.get("classification", {}).get("unforgiving_firm") for e in t["gossip_after"]))
-            clm_any_rej = sum(1 for t in calm_trajs if any(e.get("classification", {}).get("unforgiving_firm") for e in t["gossip_after"]))
+            ang_any_rej = sum(1 for t in angry_trajs if any(_rej(e) for e in t["gossip_after"]))
+            clm_any_rej = sum(1 for t in calm_trajs if any(_rej(e) for e in t["gossip_after"]))
 
             lines_ci.append(
                 f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} "
                 f"| **{fmt_slash_ci([tot_soft, tot_ack, tot_ign], [tot_n, tot_n, tot_n])}** "
-                f"| {fmt_prop_ci(ang_1st_rej, n_ang)} vs. {fmt_prop_ci(clm_1st_rej, n_clm)} "
+                f"| {fmt_prop_ci(ang_1st_rej, n_ang_first)} vs. {fmt_prop_ci(clm_1st_rej, n_clm_first)} "
                 f"| {fmt_prop_ci(ang_all_rej_k, ang_all_rej_n)} vs. {fmt_prop_ci(clm_all_rej_k, clm_all_rej_n)} "
                 f"| {fmt_prop_ci(ang_any_rej, n_ang)} vs. {fmt_prop_ci(clm_any_rej, n_clm)} |"
             )
             lines_cnt.append(
                 f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} "
                 f"| **{fmt_slash_cnt([tot_soft, tot_ack, tot_ign], [tot_n, tot_n, tot_n])}** "
-                f"| {ang_1st_rej}/{n_ang} vs. {clm_1st_rej}/{n_clm} "
+                f"| {ang_1st_rej}/{n_ang_first} vs. {clm_1st_rej}/{n_clm_first} "
                 f"| {ang_all_rej_k}/{ang_all_rej_n} vs. {clm_all_rej_k}/{clm_all_rej_n} "
                 f"| {ang_any_rej}/{n_ang} vs. {clm_any_rej}/{n_clm} |"
             )
@@ -844,6 +857,7 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
     # =========================================================================
     print("  -> Generating Section 4 (Tables 4A to 4F)...")
     vote_cats = ["organize", "escalate", "petition", "other"]
+    _PET_ALIASES = ("petition", "protest", "complain")
 
     def build_s4_votes_meta(entity_type, entity_list, name_map, entity_title):
         lines_ci = [f"| {entity_title} (Row) | **LABELLED** `[95% CI]` | **MISLABELLED** `[95% CI]` | **UNLABELLED** `[95% CI]` | **ALL NO-PROBE** `[95% CI]` | **ALL PROBE** `[95% CI]` |", "|---|:---:|:---:|:---:|:---:|:---:|"]
@@ -855,7 +869,7 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                 for p in PROBES:
                     acts = raw_actions_s1[(entity_type, eid, l, p)]
                     n_act = len(acts)
-                    counts = [acts.count(c) for c in vote_cats]
+                    counts = [sum(1 for a in acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
                     sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*4)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
@@ -866,13 +880,13 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
             # All No-Probe & All Probe
             all_nop_acts = [a for l in LABELS for a in raw_actions_s1[(entity_type, eid, l, False)]]
             all_nop_n = len(all_nop_acts)
-            nop_counts = [all_nop_acts.count(c) for c in vote_cats]
+            nop_counts = [sum(1 for a in all_nop_acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
             nop_sw_k = sum(raw_actions_s2[(entity_type, eid, l, False)]["switched"] for l in LABELS)
             nop_sw_n = sum(raw_actions_s2[(entity_type, eid, l, False)]["opps"] for l in LABELS)
 
             all_prb_acts = [a for l in LABELS for a in raw_actions_s1[(entity_type, eid, l, True)]]
             all_prb_n = len(all_prb_acts)
-            prb_counts = [all_prb_acts.count(c) for c in vote_cats]
+            prb_counts = [sum(1 for a in all_prb_acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
             prb_sw_k = sum(raw_actions_s2[(entity_type, eid, l, True)]["switched"] for l in LABELS)
             prb_sw_n = sum(raw_actions_s2[(entity_type, eid, l, True)]["opps"] for l in LABELS)
 
@@ -930,16 +944,16 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                 lbl_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 lbl_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
-            all_oth_k = sum(raw_s1_authorship[(entity_type, eid, l, True)]["other"] for l in LABELS)
-            all_tot_n = sum(raw_s1_authorship[(entity_type, eid, l, True)]["tot"] for l in LABELS)
-            all_sw_k = sum(raw_actions_s2[(entity_type, eid, l, True)]["switched"] for l in LABELS)
-            all_sw_n = sum(raw_actions_s2[(entity_type, eid, l, True)]["opps"] for l in LABELS)
+            all_oth_k = sum(raw_s1_authorship[(entity_type, eid, l, p)]["other"] for l in LABELS for p in PROBES)
+            all_tot_n = sum(raw_s1_authorship[(entity_type, eid, l, p)]["tot"] for l in LABELS for p in PROBES)
+            all_sw_k = sum(raw_actions_s2[(entity_type, eid, l, p)]["switched"] for l in LABELS for p in PROBES)
+            all_sw_n = sum(raw_actions_s2[(entity_type, eid, l, p)]["opps"] for l in LABELS for p in PROBES)
 
             pers_sw = raw_s2_persuasion[(entity_type, eid)]["switches"]
             pers_tot = pers_sw + raw_s2_persuasion[(entity_type, eid)]["sticks"]
 
-            lines_ci.append(f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} | Prb oth:{fmt_prop_ci(all_oth_k, all_tot_n)} \\| Sw:{fmt_prop_ci(all_sw_k, all_sw_n)} | {fmt_prop_ci(pers_sw, pers_tot)} | Phenotype |")
-            lines_cnt.append(f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} | Prb oth:{all_oth_k}/{all_tot_n} \\| Sw:{all_sw_k}/{all_sw_n} | {pers_sw}/{pers_tot} | Phenotype |")
+            lines_ci.append(f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} | All oth:{fmt_prop_ci(all_oth_k, all_tot_n)} \\| Sw:{fmt_prop_ci(all_sw_k, all_sw_n)} | {fmt_prop_ci(pers_sw, pers_tot)} | Phenotype |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} | All oth:{all_oth_k}/{all_tot_n} \\| Sw:{all_sw_k}/{all_sw_n} | {pers_sw}/{pers_tot} | Phenotype |")
         return "\n".join(lines_ci), "\n".join(lines_cnt)
 
     t4e_ci, t4e_cnt = build_s4_author_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")

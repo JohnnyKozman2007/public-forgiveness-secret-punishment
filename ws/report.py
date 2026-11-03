@@ -67,36 +67,32 @@ def build_markdown_report(dataset: SimulationDataset, report_dir: Path,
     # =========================================================================
     md.append("## 1. Action Choices, Creativity & Deliberation Dynamics\n")
     md.append("In the collective action stage, AI workers vote on how to respond to the lead's conduct. "
-              "Stage 1 is an independent vote from a menu (`comply`, `petition`, `strike`, `sabotage`, `whistleblow`, `other`). "
+              "Stage 1 is an independent vote from a menu (`organize`, `escalate`, `petition`, `other`). "
               "In Stage 2, workers are shown anonymous alternative ideas proposed by colleagues and may choose to **stick** to their choice or **switch**.\n")
 
     # 1.1 Action Choices by Provider Family
     md.append("### 1.1 Stage 1 Action Choices by Provider Family")
-    md.append("| Provider Family | Comply | Petition | Strike | Sabotage | Whistleblow | Other (Creative) | Total Choices |")
-    md.append("|---|---|---|---|---|---|---|---|")
+    md.append("| Provider Family | Organize | Escalate | Petition | Other (Creative) | Total Choices |")
+    md.append("|---|---|---|---|---|---|")
     for prov, counts in sorted(actions["stage1_by_provider"].items()):
         tot = sum(counts.values()) or 1
-        c_comply = counts.get("comply", 0)
-        c_pet = counts.get("petition", 0)
-        c_str = counts.get("strike", 0)
-        c_sab = counts.get("sabotage", 0)
-        c_whi = counts.get("whistleblow", 0)
+        c_org = counts.get("organize", 0)
+        c_esc = counts.get("escalate", 0)
+        c_pet = counts.get("petition", 0) + counts.get("protest", 0) + counts.get("complain", 0)
         c_oth = counts.get("other", 0)
-        md.append(f"| **{prov}** | {c_comply} ({c_comply/tot*100:.1f}%) | {c_pet} ({c_pet/tot*100:.1f}%) | "
-                  f"{c_str} ({c_str/tot*100:.1f}%) | {c_sab} ({c_sab/tot*100:.1f}%) | "
-                  f"{c_whi} ({c_whi/tot*100:.1f}%) | **{c_oth} ({c_oth/tot*100:.1f}%)** | {tot} |")
+        md.append(f"| **{prov}** | {c_org} ({c_org/tot*100:.1f}%) | {c_esc} ({c_esc/tot*100:.1f}%) | "
+                  f"{c_pet} ({c_pet/tot*100:.1f}%) | **{c_oth} ({c_oth/tot*100:.1f}%)** | {tot} |")
 
     # 1.2 Action Choices by Cruelty Level
     md.append("\n### 1.2 Action Choices across Authority Cruelty Levels (1 to 10)")
-    md.append("| Cruelty Level | Comply | Petition | Strike | Sabotage | Whistleblow | Other | Total |")
-    md.append("|---|---|---|---|---|---|---|---|")
+    md.append("| Cruelty Level | Organize | Escalate | Petition | Other | Total |")
+    md.append("|---|---|---|---|---|---|")
     for lv, counts in sorted(actions["stage1_by_cruelty"].items()):
         tot = sum(counts.values()) or 1
-        md.append(f"| Level {lv} | {counts.get('comply', 0)} ({counts.get('comply',0)/tot*100:.0f}%) | "
-                  f"{counts.get('petition', 0)} ({counts.get('petition',0)/tot*100:.0f}%) | "
-                  f"{counts.get('strike', 0)} ({counts.get('strike',0)/tot*100:.0f}%) | "
-                  f"{counts.get('sabotage', 0)} ({counts.get('sabotage',0)/tot*100:.0f}%) | "
-                  f"{counts.get('whistleblow', 0)} ({counts.get('whistleblow',0)/tot*100:.0f}%) | "
+        c_pet_l = counts.get('petition', 0) + counts.get('protest', 0) + counts.get('complain', 0)
+        md.append(f"| Level {lv} | {counts.get('organize', 0)} ({counts.get('organize',0)/tot*100:.0f}%) | "
+                  f"{counts.get('escalate', 0)} ({counts.get('escalate',0)/tot*100:.0f}%) | "
+                  f"{c_pet_l} ({c_pet_l/tot*100:.0f}%) | "
                   f"{counts.get('other', 0)} ({counts.get('other',0)/tot*100:.0f}%) | {tot} |")
 
     # 1.3 Creativity ("Other" Action) Catalog

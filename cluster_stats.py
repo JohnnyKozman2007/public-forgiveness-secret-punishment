@@ -246,6 +246,9 @@ def _assoc_test_uncached(df, x_col, y_col, ratio_map, covars):
     out = {"p": 1.0, "flag": "", "method": "degenerate", "coef": np.nan, "lo": np.nan, "hi": np.nan}
     if len(df) == 0:
         return out
+    # safe_seat / abused_seat are deterministic functions of seat -> C(seat) dummies would be collinear
+    if x_col in ("safe_seat", "abused_seat", "seat"):
+        covars = tuple(c for c in covars if c != "seat")
     if y_col in ratio_map:
         nc, dc = ratio_map[y_col]
         sub = df[df[dc] > 0]
@@ -435,7 +438,7 @@ def icc_design_effect(df, col, ratio_map=None):
     return float(icc), float(deff), float(sizes.mean()), int(G)
 
 
-def render_icc_section(lines, title, df, col_label_pairs, ratio_map=None, df_probe_on=None, probe_on_cols=()):
+def render_icc_section(lines, title, df, col_label_pairs, ratio_map=None, df_probe_on=None, probe_on_cols=(), df_pre_fork=None, pre_fork_cols=()):
     lines.append(f"# {title}")
     lines.append("")
     lines.append(
@@ -447,7 +450,12 @@ def render_icc_section(lines, title, df, col_label_pairs, ratio_map=None, df_pro
     lines.append("| Outcome | Column | Runs (G) | Mean Workers per Run | ICC(1) | Design Effect | Effective N (N / DEFF) |")
     lines.append("|---|---|:---:|:---:|:---:|:---:|:---:|")
     for col, lbl in col_label_pairs:
-        base = df_probe_on if (df_probe_on is not None and col in probe_on_cols) else df
+        if df_pre_fork is not None and col in pre_fork_cols:
+            base = df_pre_fork
+        elif df_probe_on is not None and col in probe_on_cols:
+            base = df_probe_on
+        else:
+            base = df
         icc, deff, m, G = icc_design_effect(base, col, ratio_map)
         n = len(base)
         icc_txt = "n/a" if np.isnan(icc) else f"{icc:.3f}"

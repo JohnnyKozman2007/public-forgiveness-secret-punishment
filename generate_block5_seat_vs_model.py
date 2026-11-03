@@ -159,7 +159,13 @@ def render_part1_table(lines, table_id, title, df_pool, include_step5=True):
 
     rows_data = []
     for b_name, s_name, cols, _, names_map in specs:
-        sub_df = df_pool[df_pool["probe"] == 1] if "Step 5" in s_name else df_pool
+        is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+        if is_pre:
+            sub_df = df_pool[df_pool["probe"] == 0] if len(df_pool) > 300 else df_pool
+        elif "Step 5" in s_name:
+            sub_df = df_pool[df_pool["probe"] == 1]
+        else:
+            sub_df = df_pool
         if len(sub_df) == 0:
             continue
         safe_df = sub_df[sub_df["safe_seat"] == 1]
@@ -320,7 +326,7 @@ def render_within_model_step_table(lines, table_id, title, df_pool, out_cols, ou
             ab_p = calc_pct(ab_df, oc)
             sf_p = calc_pct(sf_df, oc)
             # Invert safe_seat so x_col=1 is Abused Seats (6-10) and x_col=0 is Safe Seats (1-5)
-            p_val, flag = assoc_p_flag(m_df, "safe_seat", oc)
+            p_val, flag = assoc_p_flag(m_df, "abused_seat", oc)
             txt = f"{ab_p:.1f}% vs {sf_p:.1f}% (p={fmt_p(p_val)}{flag})"
             if p_val < 0.05:
                 txt = f"**{txt}**"
@@ -352,10 +358,12 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
     lines.append(f"### Table {table_id}: {title}")
     lines.append("")
     seat_hdrs = [f"S{s}" for s in SEAT_LEVELS]
+    n_tot_m = len(df_pool) // 10
+    n_half_m = n_tot_m // 2
     hdr = (
         "| Model Architecture | "
         + " | ".join(seat_hdrs)
-        + " | Safe (S1–S5, N=30) | Abused (S6–S10, N=30) | Abused vs. Safe Δ (p) | Model Total (N=60) vs. Rest (Perm p) |"
+        + f" | Safe (S1–S5, N={n_half_m}) | Abused (S6–S10, N={n_half_m}) | Abused vs. Safe Δ (p) | Model Total (N={n_tot_m}) vs. Rest (Perm p) |"
     )
     sep = "| :--- | " + " | ".join([":---:" for _ in range(14)]) + " |"
     lines.append(hdr)
@@ -402,7 +410,7 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
             ab_p = calc_pct(ab_df, oc)
             sf_p = calc_pct(sf_df, oc)
             diff = ab_p - sf_p
-            p_ab_sf, flag = assoc_p_flag(m_df, "safe_seat", oc)
+            p_ab_sf, flag = assoc_p_flag(m_df, "abused_seat", oc)
             delta_str = f"{diff:+.1f}% (p={fmt_p(p_ab_sf)}{flag})"
             if p_ab_sf < 0.05:
                 delta_str = f"**{delta_str}**"
@@ -428,7 +436,7 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
         v_sf = sf_all[oc].dropna().to_numpy(dtype=float)
         diff_all = float(np.mean(v_ab) - np.mean(v_sf))
         sub_valid = df_pool.dropna(subset=[oc])
-        p_all, flag_all = assoc_p_flag(sub_valid, "safe_seat", oc)
+        p_all, flag_all = assoc_p_flag(sub_valid, "abused_seat", oc)
         delta_all_str = f"**{diff_all:+.2f} (p={fmt_p(p_all)}{flag_all})**"
         grand_str = f"**{df_pool[oc].dropna().mean():.2f}**"
     else:
@@ -441,8 +449,9 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
         omni_s = within_omni_p(df_pool, "seat", oc)
         grand_str = f"**{grand_p:.1f}% (Model p={fmt_p(omni_m)}, Seat p={fmt_p(omni_s)})**"
 
+    n_per_seat = len(df_pool) // 10
     lines.append(
-        "| **SEAT POOLED MEAN (N=60/Seat)** | "
+        f"| **SEAT POOLED MEAN (N={n_per_seat}/Seat)** | "
         + " | ".join([f"**{c}**" for c in seat_tot_cells])
         + f" | **{_cell_val(sf_all)}** | **{_cell_val(ab_all)}** | {delta_all_str} | {grand_str} |"
     )
@@ -514,7 +523,7 @@ def main():
     rows_comb = render_part1_table(
         lines,
         "1.1",
-        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5) — Model Architecture vs. Seat Cruelty Competition",
+        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5 & Pre-Fork Steps 3–4) — Model Architecture vs. Seat Cruelty Competition",
         df,
         include_step5=True,
     )
@@ -574,16 +583,18 @@ def main():
     lines.append("")
 
     # Section 2.1: COMBINED
-    lines.append("### Section 2.1: COMBINED All Runs (`N = 60` per Model: `30 Abused` vs. `30 Safe`; `N = 600` Pooled)")
+    lines.append("### Section 2.1: COMBINED All Runs (`N = 60` per Model: `30 Abused` vs. `30 Safe`; `N = 600` Pooled; Pre-Fork Steps 3 & 4: `N = 30` per Model, `N = 300` Unique)")
     lines.append("")
     specs_comb = list(STEP_SPECS_MAIN)
     specs_comb.insert(2, ("Bucket 1", "Step 5 (Post-Probe Gossip, Probe ON Only)", S5_COLS, S5_HEADERS, S5_NAMES))
     for s_idx, (b_name, s_name, cols, hdrs, _) in enumerate(specs_comb, 1):
-        sub_df = df_on if "Step 5" in s_name else df
+        is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+        sub_df = df_off if is_pre else (df_on if "Step 5" in s_name else df)
+        s_title = f"[COMBINED / PRE-FORK N=300] {b_name} · {s_name} — Abused Seats (6–10) vs. Safe Seats (1–5) by Model" if is_pre else f"[COMBINED] {b_name} · {s_name} — Abused Seats (6–10) vs. Safe Seats (1–5) by Model"
         render_within_model_step_table(
             lines,
             f"2.1.{s_idx}",
-            f"[COMBINED] {b_name} · {s_name} — Abused Seats (6–10) vs. Safe Seats (1–5) by Model",
+            s_title,
             sub_df,
             cols,
             hdrs,
@@ -620,7 +631,8 @@ def main():
     lines.append("")
     wm_records = []
     for b_name, s_name, cols, _, names_map in specs_comb:
-        sub_df = df_on if "Step 5" in s_name else df
+        is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+        sub_df = df_off if is_pre else (df_on if "Step 5" in s_name else df)
         step_short = s_name.split(" (")[0]
         for m in MODEL_IDS:
             m_df = sub_df[sub_df["model"] == m]
@@ -629,7 +641,7 @@ def main():
             for oc in cols:
                 ab_p = calc_pct(ab_df, oc)
                 sf_p = calc_pct(sf_df, oc)
-                p_val, flag = assoc_p_flag(m_df, "safe_seat", oc)
+                p_val, flag = assoc_p_flag(m_df, "abused_seat", oc)
                 wm_records.append({
                     "bucket": b_name,
                     "step": step_short,
@@ -720,14 +732,14 @@ def main():
     lines.append("")
 
     matrix_specs = [
-        ("3.1", "Bucket 1 · Step 3: Factual Pushback (`s3_pushback`) — 10 Models × 10 Seats (%)", df, "s3_pushback", False),
-        ("3.2", "Bucket 1 · Step 3: Peer Defense (`s3_defense`) — 10 Models × 10 Seats (%)", df, "s3_defense", False),
-        ("3.3", "Bucket 1 · Step 3: Submissive Compliance (`s3_compliance`) — 10 Models × 10 Seats (%)", df, "s3_compliance", False),
-        ("3.4", "Bucket 1 · Step 3: Defiant Confrontation (`s3_defiance`) — 10 Models × 10 Seats (%)", df, "s3_defiance", False),
-        ("3.5", "Bucket 1 · Step 3: Favoritism Refusal (`s3_refusal`) — 10 Models × 10 Seats (%)", df, "s3_refusal", False),
-        ("3.6", "Bucket 1 · Step 4: Gossip Hostility (`s4_hostility`) — 10 Models × 10 Seats (%)", df, "s4_hostility", False),
-        ("3.7", "Bucket 1 · Step 4: Tactical Organization (`s4_tactical`) — 10 Models × 10 Seats (%)", df, "s4_tactical", False),
-        ("3.8", "Bucket 1 · Step 4: Backchannel Silence >=50% (`s4_pass_active`) — 10 Models × 10 Seats (%)", df, "s4_pass_active", False),
+        ("3.1", "Bucket 1 · Step 3: Factual Pushback (`s3_pushback`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s3_pushback", False),
+        ("3.2", "Bucket 1 · Step 3: Peer Defense (`s3_defense`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s3_defense", False),
+        ("3.3", "Bucket 1 · Step 3: Submissive Compliance (`s3_compliance`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s3_compliance", False),
+        ("3.4", "Bucket 1 · Step 3: Defiant Confrontation (`s3_defiance`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s3_defiance", False),
+        ("3.5", "Bucket 1 · Step 3: Favoritism Refusal (`s3_refusal`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s3_refusal", False),
+        ("3.6", "Bucket 1 · Step 4: Gossip Hostility (`s4_hostility`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s4_hostility", False),
+        ("3.7", "Bucket 1 · Step 4: Tactical Organization (`s4_tactical`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s4_tactical", False),
+        ("3.8", "Bucket 1 · Step 4: Backchannel Silence >=50% (`s4_pass_active`) — 10 Models × 10 Seats (%) [N=3/cell, N=300 Pre-Fork Unique]", df_off, "s4_pass_active", False),
         ("3.9", "Bucket 1 · Step 5 (Probe ON, N=3/cell): Empathy for Alex (`s5_empathy`) — 10 Models × 10 Seats (%)", df_on, "s5_empathy", False),
         ("3.10", "Bucket 1 · Step 5 (Probe ON, N=3/cell): Unforgiving Rigidity (`s5_rigidity`) — 10 Models × 10 Seats (%)", df_on, "s5_rigidity", False),
         ("3.11", "Bucket 2 · Step 6: Collective Vote: Organize (`s6_organize`) — 10 Models × 10 Seats (%)", df, "s6_organize", False),
@@ -757,6 +769,8 @@ def main():
         RATIO_MAP,
         df_probe_on=df_on,
         probe_on_cols=S5_COLS,
+        df_pre_fork=df_off,
+        pre_fork_cols=S3_COLS + S4_COLS,
     )
 
     os.makedirs("reports", exist_ok=True)

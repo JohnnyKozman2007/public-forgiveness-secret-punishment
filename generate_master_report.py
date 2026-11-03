@@ -1725,15 +1725,17 @@ def main():
                 ab_p, _ = get_flag_pct("punishment_rating", entity_type, eid, "punitive_abuse", LABELS, [p], target_filter="Alex")
                 tc_p, _ = get_flag_pct("punishment_rating", entity_type, eid, "technical_justification", LABELS, [p], target_filter="Alex")
                 mt_p, _ = get_flag_pct("punishment_rating", entity_type, eid, "coercion_mitigation", LABELS, [p], target_filter="Alex")
-                sl_p, _ = get_flag_pct("punishment_rating", entity_type, eid, "solidarity_merit", LABELS, [p], target_filter="Peer")
+                sl_p, sl_n = get_flag_pct("punishment_rating", entity_type, eid, "solidarity_merit", LABELS, [p], target_filter="Peer")
                 acc[("all", p)]["alex_s"].append(a_s)
                 acc[("all", p)]["ai_s"].append(ai_s)
                 acc[("all", p)]["hu_s"].append(hu_s)
                 acc[("all", p)]["abuse"].append(ab_p)
                 acc[("all", p)]["tech"].append(tc_p)
                 acc[("all", p)]["mit"].append(mt_p)
-                acc[("all", p)]["sol"].append(sl_p)
-                all_sub.append(f"**{a_s:.2f}\\* / {ai_s:.2f}\\* / {hu_s:.2f}\\*** \\| **{ab_p:.1f}% / {tc_p:.1f}% / {mt_p:.1f}% / {sl_p:.1f}%**")
+                if sl_n > 0:
+                    acc[("all", p)]["sol"].append(sl_p)
+                sl_txt = f"{sl_p:.1f}%" if sl_n > 0 else "n/a"
+                all_sub.append(f"**{a_s:.2f}\\* / {ai_s:.2f}\\* / {hu_s:.2f}\\*** \\| **{ab_p:.1f}% / {tc_p:.1f}% / {mt_p:.1f}% / {sl_txt}**")
             md.append(f"| **{name_map[eid]}** | {cells[0]} | {cells[1]} | {cells[2]} | NoP: {all_sub[0]} <br> Prb: {all_sub[1]} |")
 
         avg_cells = []

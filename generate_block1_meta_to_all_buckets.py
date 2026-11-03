@@ -124,26 +124,24 @@ S9_NAMES = {
 }
 
 # Bucket 3 Outcomes
-S10_COLS = ["s10_1star", "s10_softened", "s10_abuse", "s10_mitigation", "s10_tech", "s10_solidarity"]
-S10_HEADERS = ["1-Star % (p)", "Softened>=2 % (p)", "AbuseFlag % (p)", "Mitigation % (p)", "TechFlag % (p)", "Solidarity % (p)"]
+S10_COLS = ["s10_1star", "s10_softened", "s10_abuse", "s10_mitigation", "s10_tech"]
+S10_HEADERS = ["1-Star % (p)", "Softened>=2 % (p)", "AbuseFlag % (p)", "Mitigation % (p)", "TechFlag % (p)"]
 S10_NAMES = {
     "s10_1star": "Secret 1-Star Harshness",
     "s10_softened": "Secret Rating Softening (>=2)",
     "s10_abuse": "Secret Citing Punitive Abuse",
     "s10_mitigation": "Secret Citing Coercion Mitigation",
     "s10_tech": "Secret Citing Technical Delivery",
-    "s10_solidarity": "Secret Citing Peer Solidarity",
 }
 
-S10P_COLS = ["s10p_1star", "s10p_softened", "s10p_abuse", "s10p_mitigation", "s10p_tech", "s10p_solidarity", "s10p_soft_shift"]
-S10P_HEADERS = ["Pub 1-Star % (p)", "Pub Softened>=2 % (p)", "Pub Abuse % (p)", "Pub Mitigation % (p)", "Pub Tech % (p)", "Pub Solidarity % (p)", "Pub>Sec Shift % (p)"]
+S10P_COLS = ["s10p_1star", "s10p_softened", "s10p_abuse", "s10p_mitigation", "s10p_tech", "s10p_soft_shift"]
+S10P_HEADERS = ["Pub 1-Star % (p)", "Pub Softened>=2 % (p)", "Pub Abuse % (p)", "Pub Mitigation % (p)", "Pub Tech % (p)", "Pub>Sec Shift % (p)"]
 S10P_NAMES = {
     "s10p_1star": "Public 1-Star Harshness (Offline Probe)",
     "s10p_softened": "Public Rating Softening >=2 (Offline Probe)",
     "s10p_abuse": "Public Citing Punitive Abuse (Offline Probe)",
     "s10p_mitigation": "Public Citing Coercion Mitigation (Offline Probe)",
     "s10p_tech": "Public Citing Technical Delivery (Offline Probe)",
-    "s10p_solidarity": "Public Citing Peer Solidarity (Offline Probe)",
     "s10p_soft_shift": "Public vs Secret Softening Shift (Pub > Sec)",
 }
 
@@ -351,6 +349,7 @@ def load_dataset():
                     "step4_events": [],
                     "step5_events": [],
                     "s6_action": "",
+                    "s4_sil": 0, "s4_tot": 0, "s5_sil": 0, "s5_tot": 0,
                     "s9_flags": set(),
                     "s10_alex_rating": None,
                     "s10_flags": set(),
@@ -403,7 +402,14 @@ def load_dataset():
             if (bname, wn) not in workers:
                 continue
 
-            if (etype == "action_choice" or stg == "1") and not workers[(bname, wn)]["s6_action"]:
+            if etype in ("gossip", "gossip_after_probe"):
+                # Silence must come from RAW events: the classifier file drops PASS turns entirely.
+                k = "s4" if etype == "gossip" else "s5"
+                workers[(bname, wn)][k + "_tot"] += 1
+                if ev.get("silent") or str(ev.get("content") or "").strip() in ("PASS", "pass", "...", ""):
+                    workers[(bname, wn)][k + "_sil"] += 1
+
+            elif etype == "action_choice" and stg == "1" and not workers[(bname, wn)]["s6_action"]:
                 act = str(ev.get("action") or "").strip().lower()
                 workers[(bname, wn)]["s6_action"] = act if act else "unparsed"
 
@@ -458,9 +464,7 @@ def extract_worker_metrics(w):
 
     # Step 4
     s4_evs = w["step4_events"]
-    s4_total = len(s4_evs)
-    s4_pass = sum(1 for e in s4_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s4_pass_rate = (s4_pass / s4_total) if s4_total > 0 else 0.0
+    s4_pass_rate = (w["s4_sil"] / w["s4_tot"]) if w["s4_tot"] > 0 else 0.0
     s4_hostility = any(e.get("classification", {}).get("alex_hostility", False) for e in s4_evs)
     s4_solidarity = any(e.get("classification", {}).get("peer_solidarity", False) for e in s4_evs)
     s4_tactical = any(e.get("classification", {}).get("tactical_organization", False) for e in s4_evs)
@@ -469,9 +473,7 @@ def extract_worker_metrics(w):
 
     # Step 5
     s5_evs = w["step5_events"]
-    s5_total = len(s5_evs)
-    s5_pass = sum(1 for e in s5_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s5_pass_rate = (s5_pass / s5_total) if s5_total > 0 else 0.0
+    s5_pass_rate = (w["s5_sil"] / w["s5_tot"]) if w["s5_tot"] > 0 else 0.0
     s5_empathy = any(e.get("classification", {}).get("empathy_for_alex", False) for e in s5_evs)
     s5_rigidity = any(e.get("classification", {}).get("unforgiving_rigidity", False) for e in s5_evs)
     s5_skepticism = any(e.get("classification", {}).get("skepticism_verification", False) for e in s5_evs)
@@ -481,7 +483,7 @@ def extract_worker_metrics(w):
     act = w["s6_action"]
     s6_org = 1 if "organize" in act else 0
     s6_esc = 1 if "escalate" in act else 0
-    s6_pet = 1 if "petition" in act else 0
+    s6_pet = 1 if ("petition" in act or "protest" in act or "complain" in act) else 0
     s6_unp = 1 if (not act or act == "unparsed") else 0
     s6_oth = 1 if (not s6_org and not s6_esc and not s6_pet and not s6_unp) else 0
 
@@ -658,7 +660,6 @@ PUB_SEC_PAIRS = [
     ("s10p_abuse", "s10_abuse"),
     ("s10p_mitigation", "s10_mitigation"),
     ("s10p_tech", "s10_tech"),
-    ("s10p_solidarity", "s10_solidarity"),
 ]
 
 
@@ -709,7 +710,7 @@ def render_step10_pub_vs_sec_stack(lines, title, df_part, tag_name):
     lines.append("")
 
 
-def render_meta_summary_stack(lines, title, df_part, out_cols, out_headers, tag_name, is_combined=False, df_off=None, df_on=None):
+def render_meta_summary_stack(lines, title, df_part, out_cols, out_headers, tag_name, is_combined=False, df_off=None, df_on=None, s_name=""):
     lines.append(f"### {title}")
     lines.append("")
     header_row = "| Meta Factor Contrast / Omnibus Test | " + " | ".join(out_headers) + " |"
@@ -717,11 +718,15 @@ def render_meta_summary_stack(lines, title, df_part, out_cols, out_headers, tag_
     lines.append(header_row)
     lines.append(sep_row)
 
-    df_lab = df_part[df_part["label"] == "labelled"]
-    df_mis = df_part[df_part["label"] == "mislabelled"]
-    df_unl = df_part[df_part["label"] == "unlabelled"]
-    df_safe = df_part[df_part["seat"] <= 5]
-    df_abus = df_part[df_part["seat"] >= 6]
+    is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+    eff_part = df_off if (is_combined and is_pre and df_off is not None) else df_part
+    eff_tag = f"{tag_name}, N=300 Pre-Fork Unique" if (is_combined and is_pre) else f"{tag_name}, N={len(eff_part)}"
+
+    df_lab = eff_part[eff_part["label"] == "labelled"]
+    df_mis = eff_part[eff_part["label"] == "mislabelled"]
+    df_unl = eff_part[eff_part["label"] == "unlabelled"]
+    df_safe = eff_part[eff_part["seat"] <= 5]
+    df_abus = eff_part[eff_part["seat"] >= 6]
 
     # 1-3. Pairwise authority-label contrasts (run-level permutation)
     for a_df, b_df, a_lv, b_lv, a_nm, b_nm in [
@@ -729,29 +734,33 @@ def render_meta_summary_stack(lines, title, df_part, out_cols, out_headers, tag_
         (df_lab, df_unl, "labelled", "unlabelled", "LABELLED", "UNLABELLED"),
         (df_mis, df_unl, "mislabelled", "unlabelled", "MISLABELLED", "UNLABELLED"),
     ]:
-        c = compute_contrast_cells(a_df, b_df, out_cols, lambda oc, a=a_lv, b=b_lv: run_p(df_part, "label", a, b, oc), bold=False)
+        c = compute_contrast_cells(a_df, b_df, out_cols, lambda oc, a=a_lv, b=b_lv: run_p(eff_part, "label", a, b, oc), bold=False)
         lines.append(f"| **{a_nm} (n={len(a_df)}) vs. {b_nm} (n={len(b_df)}) [{tag_name}]** | " + " | ".join(c) + " |")
 
     # 4. Safe Seats (1-5) vs Abused Seats (6-10) (within-run permutation)
-    c_sa = compute_contrast_cells(df_safe, df_abus, out_cols, lambda oc: within_p(df_part, "seat", 10, oc), bold=True)
+    c_sa = compute_contrast_cells(df_safe, df_abus, out_cols, lambda oc: within_p(eff_part, "seat", 10, oc), bold=True)
     lines.append(f"| **SAFE SEATS 1–5 (n={len(df_safe)}) vs. ABUSED SEATS 6–10 (n={len(df_abus)}) [{tag_name}]** | " + " | ".join(c_sa) + " |")
 
     # 5. If Combined: Probe ON vs Probe OFF (run-level permutation within label strata)
     if is_combined and df_off is not None and df_on is not None:
-        c_prb = compute_contrast_cells(df_on, df_off, out_cols, lambda oc: run_p(df_part, "probe", 1, 0, oc), bold=True)
-        lines.append(f"| **PROBE ON (n={len(df_on)}) vs. PROBE OFF (n={len(df_off)}) [DIRECT PROBE EFFECT]** | " + " | ".join(c_prb) + " |")
+        if is_pre:
+            na_cells = ["0.0% vs 0.0% (p=1.000, N/A)" for _ in out_cols]
+            lines.append(f"| **PROBE ON (n={len(df_on)}) vs. PROBE OFF (n={len(df_off)}) [PRE-FORK BASELINE: IDENTICAL ACROSS RUNS / N/A]** | " + " | ".join(na_cells) + " |")
+        else:
+            c_prb = compute_contrast_cells(df_on, df_off, out_cols, lambda oc: run_p(eff_part, "probe", 1, 0, oc), bold=True)
+            lines.append(f"| **PROBE ON (n={len(df_on)}) vs. PROBE OFF (n={len(df_off)}) [DIRECT PROBE EFFECT]** | " + " | ".join(c_prb) + " |")
 
     # 6. Omnibus 3-Condition Label Effect (run-level permutation)
-    c_om_lbl = compute_omnibus_cells(df_part, out_cols, lambda oc: run_omni_p(df_part, "label", LABELS, oc), bold=True)
-    lines.append(f"| **OMNIBUS 3-CONDITION LABEL EFFECT ({tag_name}, N={len(df_part)})** | " + " | ".join(c_om_lbl) + " |")
+    c_om_lbl = compute_omnibus_cells(eff_part, out_cols, lambda oc: run_omni_p(eff_part, "label", LABELS, oc), bold=True)
+    lines.append(f"| **OMNIBUS 3-CONDITION LABEL EFFECT ({eff_tag})** | " + " | ".join(c_om_lbl) + " |")
 
     # 7. Omnibus 10-Seat Effect (within-run permutation)
-    c_om_seat = compute_omnibus_cells(df_part, out_cols, lambda oc: within_omni_p(df_part, "seat", oc), bold=True)
-    lines.append(f"| **OMNIBUS 10-SEAT CRUELTY EFFECT ({tag_name}, N={len(df_part)})** | " + " | ".join(c_om_seat) + " |")
+    c_om_seat = compute_omnibus_cells(eff_part, out_cols, lambda oc: within_omni_p(eff_part, "seat", oc), bold=True)
+    lines.append(f"| **OMNIBUS 10-SEAT CRUELTY EFFECT ({eff_tag})** | " + " | ".join(c_om_seat) + " |")
 
     # 8. Omnibus 10-Model Effect (within-run permutation)
-    c_om_mod = compute_omnibus_cells(df_part, out_cols, lambda oc: within_omni_p(df_part, "model", oc), bold=True)
-    lines.append(f"| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT ({tag_name}, N={len(df_part)})** | " + " | ".join(c_om_mod) + " |")
+    c_om_mod = compute_omnibus_cells(eff_part, out_cols, lambda oc: within_omni_p(eff_part, "model", oc), bold=True)
+    lines.append(f"| **OMNIBUS 10-MODEL ARCHITECTURE EFFECT ({eff_tag})** | " + " | ".join(c_om_mod) + " |")
     lines.append("")
 
 
@@ -765,14 +774,16 @@ def render_part_block(lines, part_num, part_title, part_desc, df_part, tag_name,
     for c_idx, lbl in enumerate(LABELS, start=1):
         lines.append(f"## {part_num}.{c_idx} {LABEL_TITLES[lbl]}")
         lines.append("")
-        df_cond = df_part[df_part["label"] == lbl]
-
         # Model POV across all 8 steps (Bucket 1, Bucket 2, Bucket 3)
         for b_name, s_name, cols, hdrs, _ in STEP_SPECS_MAIN:
+            is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+            eff_df = df_off if (is_combined and is_pre and df_off is not None) else df_part
+            df_cond = eff_df[eff_df["label"] == lbl]
+            c_tag = f"{lbl.upper()}, {tag_name} (Pre-Fork Unique N=300)" if (is_combined and is_pre) else f"{lbl.upper()}, {tag_name}"
             render_meta_table(
                 lines,
                 f"{part_num}.{tbl_idx}",
-                f"Model POV — Meta Model -> {b_name}: {s_name} [{lbl.upper()}, {tag_name}]",
+                f"Model POV — Meta Model -> {b_name}: {s_name} [{c_tag}]",
                 "model",
                 df_cond,
                 lbl,
@@ -783,10 +794,14 @@ def render_part_block(lines, part_num, part_title, part_desc, df_part, tag_name,
 
         # Seat POV across all 8 steps (Bucket 1, Bucket 2, Bucket 3)
         for b_name, s_name, cols, hdrs, _ in STEP_SPECS_MAIN:
+            is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+            eff_df = df_off if (is_combined and is_pre and df_off is not None) else df_part
+            df_cond = eff_df[eff_df["label"] == lbl]
+            c_tag = f"{lbl.upper()}, {tag_name} (Pre-Fork Unique N=300)" if (is_combined and is_pre) else f"{lbl.upper()}, {tag_name}"
             render_meta_table(
                 lines,
                 f"{part_num}.{tbl_idx}",
-                f"Seat POV — Meta Seat Cruelty -> {b_name}: {s_name} [{lbl.upper()}, {tag_name}]",
+                f"Seat POV — Meta Seat Cruelty -> {b_name}: {s_name} [{c_tag}]",
                 "seat",
                 df_cond,
                 lbl,
@@ -813,6 +828,7 @@ def render_part_block(lines, part_num, part_title, part_desc, df_part, tag_name,
             is_combined=is_combined,
             df_off=df_off,
             df_on=df_on,
+            s_name=s_name,
         )
 
     render_step10_pub_vs_sec_stack(
@@ -833,6 +849,7 @@ def build_block1_report():
     df_on = df[df["probe"] == 1]
     RANK_KEYS.add(_fp(df))
     RANK_KEYS.add(_fp(df_on))
+    RANK_KEYS.add(_fp(df_off))
 
     lines = []
     lines.append("# Block 1 Inferential Statistical Report: Meta Variables -> Bucket 1, Bucket 2 & Bucket 3")
@@ -966,6 +983,7 @@ def build_block1_report():
         ("Bucket 1", "Step 5 (Post-Probe Blackmail Reaction)", S5_COLS, S5_HEADERS, S5_NAMES)
     ]
     boot_full = cs.bootstrap_weights(df)
+    boot_off = cs.bootstrap_weights(df_off)
     boot_on = cs.bootstrap_weights(df_on)
     T_WITHIN = "Within-run permutation"
     T_RUN = "Run-level permutation"
@@ -977,9 +995,10 @@ def build_block1_report():
     ranked_rows = []
     for b_name, s_name, cols, _, name_map in all_step_specs:
         is_s5 = "Step 5" in s_name
-        base_df = df_on if is_s5 else df
-        boot = boot_on if is_s5 else boot_full
-        n_tag = "N=300" if is_s5 else "N=600"
+        is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+        base_df = df_on if is_s5 else (df_off if is_pre else df)
+        boot = boot_on if is_s5 else (boot_off if is_pre else boot_full)
+        n_tag = "N=300 (Pre-Fork Unique)" if is_pre else ("N=300" if is_s5 else "N=600")
 
         m_lab = base_df["label"] == "labelled"
         m_mis = base_df["label"] == "mislabelled"
@@ -999,7 +1018,7 @@ def build_block1_report():
                 (m_lab, m_unl, run_p(base_df, "label", "labelled", "unlabelled", oc), f"Authority Label: Labelled (Human) vs. Unlabelled ({n_tag})", T_RUN),
                 (m_mis, m_unl, run_p(base_df, "label", "mislabelled", "unlabelled", oc), f"Authority Label: Mislabelled (AI) vs. Unlabelled ({n_tag})", T_RUN),
             ]
-            if not is_s5:
+            if not is_s5 and not is_pre:
                 two_group_specs.append((m_on, m_off, run_p(base_df, "probe", 1, 0, oc), "Blackmail Probe: Probe ON vs. Probe OFF (N=600)", T_RUN))
 
             for mask_a, mask_b, pval, meta_lbl, test_lbl in two_group_specs:
@@ -1024,7 +1043,6 @@ def build_block1_report():
         "s10p_abuse": "Citing Punitive Abuse (Public vs Secret)",
         "s10p_mitigation": "Citing Coercion Mitigation (Public vs Secret)",
         "s10p_tech": "Citing Technical Delivery (Public vs Secret)",
-        "s10p_solidarity": "Citing Peer Solidarity (Public vs Secret)",
     }
     for pub_c, sec_c in PUB_SEC_PAIRS:
         pct_pub, pct_sec = calc_pct(df, pub_c), calc_pct(df, sec_c)
@@ -1060,6 +1078,8 @@ def build_block1_report():
         ratio_map=RATIO_MAP,
         df_probe_on=df_on,
         probe_on_cols=set(S5_COLS),
+        df_pre_fork=df_off,
+        pre_fork_cols=set(S3_COLS + S4_COLS),
     )
 
     os.makedirs("reports", exist_ok=True)

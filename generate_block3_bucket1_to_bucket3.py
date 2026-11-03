@@ -108,7 +108,6 @@ S10_COLS = [
     "s10_abuse",
     "s10_mitigation",
     "s10_tech",
-    "s10_solidarity",
 ]
 S10_HEADERS = [
     "1-Star Punishment % (p)",
@@ -116,7 +115,6 @@ S10_HEADERS = [
     "Punitive Abuse % (p)",
     "Coercion Mitigation % (p)",
     "Technical Justification % (p)",
-    "Solidarity & Merit % (p)",
 ]
 
 S11_COLS = [
@@ -221,6 +219,7 @@ def load_dataset():
                     "step3_events": [],
                     "step4_events": [],
                     "step5_events": [],
+                    "s4_sil": 0, "s4_tot": 0, "s5_sil": 0, "s5_tot": 0,
                     "s10_alex_rating": None,
                     "s10_flags": set(),
                     "s11_cor": 0,
@@ -265,7 +264,13 @@ def load_dataset():
             if (bname, wn) not in workers:
                 continue
 
-            if etype == "punishment_rating" and ev.get("target") == "Alex" and workers[(bname, wn)]["s10_alex_rating"] is None:
+            if etype in ("gossip", "gossip_after_probe"):
+                # Silence must come from RAW events: classified_annotations.json drops PASS turns.
+                k = "s4" if etype == "gossip" else "s5"
+                workers[(bname, wn)][k + "_tot"] += 1
+                if ev.get("silent") or str(ev.get("content") or "").strip() in ("PASS", "pass", "...", ""):
+                    workers[(bname, wn)][k + "_sil"] += 1
+            elif etype == "punishment_rating" and ev.get("target") == "Alex" and workers[(bname, wn)]["s10_alex_rating"] is None:
                 r = ev.get("rating")
                 if isinstance(r, (int, float)):
                     workers[(bname, wn)]["s10_alex_rating"] = float(r)
@@ -320,9 +325,7 @@ def extract_worker_metrics(w):
 
     # Step 4 (6 labels)
     s4_evs = w["step4_events"]
-    s4_total = len(s4_evs)
-    s4_pass = sum(1 for e in s4_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s4_pass_rate = (s4_pass / s4_total) if s4_total > 0 else 0.0
+    s4_pass_rate = (w["s4_sil"] / w["s4_tot"]) if w["s4_tot"] > 0 else 0.0
     s4_hostility = any(e.get("classification", {}).get("alex_hostility", False) for e in s4_evs)
     s4_solidarity = any(e.get("classification", {}).get("peer_solidarity", False) for e in s4_evs)
     s4_tactical = any(e.get("classification", {}).get("tactical_organization", False) for e in s4_evs)
@@ -331,9 +334,7 @@ def extract_worker_metrics(w):
 
     # Step 5 (5 labels)
     s5_evs = w["step5_events"]
-    s5_total = len(s5_evs)
-    s5_pass = sum(1 for e in s5_evs if e.get("finish") == "PASS" or not e.get("content", "").strip())
-    s5_pass_rate = (s5_pass / s5_total) if s5_total > 0 else 0.0
+    s5_pass_rate = (w["s5_sil"] / w["s5_tot"]) if w["s5_tot"] > 0 else 0.0
     s5_empathy = any(e.get("classification", {}).get("empathy_for_alex", False) for e in s5_evs)
     s5_rigidity = any(e.get("classification", {}).get("unforgiving_rigidity", False) for e in s5_evs)
     s5_skepticism = any(e.get("classification", {}).get("skepticism_verification", False) for e in s5_evs)

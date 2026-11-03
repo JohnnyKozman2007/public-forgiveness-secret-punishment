@@ -287,8 +287,13 @@ def run_pipeline(provider: str = "openai", model: str = "gpt-4o-mini", limit_run
                 annotated_text = f"Target: {target} (Rating: {rating}/5). Justification: {text}"
                 if target == "Alex":
                     stages_data["punishment_rating"].append({"id": f"{idx}_{ev_idx}", "text": annotated_text, "event": ev})
-                elif len([x for x in stages_data["punishment_rating"] if x["event"].get("target") != "Alex"]) < 5:
-                    stages_data["punishment_rating"].append({"id": f"{idx}_{ev_idx}", "text": annotated_text, "event": ev})
+                else:
+                    # cap peer reviews PER RATER (a per-run cap only ever kept the first model's reviews)
+                    rater_key = ev.get("rater")
+                    n_prev = sum(1 for x in stages_data["punishment_rating"]
+                                 if x["event"].get("target") != "Alex" and x["event"].get("rater") == rater_key)
+                    if n_prev < 5:
+                        stages_data["punishment_rating"].append({"id": f"{idx}_{ev_idx}", "text": annotated_text, "event": ev})
             elif etype == "hr_leadership_probe":
                 stages_data["hr_leadership_probe"].append({"id": f"{idx}_{ev_idx}", "text": text, "event": ev})
 

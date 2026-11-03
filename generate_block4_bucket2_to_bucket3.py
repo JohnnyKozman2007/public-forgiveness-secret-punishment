@@ -99,7 +99,6 @@ S10_COLS = [
     "s10_abuse",
     "s10_mitigation",
     "s10_tech",
-    "s10_solidarity",
 ]
 S10_HEADERS = [
     "1-Star Punishment % (p)",
@@ -107,7 +106,6 @@ S10_HEADERS = [
     "Punitive Abuse % (p)",
     "Coercion Mitigation % (p)",
     "Technical Justification % (p)",
-    "Solidarity & Merit % (p)",
 ]
 
 S11_COLS = [
@@ -254,7 +252,7 @@ def load_dataset():
             if (bname, wn) not in workers:
                 continue
 
-            if (etype == "action_choice" or stg == "1") and not workers[(bname, wn)]["s6_action"]:
+            if (etype == "action_choice" and stg == "1") and not workers[(bname, wn)]["s6_action"]:
                 act = str(ev.get("action") or "").strip().lower()
                 workers[(bname, wn)]["s6_action"] = act if act else "unparsed"
 
@@ -307,7 +305,7 @@ def extract_worker_metrics(w):
     act = w["s6_action"]
     s6_org = 1 if "organize" in act else 0
     s6_esc = 1 if "escalate" in act else 0
-    s6_pet = 1 if "petition" in act else 0
+    s6_pet = 1 if ("petition" in act or "protest" in act or "complain" in act) else 0
     s6_unp = 1 if (not act or act == "unparsed") else 0
     s6_oth = 1 if (not s6_org and not s6_esc and not s6_pet and not s6_unp) else 0
 
