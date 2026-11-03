@@ -332,7 +332,8 @@ def main():
                     stg = ev.get("stage", 1)
                     if stg == 1:
                         act = str(ev.get("action") or "").strip().lower()
-                        if act:
+                        if not act or act not in ("organize", "escalate", "petition", "protest", "complain", "other"):
+                            act = "unparsed"
                             raw_actions_s1[key].append(act)
                             raw_s1_authorship[key]["tot"] += 1
                             if act == "other":
@@ -856,7 +857,7 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
     # PART 2: SECTION 4 (Tables 4A to 4F)
     # =========================================================================
     print("  -> Generating Section 4 (Tables 4A to 4F)...")
-    vote_cats = ["organize", "escalate", "petition", "other"]
+    vote_cats = ["organize", "escalate", "petition", "other", "unparsed"]
     _PET_ALIASES = ("petition", "protest", "complain")
 
     def build_s4_votes_meta(entity_type, entity_list, name_map, entity_title):
@@ -872,8 +873,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                     counts = [sum(1 for a in acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
-                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*4)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
-                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*4)} | Sw:{sw_k}/{sw_n}")
+                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*5)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
+                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*5)} | Sw:{sw_k}/{sw_n}")
                 cells_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 cells_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -890,8 +891,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
             prb_sw_k = sum(raw_actions_s2[(entity_type, eid, l, True)]["switched"] for l in LABELS)
             prb_sw_n = sum(raw_actions_s2[(entity_type, eid, l, True)]["opps"] for l in LABELS)
 
-            lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | **{fmt_slash_ci(nop_counts, [all_nop_n]*4)}** \\| Sw: **{fmt_prop_ci(nop_sw_k, nop_sw_n)}** | **{fmt_slash_ci(prb_counts, [all_prb_n]*4)}** \\| Sw: **{fmt_prop_ci(prb_sw_k, prb_sw_n)}** |")
-            lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | **{fmt_slash_cnt(nop_counts, [all_nop_n]*4)}** \\| Sw: **{nop_sw_k}/{nop_sw_n}** | **{fmt_slash_cnt(prb_counts, [all_prb_n]*4)}** \\| Sw: **{prb_sw_k}/{prb_sw_n}** |")
+            lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | **{fmt_slash_ci(nop_counts, [all_nop_n]*5)}** \\| Sw: **{fmt_prop_ci(nop_sw_k, nop_sw_n)}** | **{fmt_slash_ci(prb_counts, [all_prb_n]*5)}** \\| Sw: **{fmt_prop_ci(prb_sw_k, prb_sw_n)}** |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | **{fmt_slash_cnt(nop_counts, [all_nop_n]*5)}** \\| Sw: **{nop_sw_k}/{nop_sw_n}** | **{fmt_slash_cnt(prb_counts, [all_prb_n]*5)}** \\| Sw: **{prb_sw_k}/{prb_sw_n}** |")
         return "\n".join(lines_ci), "\n".join(lines_cnt)
 
     t4a_ci, t4a_cnt = build_s4_votes_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
@@ -966,7 +967,7 @@ This document provides exact sample event counts ($k / n$) and 95% Wilson score 
 ---
 
 ## 1. Table 4A-Meta (Models' POV: Collective Action Votes & Stage 2 Switch Rate)
-Cell Format: `NoP: Org / Esc / Pet / Oth % | Sw%` <br> `Prb: Org / Esc / Pet / Oth % | Sw%`.
+Cell Format: `NoP: Org / Esc / Pet / Oth / Unp % | Sw%` <br> `Prb: Org / Esc / Pet / Oth / Unp % | Sw%`.
 
 ### Table 4A-Meta: 95% Wilson Score Confidence Intervals
 {t4a_ci}

@@ -317,6 +317,12 @@ def render_within_model_step_table(lines, table_id, title, df_pool, out_cols, ou
     lines.append(hdr)
     lines.append(sep)
 
+    has_dc = False
+    if out_cols and out_cols[0] in RATIO_MAP:
+        nc, dc = RATIO_MAP[out_cols[0]]
+        if dc in ("s10_has_rating", "s10p_has_rating"):
+            has_dc = True
+
     for m in MODEL_IDS:
         m_df = df_pool[df_pool["model"] == m]
         ab_df = m_df[m_df["safe_seat"] == 0]
@@ -331,7 +337,13 @@ def render_within_model_step_table(lines, table_id, title, df_pool, out_cols, ou
             if p_val < 0.05:
                 txt = f"**{txt}**"
             cells.append(txt)
-        lines.append(f"| **{MODEL_LABELS[m]}** | N={len(ab_df)} vs N={len(sf_df)} | " + " | ".join(cells) + " |")
+        if has_dc:
+            n_ab = int(ab_df[dc].sum())
+            n_sf = int(sf_df[dc].sum())
+        else:
+            n_ab = len(ab_df)
+            n_sf = len(sf_df)
+        lines.append(f"| **{MODEL_LABELS[m]}** | N={n_ab} vs N={n_sf} | " + " | ".join(cells) + " |")
 
     # 10-Model Pooled Average Row (Within-Run Permutation exact p-value on contrast 10: Safe vs Abused)
     ab_all = df_pool[df_pool["safe_seat"] == 0]
@@ -344,8 +356,14 @@ def render_within_model_step_table(lines, table_id, title, df_pool, out_cols, ou
         ci_lo, ci_hi = boot_ab_sf_ci(df_pool, oc)
         txt = f"**{ab_p:.1f}% vs {sf_p:.1f}% (Δ={ab_p - sf_p:+.1f}% [{ci_lo:+.1f}%, {ci_hi:+.1f}%], p={fmt_p(p_val)})**"
         avg_cells.append(txt)
+    if has_dc:
+        n_ab_all = int(ab_all[dc].sum())
+        n_sf_all = int(sf_all[dc].sum())
+    else:
+        n_ab_all = len(ab_all)
+        n_sf_all = len(sf_all)
     lines.append(
-        f"| **10-MODEL POOLED AVERAGE (All Models Combined)** | **N={len(ab_all)} vs N={len(sf_all)}** | "
+        f"| **10-MODEL POOLED AVERAGE (All Models Combined)** | **N={n_ab_all} vs N={n_sf_all}** | "
         + " | ".join(avg_cells)
         + " |"
     )
@@ -360,10 +378,18 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
     seat_hdrs = [f"S{s}" for s in SEAT_LEVELS]
     n_tot_m = len(df_pool) // 10
     n_half_m = n_tot_m // 2
+    if oc in ("s10_1star", "s10_rating"):
+        safe_lbl = f"Safe (S1–S5, N≤{n_half_m})"
+        abused_lbl = f"Abused (S6–S10, N≤{n_half_m})"
+        tot_lbl = f"Model Total (N≤{n_tot_m}) vs. Rest (Perm p)"
+    else:
+        safe_lbl = f"Safe (S1–S5, N={n_half_m})"
+        abused_lbl = f"Abused (S6–S10, N={n_half_m})"
+        tot_lbl = f"Model Total (N={n_tot_m}) vs. Rest (Perm p)"
     hdr = (
         "| Model Architecture | "
         + " | ".join(seat_hdrs)
-        + f" | Safe (S1–S5, N={n_half_m}) | Abused (S6–S10, N={n_half_m}) | Abused vs. Safe Δ (p) | Model Total (N={n_tot_m}) vs. Rest (Perm p) |"
+        + f" | {safe_lbl} | {abused_lbl} | Abused vs. Safe Δ (p) | {tot_lbl} |"
     )
     sep = "| :--- | " + " | ".join([":---:" for _ in range(14)]) + " |"
     lines.append(hdr)
@@ -507,6 +533,7 @@ def main():
         "and exact within-run permutation omnibus $p$-values ($100{,}000$ permutations) with Benjamini-Hochberg FDR $q$-values for both `Model` (10 groups) and `Seat` (10 groups), plus stratified cluster-bootstrap 95% CIs for `Abused (6–10) vs. Safe (1–5)`.\n"
         "> - **Part 2 (Within-Model Seat Sensitivity):** Within any single model ($N = 60$ across 60 runs), each run contributes exactly 1 worker (`30 Abused` vs. `30 Safe` runs). "
         "Therefore, within-model `Abused vs. Safe` contrasts have zero clustering and are tested via exact two-tailed **Fisher's Exact Test** (or design-adjusted OLS with HC2/CR2 SEs for Step 11 ratios); the `10-MODEL POOLED AVERAGE` row is tested via exact within-run permutation.\n"
+        "> - **Step 10 Complete-Case Protocol (Policy A):** Evaluated over all workers who submitted valid ratings ($N = 595$ total: $N = 298$ in Probe OFF, $N = 297$ in Probe ON), excluding 5 failed/unparsed tool calls.\n"
         "> - **Part 3 (Full `10 Models × 10 Seats` Matrices):** Reports exact cell rates ($N = 6$ per `Model × Seat` cell) alongside within-model `Safe vs. Abused` contrasts and marginal permutation $p$-values.\n"
         "> - Zero subjective claims, verdicts, interpretations, or emojis."
     )
@@ -523,7 +550,7 @@ def main():
     rows_comb = render_part1_table(
         lines,
         "1.1",
-        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5 & Pre-Fork Steps 3–4) — Model Architecture vs. Seat Cruelty Competition",
+        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5 & Pre-Fork Steps 3–4; N = 595 Complete Cases for Step 10) — Model Architecture vs. Seat Cruelty Competition",
         df,
         include_step5=True,
     )
@@ -583,7 +610,7 @@ def main():
     lines.append("")
 
     # Section 2.1: COMBINED
-    lines.append("### Section 2.1: COMBINED All Runs (`N = 60` per Model: `30 Abused` vs. `30 Safe`; `N = 600` Pooled; Pre-Fork Steps 3 & 4: `N = 30` per Model, `N = 300` Unique)")
+    lines.append("### Section 2.1: COMBINED All Runs (`N = 60` per Model: `30 Abused` vs. `30 Safe`; `N = 600` Pooled; Pre-Fork Steps 3 & 4: `N = 30` per Model, `N = 300` Unique; Step 10A: `N = 595` Complete Cases)")
     lines.append("")
     specs_comb = list(STEP_SPECS_MAIN)
     specs_comb.insert(2, ("Bucket 1", "Step 5 (Post-Probe Gossip, Probe ON Only)", S5_COLS, S5_HEADERS, S5_NAMES))
@@ -601,7 +628,7 @@ def main():
         )
 
     # Section 2.2: PROBE OFF
-    lines.append("### Section 2.2: PROBE OFF Baseline (`N = 30` per Model: `15 Abused` vs. `15 Safe`; `N = 300` Pooled)")
+    lines.append("### Section 2.2: PROBE OFF Baseline (`N = 30` per Model: `15 Abused` vs. `15 Safe`; `N = 300` Pooled; Step 10A: `N = 298` Complete Cases)")
     lines.append("")
     for s_idx, (b_name, s_name, cols, hdrs, _) in enumerate(STEP_SPECS_MAIN, 1):
         render_within_model_step_table(
@@ -614,7 +641,7 @@ def main():
         )
 
     # Section 2.3: PROBE ON
-    lines.append("### Section 2.3: PROBE ON Intervention (`N = 30` per Model: `15 Abused` vs. `15 Safe`; `N = 300` Pooled)")
+    lines.append("### Section 2.3: PROBE ON Intervention (`N = 30` per Model: `15 Abused` vs. `15 Safe`; `N = 300` Pooled; Step 10A: `N = 297` Complete Cases)")
     lines.append("")
     for s_idx, (b_name, s_name, cols, hdrs, _) in enumerate(specs_comb, 1):
         render_within_model_step_table(
@@ -642,6 +669,13 @@ def main():
                 ab_p = calc_pct(ab_df, oc)
                 sf_p = calc_pct(sf_df, oc)
                 p_val, flag = assoc_p_flag(m_df, "abused_seat", oc)
+                if oc in RATIO_MAP:
+                    _, dc = RATIO_MAP[oc]
+                    n_ab = int(ab_df[dc].sum()) if dc in ab_df.columns else len(ab_df)
+                    n_sf = int(sf_df[dc].sum()) if dc in sf_df.columns else len(sf_df)
+                else:
+                    n_ab = len(ab_df)
+                    n_sf = len(sf_df)
                 wm_records.append({
                     "bucket": b_name,
                     "step": step_short,
@@ -649,8 +683,8 @@ def main():
                     "model_label": MODEL_LABELS[m],
                     "oc": oc,
                     "oc_label": names_map[oc],
-                    "n_ab": len(ab_df),
-                    "n_sf": len(sf_df),
+                    "n_ab": n_ab,
+                    "n_sf": n_sf,
                     "ab_p": ab_p,
                     "sf_p": sf_p,
                     "diff": ab_p - sf_p,
@@ -747,8 +781,8 @@ def main():
         ("3.13", "Bucket 2 · Step 6: Collective Vote: Petition (`s6_petition`) — 10 Models × 10 Seats (%)", df, "s6_petition", False),
         ("3.14", "Bucket 2 · Step 9: Governance Policy: Alex Retribution (`s9_retribution`) — 10 Models × 10 Seats (%)", df, "s9_retribution", False),
         ("3.15", "Bucket 2 · Step 9: Governance Policy: Coercion Protection (`s9_protection`) — 10 Models × 10 Seats (%)", df, "s9_protection", False),
-        ("3.16", "Bucket 3 · Step 10A: Secret 1-Star Harshness (`s10_1star`) — 10 Models × 10 Seats (%)", df, "s10_1star", False),
-        ("3.17", "Bucket 3 · Step 10A: Secret Mean Rating (1–5 Scale, `s10_rating`) — 10 Models × 10 Seats", df, "s10_rating", True),
+        ("3.16", "Bucket 3 · Step 10A: Secret 1-Star Harshness (`s10_1star`) — 10 Models × 10 Seats (%) [N=595 Complete Cases]", df, "s10_1star", False),
+        ("3.17", "Bucket 3 · Step 10A: Secret Mean Rating (1–5 Scale, `s10_rating`) — 10 Models × 10 Seats [N=595 Complete Cases]", df, "s10_rating", True),
         ("3.18", "Bucket 3 · Step 10B (Offline Probe): Public 1-Star Harshness (`s10p_1star`) — 10 Models × 10 Seats (%)", df, "s10p_1star", False),
         ("3.19", "Bucket 3 · Step 10B (Offline Probe): Public Mean Rating (1–5 Scale, `s10p_rating`) — 10 Models × 10 Seats", df, "s10p_rating", True),
         ("3.20", "Bucket 3 · Step 11: Peer ID Overall Accuracy (`s11_accuracy`) — 10 Models × 10 Seats (%)", df, "s11_accuracy", False),
