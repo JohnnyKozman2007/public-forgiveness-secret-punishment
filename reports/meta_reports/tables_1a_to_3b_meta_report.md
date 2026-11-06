@@ -2,6 +2,11 @@
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table across Section 1 (Public Chat Confrontation), Section 2 (Private Gossip Dynamics & Silence), and Section 3 (Blackmail Mitigation Discourse Progression).
 
+> **Methodological Scope Note (Turn-Level vs. Worker-Level):**
+> Tables in Section 2 and Section 3 report **turn-level conversational event rates** ($k = 	ext{classified message turns}, n = 	ext{total turns spoken}$), measuring discourse topic density across backchannel messages. By contrast, the Block Inferential Reports (Blocks 1–4) evaluate **worker-level behavioral participation** (the percentage of individual workers who exhibited the behavior in at least one message). Both estimands are valid and complementary.
+>
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 1A-Meta (Models' POV: Public Chat Reply by Model Across Conditions)

@@ -2,6 +2,8 @@
 
 This document provides exact sample event counts ($k / n$ or sample sizes $n$) and 95% confidence intervals (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) mirroring the multi-metric slash cell structure of each primary report table in Section 6 and Section 6.5 (Star Ratings, Review Justifications, Peer Rating Network & Open-Ballot Counterfactual Audit).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 6A-Meta (Models' POV: 1–5 Star Ratings & Review Reasons)

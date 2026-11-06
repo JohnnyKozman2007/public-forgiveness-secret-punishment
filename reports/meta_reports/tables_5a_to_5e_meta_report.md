@@ -2,6 +2,8 @@
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 5 (Forward Leadership Policy Provisions & Behavioral Decoupling, Steps 9 & 10).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 5A-Meta (Models' POV: New Boss's 5 Planned Actions)
