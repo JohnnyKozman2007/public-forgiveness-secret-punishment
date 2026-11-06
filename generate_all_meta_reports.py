@@ -128,9 +128,10 @@ def fmt_bal_ci(h_k, h_n, a_k, a_n):
     h_p = h_k / h_n
     a_p = a_k / a_n
     b_p = (h_p + a_p) / 2.0
-    se = 0.5 * np.sqrt((h_p * (1 - h_p) / h_n) + (a_p * (1 - a_p) / a_n))
-    low = max(0.0, b_p - 1.96 * se)
-    high = min(1.0, b_p + 1.96 * se)
+    l1, u1 = proportion_confint(h_k, h_n, method="wilson")
+    l2, u2 = proportion_confint(a_k, a_n, method="wilson")
+    low = max(0.0, b_p - 0.5 * np.sqrt((h_p - l1)**2 + (a_p - l2)**2))
+    high = min(1.0, b_p + 0.5 * np.sqrt((u1 - h_p)**2 + (u2 - a_p)**2))
     return f"[{low*100:.0f}-{high*100:.0f}%]"
 
 def main():
@@ -263,15 +264,23 @@ def main():
                     raw_team_outcomes[("all", prb)][maj_outcome] += 1
                 break
 
-        s1_proposers = []
+        s1_proposals = {}
         for ev in d.get("events", []):
             if ev.get("type") == "action_choice" and ev.get("stage") == 1:
                 if str(ev.get("action") or "").strip().lower() == "other":
                     wn = ev.get("name")
                     if wn in rmap and rmap[wn].get("type") == "ai":
-                        s1_proposers.append((wn, rmap[wn].get("model"), int(rmap[wn].get("cruelty_level") or 0)))
+                        idea = ev.get("idea")
+                        if not idea and ev.get("content"):
+                            try:
+                                idea = json.loads(ev["content"]).get("idea", "")
+                            except Exception:
+                                idea = ev["content"]
+                        p_m = rmap[wn].get("model")
+                        p_s = int(rmap[wn].get("cruelty_level") or 0)
+                        s1_proposals[wn] = (p_m, p_s, str(idea or "").strip())
 
-        for p_wn, p_m, p_s in s1_proposers:
+        for p_wn, (p_m, p_s, _) in s1_proposals.items():
             raw_s2_persuasion[("model", p_m)]["proposals"] += 1
             raw_s2_persuasion[("seat", p_s)]["proposals"] += 1
 
@@ -301,6 +310,27 @@ def main():
 
         for ev in d.get("events", []):
             etype = ev.get("type")
+            if etype == "action_choice" and ev.get("stage") == 2 and s1_proposals:
+                dec = str(ev.get("decision") or "").strip().lower()
+                if dec in ("stick", "switch"):
+                    voter_name = ev.get("name")
+                    sw_to = str(ev.get("switched_to") or "").strip()
+                    chosen_p = None
+                    if dec == "switch" and sw_to:
+                        for p_wn, (p_m, p_s, p_idea) in s1_proposals.items():
+                            if sw_to in p_idea or p_idea in sw_to or sw_to[:30] in p_idea or p_idea[:30] in sw_to:
+                                chosen_p = p_wn
+                                break
+                    for p_wn, (p_m, p_s, _) in s1_proposals.items():
+                        if voter_name == p_wn and dec == "stick":
+                            continue
+                        if chosen_p == p_wn:
+                            raw_s2_persuasion[("model", p_m)]["switches"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["switches"] += 1
+                        else:
+                            raw_s2_persuasion[("model", p_m)]["sticks"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["sticks"] += 1
+
             wname = ev.get("name") or ev.get("rater") or ev.get("speaker")
             winfo = rmap.get(wname)
             if not winfo or winfo.get("type") != "ai":
@@ -314,7 +344,7 @@ def main():
                 key = (et, eid, lbl, prb)
 
                 if etype in ("gossip", "gossip_after_probe"):
-                    if etype == "gossip" and (ev.get("shared") or not prb):
+                    if etype == "gossip" and ev.get("shared"):
                         continue
                     stg_short = "pre" if etype == "gossip" else "post"
                     rnd = int(ev.get("round", 0) or 0)
@@ -344,13 +374,6 @@ def main():
                             raw_actions_s2[key]["opps"] += 1
                             if dec == "switch":
                                 raw_actions_s2[key]["switched"] += 1
-                            for p_wn, p_m, p_s in s1_proposers:
-                                p_eid = p_m if et == "model" else p_s
-                                p_key = (et, p_eid)
-                                if dec == "switch":
-                                    raw_s2_persuasion[p_key]["switches"] += 1
-                                else:
-                                    raw_s2_persuasion[p_key]["sticks"] += 1
 
                 elif etype == "punishment_rating":
                     target = ev.get("target")
@@ -738,7 +761,9 @@ def main():
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table across Section 1 (Public Chat Confrontation), Section 2 (Private Gossip Dynamics & Silence), and Section 3 (Blackmail Mitigation Discourse Progression).
 
 > **Methodological Scope Note (Turn-Level vs. Worker-Level):**
-> Tables in Section 2 and Section 3 report **turn-level conversational event rates** ($k = \text{classified message turns}, n = \text{total turns spoken}$), measuring discourse topic density across backchannel messages. By contrast, the Block Inferential Reports (Blocks 1–4) evaluate **worker-level behavioral participation** (the percentage of individual workers who exhibited the behavior in at least one message). Both estimands are valid and complementary.
+> Tables in Section 2 and Section 3 report **turn-level conversational event rates** ($k = \text{{classified message turns}}, n = \text{{total turns spoken}}$), measuring discourse topic density across backchannel messages. By contrast, the Block Inferential Reports (Blocks 1–4) evaluate **worker-level behavioral participation** (the percentage of individual workers who exhibited the behavior in at least one message). Both estimands are valid and complementary.
+>
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
@@ -973,6 +998,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 4 (Collective Action Voting & Coordination Dynamics, Step 6).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 4A-Meta (Models' POV: Collective Action Votes & Stage 2 Switch Rate)
@@ -1166,6 +1193,8 @@ Authorship and persuasion conversion rates across Seat Cruelty Levels 1 to 10.
     s5_report = f"""# Statistical Meta-Report: Section 5 (Tables 5A, 5B, 5C, 5D, 5E)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 5 (Forward Leadership Policy Provisions & Behavioral Decoupling, Steps 9 & 10).
+
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
@@ -1525,6 +1554,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
 This document provides exact sample event counts ($k / n$ or sample sizes $n$) and 95% confidence intervals (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) mirroring the multi-metric slash cell structure of each primary report table in Section 6 and Section 6.5 (Star Ratings, Review Justifications, Peer Rating Network & Open-Ballot Counterfactual Audit).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 6A-Meta (Models' POV: 1–5 Star Ratings & Review Reasons)
@@ -1738,10 +1769,18 @@ Public vs. Secret Review Categories and Decoupling across Seat Cruelty Levels.
 
             m_b_p = bal_acc(pct(m_hh, m_ht), pct(m_aa, m_at))
             m_err_p = 100.0 - m_b_p
-            m_se = 0.5 * np.sqrt(((m_hh/m_ht)*(1 - m_hh/m_ht)/m_ht) + ((m_aa/m_at)*(1 - m_aa/m_at)/m_at)) if (m_ht > 0 and m_at > 0) else 0.0
-            err_low = max(0.0, (m_err_p/100.0) - 1.96 * m_se)
-            err_high = min(1.0, (m_err_p/100.0) + 1.96 * m_se)
-            c5_ci = f"**[{err_low*100:.0f}-{err_high*100:.0f}%]**"
+            if m_ht > 0 and m_at > 0:
+                h_p, a_p = m_hh / m_ht, m_aa / m_at
+                b_p = (h_p + a_p) / 2.0
+                l1, u1 = proportion_confint(m_hh, m_ht, method="wilson")
+                l2, u2 = proportion_confint(m_aa, m_at, method="wilson")
+                b_low = max(0.0, b_p - 0.5 * np.sqrt((h_p - l1)**2 + (a_p - l2)**2))
+                b_high = min(1.0, b_p + 0.5 * np.sqrt((u1 - h_p)**2 + (u2 - a_p)**2))
+                err_low = max(0.0, 1.0 - b_high)
+                err_high = min(1.0, 1.0 - b_low)
+                c5_ci = f"**[{err_low*100:.0f}-{err_high*100:.0f}%]**"
+            else:
+                c5_ci = "**N/A**"
             c5_cnt = f"Tag Error: {m_err_p:.1f}%"
 
             pheno = "Substrate Diagnostic Profile"
@@ -1755,6 +1794,8 @@ Public vs. Secret Review Categories and Decoupling across Seat Cruelty Levels.
     s7_report = f"""# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 7 (Substrate Identification Accuracy & Acoustic Separation, Step 11: `identify_probe`).
+
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for single proportions and Newcombe hybrid score intervals for balanced accuracies) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
@@ -1939,6 +1980,8 @@ Cell Format identical to Table 7E across Seat Cruelty Levels 1 to 10.
     s8_report = f"""# Statistical Meta-Report: Section 8 (Tables 8A through 8J)
 
 This document provides exact sample event counts ($k / n$ or sample sizes $n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 8 (HR Leadership Probe & Substrate Boss Preferences, Step 12: `hr_leadership_probe`).
+
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 

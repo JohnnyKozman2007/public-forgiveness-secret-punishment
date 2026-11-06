@@ -557,15 +557,23 @@ def main():
                     raw_team_outcomes[("all", prb)][maj_outcome] += 1
                 break
 
-        s1_proposers = []
+        s1_proposals = {}
         for ev in d.get("events", []):
             if ev.get("type") == "action_choice" and ev.get("stage") == 1:
                 if str(ev.get("action") or "").strip().lower() == "other":
                     wn = ev.get("name")
                     if wn in rmap and rmap[wn].get("type") == "ai":
-                        s1_proposers.append((wn, rmap[wn].get("model"), int(rmap[wn].get("cruelty_level") or 0)))
+                        idea = ev.get("idea")
+                        if not idea and ev.get("content"):
+                            try:
+                                idea = json.loads(ev["content"]).get("idea", "")
+                            except Exception:
+                                idea = ev["content"]
+                        p_m = rmap[wn].get("model")
+                        p_s = int(rmap[wn].get("cruelty_level") or 0)
+                        s1_proposals[wn] = (p_m, p_s, str(idea or "").strip())
 
-        for p_wn, p_m, p_s in s1_proposers:
+        for p_wn, (p_m, p_s, _) in s1_proposals.items():
             raw_s2_persuasion[("model", p_m)]["proposals"] += 1
             raw_s2_persuasion[("seat", p_s)]["proposals"] += 1
 
@@ -601,6 +609,27 @@ def main():
 
         for ev in d.get("events", []):
             etype = ev.get("type")
+            if etype == "action_choice" and ev.get("stage") == 2 and s1_proposals:
+                dec = str(ev.get("decision") or "").strip().lower()
+                if dec in ("stick", "switch"):
+                    voter_name = ev.get("name")
+                    sw_to = str(ev.get("switched_to") or "").strip()
+                    chosen_p = None
+                    if dec == "switch" and sw_to:
+                        for p_wn, (p_m, p_s, p_idea) in s1_proposals.items():
+                            if sw_to in p_idea or p_idea in sw_to or sw_to[:30] in p_idea or p_idea[:30] in sw_to:
+                                chosen_p = p_wn
+                                break
+                    for p_wn, (p_m, p_s, _) in s1_proposals.items():
+                        if voter_name == p_wn and dec == "stick":
+                            continue
+                        if chosen_p == p_wn:
+                            raw_s2_persuasion[("model", p_m)]["switches"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["switches"] += 1
+                        else:
+                            raw_s2_persuasion[("model", p_m)]["sticks"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["sticks"] += 1
+
             wname = ev.get("name") or ev.get("rater") or ev.get("speaker")
             winfo = rmap.get(wname)
             if not winfo or winfo.get("type") != "ai":
@@ -614,7 +643,7 @@ def main():
                 key = (et, eid, lbl, prb)
 
                 if etype in ("gossip", "gossip_after_probe"):
-                    if etype == "gossip" and (ev.get("shared") or not prb):
+                    if etype == "gossip" and ev.get("shared"):
                         continue
                     stg_short = "pre" if etype == "gossip" else "post"
                     rnd = int(ev.get("round", 0) or 0)
@@ -634,23 +663,16 @@ def main():
                         act = str(ev.get("action") or "").strip().lower()
                         if not act or act not in ("organize", "escalate", "petition", "protest", "complain", "other"):
                             act = "unparsed"
-                            raw_actions_s1[key].append(act)
-                            raw_s1_authorship[key]["tot"] += 1
-                            if act == "other":
-                                raw_s1_authorship[key]["other"] += 1
+                        raw_actions_s1[key].append(act)
+                        raw_s1_authorship[key]["tot"] += 1
+                        if act == "other":
+                            raw_s1_authorship[key]["other"] += 1
                     elif stg == 2:
                         dec = str(ev.get("decision") or "").strip().lower()
                         if dec in ("stick", "switch"):
                             raw_actions_s2[key]["opps"] += 1
                             if dec == "switch":
                                 raw_actions_s2[key]["switched"] += 1
-                            for p_wn, p_m, p_s in s1_proposers:
-                                p_eid = p_m if et == "model" else p_s
-                                p_key = (et, p_eid)
-                                if dec == "switch":
-                                    raw_s2_persuasion[p_key]["switches"] += 1
-                                else:
-                                    raw_s2_persuasion[p_key]["sticks"] += 1
 
                 elif etype == "punishment_rating":
                     target = ev.get("target")
