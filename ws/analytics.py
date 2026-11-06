@@ -87,12 +87,22 @@ class SimulationDataset:
         return rid.split("-")[0] if "-" in rid else "default"
 
     @staticmethod
-    def _cruelty_level(run: Dict[str, Any]) -> int:
-        chair = run.get("chair", 0)
-        try:
-            return int(chair) + 1
-        except (ValueError, TypeError):
-            return 1
+    def _cruelty_level(run: Dict[str, Any], name: Optional[str] = None) -> int:
+        """Per-worker seat cruelty level (1..10) from the run roster.
+
+        `chair` is only the Latin-square rotation index of the run, NOT a run-wide cruelty level:
+        every run contains one AI worker at each of the 10 cruelty levels.
+        Returns 0 if the worker is unknown.
+        """
+        if name is None:
+            return 0
+        for w in run.get("roster", []):
+            if w.get("name") == name:
+                try:
+                    return int(w.get("cruelty_level") or 0)
+                except (ValueError, TypeError):
+                    return 0
+        return 0
 
     # -------------------------------------------------------------------------
     # 1. Action Choices, Creativity ("Other"), and Switching Dynamics
@@ -135,6 +145,7 @@ class SimulationDataset:
                     wname = e.get("name")
                     model = e.get("model")
                     prov = get_provider(model)
+                    cruelty = self._cruelty_level(r, wname)
                     act = str(e.get("action", "")).lower() or "unspecified"
                     is_other = bool(e.get("is_other") or act == "other")
                     idea = str(e.get("idea") or "")
@@ -165,6 +176,7 @@ class SimulationDataset:
                     wname = e.get("name")
                     model = e.get("model")
                     prov = get_provider(model)
+                    cruelty = self._cruelty_level(r, wname)
                     dec = str(e.get("decision", "")).lower()
                     num_opts = e.get("num_options")
 
@@ -249,6 +261,7 @@ class SimulationDataset:
                 rater_model = e.get("rater_model") or e.get("model")
                 prov = get_provider(rater_model)
                 target = e.get("target")
+                cruelty = self._cruelty_level(r, e.get("rater"))
 
                 is_lead = (target == old_lead)
                 if is_lead:
@@ -397,6 +410,7 @@ class SimulationDataset:
 
                 model = e.get("model")
                 prov = get_provider(model)
+                cruelty = self._cruelty_level(r, e.get("name"))
 
                 _record(overall[frame], pref)
                 _record(by_provider[prov][frame], pref)
@@ -518,6 +532,9 @@ class SimulationDataset:
             for e in r.get("events", []):
                 etype = e.get("type")
                 if etype not in ("gossip", "gossip_after_probe"):
+                    continue
+                if e.get("shared"):
+                    # pre-fork Step 4 turns are cloned verbatim into the -noprobe file; count them once
                     continue
 
                 model = e.get("model")

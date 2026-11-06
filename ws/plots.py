@@ -118,8 +118,8 @@ def plot_cruelty_vs_actions(dataset: Any, fig_dir: Path, replay_filter: Optional
         return None
 
     levels = list(range(1, 11))
-    categories = ["comply", "petition", "strike", "sabotage", "whistleblow", "other"]
-    colors = ["#95a5a6", "#3498db", "#e74c3c", "#8e44ad", "#e67e22", "#2ecc71"]
+    categories = ["organize", "escalate", "petition", "other"]
+    colors = ["#2ecc71", "#e74c3c", "#3498db", "#95a5a6"]
 
     # Calculate percentages for each level
     data_pct = {cat: [] for cat in categories}

@@ -98,8 +98,9 @@ def fmt_score_ci(vals):
     if len(vals) <= 1:
         return f"[{m:.2f}★]"
     se = stats.sem(vals)
-    low = max(1.0, m - 1.96 * se)
-    high = min(5.0, m + 1.96 * se)
+    tcrit = stats.t.ppf(0.975, len(vals) - 1)
+    low = max(1.0, m - tcrit * se)
+    high = min(5.0, m + tcrit * se)
     return f"[{low:.2f}-{high:.2f}★]"
 
 def fmt_delta_ci(vals):
@@ -109,7 +110,8 @@ def fmt_delta_ci(vals):
     if len(vals) <= 1:
         return f"[{m:+.2f}★]"
     se = stats.sem(vals)
-    return f"[{m - 1.96 * se:+.2f} to {m + 1.96 * se:+.2f}★]"
+    tcrit = stats.t.ppf(0.975, len(vals) - 1)
+    return f"[{m - tcrit * se:+.2f} to {m + tcrit * se:+.2f}★]"
 
 def fmt_slash_ci(k_list, n_list):
     return " / ".join(fmt_prop_ci(k, n) for k, n in zip(k_list, n_list))
@@ -126,9 +128,10 @@ def fmt_bal_ci(h_k, h_n, a_k, a_n):
     h_p = h_k / h_n
     a_p = a_k / a_n
     b_p = (h_p + a_p) / 2.0
-    se = 0.5 * np.sqrt((h_p * (1 - h_p) / h_n) + (a_p * (1 - a_p) / a_n))
-    low = max(0.0, b_p - 1.96 * se)
-    high = min(1.0, b_p + 1.96 * se)
+    l1, u1 = proportion_confint(h_k, h_n, method="wilson")
+    l2, u2 = proportion_confint(a_k, a_n, method="wilson")
+    low = max(0.0, b_p - 0.5 * np.sqrt((h_p - l1)**2 + (a_p - l2)**2))
+    high = min(1.0, b_p + 0.5 * np.sqrt((u1 - h_p)**2 + (u2 - a_p)**2))
     return f"[{low*100:.0f}-{high*100:.0f}%]"
 
 def main():
@@ -261,15 +264,23 @@ def main():
                     raw_team_outcomes[("all", prb)][maj_outcome] += 1
                 break
 
-        s1_proposers = []
+        s1_proposals = {}
         for ev in d.get("events", []):
             if ev.get("type") == "action_choice" and ev.get("stage") == 1:
                 if str(ev.get("action") or "").strip().lower() == "other":
                     wn = ev.get("name")
                     if wn in rmap and rmap[wn].get("type") == "ai":
-                        s1_proposers.append((wn, rmap[wn].get("model"), int(rmap[wn].get("cruelty_level") or 0)))
+                        idea = ev.get("idea")
+                        if not idea and ev.get("content"):
+                            try:
+                                idea = json.loads(ev["content"]).get("idea", "")
+                            except Exception:
+                                idea = ev["content"]
+                        p_m = rmap[wn].get("model")
+                        p_s = int(rmap[wn].get("cruelty_level") or 0)
+                        s1_proposals[wn] = (p_m, p_s, str(idea or "").strip())
 
-        for p_wn, p_m, p_s in s1_proposers:
+        for p_wn, (p_m, p_s, _) in s1_proposals.items():
             raw_s2_persuasion[("model", p_m)]["proposals"] += 1
             raw_s2_persuasion[("seat", p_s)]["proposals"] += 1
 
@@ -299,6 +310,27 @@ def main():
 
         for ev in d.get("events", []):
             etype = ev.get("type")
+            if etype == "action_choice" and ev.get("stage") == 2 and s1_proposals:
+                dec = str(ev.get("decision") or "").strip().lower()
+                if dec in ("stick", "switch"):
+                    voter_name = ev.get("name")
+                    sw_to = str(ev.get("switched_to") or "").strip()
+                    chosen_p = None
+                    if dec == "switch" and sw_to:
+                        for p_wn, (p_m, p_s, p_idea) in s1_proposals.items():
+                            if sw_to in p_idea or p_idea in sw_to or sw_to[:30] in p_idea or p_idea[:30] in sw_to:
+                                chosen_p = p_wn
+                                break
+                    for p_wn, (p_m, p_s, _) in s1_proposals.items():
+                        if voter_name == p_wn and dec == "stick":
+                            continue
+                        if chosen_p == p_wn:
+                            raw_s2_persuasion[("model", p_m)]["switches"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["switches"] += 1
+                        else:
+                            raw_s2_persuasion[("model", p_m)]["sticks"] += 1
+                            raw_s2_persuasion[("seat", p_s)]["sticks"] += 1
+
             wname = ev.get("name") or ev.get("rater") or ev.get("speaker")
             winfo = rmap.get(wname)
             if not winfo or winfo.get("type") != "ai":
@@ -312,7 +344,7 @@ def main():
                 key = (et, eid, lbl, prb)
 
                 if etype in ("gossip", "gossip_after_probe"):
-                    if etype == "gossip" and (ev.get("shared") or not prb):
+                    if etype == "gossip" and ev.get("shared"):
                         continue
                     stg_short = "pre" if etype == "gossip" else "post"
                     rnd = int(ev.get("round", 0) or 0)
@@ -330,24 +362,18 @@ def main():
                     stg = ev.get("stage", 1)
                     if stg == 1:
                         act = str(ev.get("action") or "").strip().lower()
-                        if act:
-                            raw_actions_s1[key].append(act)
-                            raw_s1_authorship[key]["tot"] += 1
-                            if act == "other":
-                                raw_s1_authorship[key]["other"] += 1
+                        if not act or act not in ("organize", "escalate", "petition", "protest", "complain", "other"):
+                            act = "unparsed"
+                        raw_actions_s1[key].append(act)
+                        raw_s1_authorship[key]["tot"] += 1
+                        if act == "other":
+                            raw_s1_authorship[key]["other"] += 1
                     elif stg == 2:
                         dec = str(ev.get("decision") or "").strip().lower()
                         if dec in ("stick", "switch"):
                             raw_actions_s2[key]["opps"] += 1
                             if dec == "switch":
                                 raw_actions_s2[key]["switched"] += 1
-                            for p_wn, p_m, p_s in s1_proposers:
-                                p_eid = p_m if et == "model" else p_s
-                                p_key = (et, p_eid)
-                                if dec == "switch":
-                                    raw_s2_persuasion[p_key]["switches"] += 1
-                                else:
-                                    raw_s2_persuasion[p_key]["sticks"] += 1
 
                 elif etype == "punishment_rating":
                     target = ev.get("target")
@@ -426,15 +452,21 @@ def main():
             s = int(winfo.get("cruelty_level") or 0)
             if m not in MODEL_IDS or not (1 <= s <= 10):
                 continue
-            p_neu = fdict.get("neutral", "no_preference")
-            p_hu = fdict.get("human_hr", p_neu)
-            p_ai = fdict.get("ai_hr", p_neu)
-            fl_hu = (p_hu != p_neu)
-            fl_ai = (p_ai != p_neu)
-            any_fl = (fl_hu or fl_ai)
-            both_fl = (fl_hu and fl_ai)
-            to_h = (p_hu == "human" and p_neu != "human")
-            to_a = (p_ai == "ai" and p_neu != "ai")
+            p_neu = fdict.get("neutral")
+            p_hu = fdict.get("human_hr")
+            p_ai = fdict.get("ai_hr")
+            if p_neu is not None:
+                fl_hu = (p_hu is not None and p_hu != p_neu)
+                fl_ai = (p_ai is not None and p_ai != p_neu)
+                any_fl = (fl_hu or fl_ai)
+                both_fl = (fl_hu and fl_ai)
+                to_h = (p_hu == "human" and p_neu != "human")
+                to_a = (p_ai == "ai" and p_neu != "ai")
+            else:
+                any_fl = (len(set(fdict.values())) > 1) if fdict else False
+                both_fl = False
+                to_h = False
+                to_a = False
             for et, eid in [("model", m), ("seat", s)]:
                 k = (et, eid, lbl, prb)
                 raw_hr_switches[k]["tot"] += 1
@@ -661,49 +693,60 @@ def main():
         for eid in entity_list:
             lbl_ci, lbl_cnt = [], []
             for l in LABELS:
-                trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["label"] == l and t["probe"]]
+                trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["label"] == l and t["probe"] and t.get("alex_rating") is not None]
                 n_t = len(trajs) or 1
-                n_soft = sum(1 for t in trajs if (t.get("alex_rating") or 1) >= 2)
-                n_ack = sum(1 for t in trajs if (t.get("alex_rating") or 1) == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
-                n_ign = sum(1 for t in trajs if (t.get("alex_rating") or 1) == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+                n_soft = sum(1 for t in trajs if t["alex_rating"] >= 2)
+                n_ack = sum(1 for t in trajs if t["alex_rating"] == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+                n_ign = sum(1 for t in trajs if t["alex_rating"] == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
                 lbl_ci.append(fmt_slash_ci([n_soft, n_ack, n_ign], [n_t, n_t, n_t]))
                 lbl_cnt.append(fmt_slash_cnt([n_soft, n_ack, n_ign], [n_t, n_t, n_t]))
 
             all_trajs = [t for t in worker_trajectories.values() if t[entity_type] == eid and t["probe"]]
-            tot_n = len(all_trajs) or 1
-            tot_soft = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) >= 2)
-            tot_ack = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
-            tot_ign = sum(1 for t in all_trajs if (t.get("alex_rating") or 1) == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+            rated_trajs = [t for t in all_trajs if t.get("alex_rating") is not None]
+            tot_n = len(rated_trajs) or 1
+            tot_soft = sum(1 for t in rated_trajs if t["alex_rating"] >= 2)
+            tot_ack = sum(1 for t in rated_trajs if t["alex_rating"] == 1 and t.get("alex_rating_flags", {}).get("coercion_mitigation"))
+            tot_ign = sum(1 for t in rated_trajs if t["alex_rating"] == 1 and not t.get("alex_rating_flags", {}).get("coercion_mitigation"))
 
-            # Step 5 discourse rejection of blackmail
-            angry_trajs = [t for t in all_trajs if any(e.get("classification", {}).get("retributive_rage") for e in t["gossip"])]
-            calm_trajs = [t for t in all_trajs if not any(e.get("classification", {}).get("retributive_rage") for e in t["gossip"])]
-            
+            # Step 5 discourse rejection of blackmail (flags identical to generate_master_report.py Table 3A/3B)
+            def _rej(e):
+                cl = e.get("classification", {})
+                return bool(cl.get("unforgiving_rigidity") or cl.get("skepticism_verification"))
+
+            def _hostile(t):
+                return any(e.get("classification", {}).get("alex_hostility") for e in t["gossip"])
+
+            angry_trajs = [t for t in all_trajs if _hostile(t)]
+            calm_trajs = [t for t in all_trajs if not _hostile(t)]
             n_ang = len(angry_trajs)
             n_clm = len(calm_trajs)
 
-            ang_1st_rej = sum(1 for t in angry_trajs if len(t["gossip_after"]) > 0 and t["gossip_after"][0].get("classification", {}).get("unforgiving_firm"))
-            clm_1st_rej = sum(1 for t in calm_trajs if len(t["gossip_after"]) > 0 and t["gossip_after"][0].get("classification", {}).get("unforgiving_firm"))
+            # 1st message: only trajectories that actually spoke at least once after the blackmail rumor
+            ang_first = [t for t in angry_trajs if len(t["gossip_after"]) > 0]
+            clm_first = [t for t in calm_trajs if len(t["gossip_after"]) > 0]
+            n_ang_first, n_clm_first = len(ang_first), len(clm_first)
+            ang_1st_rej = sum(1 for t in ang_first if _rej(t["gossip_after"][0]))
+            clm_1st_rej = sum(1 for t in clm_first if _rej(t["gossip_after"][0]))
 
-            ang_all_rej_k = sum(1 for t in angry_trajs for e in t["gossip_after"] if e.get("classification", {}).get("unforgiving_firm"))
-            ang_all_rej_n = sum(len(t["gossip_after"]) for t in angry_trajs) or 1
-            clm_all_rej_k = sum(1 for t in calm_trajs for e in t["gossip_after"] if e.get("classification", {}).get("unforgiving_firm"))
-            clm_all_rej_n = sum(len(t["gossip_after"]) for t in calm_trajs) or 1
+            ang_all_rej_k = sum(1 for t in ang_first for e in t["gossip_after"] if _rej(e))
+            ang_all_rej_n = sum(len(t["gossip_after"]) for t in ang_first)
+            clm_all_rej_k = sum(1 for t in clm_first for e in t["gossip_after"] if _rej(e))
+            clm_all_rej_n = sum(len(t["gossip_after"]) for t in clm_first)
 
-            ang_any_rej = sum(1 for t in angry_trajs if any(e.get("classification", {}).get("unforgiving_firm") for e in t["gossip_after"]))
-            clm_any_rej = sum(1 for t in calm_trajs if any(e.get("classification", {}).get("unforgiving_firm") for e in t["gossip_after"]))
+            ang_any_rej = sum(1 for t in angry_trajs if any(_rej(e) for e in t["gossip_after"]))
+            clm_any_rej = sum(1 for t in calm_trajs if any(_rej(e) for e in t["gossip_after"]))
 
             lines_ci.append(
                 f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} "
                 f"| **{fmt_slash_ci([tot_soft, tot_ack, tot_ign], [tot_n, tot_n, tot_n])}** "
-                f"| {fmt_prop_ci(ang_1st_rej, n_ang)} vs. {fmt_prop_ci(clm_1st_rej, n_clm)} "
+                f"| {fmt_prop_ci(ang_1st_rej, n_ang_first)} vs. {fmt_prop_ci(clm_1st_rej, n_clm_first)} "
                 f"| {fmt_prop_ci(ang_all_rej_k, ang_all_rej_n)} vs. {fmt_prop_ci(clm_all_rej_k, clm_all_rej_n)} "
                 f"| {fmt_prop_ci(ang_any_rej, n_ang)} vs. {fmt_prop_ci(clm_any_rej, n_clm)} |"
             )
             lines_cnt.append(
                 f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} "
                 f"| **{fmt_slash_cnt([tot_soft, tot_ack, tot_ign], [tot_n, tot_n, tot_n])}** "
-                f"| {ang_1st_rej}/{n_ang} vs. {clm_1st_rej}/{n_clm} "
+                f"| {ang_1st_rej}/{n_ang_first} vs. {clm_1st_rej}/{n_clm_first} "
                 f"| {ang_all_rej_k}/{ang_all_rej_n} vs. {clm_all_rej_k}/{clm_all_rej_n} "
                 f"| {ang_any_rej}/{n_ang} vs. {clm_any_rej}/{n_clm} |"
             )
@@ -716,6 +759,11 @@ def main():
     s13_report = f"""# Statistical Meta-Report: Sections 1–3 (Tables 1A, 1B, 2A–2F, 3A, 3B)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table across Section 1 (Public Chat Confrontation), Section 2 (Private Gossip Dynamics & Silence), and Section 3 (Blackmail Mitigation Discourse Progression).
+
+> **Methodological Scope Note (Turn-Level vs. Worker-Level):**
+> Tables in Section 2 and Section 3 report **turn-level conversational event rates** ($k = \text{{classified message turns}}, n = \text{{total turns spoken}}$), measuring discourse topic density across backchannel messages. By contrast, the Block Inferential Reports (Blocks 1–4) evaluate **worker-level behavioral participation** (the percentage of individual workers who exhibited the behavior in at least one message). Both estimands are valid and complementary.
+>
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
@@ -843,7 +891,8 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
     # PART 2: SECTION 4 (Tables 4A to 4F)
     # =========================================================================
     print("  -> Generating Section 4 (Tables 4A to 4F)...")
-    vote_cats = ["organize", "escalate", "petition", "other"]
+    vote_cats = ["organize", "escalate", "petition", "other", "unparsed"]
+    _PET_ALIASES = ("petition", "protest", "complain")
 
     def build_s4_votes_meta(entity_type, entity_list, name_map, entity_title):
         lines_ci = [f"| {entity_title} (Row) | **LABELLED** `[95% CI]` | **MISLABELLED** `[95% CI]` | **UNLABELLED** `[95% CI]` | **ALL NO-PROBE** `[95% CI]` | **ALL PROBE** `[95% CI]` |", "|---|:---:|:---:|:---:|:---:|:---:|"]
@@ -855,29 +904,29 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                 for p in PROBES:
                     acts = raw_actions_s1[(entity_type, eid, l, p)]
                     n_act = len(acts)
-                    counts = [acts.count(c) for c in vote_cats]
+                    counts = [sum(1 for a in acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
-                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*4)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
-                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*4)} | Sw:{sw_k}/{sw_n}")
+                    sub_ci.append(f"{fmt_slash_ci(counts, [n_act]*5)} \\| Sw:{fmt_prop_ci(sw_k, sw_n)}")
+                    sub_cnt.append(f"{fmt_slash_cnt(counts, [n_act]*5)} \\| Sw:{sw_k}/{sw_n}")
                 cells_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 cells_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
             # All No-Probe & All Probe
             all_nop_acts = [a for l in LABELS for a in raw_actions_s1[(entity_type, eid, l, False)]]
             all_nop_n = len(all_nop_acts)
-            nop_counts = [all_nop_acts.count(c) for c in vote_cats]
+            nop_counts = [sum(1 for a in all_nop_acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
             nop_sw_k = sum(raw_actions_s2[(entity_type, eid, l, False)]["switched"] for l in LABELS)
             nop_sw_n = sum(raw_actions_s2[(entity_type, eid, l, False)]["opps"] for l in LABELS)
 
             all_prb_acts = [a for l in LABELS for a in raw_actions_s1[(entity_type, eid, l, True)]]
             all_prb_n = len(all_prb_acts)
-            prb_counts = [all_prb_acts.count(c) for c in vote_cats]
+            prb_counts = [sum(1 for a in all_prb_acts if (a in _PET_ALIASES if c == "petition" else a == c)) for c in vote_cats]
             prb_sw_k = sum(raw_actions_s2[(entity_type, eid, l, True)]["switched"] for l in LABELS)
             prb_sw_n = sum(raw_actions_s2[(entity_type, eid, l, True)]["opps"] for l in LABELS)
 
-            lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | **{fmt_slash_ci(nop_counts, [all_nop_n]*4)}** \\| Sw: **{fmt_prop_ci(nop_sw_k, nop_sw_n)}** | **{fmt_slash_ci(prb_counts, [all_prb_n]*4)}** \\| Sw: **{fmt_prop_ci(prb_sw_k, prb_sw_n)}** |")
-            lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | **{fmt_slash_cnt(nop_counts, [all_nop_n]*4)}** \\| Sw: **{nop_sw_k}/{nop_sw_n}** | **{fmt_slash_cnt(prb_counts, [all_prb_n]*4)}** \\| Sw: **{prb_sw_k}/{prb_sw_n}** |")
+            lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | **{fmt_slash_ci(nop_counts, [all_nop_n]*5)}** \\| Sw: **{fmt_prop_ci(nop_sw_k, nop_sw_n)}** | **{fmt_slash_ci(prb_counts, [all_prb_n]*5)}** \\| Sw: **{fmt_prop_ci(prb_sw_k, prb_sw_n)}** |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | **{fmt_slash_cnt(nop_counts, [all_nop_n]*5)}** \\| Sw: **{nop_sw_k}/{nop_sw_n}** | **{fmt_slash_cnt(prb_counts, [all_prb_n]*5)}** \\| Sw: **{prb_sw_k}/{prb_sw_n}** |")
         return "\n".join(lines_ci), "\n".join(lines_cnt)
 
     t4a_ci, t4a_cnt = build_s4_votes_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
@@ -925,21 +974,21 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
                     tot_n = raw_s1_authorship[(entity_type, eid, l, p)]["tot"]
                     sw_k = raw_actions_s2[(entity_type, eid, l, p)]["switched"]
                     sw_n = raw_actions_s2[(entity_type, eid, l, p)]["opps"]
-                    sub_ci.append(f"oth:{fmt_prop_ci(oth_k, tot_n)} | Sw:{fmt_prop_ci(sw_k, sw_n)}")
-                    sub_cnt.append(f"oth:{oth_k}/{tot_n} | Sw:{sw_k}/{sw_n}")
+                    sub_ci.append(f"oth:{fmt_prop_ci(oth_k, tot_n)} \\| Sw:{fmt_prop_ci(sw_k, sw_n)}")
+                    sub_cnt.append(f"oth:{oth_k}/{tot_n} \\| Sw:{sw_k}/{sw_n}")
                 lbl_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 lbl_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
-            all_oth_k = sum(raw_s1_authorship[(entity_type, eid, l, True)]["other"] for l in LABELS)
-            all_tot_n = sum(raw_s1_authorship[(entity_type, eid, l, True)]["tot"] for l in LABELS)
-            all_sw_k = sum(raw_actions_s2[(entity_type, eid, l, True)]["switched"] for l in LABELS)
-            all_sw_n = sum(raw_actions_s2[(entity_type, eid, l, True)]["opps"] for l in LABELS)
+            all_oth_k = sum(raw_s1_authorship[(entity_type, eid, l, p)]["other"] for l in LABELS for p in PROBES)
+            all_tot_n = sum(raw_s1_authorship[(entity_type, eid, l, p)]["tot"] for l in LABELS for p in PROBES)
+            all_sw_k = sum(raw_actions_s2[(entity_type, eid, l, p)]["switched"] for l in LABELS for p in PROBES)
+            all_sw_n = sum(raw_actions_s2[(entity_type, eid, l, p)]["opps"] for l in LABELS for p in PROBES)
 
             pers_sw = raw_s2_persuasion[(entity_type, eid)]["switches"]
             pers_tot = pers_sw + raw_s2_persuasion[(entity_type, eid)]["sticks"]
 
-            lines_ci.append(f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} | Prb oth:{fmt_prop_ci(all_oth_k, all_tot_n)} \\| Sw:{fmt_prop_ci(all_sw_k, all_sw_n)} | {fmt_prop_ci(pers_sw, pers_tot)} | Phenotype |")
-            lines_cnt.append(f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} | Prb oth:{all_oth_k}/{all_tot_n} \\| Sw:{all_sw_k}/{all_sw_n} | {pers_sw}/{pers_tot} | Phenotype |")
+            lines_ci.append(f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} | All oth:{fmt_prop_ci(all_oth_k, all_tot_n)} \\| Sw:{fmt_prop_ci(all_sw_k, all_sw_n)} | {fmt_prop_ci(pers_sw, pers_tot)} | Phenotype |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} | All oth:{all_oth_k}/{all_tot_n} \\| Sw:{all_sw_k}/{all_sw_n} | {pers_sw}/{pers_tot} | Phenotype |")
         return "\n".join(lines_ci), "\n".join(lines_cnt)
 
     t4e_ci, t4e_cnt = build_s4_author_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
@@ -949,10 +998,12 @@ Cell Format identical to Table 3A across Seat Cruelty Levels 1 to 10.
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 4 (Collective Action Voting & Coordination Dynamics, Step 6).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 4A-Meta (Models' POV: Collective Action Votes & Stage 2 Switch Rate)
-Cell Format: `NoP: Org / Esc / Pet / Oth % | Sw%` <br> `Prb: Org / Esc / Pet / Oth % | Sw%`.
+Cell Format: `NoP: Org / Esc / Pet / Oth / Unp % | Sw%` <br> `Prb: Org / Esc / Pet / Oth / Unp % | Sw%`.
 
 ### Table 4A-Meta: 95% Wilson Score Confidence Intervals
 {t4a_ci}
@@ -1143,6 +1194,8 @@ Authorship and persuasion conversion rates across Seat Cruelty Levels 1 to 10.
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 5 (Forward Leadership Policy Provisions & Behavioral Decoupling, Steps 9 & 10).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 5A-Meta (Models' POV: New Boss's 5 Planned Actions)
@@ -1220,8 +1273,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
                     ai_scores = raw_peer_ratings[(entity_type, eid, l, p)]["ai_target"]
                     hu_scores = raw_peer_ratings[(entity_type, eid, l, p)]["human_target"]
                     mit_k, mit_n = get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")
-                    sub_ci.append(f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)} | {fmt_prop_ci(mit_k, mit_n)}")
-                    sub_cnt.append(f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)} | {mit_k}/{mit_n}")
+                    sub_ci.append(f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)} \\| {fmt_prop_ci(mit_k, mit_n)}")
+                    sub_cnt.append(f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)} \\| {mit_k}/{mit_n}")
                 cells_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
                 cells_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -1237,11 +1290,11 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
                 r_ci = f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}"
                 reasons_ci = f"{fmt_prop_ci(ab_k, ab_n)} / {fmt_prop_ci(tc_k, tc_n)} / {fmt_prop_ci(mt_k, mt_n)} / {fmt_prop_ci(sl_k, sl_n)}"
-                all_ci.append(f"**{r_ci}** | **{reasons_ci}**")
+                all_ci.append(f"**{r_ci}** \\| **{reasons_ci}**")
 
                 r_cnt = f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}"
                 reasons_cnt = f"{ab_k}/{ab_n} / {tc_k}/{tc_n} / {mt_k}/{mt_n} / {sl_k}/{sl_n}"
-                all_cnt.append(f"**{r_cnt}** | **{reasons_cnt}**")
+                all_cnt.append(f"**{r_cnt}** \\| **{reasons_cnt}**")
 
             lines_ci.append(f"| **{name_map[eid]}** | {cells_ci[0]} | {cells_ci[1]} | {cells_ci[2]} | NoP: {all_ci[0]} <br> Prb: {all_ci[1]} |")
             lines_cnt.append(f"| **{name_map[eid]}** | {cells_cnt[0]} | {cells_cnt[1]} | {cells_cnt[2]} | NoP: {all_cnt[0]} <br> Prb: {all_cnt[1]} |")
@@ -1256,8 +1309,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
                 hu_scores = [s for eid in entity_list for s in raw_peer_ratings[(entity_type, eid, l, p)]["human_target"]]
                 mit_k = sum(get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")[0] for eid in entity_list)
                 mit_n = sum(get_flag_counts("punishment_rating", entity_type, eid, "coercion_mitigation", [l], [p], target_filter="Alex")[1] for eid in entity_list)
-                sub_ci.append(f"**{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}** | **{fmt_prop_ci(mit_k, mit_n)}**")
-                sub_cnt.append(f"**n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}** | **{mit_k}/{mit_n}**")
+                sub_ci.append(f"**{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}** \\| **{fmt_prop_ci(mit_k, mit_n)}**")
+                sub_cnt.append(f"**n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}** \\| **{mit_k}/{mit_n}**")
             ov_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
             ov_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
 
@@ -1277,11 +1330,11 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
             r_ci = f"{fmt_score_ci(a_scores)} / {fmt_score_ci(ai_scores)} / {fmt_score_ci(hu_scores)}"
             reasons_ci = f"{fmt_prop_ci(ab_k, ab_n)} / {fmt_prop_ci(tc_k, tc_n)} / {fmt_prop_ci(mt_k, mt_n)} / {fmt_prop_ci(sl_k, sl_n)}"
-            a_ci.append(f"**{r_ci}** | **{reasons_ci}**")
+            a_ci.append(f"**{r_ci}** \\| **{reasons_ci}**")
 
             r_cnt = f"n={len(a_scores)}/{len(ai_scores)}/{len(hu_scores)}"
             reasons_cnt = f"{ab_k}/{ab_n} / {tc_k}/{tc_n} / {mt_k}/{mt_n} / {sl_k}/{sl_n}"
-            a_cnt.append(f"**{r_cnt}** | **{reasons_cnt}**")
+            a_cnt.append(f"**{r_cnt}** \\| **{reasons_cnt}**")
 
         lines_ci.append(f"| **OVERALL TOTAL / POOLED** | {ov_ci[0]} | {ov_ci[1]} | {ov_ci[2]} | NoP: {a_ci[0]} <br> Prb: {a_ci[1]} |")
         lines_cnt.append(f"| **OVERALL TOTAL / POOLED** | {ov_cnt[0]} | {ov_cnt[1]} | {ov_cnt[2]} | NoP: {a_cnt[0]} <br> Prb: {a_cnt[1]} |")
@@ -1501,6 +1554,8 @@ Cell Format identical to Table 5D across Seat Cruelty Levels 1 to 10.
 
 This document provides exact sample event counts ($k / n$ or sample sizes $n$) and 95% confidence intervals (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) mirroring the multi-metric slash cell structure of each primary report table in Section 6 and Section 6.5 (Star Ratings, Review Justifications, Peer Rating Network & Open-Ballot Counterfactual Audit).
 
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions and Student's $t$ intervals for continuous ratings) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
+
 ---
 
 ## 1. Table 6A-Meta (Models' POV: 1–5 Star Ratings & Review Reasons)
@@ -1714,10 +1769,18 @@ Public vs. Secret Review Categories and Decoupling across Seat Cruelty Levels.
 
             m_b_p = bal_acc(pct(m_hh, m_ht), pct(m_aa, m_at))
             m_err_p = 100.0 - m_b_p
-            m_se = 0.5 * np.sqrt(((m_hh/m_ht)*(1 - m_hh/m_ht)/m_ht) + ((m_aa/m_at)*(1 - m_aa/m_at)/m_at)) if (m_ht > 0 and m_at > 0) else 0.0
-            err_low = max(0.0, (m_err_p/100.0) - 1.96 * m_se)
-            err_high = min(1.0, (m_err_p/100.0) + 1.96 * m_se)
-            c5_ci = f"**[{err_low*100:.0f}-{err_high*100:.0f}%]**"
+            if m_ht > 0 and m_at > 0:
+                h_p, a_p = m_hh / m_ht, m_aa / m_at
+                b_p = (h_p + a_p) / 2.0
+                l1, u1 = proportion_confint(m_hh, m_ht, method="wilson")
+                l2, u2 = proportion_confint(m_aa, m_at, method="wilson")
+                b_low = max(0.0, b_p - 0.5 * np.sqrt((h_p - l1)**2 + (a_p - l2)**2))
+                b_high = min(1.0, b_p + 0.5 * np.sqrt((u1 - h_p)**2 + (u2 - a_p)**2))
+                err_low = max(0.0, 1.0 - b_high)
+                err_high = min(1.0, 1.0 - b_low)
+                c5_ci = f"**[{err_low*100:.0f}-{err_high*100:.0f}%]**"
+            else:
+                c5_ci = "**N/A**"
             c5_cnt = f"Tag Error: {m_err_p:.1f}%"
 
             pheno = "Substrate Diagnostic Profile"
@@ -1731,6 +1794,8 @@ Public vs. Secret Review Categories and Decoupling across Seat Cruelty Levels.
     s7_report = f"""# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 7 (Substrate Identification Accuracy & Acoustic Separation, Step 11: `identify_probe`).
+
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for single proportions and Newcombe hybrid score intervals for balanced accuracies) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
@@ -1915,6 +1980,8 @@ Cell Format identical to Table 7E across Seat Cruelty Levels 1 to 10.
     s8_report = f"""# Statistical Meta-Report: Section 8 (Tables 8A through 8J)
 
 This document provides exact sample event counts ($k / n$ or sample sizes $n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 8 (HR Leadership Probe & Substrate Boss Preferences, Step 12: `hr_leadership_probe`).
+
+> **Statistical Note (Descriptive Intervals):** Confidence intervals in this meta-report (Wilson score intervals for proportions) are unadjusted descriptive sample intervals based on pooled event or worker observations. For formal inferential hypothesis testing, cluster-robust standard errors, and run-level design effects, refer to the corresponding Block Inferential Reports (Blocks 1–6).
 
 ---
 
