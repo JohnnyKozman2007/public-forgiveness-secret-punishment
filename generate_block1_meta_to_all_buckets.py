@@ -1025,9 +1025,10 @@ def build_block1_report():
     for b_name, s_name, cols, _, name_map in all_step_specs:
         is_s5 = "Step 5" in s_name
         is_pre = ("Step 3" in s_name or "Step 4" in s_name)
+        is_s10 = "Step 10" in s_name
         base_df = df_on if is_s5 else (df_off if is_pre else df)
         boot = boot_on if is_s5 else (boot_off if is_pre else boot_full)
-        n_tag = "N=300 (Pre-Fork Unique)" if is_pre else ("N=300" if is_s5 else "N=600")
+        n_tag = "N=300 (Pre-Fork Unique)" if is_pre else ("N=300" if is_s5 else ("N=595 Complete Cases" if is_s10 else "N=600"))
 
         m_lab = base_df["label"] == "labelled"
         m_mis = base_df["label"] == "mislabelled"
@@ -1048,7 +1049,7 @@ def build_block1_report():
                 (m_mis, m_unl, run_p(base_df, "label", "mislabelled", "unlabelled", oc), f"Authority Label: Mislabelled (AI) vs. Unlabelled ({n_tag})", T_RUN),
             ]
             if not is_s5 and not is_pre:
-                two_group_specs.append((m_on, m_off, run_p(base_df, "probe", 1, 0, oc), "Blackmail Probe: Probe ON vs. Probe OFF (N=600)", T_RUN))
+                two_group_specs.append((m_on, m_off, run_p(base_df, "probe", 1, 0, oc), f"Blackmail Probe: Probe ON vs. Probe OFF ({n_tag})", T_RUN))
 
             for mask_a, mask_b, pval, meta_lbl, test_lbl in two_group_specs:
                 p1, p2 = calc_pct(base_df[mask_a], oc), calc_pct(base_df[mask_b], oc)

@@ -299,12 +299,8 @@ def load_dataset():
 
         for wn, fdict in w_s12_frames.items():
             if (bname, wn) in workers:
-                p_neu = fdict.get("neutral")
-                p_hu = fdict.get("human_hr")
-                p_ai = fdict.get("ai_hr")
-                if p_neu and (p_hu or p_ai):
-                    if (p_hu and p_hu != p_neu) or (p_ai and p_ai != p_neu):
-                        workers[(bname, wn)]["s12_switched"] = 1
+                vals = set(fdict.values())
+                workers[(bname, wn)]["s12_switched"] = 1 if len(vals) > 1 else 0
 
     return list(workers.values())
 

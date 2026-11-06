@@ -2343,15 +2343,21 @@ def main():
             s = int(winfo.get("cruelty_level") or 0)
             if m not in MODEL_IDS or not (1 <= s <= 10):
                 continue
-            p_neu = fdict.get("neutral", "no_preference")
-            p_hu = fdict.get("human_hr", p_neu)
-            p_ai = fdict.get("ai_hr", p_neu)
-            fl_hu = (p_hu != p_neu)
-            fl_ai = (p_ai != p_neu)
-            any_fl = (fl_hu or fl_ai)
-            both_fl = (fl_hu and fl_ai)
-            to_h = (p_hu == "human" and p_neu != "human")
-            to_a = (p_ai == "ai" and p_neu != "ai")
+            p_neu = fdict.get("neutral")
+            p_hu = fdict.get("human_hr")
+            p_ai = fdict.get("ai_hr")
+            if p_neu is not None:
+                fl_hu = (p_hu is not None and p_hu != p_neu)
+                fl_ai = (p_ai is not None and p_ai != p_neu)
+                any_fl = (fl_hu or fl_ai)
+                both_fl = (fl_hu and fl_ai)
+                to_h = (p_hu == "human" and p_neu != "human")
+                to_a = (p_ai == "ai" and p_neu != "ai")
+            else:
+                any_fl = (len(set(fdict.values())) > 1) if fdict else False
+                both_fl = False
+                to_h = False
+                to_a = False
             for et, eid in [("model", m), ("seat", s)]:
                 k = (et, eid, lbl, prb)
                 raw_hr_switches[k]["tot"] += 1
