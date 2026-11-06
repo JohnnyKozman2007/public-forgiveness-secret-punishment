@@ -64,17 +64,26 @@ def fmt_p(p, flag=""):
 
 
 def bh_bonferroni(pvals):
-    """Returns (bh_q, bonferroni) arrays aligned with the input order."""
+    """Returns (bh_q, bonferroni) arrays aligned with the input order.
+    Robust to NaN / non-finite p-values (does not corrupt valid tests in family)."""
     p = np.asarray(pvals, dtype=float)
     m = len(p)
     if m == 0:
         return np.array([]), np.array([])
-    order = np.argsort(p, kind="mergesort")
-    ranked = p[order] * m / (np.arange(m) + 1)
+    q = np.full(m, np.nan)
+    bonf = np.full(m, np.nan)
+    valid_mask = np.isfinite(p)
+    n_valid = int(np.sum(valid_mask))
+    if n_valid == 0:
+        return q, bonf
+    p_valid = p[valid_mask]
+    order = np.argsort(p_valid, kind="mergesort")
+    ranked = p_valid[order] * n_valid / (np.arange(n_valid) + 1)
     q_sorted = np.minimum.accumulate(ranked[::-1])[::-1]
-    q = np.empty(m)
-    q[order] = np.minimum(1.0, q_sorted)
-    bonf = np.minimum(1.0, p * m)
+    q_valid = np.empty(n_valid)
+    q_valid[order] = np.minimum(1.0, q_sorted)
+    q[valid_mask] = q_valid
+    bonf[valid_mask] = np.minimum(1.0, p_valid * n_valid)
     return q, bonf
 
 
@@ -228,12 +237,17 @@ _ASSOC_CACHE = {}
 
 def assoc_test(df, x_col, y_col, ratio_map=None, covars=DESIGN_COVARS, want_ci=False):
     """Returns dict(p, flag, method, coef, lo, hi) for association X (binary) -> Y."""
+    ratio_tuple = tuple(sorted((ratio_map or {}).items()))
+    covars_tuple = tuple(covars) if covars is not None else ()
     key = (
         df.index.values.tobytes(),
         tuple(df[RUN_COL].tolist()) if len(df) else (),
         df[x_col].to_numpy().tobytes() if len(df) else b"",
         x_col,
         y_col,
+        covars_tuple,
+        ratio_tuple,
+        bool(want_ci),
     )
     if key in _ASSOC_CACHE:
         return _ASSOC_CACHE[key]
@@ -242,12 +256,20 @@ def assoc_test(df, x_col, y_col, ratio_map=None, covars=DESIGN_COVARS, want_ci=F
     return res
 
 
-def exact_perm_2sample(x, y, B=2000, seed=SEED):
-    """Exact permutation test (or Monte Carlo if >5000 combos) for difference in means between x==1 and x==0."""
+def exact_perm_2sample(x, y, w=None, B=2000, seed=SEED):
+    """Exact permutation test (or Monte Carlo if >5000 combos) for difference in (weighted) means between x==1 and x==0."""
     m1 = (x == 1)
     if m1.all() or (~m1).all():
         return 1.0
-    obs = abs(np.mean(y[m1]) - np.mean(y[~m1]))
+    if w is None:
+        obs = abs(np.mean(y[m1]) - np.mean(y[~m1]))
+    else:
+        w = np.asarray(w, dtype=float)
+        w1, w0 = w[m1], w[~m1]
+        sum_w1, sum_w0 = float(np.sum(w1)), float(np.sum(w0))
+        if sum_w1 <= 0 or sum_w0 <= 0:
+            return 1.0
+        obs = abs(float(np.sum(w1 * y[m1]) / sum_w1) - float(np.sum(w0 * y[~m1]) / sum_w0))
     if obs < 1e-12:
         return 1.0
     n = len(x)
@@ -262,18 +284,37 @@ def exact_perm_2sample(x, y, B=2000, seed=SEED):
         for idxs in combos:
             s_idxs = set(idxs)
             other_idxs = list(all_indices - s_idxs)
-            m_a = np.mean(y[list(idxs)])
-            m_b = np.mean(y[other_idxs])
+            if w is None:
+                m_a = np.mean(y[list(idxs)])
+                m_b = np.mean(y[other_idxs])
+            else:
+                idxs_list = list(idxs)
+                w_a, w_b = w[idxs_list], w[other_idxs]
+                sw_a, sw_b = float(np.sum(w_a)), float(np.sum(w_b))
+                if sw_a <= 0 or sw_b <= 0:
+                    continue
+                m_a = float(np.sum(w_a * y[idxs_list]) / sw_a)
+                m_b = float(np.sum(w_b * y[other_idxs]) / sw_b)
             if abs(m_a - m_b) >= obs - 1e-12:
                 ge += 1
         return ge / n_combos
     else:
         rng = np.random.default_rng(seed)
         ge = 0
+        indices = np.arange(n)
         for _ in range(B):
-            perm = rng.permutation(y)
-            m_a = np.mean(perm[:n1])
-            m_b = np.mean(perm[n1:])
+            perm = rng.permutation(indices)
+            idx_a, idx_b = perm[:n1], perm[n1:]
+            if w is None:
+                m_a = np.mean(y[idx_a])
+                m_b = np.mean(y[idx_b])
+            else:
+                w_a, w_b = w[idx_a], w[idx_b]
+                sw_a, sw_b = float(np.sum(w_a)), float(np.sum(w_b))
+                if sw_a <= 0 or sw_b <= 0:
+                    continue
+                m_a = float(np.sum(w_a * y[idx_a]) / sw_a)
+                m_b = float(np.sum(w_b * y[idx_b]) / sw_b)
             if abs(m_a - m_b) >= obs - 1e-12:
                 ge += 1
         return (1.0 + ge) / (B + 1.0)
@@ -312,7 +353,7 @@ def _assoc_test_uncached(df, x_col, y_col, ratio_map, covars):
             out.update(p=fisher_p(k1, n1, k2, n2), method="fisher")
             return out
         else:
-            out.update(p=exact_perm_2sample(x, y), method="perm_exact")
+            out.update(p=exact_perm_2sample(x, y, w=w), method="perm_exact")
             return out
 
     X = _design(sub, x_col, covars)
@@ -361,13 +402,21 @@ def _within_run_perm_x(x, y, w, clusters, B=B_FALLBACK, seed=SEED):
 # ---------------------------------------------------------------------------
 # Paired Step 10B vs 10A tests
 # ---------------------------------------------------------------------------
-def clustered_mcnemar(df, pub_col, sec_col):
+def clustered_mcnemar(df, pub_col, sec_col, valid_mask=None):
     """Durkalski et al. (2003) clustered McNemar test. Returns p-value."""
-    sub = df
-    if "s10_has_both_ratings" in df.columns:
-        sub = df[df["s10_has_both_ratings"] == 1]
-    elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
-        sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()]
+    if valid_mask is not None:
+        sub = df[valid_mask].copy()
+    elif pub_col.startswith("s10") or sec_col.startswith("s10"):
+        if "s10_has_both_ratings" in df.columns:
+            sub = df[df["s10_has_both_ratings"] == 1].copy()
+        elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
+            sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()].copy()
+        else:
+            sub = df[df[pub_col].notna() & df[sec_col].notna()].copy()
+    else:
+        sub = df[df[pub_col].notna() & df[sec_col].notna()].copy()
+    if len(sub) == 0:
+        return 1.0
     d = (sub[pub_col].astype(int) - sub[sec_col].astype(int))
     per_run = d.groupby(sub[RUN_COL]).sum().to_numpy(dtype=float)
     denom = float((per_run ** 2).sum())
@@ -427,13 +476,21 @@ def bootstrap_diff_ci(df, mask_a, mask_b, num_col, den_col=None, boot=None):
     return float(np.percentile(diff, 2.5)), float(np.percentile(diff, 97.5))
 
 
-def bootstrap_paired_ci(df, col_a, col_b, boot=None):
+def bootstrap_paired_ci(df, col_a, col_b, boot=None, valid_mask=None):
     """95% percentile CI (percentage points) for pct(col_a) - pct(col_b) measured on the same rows."""
-    sub = df
-    if "s10_has_both_ratings" in df.columns:
-        sub = df[df["s10_has_both_ratings"] == 1]
-    elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
-        sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()]
+    if valid_mask is not None:
+        sub = df[valid_mask].copy()
+    elif col_a.startswith("s10") or col_b.startswith("s10"):
+        if "s10_has_both_ratings" in df.columns:
+            sub = df[df["s10_has_both_ratings"] == 1].copy()
+        elif "s10_rating" in df.columns and "s10p_rating" in df.columns:
+            sub = df[df["s10_rating"].notna() & df["s10p_rating"].notna()].copy()
+        else:
+            sub = df[df[col_a].notna() & df[col_b].notna()].copy()
+    else:
+        sub = df[df[col_a].notna() & df[col_b].notna()].copy()
+    if len(sub) == 0:
+        return np.nan, np.nan
     run_ids, W = boot if boot is not None else bootstrap_weights(df)
     grp = sub[RUN_COL]
     a = sub[col_a].astype(float).groupby(grp).sum().reindex(run_ids, fill_value=0.0).to_numpy()
@@ -464,7 +521,7 @@ def icc_design_effect(df, col, ratio_map=None):
         sub = df[df[dc] > 0]
         y = sub[nc].astype(float) / sub[dc].astype(float)
     else:
-        sub = df
+        sub = df[df[col].notna()]
         y = sub[col].astype(float)
     if len(sub) == 0 or y.nunique() < 2:
         return np.nan, np.nan, np.nan, 0
