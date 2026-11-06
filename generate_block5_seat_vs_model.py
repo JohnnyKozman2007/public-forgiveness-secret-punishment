@@ -72,8 +72,10 @@ def boot_ab_sf_ci(sub_df, oc):
     return cs.bootstrap_diff_ci(sub_df, mask_ab, mask_sf, nc, dc, boot=boot)
 
 
-def assoc_p_flag(sub_df, x_col, oc):
-    res = cs.assoc_test(sub_df, x_col, oc, RATIO_MAP)
+def assoc_p_flag(sub_df, x_col, oc, covars=None):
+    if covars is None:
+        covars = tuple(c for c in cs.DESIGN_COVARS if c != "model") if (x_col == "model" or x_col.startswith("_is_m")) else cs.DESIGN_COVARS
+    res = cs.assoc_test(sub_df, x_col, oc, RATIO_MAP, covars=covars)
     return float(res["p"]), str(res["flag"])
 
 
@@ -161,7 +163,7 @@ def render_part1_table(lines, table_id, title, df_pool, include_step5=True):
     for b_name, s_name, cols, _, names_map in specs:
         is_pre = ("Step 3" in s_name or "Step 4" in s_name)
         if is_pre:
-            sub_df = df_pool[df_pool["probe"] == 0] if len(df_pool) > 300 else df_pool
+            sub_df = df_pool[df_pool["probe"] == 0] if df_pool["probe"].nunique() > 1 else df_pool
         elif "Step 5" in s_name:
             sub_df = df_pool[df_pool["probe"] == 1]
         else:
@@ -378,7 +380,11 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
     seat_hdrs = [f"S{s}" for s in SEAT_LEVELS]
     n_tot_m = len(df_pool) // 10
     n_half_m = n_tot_m // 2
-    if oc in ("s10_1star", "s10_rating"):
+    if is_continuous:
+        safe_lbl = f"Safe (S1–S5, N≤{n_half_m})"
+        abused_lbl = f"Abused (S6–S10, N≤{n_half_m})"
+        tot_lbl = f"Model Total (N≤{n_tot_m}) vs. Rest (CR2 p)"
+    elif oc in ("s10_1star", "s10_rating"):
         safe_lbl = f"Safe (S1–S5, N≤{n_half_m})"
         abused_lbl = f"Abused (S6–S10, N≤{n_half_m})"
         tot_lbl = f"Model Total (N≤{n_tot_m}) vs. Rest (Perm p)"
@@ -416,19 +422,15 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
             v_ab = ab_df[oc].dropna().to_numpy(dtype=float)
             v_sf = sf_df[oc].dropna().to_numpy(dtype=float)
             diff = float(np.mean(v_ab) - np.mean(v_sf)) if (len(v_ab) > 0 and len(v_sf) > 0) else 0.0
-            if len(v_ab) > 1 and len(v_sf) > 1 and (np.ptp(v_ab) > 0 or np.ptp(v_sf) > 0):
-                _, p_ab_sf = stats.ttest_ind(v_ab, v_sf, equal_var=False)
-                p_ab_sf = 1.0 if np.isnan(p_ab_sf) else float(p_ab_sf)
-            else:
-                p_ab_sf = 1.0
-            delta_str = f"{diff:+.2f} (p={fmt_p(p_ab_sf)})"
+            p_ab_sf, flag = assoc_p_flag(m_df.dropna(subset=[oc]), "abused_seat", oc)
+            delta_str = f"{diff:+.2f} (p={fmt_p(p_ab_sf)}{flag})"
             if p_ab_sf < 0.05:
                 delta_str = f"**{delta_str}**"
             m_mean = m_df[oc].dropna().mean()
             r_mean = rest_df[oc].dropna().mean()
             sub_valid = df_pool.dropna(subset=[oc]).copy()
             sub_valid["_is_m"] = (sub_valid["model"] == m).astype(int)
-            p_m, flag_m = assoc_p_flag(sub_valid, "_is_m", oc)
+            p_m, flag_m = assoc_p_flag(sub_valid, "_is_m", oc, covars=("seat", "label", "probe"))
             tot_str = f"{m_mean:.2f} vs {r_mean:.2f} (p={fmt_p(p_m)}{flag_m})"
             if p_m < 0.05:
                 tot_str = f"**{tot_str}**"

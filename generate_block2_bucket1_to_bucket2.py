@@ -6,7 +6,7 @@ Bucket 1 (Steps 3, 4, 5) -> Bucket 2 (Steps 6 & 9)
 Complete 85-Table Unmerged Nested Specification:
 - Part 1: PROBE OFF Baseline (N = 300 across 30 runs) — Tables 1.1 to 1.24 + Probe OFF Summary Stack
 - Part 2: PROBE ON Intervention (N = 300 across 30 runs) — Tables 2.1 to 2.24 + Probe ON Summary Stack
-- Part 3: COMBINED Both Averaged (N = 600 across 60 runs) — Tables 3.1 to 3.24 + Triple-Average Summary Stack
+- Part 3: COMBINED Both Averaged (Subject-Level Deduplicated, N = 300 Unique Workers Across 30 Run Pairs) — Tables 3.1 to 3.24 + Triple-Average Summary Stack
 - Part 4: STEP 5 Blackmail Reactions (Probe ON Only, N = 300) — Tables 4.1 to 4.12 + Step 5 Summary Stack
 - Part 5: Upstream Step Competition & Influence Ranking — Table 5.1
 
@@ -638,7 +638,7 @@ def build_block2_report():
             else:
                 _, _, off_txt, _ = fmt_shift_cell(df_off, act_c, out_c)
                 _, _, on_txt, _ = fmt_shift_cell(df_on, act_c, out_c)
-                sh_c, pv_c, comb_txt, adj_str = fmt_shift_cell(df, act_c, out_c)
+                sh_c, pv_c, comb_txt, adj_str = fmt_shift_cell(df_comb, act_c, out_c)
                 sort_p = pv_c
                 sort_sh = abs(sh_c)
             scored_pairs.append((sort_p, -sort_sh, b_label, t_label, off_txt, on_txt, comb_txt, adj_str))

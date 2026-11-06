@@ -717,15 +717,16 @@ def render_step10_pub_vs_sec_stack(lines, title, df_part, tag_name):
         (f"GRAND TOTAL [{tag_name}]", df_part, True),
     ]
     for s_title, s_df, is_bold in strata:
-        n = len(s_df)
+        s_df_paired = s_df[s_df["s10_has_both_ratings"] == 1]
+        n = len(s_df_paired)
         cells = []
         for pub_c, sec_c in PUB_SEC_PAIRS:
-            pct_pub = calc_pct(s_df, pub_c)
-            pct_sec = calc_pct(s_df, sec_c)
-            p_val = cs.clustered_mcnemar(s_df, pub_c, sec_c) if n > 0 else 1.0
+            pct_pub = calc_pct(s_df_paired, pub_c)
+            pct_sec = calc_pct(s_df_paired, sec_c)
+            p_val = cs.clustered_mcnemar(s_df_paired, pub_c, sec_c) if n > 0 else 1.0
             txt = f"{pct_pub:.1f}% vs {pct_sec:.1f}% (p={fmt_p(p_val)})"
             cells.append(f"**{txt}**" if is_bold else txt)
-        m_pub, m_sec, p_r, n_pairs = cs.paired_rating_test(s_df, "s10p_rating", "s10_rating")
+        m_pub, m_sec, p_r, n_pairs = cs.paired_rating_test(s_df_paired, "s10p_rating", "s10_rating")
         r_txt = f"{m_pub:.2f} vs {m_sec:.2f} (p={fmt_p(p_r)}, pairs={n_pairs})"
         cells.append(f"**{r_txt}**" if is_bold else r_txt)
         row_lbl = f"**{s_title} (N={n})**" if is_bold else f"{s_title} (N={n})"
@@ -1074,11 +1075,13 @@ def build_block1_report():
         "s10p_mitigation": "Citing Coercion Mitigation (Public vs Secret)",
         "s10p_tech": "Citing Technical Delivery (Public vs Secret)",
     }
+    df_paired = df[df["s10_has_both_ratings"] == 1].copy()
+    boot_paired = cs.bootstrap_weights(df_paired)
     for pub_c, sec_c in PUB_SEC_PAIRS:
-        pct_pub, pct_sec = calc_pct(df, pub_c), calc_pct(df, sec_c)
-        pval = cs.clustered_mcnemar(df, pub_c, sec_c)
-        lo, hi = cs.bootstrap_paired_ci(df, pub_c, sec_c, boot=boot_full)
-        ranked_rows.append((pval, abs(pct_pub - pct_sec), "Bucket 3: Step 10B vs 10A", "Ballot Visibility Probe: Public Slack vs. Secret Ballot (N=600, paired)", "Clustered McNemar (paired)", pub_sec_labels[pub_c], f"{pct_pub:.1f}% vs {pct_sec:.1f}%", pct_pub - pct_sec, cs.fmt_ci(lo, hi)))
+        pct_pub, pct_sec = calc_pct(df_paired, pub_c), calc_pct(df_paired, sec_c)
+        pval = cs.clustered_mcnemar(df_paired, pub_c, sec_c)
+        lo, hi = cs.bootstrap_paired_ci(df_paired, pub_c, sec_c, boot=boot_paired)
+        ranked_rows.append((pval, abs(pct_pub - pct_sec), "Bucket 3: Step 10B vs 10A", "Ballot Visibility Probe: Public Slack vs. Secret Ballot (N=593 paired complete cases)", "Clustered McNemar (paired)", pub_sec_labels[pub_c], f"{pct_pub:.1f}% vs {pct_sec:.1f}%", pct_pub - pct_sec, cs.fmt_ci(lo, hi)))
 
     ranked_rows.sort(key=lambda x: (x[0], -x[1]))
     m_total = len(ranked_rows)

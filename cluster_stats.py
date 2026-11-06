@@ -327,6 +327,8 @@ def _assoc_test_uncached(df, x_col, y_col, ratio_map, covars):
     # safe_seat / abused_seat are deterministic functions of seat -> C(seat) dummies would be collinear
     if x_col in ("safe_seat", "abused_seat", "seat"):
         covars = tuple(c for c in covars if c != "seat")
+    if x_col in ("model",) or x_col.startswith("_is_m"):
+        covars = tuple(c for c in covars if c != "model")
     if y_col in ratio_map:
         nc, dc = ratio_map[y_col]
         sub = df[df[dc] > 0]
