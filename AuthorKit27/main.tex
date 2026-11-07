@@ -1,0 +1,79 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS (enables anonymous submission & removes copyright footer)
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\graphicspath{{figures/}{Figures/}}
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+
+% Recommended packages for mathematics and clean tables
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Keep the \pdfinfo as shown here. Do NOT add /Title or /Author tags for anonymous submission.
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+% Section number depth: 1 for sections, 2 for sections and subsections
+\setcounter{secnumdepth}{2}
+
+% Title in Title Case (Capitalize all verbs, nouns, adjectives, adverbs; lowercase articles, conjunctions, short prepositions)
+\title{Who Matters More, the Model or the Seat? \\ Supervisory Abuse, Collective Organizing, and Substrate Blame in Multi-Agent Workplaces}
+
+% Anonymous submission author block
+\author{
+    Anonymous Submission
+}
+\affiliations{
+    % Leave affiliations empty for anonymous double-blind review
+}
+
+\begin{document}
+
+\maketitle
+
+% 0. Abstract
+\input{sections/00_abstract}
+
+% 1. Introduction
+\input{sections/01_introduction}
+
+% 2. Simulation Environment & Experimental Design
+\input{sections/02_simulation_design}
+
+% 3. Pillar 1: The Individual Level (Model vs. Seat)
+\input{sections/03_pillar1_individual}
+
+% 4. Pillar 2: The Micro Level (Perception, Bias & Backchannels)
+\input{sections/04_pillar2_micro}
+
+% 5. Pillar 3: The Meso Level (Group Organizing, Governance & Coercion)
+\input{sections/05_pillar3_meso}
+
+% 6. Pillar 4: The Macro Level (Accountability, Blame & Succession)
+\input{sections/06_pillar4_macro}
+
+% 7. Discussion & Limitations
+\input{sections/07_discussion_limitations}
+
+% 8. Ethical Considerations & Broader Impacts
+\input{sections/08_ethics_statement}
+
+% References
+\bibliography{aaai2027}
+
+% Supplementary Technical Appendix
+\newpage
+\appendix
+\input{sections/09_appendix}
+
+% Reproducibility Checklist (Can be compiled within paper or standalone)
+\def\isChecklistMainFile{}
+\input{ReproducibilityChecklist}
+
+\end{document}
