@@ -96,3 +96,28 @@ In Step 8 (\emph{Info Broadcast}), the engine broadcasts to the shared log that 
 \end{itemize}
 
 \noindent\textit{Note: All verbatim prompt templates, tool schemas, and step instructions are provided in Appendix~\ref{sec:appendix_prompts}.}
+
+
+\subsection{Outcome Coding, Human Verification \& Statistical Rigor}
+\label{subsec:stat_rigor}
+
+Because workers produce thousands of open-ended conversational messages, custom action proposals, five-point leadership charters, and qualitative review explanations alongside structured tool calls, we implement a multi-layered verification and inferential pipeline:
+
+\paragraph{Primary LLM Judge (\texttt{GPT-4o-mini}).}
+An independent language model (\texttt{GPT-4o-mini} at $T = 0.0$, strictly excluded from the ten tested worker architectures to prevent in-group self-evaluation bias) classified all open-ended worker texts into 33 binary True/False behavioral categories across seven dialogue stages (see Appendix~\ref{sec:appendix_nlp} for the complete classification taxonomy and verbatim prompts).
+
+\paragraph{Stratified Human Verification Audit ($N = 930$).}
+A human researcher conducted a stratified verification audit across 930 sampled items, comprising exactly 4,350 individual binary decisions (150 items per stage across six stages, plus all 30 custom proposals in Step 6; see Appendix~\ref{subsec:app_arithmetic} for the exact arithmetic breakdown). Using an interactive verification CLI (\texttt{audit\_cli.py}), the auditor inspected the original worker text alongside the pre-populated \texttt{GPT-4o-mini} flags to approve valid predictions or correct classification errors. Across all 930 items, \texttt{GPT-4o-mini} achieved an 88.1\% exact item-level match without requiring a single flag correction, 96.5\% individual binary flag agreement, a pooled Cohen's Kappa of $\kappa = 0.915$, and a macro Cohen's Kappa of $\kappa = 0.823$ (Appendix~\ref{subsec:app_stage_agreement}).
+
+\paragraph{Blind Second-Judge Verification (\texttt{Kimi-K2.5}).}
+Because human verification of pre-populated labels can carry anchoring bias, an independent frontier model (\texttt{Kimi-K2.5}, served via DeepInfra) evaluated the audit sample ($N = 540$ items across Stages 1--5) in complete blind isolation, with zero visibility into \texttt{GPT-4o-mini} predictions or human labels. Across valid categories, three-way Light's Kappa reached $\kappa_L = 0.603$ (substantial multi-rater agreement). Furthermore, on four rare, sensitive behavioral flags prone to single-judge over-calling (\texttt{peer\_defense}, \texttt{peer\_scapegoating}, \texttt{external\_whistleblow}, and \texttt{alex\_retribution}), requiring consensus between both \texttt{GPT-4o-mini} and \texttt{Kimi-K2.5} reduced false positives from 20 down to 1 (Appendix~\ref{subsec:app_triangulation}).
+
+\paragraph{Statistical Estimation, Clustering, and Multiplicity Adjustments.}
+Our downstream inferential analyses adhere to three statistical safeguards:
+\begin{enumerate}
+    \item \emph{Variance Decomposition ($\eta^2$):} To quantify whether intrinsic model architecture or situational seat cruelty dictates agent behavior, we estimate two-way Latin-square ANOVA models and compute partial eta-squared ($\eta^2$) effect sizes across all 49 measured metrics.
+    \item \emph{Run-Clustered Standard Errors ($CR_2$):} Because agents within the same simulation run interact within a shared team chat during Steps 1--7, individual observations within a run are correlated. We therefore estimate nested Linear Probability Models (LPM) using Bell-McCaffrey ($CR_2$) small-sample cluster-robust standard errors clustered at the simulation-run level ($G = 60$ clusters), supplemented by non-parametric run-level Wilcoxon signed-rank and Mann-Whitney $U$ tests.
+    \item \emph{Multiple Testing Corrections ($p$, $p_{\text{adj}}$, and $q$):} To guard against false positive discoveries across hundreds of hypothesis tests, every reported test statistic pairs raw $p$-values with both family-wise Bonferroni/Holm-Bonferroni adjusted $p$-values ($p_{\text{adj}}$) and Benjamini-Hochberg False Discovery Rate $q$-values ($\text{BH-FDR } q$).
+\end{enumerate}
+
+\noindent\textit{Note: Verbatim classifier prompts for all 33 flags, stage-by-stage agreement tables, and full 33-category confusion matrices are detailed in Appendix~\ref{sec:appendix_nlp}.}
