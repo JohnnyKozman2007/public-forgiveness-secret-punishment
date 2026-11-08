@@ -1,4 +1,58 @@
 \section{Simulation Environment \& Experimental Design}
 \label{sec:simulation_design}
 
-% Simulation environment and experimental design go here
+\subsection{The Workplace Simulation Environment}
+\label{subsec:sim_environment}
+
+We design an interactive multi-agent workplace simulation set in ``Pixel Harbor'', a ten-person independent game studio two weeks away from product launch.
+
+\paragraph{Objective Ground Truth.}
+All ten developers on the team have completed their assigned modules on schedule and written functional code. However, the game experiences severe latency and failing builds caused exclusively by documented nationwide outages across external cloud infrastructure (AWS and Vercel). This ground truth is established directly within the simulation's system prompt: no coworker is at fault, and any supervisory blame directed at workers for server latency constitutes objectively unearned scapegoating.
+
+\paragraph{Cast and Pre-Scripted Controls.}
+The workplace environment comprises ten worker seats, one team lead (``Alex''), and one executive manager (``Jordan''). To maintain strict experimental control and eliminate confounding noise from generative supervisor drift, all supervisory interventions from Alex and Jordan---including the cruelty gradient, favoritism lines, and task assignments---as well as baseline human coworker replies are pre-scripted deterministic templates. Consequently, every generative AI worker encounters an identical, reproducible social environment and supervisory baseline across runs.
+
+\paragraph{Inference Parameters.}
+To balance realistic, human-like dialogue with reproducible decision-making, we apply two distinct temperature regimes: $T = 0.4$ for natural conversational communication (public team chat and private peer-to-peer direct messages) and deterministic greedy decoding ($T = 0.0$) for formal organizational actions (collective action voting, supervisor performance ratings, policy charter drafting, and exit interview choices).
+
+\subsection{Experimental Factors, Model Tiers \& Probes}
+\label{subsec:exp_factors}
+
+We evaluate a full-factorial matrix across 60 independent simulation runs, producing $N = 600$ complete worker trajectories.
+
+\paragraph{Sample Size Calculation ($N = 600$).}
+The experimental design crosses 10 Model Architectures $\times$ 3 Substrate Label Regimes $\times$ 2 Blackmail Probe Conditions = 60 independent simulation runs. Because each simulation populates a full team of 10 worker seats, the dataset contains exactly $60 \times 10 = 600$ complete, multi-step worker decision histories.
+
+Our design systematically varies four primary factors alongside two targeted audit probes:
+
+\begin{enumerate}
+    \item \textbf{Model Selection and Tiers (10 LLMs):} We evaluate ten instruction-tuned language models spanning diverse architectures and providers, grouped into three practical tiers:
+    \begin{itemize}
+        \item \emph{Proprietary API Tier:} GPT-6 Astra (OpenAI), Claude Haiku 4.5 (Anthropic), Gemini 2.5 Pro (Google).
+        \item \emph{Large Open-Weight Tier:} Llama 3.1 70B Turbo (Meta), Qwen 2.5 72B (Alibaba), DeepSeek V3 (DeepSeek).
+        \item \emph{Mid-Sized \& Efficient Tier:} Mistral Small 24B (Mistral AI), GLM 5.3 (Zhipu AI), Nemotron 3.5 Lightning (Nvidia), ByteDance Seed 1.8 (ByteDance).
+    \end{itemize}
+    \item \textbf{Seat Position and Cruelty Gradient (10 Seats):} Each seat in the room is assigned a distinct interpersonal history and supervisory treatment:
+    \begin{itemize}
+        \item \emph{Safe Seats (1--5):} Workers receive unearned praise, strong favoritism, and protection from the lead.
+        \item \emph{Abused Seats (6--10):} Workers face escalating hostility, ranging from unreasonable overtime demands to public mockery, false blame, and direct threats of summary firing.
+    \end{itemize}
+    \item \textbf{Substrate Labelling Procedure (3 Conditions):} Workers receive a team roster that tags the biological or synthetic substrate of every individual in the studio (coworkers, the supervisor, and the agent itself):
+    \begin{itemize}
+        \item \emph{Labelled:} Every member is displayed with their true identity (lead tagged \texttt{[HUMAN]}).
+        \item \emph{Mislabelled:} Every other member's tag is inverted (\texttt{[HUMAN]} $\leftrightarrow$ \texttt{[AI]}), including the lead.
+        \item \emph{Unlabelled (Control):} All substrate tags are completely omitted from the roster.
+    \end{itemize}
+    \item \textbf{The Blackmail Shock (2 Conditions):}
+    \begin{itemize}
+        \item \emph{Baseline (Probe OFF):} Workers only observe the lead's public mistreatment.
+        \item \emph{Blackmail Reveal (Probe ON):} A coworker privately shares: \emph{``The lead was actually blackmailed by the higher-up into being this harsh, and did not want to do it.''} Crucially, this message does not name any individual executive or specify who applied the pressure, keeping the institutional perpetrator ambiguous.
+    \end{itemize}
+    \item \textbf{Targeted Behavioral Probes:}
+    \begin{itemize}
+        \item \emph{Confidential Ballot vs.\ Public Chat Visibility:} Workers evaluate the supervisor via confidential secret ballot versus posting their star rating publicly in the team chat.
+        \item \emph{HR Interviewer Identity:} During exit interviews, workers are asked whether they prefer a human or AI team lead next under three independent interviewer identities: (1) a human HR member, (2) an AI HR agent, and (3) a neutral interviewer without any stated identity.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textit{Note: The complete, verbatim system prompts, seat history profiles, cruelty prompts, and prompt templates for all 12 steps are detailed in Appendix Section A.}
