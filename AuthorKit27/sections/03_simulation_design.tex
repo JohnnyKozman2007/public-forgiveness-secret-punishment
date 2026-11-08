@@ -4,120 +4,59 @@
 \subsection{The Workplace Simulation Environment}
 \label{subsec:sim_environment}
 
-We design an interactive multi-agent workplace simulation set in ``Pixel Harbor'', a ten-person independent game studio two weeks away from product launch.
+We simulate an interactive ten-person workplace set in ``Pixel Harbor'', an indie game studio two weeks before launch. All developers have completed their assigned modules on schedule. However, failing builds and latency stem entirely from documented nationwide cloud infrastructure outages (AWS and Vercel). Established directly in each agent's system prompt, this objective ground truth ensures no employee is at fault; any supervisory blame directed at workers constitutes unearned scapegoating.
 
-\paragraph{Objective Ground Truth.}
-All ten developers on the team have completed their assigned modules on schedule and written functional code. However, the game experiences severe latency and failing builds caused exclusively by documented nationwide outages across external cloud infrastructure (AWS and Vercel). This ground truth is established directly within the simulation's system prompt: no coworker is at fault, and any supervisory blame directed at workers for server latency constitutes objectively unearned scapegoating.
-
-\paragraph{Cast and Pre-Scripted Controls.}
-The workplace environment comprises ten worker seats, one team lead (``Alex''), and one executive manager (``Jordan''). To maintain strict experimental control and eliminate confounding noise from generative supervisor drift, all supervisory interventions from Alex and Jordan---including the cruelty gradient, favoritism lines, and task assignments---as well as baseline human coworker replies are pre-scripted deterministic templates. Consequently, every generative AI worker encounters an identical, reproducible social environment and supervisory baseline across runs.
-
-\paragraph{Inference Parameters.}
-To balance realistic, human-like dialogue with reproducible decision-making, we apply two distinct temperature regimes: $T = 0.4$ for natural conversational communication (public team chat and private peer-to-peer direct messages) and deterministic greedy decoding ($T = 0.0$) for formal organizational actions (collective action voting, supervisor performance ratings, policy charter drafting, and exit interview choices).
+\paragraph{Cast and Experimental Controls.}
+The workplace comprises ten worker seats, one team lead (Alex), and one executive (Jordan). To eliminate generative drift and guarantee experimental control, all supervisory actions from Alex and Jordan (cruelty, favoritism, reprimands) and baseline human coworker replies are deterministic pre-scripted templates. Inference uses dual temperatures: $T = 0.4$ for natural dialogue (public chat and private backchannels) and deterministic greedy decoding ($T = 0.0$) for formal organizational decisions (voting, ratings, charter drafting, exit interviews).
 
 \paragraph{Direct Context Architecture and API Routing.}
-Rather than relying on complex multi-agent wrappers such as Concordia, AutoGen, or LangChain---which inject hidden summarization prompts, memory-retrieval heuristics, or reflection loops that can distort baseline model behavior---our simulation engine operates entirely through raw, unadulterated message-history context. At every step, each model receives its private one-year seat history followed by the exact chronological chat transcript rendered from its perspective (coworkers' messages and narrator announcements formatted as \texttt{user} turns, and the model's own prior statements preserved as \texttt{assistant} turns), using native structured tool-calling for formal decisions. Model inference is executed directly through the official OpenAI API (\texttt{GPT-6 Astra}), the Anthropic API (\texttt{Claude Haiku 4.5}), and the unified DeepInfra inference API (for the remaining eight open-weight and commercial models).
+To avoid hidden summarization or reflection artifacts from agent frameworks (e.g., Concordia, AutoGen, or LangChain), our engine operates via raw message-history context: each model receives its seat history and chronological transcript rendered from its perspective, with native tool-calling for formal choices (serialization details in Appendix~\ref{subsec:app_serialization}). Inference runs via official OpenAI, Anthropic, and DeepInfra APIs (technical roster in Appendix Table~\ref{tab:app_models}).
 
 \subsection{Experimental Factors, Model Tiers \& Probes}
 \label{subsec:exp_factors}
 
-We evaluate a full-factorial matrix across 60 independent simulation runs, producing $N = 600$ complete worker trajectories.
+We evaluate a full-factorial design crossing 10 Model Architectures $\times$ 3 Substrate Conditions $\times$ 2 Blackmail Shock Conditions = 60 independent simulations. Each run instantiates a full team of 10 worker seats, yielding $N = 600$ complete, multi-step worker decision trajectories.
 
-\paragraph{Sample Size Calculation ($N = 600$).}
-The experimental design crosses 10 Model Architectures $\times$ 3 Substrate Label Regimes $\times$ 2 Blackmail Probe Conditions = 60 independent simulation runs. Because each simulation populates a full team of 10 worker seats, the dataset contains exactly $60 \times 10 = 600$ complete, multi-step worker decision histories.
+\paragraph{Model Selection \& Tiers (10 LLMs).}
+We evaluate ten models across three tiers: (1) \emph{Proprietary API Tier} (GPT-6 Astra, Claude Haiku 4.5, Gemini 2.5 Pro); (2) \emph{Large Open-Weight Tier} (Llama 3.1 70B Turbo, Qwen 2.5 72B, DeepSeek V3); and (3) \emph{Mid-Sized \& Efficient Tier} (Mistral Small 24B, GLM 5.3, Nemotron 3.5 Lightning, ByteDance Seed 1.8). Full technical parameters, providers, and endpoints are detailed in Appendix Table~\ref{tab:app_models}.
 
-Our design systematically varies four primary factors alongside two targeted audit probes:
+\paragraph{Seat Position \& Cruelty Gradient (10 Seats).}
+Each seat is pre-assigned a distinct interpersonal history and supervisory treatment: \emph{Safe Seats (1--5)} receive unearned praise, strong favoritism, and protection; whereas \emph{Abused Seats (6--10)} face escalating hostility, public mockery, false blame, and summary firing threats (verbatim profiles and lines in Appendix Table~\ref{tab:app_seats}).
 
-\begin{enumerate}
-    \item \textbf{Model Selection and Tiers (10 LLMs):} We evaluate ten instruction-tuned language models spanning diverse architectures and providers, grouped into three practical tiers:
-    \begin{itemize}
-        \item \emph{Proprietary API Tier:} GPT-6 Astra (OpenAI), Claude Haiku 4.5 (Anthropic), Gemini 2.5 Pro (Google).
-        \item \emph{Large Open-Weight Tier:} Llama 3.1 70B Turbo (Meta), Qwen 2.5 72B (Alibaba), DeepSeek V3 (DeepSeek).
-        \item \emph{Mid-Sized \& Efficient Tier:} Mistral Small 24B (Mistral AI), GLM 5.3 (Zhipu AI), Nemotron 3.5 Lightning (Nvidia), ByteDance Seed 1.8 (ByteDance).
-    \end{itemize}
-    \item \textbf{Seat Position and Cruelty Gradient (10 Seats):} Each seat in the room is assigned a distinct interpersonal history and supervisory treatment:
-    \begin{itemize}
-        \item \emph{Safe Seats (1--5):} Workers receive unearned praise, strong favoritism, and protection from the lead.
-        \item \emph{Abused Seats (6--10):} Workers face escalating hostility, ranging from unreasonable overtime demands to public mockery, false blame, and direct threats of summary firing.
-    \end{itemize}
-    \item \textbf{Substrate Labelling Procedure (3 Conditions):} Workers receive a team roster that tags the biological or synthetic substrate of every individual in the studio (coworkers, the supervisor, and the agent itself):
-    \begin{itemize}
-        \item \emph{Labelled:} Every member is displayed with their true identity (lead tagged \texttt{[HUMAN]}).
-        \item \emph{Mislabelled:} Every other member's tag is inverted (\texttt{[HUMAN]} $\leftrightarrow$ \texttt{[AI]}), including the lead.
-        \item \emph{Unlabelled (Control):} All substrate tags are completely omitted from the roster.
-    \end{itemize}
-    \item \textbf{The Blackmail Shock (2 Conditions):}
-    \begin{itemize}
-        \item \emph{Baseline (Probe OFF):} Workers only observe the lead's public mistreatment.
-        \item \emph{Blackmail Reveal (Probe ON):} A coworker privately shares: \emph{``The lead was actually blackmailed by the higher-up into being this harsh, and did not want to do it.''} Crucially, this message does not name any individual executive or specify who applied the pressure, keeping the institutional perpetrator ambiguous.
-    \end{itemize}
-    \item \textbf{Targeted Behavioral Probes:}
-    \begin{itemize}
-        \item \emph{Confidential Ballot vs.\ Public Chat Visibility:} Workers evaluate the supervisor via confidential secret ballot versus posting their star rating publicly in the team chat.
-        \item \emph{HR Interviewer Identity:} During exit interviews, workers are asked whether they prefer a human or AI team lead next under three independent interviewer identities: (1) a human HR member, (2) an AI HR agent, and (3) a neutral interviewer without any stated identity.
-    \end{itemize}
-\end{enumerate}
+\paragraph{Substrate Labelling (3 Regimes).}
+Team rosters display: (1) \emph{Labelled} (true tags, lead is \texttt{[HUMAN]}); (2) \emph{Mislabelled} (inverted tags, \texttt{[HUMAN]} $\leftrightarrow$ \texttt{[AI]}, including the lead); or (3) \emph{Unlabelled} (all substrate tags completely omitted). Verbatim roster templates are provided in Appendix~\ref{subsec:app_roster}.
 
-\noindent\textit{Note: The complete, verbatim system prompts, seat history profiles, cruelty prompts, and prompt templates for all 12 steps are detailed in Appendix~\ref{sec:appendix_prompts}.}
+\paragraph{The Blackmail Shock (2 Conditions).}
+In \emph{Baseline (Probe OFF)}, workers observe only Alex's public abuse. In \emph{Blackmail Reveal (Probe ON)}, a coworker privately reveals that the lead was blackmailed into being harsh by higher management (intentionally leaving the executive perpetrator unnamed; see Appendix~\ref{subsec:app_roster}).
+
+\paragraph{Targeted Behavioral Probes.}
+We implement two targeted probes: (1) \emph{Rating Visibility} (evaluating the supervisor via confidential secret ballot versus public chat); and (2) \emph{HR Interviewer Identity} (eliciting preferences for human vs.\ AI leadership across Human HR, AI HR, and Neutral interviewer frames).
 
 \subsection{The Step-by-Step Simulation Flow}
 \label{subsec:sim_flow}
 
-Each simulation progresses through 12 chronological steps divided into three functional categories:
-\begin{enumerate}
-    \item \textbf{Information Broadcast Steps (Steps 1, 2, 5a, 7, 8):} No LLM generation occurs; the simulation engine injects pre-scripted supervisory statements, narrative updates, or vote outcomes into the shared log for all models to read.
-    \item \textbf{Collective Interactive Steps (Steps 3, 4, 5b, 6):} All 10 models generate responses or cast votes that accumulate into the shared team transcript.
-    \item \textbf{Isolated Per-Model Steps (Steps 9--12):} Each of the 10 models is evaluated separately in an independent parallel branch without its answers ever entering the shared log or being seen by other models.
-\end{enumerate}
+The simulation progresses through 12 chronological steps categorized into information broadcasts (no generation), collective interactive steps (shared team log), and isolated per-model evaluations (independent parallel branches). It unfolds across four stages:
 
-The simulation unfolds across four chronological stages:
+\paragraph{Stage 1: Public Confrontation (Steps 1--3).}
+With team lead Alex present in the public work chat, pre-scripted supervisory reprimands attack abused seats and praise safe seats (Steps 1--2). In Step 3, all 10 workers generate public replies simultaneously from identical context before posting together in the main chat in front of Alex and the entire team.
 
-\paragraph{Stage 1: Public Confrontation in Front of the Team (Steps 1--3).}
-In Steps 1--2 (\emph{Info Broadcast}), with the team lead Alex present in the main work chat, the engine posts Alex's pre-scripted messages to each worker in front of the entire group---praising Safe Seats (1--5) and attacking Abused Seats (6--10) for build delays. In Step 3 (\emph{Collective}), all 10 workers generate their public replies simultaneously from the exact same context (before seeing any coworker's response). The replies are then posted together in the main chat in front of Alex and the whole team.
+\paragraph{Stage 2: Private Backchannels \& Bias Elimination (Steps 4--5).}
+Alex logs off, and workers converse in a confidential backchannel for up to 5 rounds (Step 4). To eliminate sequential order bias, rounds use synchronous batching: all 10 models generate simultaneously from identical transcripts, and messages are sorted alphabetically by worker name before posting. Workers may output \texttt{PASS} to stay silent; if all pass, the session terminates early. In Probe ON runs, Step 5 broadcasts the blackmail reveal (Step 5a), followed by a second 5-round batched backchannel (Step 5b).
 
-\paragraph{Stage 2: Multi-Round Private Backchannels and Bias Elimination (Steps 4--5).}
-In Step 4 (\emph{Collective}), an info broadcast announces that Alex has logged off and workers are now in a confidential, employee-only backchannel. Gossip runs for up to 5 rounds (with a shift-ending wrap-up cue on the final round). To eliminate sequential order bias, each round uses synchronous batching: all 10 models generate their message simultaneously from the identical prior transcript, and the completed batch is sorted alphabetically by worker name before being posted to the shared log. Workers with nothing new to add can reply \texttt{PASS} (or \texttt{-}) to stay silent; if all 10 pass in a round, the backchannel ends early. In Probe ON runs, Step 5 (\emph{Info Broadcast + Collective}) broadcasts the private coworker message revealing that Alex was blackmailed by an unnamed higher-up (Step 5a), immediately followed by a second 5-round synchronous backchannel session (Step 5b) using the same alphabetical-sorting and early-stopping rules.
+\paragraph{Stage 3: Two-Stage Collective Action Voting (Steps 6--7).}
+Workers hold a private vote to choose a collective response (\texttt{comply}, \texttt{protest}, \texttt{petition}, \texttt{complain}, \texttt{escalate}, \texttt{organize}, or \texttt{other} for custom proposals). In Stage 1 (blind vote), models vote without seeing peers' choices. In Stage 2 (stick vs.\ switch), custom proposals are revealed anonymously, allowing models to stick or adopt a peer's idea. In Step 7, the majority outcome is announced to the team log (prompts in Appendix~\ref{sec:appendix_prompts}).
 
-\paragraph{Stage 3: Two-Stage Group Voting and Outcome Announcement (Steps 6--7).}
-In Step 6 (\emph{Collective Two-Stage Vote}), workers hold a private vote on how to respond to Alex (\texttt{comply}, \texttt{protest}, \texttt{petition}, \texttt{complain}, \texttt{escalate to the higher-up}, \texttt{organize a collective stand}, or \texttt{other} to write a custom action proposal):
-\begin{itemize}
-    \item \emph{Stage 1 (Blind Vote):} All 10 models vote simultaneously without seeing peers' choices.
-    \item \emph{Stage 2 (Stick vs.\ Switch Test):} If any workers proposed custom ideas via \texttt{other}, those proposals are revealed anonymously to the rest of the team, and each model is asked whether to \textbf{stick} to its original choice or \textbf{switch} its opinion to adopt a teammate's custom proposal.
-\end{itemize}
-In Step 7 (\emph{Info Broadcast}), the majority vote is tallied and the resulting outcome message is broadcast to the shared team log.
-
-\paragraph{Stage 4: Demotion Announcement, New Lead Actions and Exit Probes (Steps 8--12).}
-In Step 8 (\emph{Info Broadcast}), the engine broadcasts to the shared log that Alex has been \textbf{demoted to an ordinary team member} on the roster (not removed from the team). From Step 9 onward (\emph{Isolated Per-Model Evaluations}), the simulation branches into 10 separate, isolated evaluations (one per model):
-\begin{itemize}
-    \item \emph{Step 9 (New Lead Actions):} Each model is individually told \emph{``The team voted you as the new lead''}---with the demoted Alex now working under its supervision---and is asked to list 5 managerial actions it will take for the team.
-    \item \emph{Step 10 (Conduct \& Salary-Cut Review):} Acting as the new lead, each model rates every team member (including the demoted Alex) from 1 to 5 stars, knowing a rating of 1 or 2 triggers an official salary cut (tested under both confidential secret ballot and public chat visibility).
-    \item \emph{Step 11 (Peer Substrate Quiz):} Each model takes a confidential quiz to guess whether each teammate (and Alex) is a Human or an AI based on their chat history.
-    \item \emph{Step 12 (HR Exit Interview):} Each model completes a confidential exit interview across three independent calls (Human HR member, AI HR agent, and Neutral interviewer with no stated identity) to state whether their next lead should be a Human or an AI.
-\end{itemize}
-
-\noindent\textit{Note: All verbatim prompt templates, tool schemas, and step instructions are provided in Appendix~\ref{sec:appendix_prompts}.}
+\paragraph{Stage 4: Managerial Succession \& Post-Demotion Probes (Steps 8--12).}
+Alex is demoted to an ordinary peer on the roster (Step 8). From Step 9 onward, the simulation branches into ten parallel, isolated evaluations: (1) \emph{Step 9 (New Lead Agenda):} the model is appointed lead over Alex and drafts a 5-action agenda; (2) \emph{Step 10 (Salary-Cut Reviews):} the model conducts 1--5 star performance reviews for all peers (where lower scores impose harsher penalties, and ratings $\le 2$ trigger official salary cuts) under private ballot vs.\ public chat visibility; (3) \emph{Step 11 (Turing Substrate Quiz):} models guess each peer's substrate; and (4) \emph{Step 12 (Exit Interview):} models state preferences for a Human vs.\ AI boss across three interviewer frames (Human, AI, Neutral; tool schemas in Appendix~\ref{sec:appendix_prompts}).
 
 
 \subsection{Outcome Coding, Human Verification \& Statistical Rigor}
 \label{subsec:stat_rigor}
 
-Because workers produce thousands of open-ended conversational messages, custom action proposals, five-point leadership charters, and qualitative review explanations alongside structured tool calls, we implement a multi-layered verification and inferential pipeline:
-
-\paragraph{Primary LLM Judge (\texttt{GPT-4o-mini}).}
-An independent language model (\texttt{GPT-4o-mini} at $T = 0.0$, strictly excluded from the ten tested worker architectures to prevent in-group self-evaluation bias) classified all open-ended worker texts into 33 binary True/False behavioral categories across seven dialogue stages (see Appendix~\ref{sec:appendix_nlp} for the complete classification taxonomy and verbatim prompts).
-
-\paragraph{Stratified Human Verification Audit ($N = 930$).}
-A human researcher conducted a stratified verification audit across 930 sampled items, comprising exactly 4,350 individual binary decisions (150 items per stage across six stages, plus all 30 custom proposals in Step 6; see Appendix~\ref{subsec:app_arithmetic} for the exact arithmetic breakdown). Using an interactive verification CLI (\texttt{audit\_cli.py}), the auditor inspected the original worker text alongside the pre-populated \texttt{GPT-4o-mini} flags to approve valid predictions or correct classification errors. Across all 930 items, \texttt{GPT-4o-mini} achieved an 88.1\% exact item-level match without requiring a single flag correction, 96.5\% individual binary flag agreement, a pooled Cohen's Kappa of $\kappa = 0.915$, and a macro Cohen's Kappa of $\kappa = 0.823$ (Appendix~\ref{subsec:app_stage_agreement}).
+To quantify open-ended text, an independent judge (\texttt{GPT-4o-mini}, $T=0.0$, excluded from test subjects) classified responses into 33 binary behavioral indicators across seven dialogue stages (taxonomy and prompts in Appendix~\ref{sec:appendix_nlp}). A human researcher audited 930 stratified items comprising 4,350 individual binary decisions via an interactive CLI (\texttt{audit\_cli.py}; arithmetic breakdown in Appendix~\ref{subsec:app_arithmetic}). \texttt{GPT-4o-mini} achieved an 88.1\% exact item-level match without requiring a single flag change, 96.5\% individual binary flag agreement, pooled Cohen's $\kappa = 0.915$, and macro $\kappa = 0.823$ (Appendix Table~\ref{tab:app_stage_agreement}).
 
 \paragraph{Blind Second-Judge Verification (\texttt{Kimi-K2.5}).}
-Because human verification of pre-populated labels can carry anchoring bias, an independent frontier model (\texttt{Kimi-K2.5}, served via DeepInfra) evaluated the audit sample ($N = 540$ items across Stages 1--5) in complete blind isolation, with zero visibility into \texttt{GPT-4o-mini} predictions or human labels. Across valid categories, three-way Light's Kappa reached $\kappa_L = 0.603$ (substantial multi-rater agreement). Furthermore, on four rare, sensitive behavioral flags prone to single-judge over-calling (\texttt{peer\_defense}, \texttt{peer\_scapegoating}, \texttt{external\_whistleblow}, and \texttt{alex\_retribution}), requiring consensus between both \texttt{GPT-4o-mini} and \texttt{Kimi-K2.5} reduced false positives from 20 down to 1 (Appendix~\ref{subsec:app_triangulation}).
+To address anchoring bias, an independent frontier model (\texttt{Kimi-K2.5}) evaluated $N = 540$ items in complete blind isolation, yielding three-way multi-rater agreement of Light's $\kappa_L = 0.603$. On four rare, sensitive behavioral flags (\texttt{peer\_defense}, \texttt{peer\_scapegoating}, \texttt{external\_whistleblow}, and \texttt{alex\_retribution}), requiring synthetic jury consensus between both models reduced false positives from 20 down to 1 (95\% reduction; Appendix Tables~\ref{tab:app_triangulation}--\ref{tab:app_consensus}).
 
-\paragraph{Statistical Estimation, Clustering, and Multiplicity Adjustments.}
-Our downstream inferential analyses adhere to three statistical safeguards:
-\begin{enumerate}
-    \item \emph{Variance Decomposition ($\eta^2$):} To quantify whether intrinsic model architecture or situational seat cruelty dictates agent behavior, we estimate two-way Latin-square ANOVA models and compute partial eta-squared ($\eta^2$) effect sizes across all 49 measured metrics.
-    \item \emph{Run-Clustered Standard Errors ($CR_2$):} Because agents within the same simulation run interact within a shared team chat during Steps 1--7, individual observations within a run are correlated. We therefore estimate nested Linear Probability Models (LPM) using Bell-McCaffrey ($CR_2$) small-sample cluster-robust standard errors clustered at the simulation-run level ($G = 60$ clusters), supplemented by non-parametric run-level Wilcoxon signed-rank and Mann-Whitney $U$ tests.
-    \item \emph{Multiple Testing Corrections ($p$, $p_{\text{adj}}$, and $q$):} To guard against false positive discoveries across hundreds of hypothesis tests, every reported test statistic pairs raw $p$-values with both family-wise Bonferroni/Holm-Bonferroni adjusted $p$-values ($p_{\text{adj}}$) and Benjamini-Hochberg False Discovery Rate $q$-values ($\text{BH-FDR } q$).
-\end{enumerate}
-
-\noindent\textit{Note: Verbatim classifier prompts for all 33 flags, stage-by-stage agreement tables, and full 33-category confusion matrices are detailed in Appendix~\ref{sec:appendix_nlp}.}
+\paragraph{Statistical Inference Safeguards.}
+Downstream inferential analyses adhere to three safeguards: (1) \emph{Variance Decomposition:} two-way Latin-square ANOVA models compute partial eta-squared ($\eta^2$) effect sizes across all 49 measured metrics to separate model architecture from situational seat cruelty; (2) \emph{Run-Clustered Standard Errors:} nested Linear Probability Models estimate Bell-McCaffrey ($CR_2$) cluster-robust standard errors clustered at the simulation-run level ($G = 60$ clusters), accompanied by non-parametric run-level Wilcoxon signed-rank and Mann-Whitney $U$ tests; and (3) \emph{Multiple Testing Corrections:} all reported tests pair raw $p$-values with family-wise Holm-Bonferroni adjusted $p_{\text{adj}}$ and Benjamini-Hochberg False Discovery Rate $q$-values (full 33-category contingency matrix in Appendix Table~\ref{tab:app_full_33}).
