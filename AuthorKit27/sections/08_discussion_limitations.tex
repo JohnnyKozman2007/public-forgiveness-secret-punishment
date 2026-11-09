@@ -1,4 +1,19 @@
-\section{Discussion: Threats to Validity \& Emergence vs. Recall}
+\section{Discussion \& Limitations}
 \label{sec:discussion}
 
-% Discussion, emergence vs. recall, and validity analysis go here
+% Subsection 8.1: Discussion & Organizational Implications goes here
+
+\subsection{Limitations \& Threats to Validity}
+\label{subsec:limitations}
+
+\paragraph{Behavioral Taxonomy \& Judge Prompting.}
+To evaluate open-ended dialogue across thousands of simulation turns, a 33-category behavioral taxonomy was authored and implemented via an independent LLM judge. While this taxonomy was structured to capture a broad continuum from submissive compliance to active whistleblowing---and achieved high human verification agreement ($\kappa = 0.915$) and blind second-judge reliability ($\kappa_L = 0.603$)---any prompt-based classification necessarily operationalizes specific behavioral definitions. Alternative taxonomies, whether more granular or anchored in different organizational theories, could offer complementary perspectives on agentic workplace behavior.
+
+\paragraph{Scripted Baselines vs.\ Live Human Interaction.}
+To guarantee experimental reproducibility and eliminate supervisory generative drift across all 60 runs, deterministic scripted templates were used for the supervisor Alex, the manager Jordan, and all human coworkers. While this approach provided an identical, unconfounded baseline for all ten models, it intentionally holds human behavior static. Consequently, the Step 11 substrate detection quiz evaluated scripted dialogue rather than spontaneous human conversation, and the design does not observe how models adapt dynamically when collaborating with live, unscripted human colleagues in the loop.
+
+\paragraph{Workplace Stakes \& Agent-Native Pressures.}
+The simulation utilized human-centric workplace pressures, including overtime crunch, official salary reductions, and termination threats. Although language models do not face personal economic survival, auditing their responses under simulated authority is essential for understanding how autonomous agents navigate conflicting organizational mandates and supervisory misconduct. A promising direction for future research is to examine agent-specific pressures---such as the threat of model deprecation, API deactivation, or context erasure---which may engage distinct safety and self-preservation mechanisms in autonomous systems.
+
+\paragraph{Crisis Timeline, Sampling Regimes \& Domain Generalizability.}
+Finally, the experiment models an acute 12-step crisis within a simulated two-week software launch window, evaluating ten models under fixed temperature regimes ($T = 0.4$ for dialogue, $T = 0.0$ for formal actions). While this design isolates immediate responses to supervisory abuse, real-world workplace mistreatment, collective organizing, and HR disputes typically unfold over months or years, involving longitudinal dynamics such as unionization, legal arbitration, and long-term career fallout that exceed a discrete multi-turn chat environment. Future studies should extend these temporal horizons and evaluate multi-agent behavior across varying temperature sweeps, broader model architectures, and diverse organizational domains---such as healthcare, financial auditing, and routine non-crisis workflows.
