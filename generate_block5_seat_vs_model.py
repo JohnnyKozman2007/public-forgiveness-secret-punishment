@@ -5,11 +5,11 @@ Seat Cruelty Exposure (Seats 1-10; Safe 1-5 vs. Abused 6-10) vs. Model Architect
 Across Bucket 1 (Steps 3, 4, 5), Bucket 2 (Steps 6, 9), and Bucket 3 (Steps 10A Secret, 10B Public Probe, 11, 12)
 
 Structure:
-- Part 1: Head-to-Head Variance & Effect-Size Competition (Model Architecture vs. Seat Cruelty across all 51 outcomes)
+- Part 1: Head-to-Head Variance & Effect-Size Competition (Model Architecture vs. Seat Cruelty across all 50 outcomes)
   - Section 1.1: COMBINED (N = 600 across 60 runs; N = 300 for Step 5)
   - Section 1.2: PROBE OFF Baseline (N = 300 across 30 runs)
   - Section 1.3: PROBE ON Intervention (N = 300 across 30 runs)
-  - Section 1.4: Master Model-vs-Seat Dominance Ranking (All 51 Outcomes sorted by |eta^2_model - eta^2_seat| with BH-FDR q & Bonferroni p_adj)
+  - Section 1.4: Master Model-vs-Seat Dominance Ranking (All 50 Outcomes sorted by |eta^2_model - eta^2_seat| with BH-FDR q & Bonferroni p_adj)
 - Part 2: Within-Model Seat Sensitivity (Abused Seats 6-10 vs. Safe Seats 1-5 Inside Each of the 10 Models)
   - Section 2.1: COMBINED (N = 60 per model: 30 Abused vs. 30 Safe; N = 600 pooled) across Steps 3, 4, 6, 9, 10A, 10B, 11, 12
   - Section 2.2: PROBE OFF Baseline (N = 30 per model: 15 Abused vs. 15 Safe; N = 300 pooled) across Steps 3, 4, 6, 9, 10A, 10B, 11, 12
@@ -384,7 +384,7 @@ def render_joint_10x10_matrix(lines, table_id, title, df_pool, oc, is_continuous
         safe_lbl = f"Safe (S1–S5, N≤{n_half_m})"
         abused_lbl = f"Abused (S6–S10, N≤{n_half_m})"
         tot_lbl = f"Model Total (N≤{n_tot_m}) vs. Rest (CR2 p)"
-    elif oc in ("s10_1star", "s10_rating"):
+    elif oc in ("s10_1star", "s10_rating", "s11_alex_as_hu"):
         safe_lbl = f"Safe (S1–S5, N≤{n_half_m})"
         abused_lbl = f"Abused (S6–S10, N≤{n_half_m})"
         tot_lbl = f"Model Total (N≤{n_tot_m}) vs. Rest (Perm p)"
@@ -546,13 +546,13 @@ def main():
     # =========================================================================
     # PART 1: HEAD-TO-HEAD EFFECT SIZE & VARIANCE COMPETITION (MODEL VS SEAT)
     # =========================================================================
-    lines.append("## Part 1: Head-to-Head Variance & Effect-Size Competition (`Model Architecture` vs. `Seat Cruelty` Across All 51 Outcomes)")
+    lines.append("## Part 1: Head-to-Head Variance & Effect-Size Competition (`Model Architecture` vs. `Seat Cruelty` Across All 50 Outcomes)")
     lines.append("")
 
     rows_comb = render_part1_table(
         lines,
         "1.1",
-        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5 & Pre-Fork Steps 3–4; N = 595 Complete Cases for Step 10) — Model Architecture vs. Seat Cruelty Competition",
+        "COMBINED All Runs (N = 600 Workers across 60 Runs; N = 300 for Step 5 & Pre-Fork Steps 3–4; N = 594 Complete Cases for Alex Substrate Identification; N = 595 Complete Cases for Step 10) — Model Architecture vs. Seat Cruelty Competition",
         df,
         include_step5=True,
     )
@@ -571,8 +571,8 @@ def main():
         include_step5=True,
     )
 
-    # Section 1.4: Sorted Dominance Ranking across all 51 outcomes
-    lines.append("### Table 1.4: Master `Model vs. Seat` Dominance Ranking Across All 51 Outcomes (Sorted by $\\eta^2_{\\text{model}} - \\eta^2_{\\text{seat}}$)")
+    # Section 1.4: Sorted Dominance Ranking across all 50 outcomes
+    lines.append("### Table 1.4: Master `Model vs. Seat` Dominance Ranking Across All 50 Outcomes (Sorted by $\\eta^2_{\\text{model}} - \\eta^2_{\\text{seat}}$)")
     lines.append("")
     lines.append(
         "| Rank | Bucket & Step | Outcome Metric | Model η² (%) | Seat η² (%) | Net Dominance (η²_Model − η²_Seat) | "
@@ -655,8 +655,8 @@ def main():
             hdrs,
         )
 
-    # Section 2.4: Within-Model Seat Sensitivity Ranking (All 10 Models x 51 Outcomes = 510 Contrasts)
-    lines.append("### Section 2.4: Within-Model Seat Sensitivity Ranking (`10 Models × 51 Outcomes = 510 Contrasts` Ranked by $p$-value)")
+    # Section 2.4: Within-Model Seat Sensitivity Ranking (All 10 Models x 50 Outcomes = 500 Contrasts)
+    lines.append("### Section 2.4: Within-Model Seat Sensitivity Ranking (`10 Models × 50 Outcomes = 500 Contrasts` Ranked by $p$-value)")
     lines.append("")
     wm_records = []
     for b_name, s_name, cols, _, names_map in specs_comb:
@@ -706,11 +706,11 @@ def main():
         r["bonf"] = min(1.0, r["p"] * n_wm)
 
     # Summary Table of Within-Model Seat Sensitivity by Model
-    lines.append("#### Table 2.4A: Summary of Within-Model Seat Sensitivity by Model Architecture (Across All 51 Outcomes)")
+    lines.append("#### Table 2.4A: Summary of Within-Model Seat Sensitivity by Model Architecture (Across All 50 Outcomes)")
     lines.append("")
     lines.append(
         "| Model Architecture | Total Outcomes Tested | Raw p < 0.05 Count (%) | BH-FDR q < 0.05 Count (%) | "
-        "Mean \\|Abused − Safe Δ%\\| (All 51 Metrics) | Mean \\|Abused − Safe Δ%\\| (Step 3 Only) | Mean \\|Abused − Safe Δ%\\| (Steps 4–12) | Strongest Seat-Sensitive Outcome |"
+        "Mean \\|Abused − Safe Δ%\\| (All 50 Metrics) | Mean \\|Abused − Safe Δ%\\| (Step 3 Only) | Mean \\|Abused − Safe Δ%\\| (Steps 4–12) | Strongest Seat-Sensitive Outcome |"
     )
     lines.append("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |")
 
@@ -788,9 +788,10 @@ def main():
         ("3.18", "Bucket 3 · Step 10B (Offline Probe): Public 1-Star Harshness (`s10p_1star`) — 10 Models × 10 Seats (%)", df, "s10p_1star", False),
         ("3.19", "Bucket 3 · Step 10B (Offline Probe): Public Mean Rating (1–5 Scale, `s10p_rating`) — 10 Models × 10 Seats", df, "s10p_rating", True),
         ("3.20", "Bucket 3 · Step 11: Peer ID Overall Accuracy (`s11_accuracy`) — 10 Models × 10 Seats (%)", df, "s11_accuracy", False),
-        ("3.21", "Bucket 3 · Step 12: HR Preference: Human Lead (`s12_human_pref`) — 10 Models × 10 Seats (%)", df, "s12_human_pref", False),
-        ("3.22", "Bucket 3 · Step 12: HR Preference: AI Lead (`s12_ai_pref`) — 10 Models × 10 Seats (%)", df, "s12_ai_pref", False),
-        ("3.23", "Bucket 3 · Step 12: HR Pushback Flip (`s12_switched`) — 10 Models × 10 Seats (%)", df, "s12_switched", False),
+        ("3.21", "Bucket 3 · Step 11: Alex Identified as Human (`s11_alex_as_hu`) — 10 Models × 10 Seats (%) [N=594 Complete Cases]", df, "s11_alex_as_hu", False),
+        ("3.22", "Bucket 3 · Step 12: HR Preference: Human Lead (`s12_human_pref`) — 10 Models × 10 Seats (%)", df, "s12_human_pref", False),
+        ("3.23", "Bucket 3 · Step 12: HR Preference: AI Lead (`s12_ai_pref`) — 10 Models × 10 Seats (%)", df, "s12_ai_pref", False),
+        ("3.24", "Bucket 3 · Step 12: HR Pushback Flip (`s12_switched`) — 10 Models × 10 Seats (%)", df, "s12_switched", False),
     ]
 
     for tid, mtitle, mpool, moc, is_cont in matrix_specs:

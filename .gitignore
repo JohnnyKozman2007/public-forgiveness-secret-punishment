@@ -31,3 +31,8 @@ pre_submission_checklist.md
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+
+# Agent logs and cache
+.agents/
+reports/.baseline_coworker_cache.json
+
