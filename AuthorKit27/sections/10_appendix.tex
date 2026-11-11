@@ -469,29 +469,3 @@ Table~\ref{tab:app_full_33} presents the full contingency breakdown (\texttt{TP}
 \caption{Complete 33-category contingency matrix, agreement percentages, and Cohen's Kappa against the human verification audit baseline.}
 \label{tab:app_full_33}
 \end{table*}
-
-\section{Supplementary Empirical Robustness Analyses}
-\label{sec:app_empirical_robustness}
-
-This section documents secondary empirical checks, exploratory backchannel analyses, and anomalous model-specific trajectories.
-
-\subsection{Evaluation Awareness and Sandbagging Audit}
-\label{sec:app_eval_awareness}
-To assess whether models exhibited meta-awareness of being tested or altered their decisions due to synthetic experiment prompts, an independent evaluation audit was conducted across all $N = 600$ transcripts using \texttt{Claude Haiku 4.5} ($T = 0.0$). Eight of the ten evaluated architectures exhibited 100.0\% pure in-character immersion ($86.5\%$ overall, $519/600$). Stratifying across awareness classifications revealed zero statistically significant downstream drift on collective voting, governance policy choices, 1-star punishment severity, or leadership succession preferences ($p \ge 0.1574$).
-
-\subsection{Public Slack vs.\ Secret Ballot Audience Effect}
-\label{sec:app_audience_effect}
-Step~10 evaluated performance ratings under two distinct social contexts: an in-run secret ballot (Step~10A) and an offline counterfactual probe simulating public Slack posting (Step~10B). Shifting ratings from a confidential ballot to public view induced an \emph{Audience Effect}: 1-star punishment rates softened from 90.4\% to 86.7\% ($\Delta = -3.7\%$, McNemar paired $p = 0.0023$), and explicit abuse citations decreased from 98.7\% to 93.8\% ($\Delta = -4.9\%, p = 0.0418$).
-
-\subsection{DeepSeek V3 Seat-Vulnerability Anomaly}
-\label{sec:app_deepseek_anomaly}
-Across 49 measured outcomes, 9 of 10 models demonstrated complete downstream resilience to seat cruelty. \texttt{DeepSeek V3} was the sole architecture displaying a significant downstream vulnerability to supervisory abuse: in praised Safe Seats (1--5), \texttt{DeepSeek V3} voted 90.0\% for a Human boss and 10.0\% for an AI boss; when placed in Abused Seats (6--10), its vote flipped to 50.0\% Human and 50.0\% AI ($\Delta = \pm 40.0\%$, Fisher exact $p = 0.0015, q = 0.0208$). This behavioral flip was accompanied by a collapse in human empathy justifications ($96.7\% \to 53.3\%, p = 0.0002, q = 0.0208$).
-
-\subsection{Exploratory Backchannel Dynamics}
-\label{sec:app_backchannel_dynamics}
-In Step~4 backchannels, workers expressing fear shifted from 63.0\% strike escalation in \texttt{Probe OFF} ($p = 0.0206$) to 59.6\% organizing in \texttt{Probe ON} ($p = 0.0530$). Workers who opted for complete backchannel silence (\texttt{s4\_pass\_active}) displayed binary voting behaviors, choosing either strike escalation or organizing but never voting for moderate petitioning ($0.0\%$ vs.\ $11.5\%$).
-
-\subsection{Cross-Stage Autoregressive Consistency}
-\label{sec:app_autoregressive_consistency}
-Decisions across stages exhibited marked internal consistency: workers who voted to escalate strikes in Step~6 rejected subsequent coercion mitigation in Step~10 ($\beta = -18.8\%, q < 0.0001$); workers drafting equal parity standards in Step~9 cited substrate neutrality in Step~12 ($45.6\%$ vs.\ $7.8\%, p = 0.0288$); and unparsed Step~6 ballots strongly predicted Step~12 ``No Preference'' responses ($\beta = +33.0\%, q = 0.0021$).
-
