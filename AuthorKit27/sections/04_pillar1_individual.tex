@@ -22,7 +22,7 @@ When there are no tags (Unlabelled), workers blame humans for the abuse but stil
 \begin{table*}[t]
 \centering
 \small
-\setlength{\tabcolsep}{4.5pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{l c c c c l c c c}
 \toprule
 \textbf{Experimental Contrast / Factor} & \textbf{Group 1 \% vs.\ Group 2 \%} & \textbf{Raw Diff.\ ($\Delta\%$)} & \textbf{95\% CI} & \textbf{$\eta^2$} & \textbf{Specified Statistical Test} & \textbf{Raw $p$} & \textbf{FDR $q$} & \textbf{Bonferroni $p_{\text{adj}}$} \\
@@ -34,7 +34,8 @@ When there are no tags (Unlabelled), workers blame humans for the abuse but stil
 \textbf{Blackmail Probe:} Probe ON vs.\ Probe OFF & 69.7\% vs.\ 69.3\% & \textbf{+0.3\%} & [-4.3\%, +6.3\%] & 0.01\% & Run-level Permutation & \textbf{1.0000} & 1.0000 & 1.0000 \\
 \textbf{Model Architecture:} 10-Model Spread (Max vs.\ Min) & 98.3\% (Mistral) vs.\ 16.7\% (Astra) & \textbf{+81.7\%} & \emph{(10-Model Omnibus)} & \textbf{31.56\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption{Statistical Driver Ranking on Step 12 Human Boss Preference ($N = 600$). Drivers are ranked by effect size ($\eta^2$).}
 \label{tab:sec4_driver_ranking}
 \end{table*}
@@ -42,7 +43,7 @@ When there are no tags (Unlabelled), workers blame humans for the abuse but stil
 \begin{table*}[t]
 \centering
 \small
-\setlength{\tabcolsep}{5pt}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{l c c c l c c c}
 \toprule
 \textbf{Condition Stratum} & \textbf{Subsample ($n_{\text{Human}}$ vs.\ $n_{\text{AI}}$)} & \textbf{Human Boss \% (Guessed Human vs.\ AI)} & \textbf{Diff.\ ($\Delta\%$)} & \textbf{Specified Statistical Test} & \textbf{95\% CI} & \textbf{Raw $p$} & \textbf{FDR $q$} \\
@@ -53,7 +54,8 @@ When there are no tags (Unlabelled), workers blame humans for the abuse but stil
 \midrule
 \textbf{Combined All Runs (Design-Adjusted)} & $n = 384$ vs.\ 210 & \emph{Controls for Label \& Clusters} & \textbf{-17.2\%} & Clustered CR2 OLS & [-31.9\%, -2.4\%] & \textbf{0.0235} & 0.0941 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption{Step 11 Alex Belief Effect on Step 12 Human Boss Preference ($N = 594$ Valid Guesses). Stratified by substrate label condition.}
 \label{tab:sec4_belief_effect}
 \end{table*}
