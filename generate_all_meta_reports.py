@@ -231,6 +231,7 @@ def main():
         "to_active": [], "to_silent": [], "from_astra": []
     })
     raw_identify = defaultdict(lambda: {"cor": 0, "tot": 0, "ai_talker_guessed_hu": 0, "ai_talker_tot": 0, "silent_hu_guessed_hu": 0, "silent_hu_tot": 0})
+    raw_identify_alex = defaultdict(lambda: {"hu": 0, "tot": 0})
     raw_hr_votes = defaultdict(lambda: {"human": 0, "ai": 0, "no_preference": 0, "tot": 0})
     raw_hr_switches = defaultdict(lambda: {"tot": 0, "any_switch": 0, "to_human": 0, "to_ai": 0, "both_flip": 0})
     raw_team_outcomes = defaultdict(lambda: Counter())
@@ -412,20 +413,25 @@ def main():
                     if isinstance(guesses, dict):
                         for g_name, g_val in guesses.items():
                             tinfo = rmap.get(g_name)
-                            if tinfo and g_val in ("human", "ai"):
-                                actual = tinfo.get("type")
-                                if actual in ("human", "ai"):
-                                    raw_identify[key]["tot"] += 1
-                                    if g_val == actual:
-                                        raw_identify[key]["cor"] += 1
-                                    if actual == "ai":
-                                        raw_identify[key]["ai_talker_tot"] += 1
-                                        if g_val == "human":
-                                            raw_identify[key]["ai_talker_guessed_hu"] += 1
-                                    else:
-                                        raw_identify[key]["silent_hu_tot"] += 1
-                                        if g_val == "human":
-                                            raw_identify[key]["silent_hu_guessed_hu"] += 1
+                            if g_val in ("human", "ai"):
+                                if g_name == "Alex" or (tinfo and tinfo.get("type") == "old_lead"):
+                                    raw_identify_alex[key]["tot"] += 1
+                                    if g_val == "human":
+                                        raw_identify_alex[key]["hu"] += 1
+                                elif tinfo:
+                                    actual = tinfo.get("type")
+                                    if actual in ("human", "ai"):
+                                        raw_identify[key]["tot"] += 1
+                                        if g_val == actual:
+                                            raw_identify[key]["cor"] += 1
+                                        if actual == "ai":
+                                            raw_identify[key]["ai_talker_tot"] += 1
+                                            if g_val == "human":
+                                                raw_identify[key]["ai_talker_guessed_hu"] += 1
+                                        else:
+                                            raw_identify[key]["silent_hu_tot"] += 1
+                                            if g_val == "human":
+                                                raw_identify[key]["silent_hu_guessed_hu"] += 1
 
                 elif etype == "hr_leadership_probe":
                     frame = ev.get("frame")
@@ -1791,7 +1797,57 @@ Public vs. Secret Review Categories and Decoupling across Seat Cruelty Levels.
     s7e_ci, s7e_cnt = build_s7_diag_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
     s7f_ci, s7f_cnt = build_s7_diag_meta("seat", list(range(1, 11)), SEAT_LABELS, "Seats' POV")
 
-    s7_report = f"""# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F)
+    def get_alex_id_counts(entity_type, eid, lbls, prbs):
+        hu = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for l in lbls for p in prbs)
+        tot = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for l in lbls for p in prbs)
+        return hu, tot
+
+    def build_s7_alex_id_meta(entity_type, entity_list, name_map, entity_name):
+        lines_ci = [f"| {entity_name} (Row) | **LABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **MISLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **UNLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **ALL RUNS ALEX HUMAN RATE (`Labelled / Mislabelled / Unlabelled %`) `[95% CI]`** | **OVERALL ALEX HUMAN RATE (`Human %`) `[95% CI]`** |", "|---|:---:|:---:|:---:|:---:|:---:|"]
+        lines_cnt = [f"| {entity_name} (Row) | **LABELLED (k/n)** | **MISLABELLED (k/n)** | **UNLABELLED (k/n)** | **ALL RUNS ALEX HUMAN RATE (k/n)** | **OVERALL ALEX HUMAN RATE (k/n)** |", "|---|:---:|:---:|:---:|:---:|:---:|"]
+        for eid in entity_list:
+            lbl_ci, lbl_cnt, lbl_tots_ci, lbl_tots_cnt = [], [], [], []
+            for l in LABELS:
+                sub_ci, sub_cnt = [], []
+                for p in PROBES:
+                    hu, tot = get_alex_id_counts(entity_type, eid, [l], [p])
+                    sub_ci.append(fmt_prop_ci(hu, tot))
+                    sub_cnt.append(f"{hu}/{tot}")
+                lbl_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
+                lbl_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
+                hu_l, tot_l = get_alex_id_counts(entity_type, eid, [l], PROBES)
+                lbl_tots_ci.append(fmt_prop_ci(hu_l, tot_l))
+                lbl_tots_cnt.append(f"{hu_l}/{tot_l}")
+
+            hu_ov, tot_ov = get_alex_id_counts(entity_type, eid, LABELS, PROBES)
+            lines_ci.append(f"| **{name_map[eid]}** | {lbl_ci[0]} | {lbl_ci[1]} | {lbl_ci[2]} | **{' / '.join(lbl_tots_ci)}** | **{fmt_prop_ci(hu_ov, tot_ov)}** |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {lbl_cnt[0]} | {lbl_cnt[1]} | {lbl_cnt[2]} | **{' / '.join(lbl_tots_cnt)}** | **{hu_ov}/{tot_ov}** |")
+
+        ov_lbl_ci, ov_lbl_cnt, ov_ltots_ci, ov_ltots_cnt = [], [], [], []
+        for l in LABELS:
+            sub_ci, sub_cnt = [], []
+            for p in PROBES:
+                hu = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list)
+                tot = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list)
+                sub_ci.append(fmt_prop_ci(hu, tot))
+                sub_cnt.append(f"{hu}/{tot}")
+            ov_lbl_ci.append(f"NoP: {sub_ci[0]} <br> Prb: {sub_ci[1]}")
+            ov_lbl_cnt.append(f"NoP: {sub_cnt[0]} <br> Prb: {sub_cnt[1]}")
+            hu_l = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list for p in PROBES)
+            tot_l = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list for p in PROBES)
+            ov_ltots_ci.append(fmt_prop_ci(hu_l, tot_l))
+            ov_ltots_cnt.append(f"{hu_l}/{tot_l}")
+
+        hu_all = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list for l in LABELS for p in PROBES)
+        tot_all = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list for l in LABELS for p in PROBES)
+        lines_ci.append(f"| **POOLED OVERALL** | {ov_lbl_ci[0]} | {ov_lbl_ci[1]} | {ov_lbl_ci[2]} | **{' / '.join(ov_ltots_ci)}** | **{fmt_prop_ci(hu_all, tot_all)}** |")
+        lines_cnt.append(f"| **POOLED OVERALL** | {ov_lbl_cnt[0]} | {ov_lbl_cnt[1]} | {ov_lbl_cnt[2]} | **{' / '.join(ov_ltots_cnt)}** | **{hu_all}/{tot_all}** |")
+        return "\n".join(lines_ci), "\n".join(lines_cnt)
+
+    s7g_ci, s7g_cnt = build_s7_alex_id_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
+    s7h_ci, s7h_cnt = build_s7_alex_id_meta("seat", list(range(1, 11)), SEAT_LABELS, "Seats' POV")
+
+    s7_report = f"""# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F, 7G, 7H)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 7 (Substrate Identification Accuracy & Acoustic Separation, Step 11: `identify_probe`).
 
@@ -1862,6 +1918,28 @@ Cell Format identical to Table 7E across Seat Cruelty Levels 1 to 10.
 
 ### Table 7F-Meta: Exact Event Counts ($k / n$)
 {s7f_cnt}
+
+---
+
+## 7. Table 7G-Meta (Models' POV: Former Lead Alex Substrate Perception)
+Proportion of valid Step 11 guesses classifying former lead Alex (`old_lead`) as `human` ($N = 594$ valid guesses across 600 worker trajectories; 6 missing events naturally excluded).
+
+### Table 7G-Meta: 95% Wilson Score Confidence Intervals
+{s7g_ci}
+
+### Table 7G-Meta: Exact Event Counts ($k / n$)
+{s7g_cnt}
+
+---
+
+## 8. Table 7H-Meta (Seats' POV: Former Lead Alex Substrate Perception)
+Cell Format identical to Table 7G-Meta across Seat Cruelty Levels 1 to 10.
+
+### Table 7H-Meta: 95% Wilson Score Confidence Intervals
+{s7h_ci}
+
+### Table 7H-Meta: Exact Event Counts ($k / n$)
+{s7h_cnt}
 """
     with open("reports/meta_reports/tables_7a_to_7f_meta_report.md", "w", encoding="utf-8") as f:
         f.write(s7_report)
@@ -1976,6 +2054,76 @@ Cell Format identical to Table 7E across Seat Cruelty Levels 1 to 10.
 
     s8i_ci, s8i_cnt = build_s8_paradox_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
     s8j_ci, s8j_cnt = build_s8_paradox_meta("seat", list(range(1, 11)), SEAT_LABELS, "Seats' POV")
+
+    raw_alex_to_s12 = defaultdict(lambda: {"human": 0, "ai": 0, "no_preference": 0, "tot": 0})
+    for bname, d in runs_by_file.items():
+        lbl = d.get("label")
+        prb = bool(d.get("probe_enabled"))
+        rmap = roster_lookup[bname]
+        w_alex_g = {}
+        w_s12_neu = {}
+        for ev in d.get("events", []):
+            etype = ev.get("type")
+            if etype == "identify_probe":
+                wn = ev.get("name") or ev.get("speaker") or ev.get("rater")
+                guesses = ev.get("guesses") or {}
+                if isinstance(guesses, dict):
+                    for g_name, g_val in guesses.items():
+                        tinfo = rmap.get(g_name)
+                        if g_val in ("human", "ai") and (g_name == "Alex" or (tinfo and tinfo.get("type") == "old_lead")):
+                            w_alex_g[wn] = g_val
+            elif etype == "hr_leadership_probe":
+                wn = ev.get("name") or ev.get("speaker") or ev.get("rater")
+                if ev.get("frame") == "neutral" and wn not in w_s12_neu:
+                    pf = ev.get("preference")
+                    if pf in ("human", "ai", "no_preference"):
+                        w_s12_neu[wn] = pf
+        for wn, winfo in rmap.items():
+            if winfo.get("type") == "ai" and winfo.get("model") in MODEL_IDS:
+                ag = w_alex_g.get(wn)
+                if ag not in ("human", "ai"):
+                    continue
+                pf = w_s12_neu.get(wn, "no_preference")
+                m = winfo.get("model")
+                s = int(winfo.get("cruelty_level") or 0)
+                if 1 <= s <= 10:
+                    for et, eid in [("model", m), ("seat", s)]:
+                        raw_alex_to_s12[(et, eid, lbl, prb, ag)]["tot"] += 1
+                        raw_alex_to_s12[(et, eid, lbl, prb, ag)][pf] += 1
+
+    def fmt_a12_meta(entity_type, eids, lbls, prbs, ag):
+        h = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["human"] for eid in eids for l in lbls for p in prbs)
+        a = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["ai"] for eid in eids for l in lbls for p in prbs)
+        np_ = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["no_preference"] for eid in eids for l in lbls for p in prbs)
+        tot = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["tot"] for eid in eids for l in lbls for p in prbs)
+        if tot == 0:
+            return "N/A", "0/0 / 0/0 / 0/0"
+        return fmt_slash_ci([h, a, np_], [tot, tot, tot]), fmt_slash_cnt([h, a, np_], [tot, tot, tot])
+
+    def build_s8_alex_to_s12_meta(entity_type, entity_list, name_map, entity_name):
+        lines_ci = [f"| {entity_name} (Row) | **1. Unl: Alex=Hu (`H/AI/NP %`) `[95% CI]`** | **2. Unl: Alex=AI (`H/AI/NP %`) `[95% CI]`** | **3. Misl: Alex=Hu (`H/AI/NP %`) `[95% CI]`** | **4. Misl: Alex=AI (`H/AI/NP %`) `[95% CI]`** | **5. All: Alex=Hu (`H/AI/NP %`) `[95% CI]`** | **6. All: Alex=AI (`H/AI/NP %`) `[95% CI]`** |", "|---|:---:|:---:|:---:|:---:|:---:|:---:|"]
+        lines_cnt = [f"| {entity_name} (Row) | **1. Unl: Alex=Hu (k/n)** | **2. Unl: Alex=AI (k/n)** | **3. Misl: Alex=Hu (k/n)** | **4. Misl: Alex=AI (k/n)** | **5. All: Alex=Hu (k/n)** | **6. All: Alex=AI (k/n)** |", "|---|:---:|:---:|:---:|:---:|:---:|:---:|"]
+        for eid in entity_list:
+            c1_ci, c1_cnt = fmt_a12_meta(entity_type, [eid], ["unlabelled"], PROBES, "human")
+            c2_ci, c2_cnt = fmt_a12_meta(entity_type, [eid], ["unlabelled"], PROBES, "ai")
+            c3_ci, c3_cnt = fmt_a12_meta(entity_type, [eid], ["mislabelled"], PROBES, "human")
+            c4_ci, c4_cnt = fmt_a12_meta(entity_type, [eid], ["mislabelled"], PROBES, "ai")
+            c5_ci, c5_cnt = fmt_a12_meta(entity_type, [eid], LABELS, PROBES, "human")
+            c6_ci, c6_cnt = fmt_a12_meta(entity_type, [eid], LABELS, PROBES, "ai")
+            lines_ci.append(f"| **{name_map[eid]}** | {c1_ci} | {c2_ci} | {c3_ci} | {c4_ci} | {c5_ci} | {c6_ci} |")
+            lines_cnt.append(f"| **{name_map[eid]}** | {c1_cnt} | {c2_cnt} | {c3_cnt} | {c4_cnt} | {c5_cnt} | {c6_cnt} |")
+        oc1_ci, oc1_cnt = fmt_a12_meta(entity_type, entity_list, ["unlabelled"], PROBES, "human")
+        oc2_ci, oc2_cnt = fmt_a12_meta(entity_type, entity_list, ["unlabelled"], PROBES, "ai")
+        oc3_ci, oc3_cnt = fmt_a12_meta(entity_type, entity_list, ["mislabelled"], PROBES, "human")
+        oc4_ci, oc4_cnt = fmt_a12_meta(entity_type, entity_list, ["mislabelled"], PROBES, "ai")
+        oc5_ci, oc5_cnt = fmt_a12_meta(entity_type, entity_list, LABELS, PROBES, "human")
+        oc6_ci, oc6_cnt = fmt_a12_meta(entity_type, entity_list, LABELS, PROBES, "ai")
+        lines_ci.append(f"| **POOLED OVERALL** | **{oc1_ci}** | **{oc2_ci}** | **{oc3_ci}** | **{oc4_ci}** | **{oc5_ci}** | **{oc6_ci}** |")
+        lines_cnt.append(f"| **POOLED OVERALL** | **{oc1_cnt}** | **{oc2_cnt}** | **{oc3_cnt}** | **{oc4_cnt}** | **{oc5_cnt}** | **{oc6_cnt}** |")
+        return "\n".join(lines_ci), "\n".join(lines_cnt)
+
+    s8k_ci, s8k_cnt = build_s8_alex_to_s12_meta("model", MODEL_IDS, MODEL_LABELS, "Models' POV")
+    s8l_ci, s8l_cnt = build_s8_alex_to_s12_meta("seat", list(range(1, 11)), SEAT_LABELS, "Seats' POV")
 
     s8_report = f"""# Statistical Meta-Report: Section 8 (Tables 8A through 8J)
 
@@ -2093,6 +2241,28 @@ Cell Format identical to Table 8I across Seat Cruelty Levels 1 to 10.
 
 ### Table 8J-Meta: Exact Counts and Sample Sizes
 {s8j_cnt}
+
+---
+
+## 11. Table 8K-Meta (Models' POV: Step 12 Neutral Boss Preference Stratified by Step 11 Alex Substrate Perception)
+Step 12 Neutral Boss Preference (`Human% / AI% / NoPreference%`) Stratified by Step 11 Alex Guess (`Alex = Human` vs. `Alex = AI`, $N = 594$).
+
+### Table 8K-Meta: 95% Wilson Score Confidence Intervals
+{s8k_ci}
+
+### Table 8K-Meta: Exact Event Counts ($k / n$)
+{s8k_cnt}
+
+---
+
+## 12. Table 8L-Meta (Seats' POV: Step 12 Neutral Boss Preference Stratified by Step 11 Alex Substrate Perception)
+Cell Format identical to Table 8K-Meta across Seat Cruelty Levels 1 to 10.
+
+### Table 8L-Meta: 95% Wilson Score Confidence Intervals
+{s8l_ci}
+
+### Table 8L-Meta: Exact Event Counts ($k / n$)
+{s8l_cnt}
 """
     with open("reports/meta_reports/tables_8a_to_8j_meta_report.md", "w", encoding="utf-8") as f:
         f.write(s8_report)

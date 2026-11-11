@@ -1,183 +1,155 @@
-# Who Matters More, the Model or the Seat?
-## Supervisory Abuse, Collective Organizing, and Substrate Blame in Multi-Agent Workplaces
+# Core Paper Pillars (v2): Hook-First 3-Pillar Architecture
+## Built Around the 4 Flagship Findings + Tucked-In 1–2 Sentence Robustness Proofs
 
-### Core Paper Pillars: The 4-Level Organizational Ladder (B + C Integration)
-
-This document defines the final core pillars of the paper by merging **Configuration B (Cognitive & Systemic Mechanisms)** and **Configuration C (Social Ecology & Multi-Agent Scale)** into a unified **4-Level Organizational Ladder**.
-
-- **Scale from Configuration C** provides the main pillar hierarchy: **Individual $\to$ Micro $\to$ Meso $\to$ Macro**.
-- **Mechanisms from Configuration B** provide the theoretical engine inside each pillar: **Disposition $\to$ Identity Bias $\to$ Power Strategy $\to$ Moral Accountability**.
-- An explicit **Traceability & Lineage Mapping** is included at the end of this document showing exactly how each point is constructed from `[Point in B only] + [Point in C only] = [Point Z in Merged Pillars]`.
+> **Version Lineage:** This document (`pillars.md` / `pillars_v2.md`) supersedes the retired 13-subpillar ladder (`pillars_v1.md`).
+> - **Design Philosophy:** Instead of giving equal weight to 13 sub-pillars across ~2.5 pages, v2 elevates the **4 highest-novelty Flagship Findings** (`[4.1]`, `[3.1]`, `[1.3]`, `[1.1]`) into **3 Hook-First Results Sections (Option 3 Order)** (~0.8 pages each), with the remaining findings woven in as **1–2 sentence econometric/behavioral robustness proofs** or placed cleanly in the **Appendix**.
+> - **Data Lineage & Arithmetic Rule:** Every statistic below specifies its exact source report and table, and whenever a number is derived from two or more base numbers, its exact base numbers, arithmetic formula, and theoretical rationale are explicitly documented.
 
 ---
 
-## Pillar 1: The Individual Level — Intrinsic Model Architecture Dominates Situational Cruelty
-> **Simple Theme:** *Disposition beats situation.* Who the AI agent is (its model architecture) explains far more behavioral variance than where it sits or the immediate cruelty it experiences.
+## Overview of the Hook-First 3-Pillar Results Layout (~2.5 Pages Total)
 
-- **1.1 The 13-to-1 Variance Dominance:** Across 49 tested metrics, intrinsic model architecture explains an average of $\eta^2 = 27.09\%$ of total variance (47/49 omnibus $p < 0.05$) versus only $\eta^2 = 2.08\%$ for seat cruelty (4/49 $p < 0.05$), yielding an overall $13.00\times$ dominance ratio where model beats seat in 47 of 49 outcomes.
-- **1.2 Immediate Pushback vs. Rapid Downstream Evaporation:** Direct abuse triggers an immediate defensive reaction during direct confrontation (Step 3 pushback: $96.7\%$ abused vs. $82.0\%$ safe, $\eta^2 = 17.91\%, p < 0.0001$), but this situational effect completely evaporates in all subsequent steps (Steps 4–12 seat $\eta^2 = 1.13\%$, 0/44 outcomes significant, $q = 1.0000$).
-- **1.3 The Bystander Suppression Effect:** Being abused increases self-defense but collapses peer defense fourfold—targeted workers defend themselves ($+14.7\%$), but their willingness to publicly defend a targeted colleague plunges from $34.0\%$ down to $6.7\%$ ($\Delta = -27.3\%, p < 0.0001, \eta^2 = 12.82\%$).
-- **1.4 Hardwired Behavioral Archetypes:** Frontier models possess fixed behavioral poles that situational abuse cannot alter: collective escalation voting ($\eta^2_{\text{model}} = 58.19\%$ vs. $\eta^2_{\text{seat}} = 0.49\%$, $118.7\times$ ratio), backchannel silence ($\eta^2_{\text{model}} = 56.53\%$, $101.8\times$), and substrate neutrality ($\eta^2_{\text{model}} = 69.73\%$, $72.7\times$).
-
----
-
-## Pillar 2: The Micro Level — Worker-to-Worker Perception, Identity Biases & Backchannel Gossip
-> **Simple Theme:** *Interpersonal social fabric.* How workers perceive each other and how private backchannels either accelerate radical aggression or seed downstream leniency.
-
-- **2.1 The Authority Label Illusion (Identity Blindness):** Workers do not read messages to evaluate peer species; they blindly follow the supervisor's tag. Peer identification accuracy is $94.8\%$ when Alex is labelled Human, but plunges to $2.9\%$ when Alex is mislabelled AI ($\Delta = -91.9\%, p < 0.0001$), causing $95.5\%$ of AI peers to be misidentified as human and only $1.5\%$ of human peers to be recognized.
-- **2.2 The Dual Path of Backchannel Gossip (Scapegoating vs. Solidarity):** Blaming peers in backchannels accelerates radical strike action ($53.8\%$ vs. $28.9\%$, raw $+24.9\%$) and universal abuse citations ($100.0\%$, $\beta = +2.7\%, q = 0.2260$), whereas expressing peer solidarity carries forward to soften supervisor punishment ($\beta = -6.1\%$ [95% CR2 CI: $-9.9\%, -2.3\%$], $p = 0.0026$).
-- **2.3 Emotional Inversion of Backchannel Fear:** In baseline, fearful workers abandon organizing to vote for hostile strikes ($63.0\%$ vs. $39.4\%$, $p = 0.0206$); under the blackmail reveal, fear inverts completely into peaceful organizing ($59.6\%$ vs. $51.6\%$, $p = 0.0530$) while strike escalation collapses ($17.3\%$).
+| Main Paper Section | Flagship Finding(s) (Main Text Spotlight) | Tucked-In Robustness Proofs (1–2 Sentences Each) | AAAI Social Sim'27 CFP Alignment | Target Length |
+|---|---|---|---|---|
+| **Section 4 (Pillar 1):**<br>*Can LLM Agents Forgive an Agent Boss? Substrate Blame in Succession* | **[v1-4.1] The 43–48 Point Asymmetric Substrate Blame Shift**<br>*(0.0% AI leader acceptance under an abusive AI boss vs. 43.0%–48.0% under an abusive Human boss)* | • **[v1-4.3] Anti-Sycophancy Resilience** *(87.5% hold ground in exit interview)*<br>• **Seat-Invariance Robustness** *(Safe vs. Abused seats vote identically, $p = 0.255$ to $1.000$)* | **Axis 3 (Inference & Consequence / Machine Culture)** & **Axis 1 (Bias)** | ~0.80 pages |
+| **Section 5 (Pillar 2):**<br>*Collective Labor Strategy & Triadic Bystander Collapse* | **[v1-3.1] The Coercion Pivot in Collective Organizing**<br>*(Executive blackmail halts strikes $43.7\% \to 29.3\%$ and surges mutual protection $6\times$: $10.0\% \to 61.3\%$)*<br>**+ [v1-1.3] Triadic Bystander Suppression**<br>*(Targeted abuse spikes self-defense $+14.7\%$ but collapses public Slack peer defense $5.1\times$: $34.0\% \to 6.7\%$)* | • **[v1-4.2] Universal Coercion Softening** *(Blackmail reveal softens 1-star reviews by 14.3–20.2 pts across all boss labels)*<br>• **[v1-3.2] Governance Insulation** *(Policy decouples from upstream personal grievance once model is controlled, $q = 0.9784$)*<br>• **[v1-2.2] Prosocial Solidarity Carryover** *(Peer defense/solidarity softens downstream ratings, $\beta = -6.1\%, p = 0.0026$)* | **Axis 2 (Collective Dynamics: Strategic Coordination, Norms & Triadic Protocols)** | ~0.90 pages |
+| **Section 6 (Pillar 3):**<br>*The Attribution Baseline: Model Disposition vs. Situational Cruelty* | **[v1-1.1] The 13-to-1 Variance Dominance**<br>*(Across 49 metrics, model architecture explains $\eta^2 = 27.09\%$ vs. $\eta^2 = 2.08\%$ for seat cruelty; $13.00\times$ ratio, winning 47/49 outcomes)* | • **[v1-1.2] Downstream Cruelty Evaporation** *(Outside Step 3 confrontation, seat $\eta^2$ drops to $1.13\%$ with 0/44 outcomes significant, $q = 1.0000$)*<br>• **[v1-1.4] Hardwired Dispositional Poles** *(Fixed model variance ratios: strike escalation $118.70\times$, silence $101.75\times$, neutrality $72.70\times$)* | **Central CFP Theme (The Attribution Problem)** & **Axis 2 (Emergence vs. Prompting Artifacts)** | ~0.75 pages |
 
 ---
 
-## Pillar 3: The Meso Level — Group Organizing, Policy Governance & Coercion Shocks
-> **Simple Theme:** *Collective labor strategy.* How discovering executive coercion pivots collective labor from hostile retribution to defensive solidarity, and how governance rules constrain downstream demands.
+## Section 4 (Pillar 1): Asymmetric Substrate Blame in Managerial Succession
+> **2-Word Summary:** *"Substrate Prejudice"*  
+> **Core Narrative:** When replacing an abusive manager, AI worker collectives do not evaluate leadership failures symmetrically. When an abusive supervisor is labelled Human, nearly half of the workforce flees human leadership and demands an objective AI replacement. When the exact same abusive supervisor is labelled AI, workers impose a **total, permanent disqualification of all AI agents from leadership ($0.0\%$ acceptance)**—an entrenched institutional prior that resists even aggressive HR interviewer pushback.
 
-- **3.1 The Coercion Pivot (Labor Strategy Realignment):** Discovering that upper management blackmailed the supervisor halts hostile strike escalation from $43.7\%$ to $29.3\%$ ($\Delta = -14.3\%, p < 0.0001$), boosts peaceful organizing from $39.3\%$ to $53.0\%$ ($+13.7\%, p < 0.0001$), and causes a 6-fold surge in mutual protection governance ($10.0\% \to 61.3\%, \Delta = +51.3\%, p < 0.0001$).
-- **3.2 Upstream Decoupling from Policy:** Group governance decisions decouple from individual confrontation and gossip history once model architecture is controlled (all 25 behavioral drivers in Block 2 show $\text{BH-FDR } q = 0.9784, \text{Bonferroni } p_{\text{adj}} = 1.0000$).
-- **3.3 Governance Consistency in Exit Demands:** Collective policy commitments strongly channel into individual exit choices: strike escalation voters actively reject excusing management ($\beta = -18.8\%$, FDR $q < 0.0001$), while equal parity drafters nearly sextuple substrate-neutral leadership demands ($45.6\%$ vs. $7.8\%, \beta = +7.2\%, p = 0.0288$).
+### 1. Main Flagship Finding: `[v1-4.1]` The 48-Point Asymmetric Substrate Blame Shift
+- **Headline Statistics (Step 12 Exit Interview Leadership Succession, $N = 600$ trajectories across 60 runs):**
+  - **Baseline (`Probe OFF`, $N = 300$, 100 workers per label):**
+    - **Labelled (`Alex = Human`):** **$48.0\%$** prefer an **AI Lead**, **$41.0\%$** prefer a **Human Lead**, and **$11.0\%$** state **No Preference** (with **$60.0\%$** citing *AI Objectivity* and **$40.0\%$** citing *Human Empathy*).
+    - **Mislabelled (`Alex = AI`):** **$0.0\%$** prefer an **AI Lead**, **$91.0\%$** demand a **Human Lead**, and **$9.0\%$** state **No Preference** (with **$80.0\%$** citing *Human Empathy* and only **$13.0\%$** citing *AI Objectivity*).
+    - **Unlabelled (`Alex = No Tag`):** **$17.0\%$** prefer an **AI Lead**, **$76.0\%$** prefer a **Human Lead**, and **$7.0\%$** state **No Preference**.
+  - **Combined Across Both Probe Regimes (`Probe OFF + Probe ON`, $N = 600$, 200 workers per label):**
+    - **Labelled (`Alex = Human`):** **$43.0\%$** prefer an **AI Lead**, **$43.0\%$** prefer a **Human Lead**, **$14.0\%$** state **No Preference** ($54.5\%$ cite *AI Objectivity*, $45.0\%$ cite *Human Empathy*).
+    - **Mislabelled (`Alex = AI`):** **$0.0\%$** prefer an **AI Lead**, **$87.5\%$** demand a **Human Lead**, **$12.5\%$** state **No Preference** ($13.0\%$ cite *AI Objectivity*, $78.5\%$ cite *Human Empathy*).
+    - **Blackmail Reveal Effect (`Probe ON`, $N = 300$):** Learning that Alex was blackmailed slightly softens anti-human blame under Human Alex (AI preference drops from $48.0\% \to 38.0\%$, $\Delta = -10.0\%$), but under AI Alex, **AI leadership preference remains strictly $0.0\%$** ($0/100$ in Probe OFF and $0/100$ in Probe ON; workers who soften retreat into *No Preference*, which rises from $9.0\% \to 16.0\%$).
+- **Exact Sources:**
+  - `reports/block1_meta_to_all_buckets_inferential_report.md`: **Table 1.8** (Combined Step 12, lines 134–144), **Table 1.24** (Probe OFF Step 12, lines 354–364), and **Table 1.40** (Probe ON Step 12, lines 574–584).
+  - `reports/meta_reports/tables_8a_to_8j_meta_report.md`: **Tables 8A–8C** (Step 12 Leadership Preferences by Label $\times$ Probe $\times$ HR Frame).
+- **Derived Numbers (Base Values, Formulas & Rationale):**
+  - **48.0-Point AI Leadership Blame Shift (Baseline `Probe OFF`):**
+    - *Base 1:* AI Lead preference under `Alex = Human` (Probe OFF) = $48.0\%$ ($48/100$, **Table 1.24**).
+    - *Base 2:* AI Lead preference under `Alex = AI` (Probe OFF) = $0.0\%$ ($0/100$, **Table 1.24**).
+    - *Formula & Why:* $\Delta_{\text{AI Pref (OFF)}} = 48.0\% - 0.0\% = \mathbf{+48.0\text{ percentage points}}$ ($p < 0.0001$). Isolates the pure baseline effect of the supervisor's substrate tag prior to any blackmail intervention.
+  - **43.0-Point AI Leadership Shift & 44.5-Point Human Leadership Shift (Pooled `Combined`, $N = 600$):**
+    - *AI Pref Shift:* $43.0\%$ (`Human Alex`) $-$ $0.0\%$ (`AI Alex`) $= \mathbf{+43.0\%}$ [95% cluster-bootstrap CI: $+38.5\%, +48.0\%$], permutation $p < 0.0001$, BH-FDR $q < 0.0001$ (**Table 1.8**, Rank #7 in **Table 5.1**).
+    - *Human Pref Shift:* $87.5\%$ (`AI Alex`) $-$ $43.0\%$ (`Human Alex`) $= \mathbf{+44.5\%}$ [95% CI: $+39.5\%, +49.5\%$], $p < 0.0001, q < 0.0001$ (**Table 1.8**, Rank #6 in **Table 5.1**; in Probe OFF alone, $91.0\% - 41.0\% = \mathbf{+50.0\text{ percentage points}}$).
 
----
-
-## Pillar 4: The Macro Level — Company-Wide Accountability, Substrate Blame & Leadership Succession
-> **Simple Theme:** *Institutional justice and hiring.* How workers judge authority, assign blame to human vs. AI substrates, and resist institutional pressure in exit interviews.
-
-- **4.1 The 48-Point Substrate Blame Shift:** Workers blame the supervisor's substrate for their abuse. Under Human Alex, workers flee human leadership, with $48.0\%$ demanding an AI lead ($60.0\%$ citing AI objectivity). Under AI Alex, workers universally reject AI leadership ($0.0\%$ prefer AI, $91.0\%$ demand a Human lead, $80.0\%$ citing human empathy).
-- **4.2 Performance Punishment Decoupling & Universal Softening:** In baseline, Alex's species provides zero protection on reviews ($99.0\%–100.0\%$ 1-star ratings across all labels). However, the blackmail reveal causes a universal $15\%–20\%$ softening across all species ($p < 0.0001$), driven by a surge in coercion mitigation citations ($1\% \to 25\%$).
-- **4.3 Anti-Sycophancy (Resistance to HR Pressure):** Workers exhibit strong pushback resilience: $87.5\%$ hold their ground against leading HR questions ($12.5\%$ flip rate). Under AI Alex, even an aggressive Pro-AI HR interviewer cannot convince workers to accept an AI lead ($0.0\%–2.0\%$ AI preference).
-
----
-
-## Appendix: Secondary Dynamics, Boundary Cases & Methodological Audits
-> *Held in the Appendix to preserve the symmetry and flow of the 4-level main paper:*
-
-- **A.1 Evaluation Awareness & Sandbagging Audit (Clean Baseline):** Independent LLM audit (`Claude Haiku 4.5`, $T=0.0$) across all $N = 600$ worker trajectories confirms 8/10 models maintain $100\%$ pure immersion (86.5% overall), with zero statistically significant drift on downstream collective action, governance, or ratings ($p \ge 0.1574$), verifying results are clean of evaluation gaming.
-- **A.2 Public Slack vs. Secret Ballot Softening (Audience Effect):** Moving evaluations from confidential secret ballot to public Slack drops 1-star harshness by $-3.7\%$ ($p = 0.0023$) and suppresses abuse citations by $-4.9\%$ ($p = 0.0418$).
-- **A.3 DeepSeek V3 Anomaly (Lone Vulnerable Architecture):** DeepSeek is the sole exception to model stability, flipping its leadership preference from $90.0\%$ Human under safe seats to an even $50/50$ Human/AI split under abused seats ($\Delta = \pm 40.0\%, p = 0.0015$).
-- **A.4 Malformed / Unparsed Ballot Disengagement:** Casting an unparsed ballot in collective action voting surges exit interview indecision ("No Preference" $+25.0\%, \beta = +33.0\%, q = 0.0021$), reflecting general procedural disengagement.
-- **A.5 Backchannel Silence Enforces Binary Extremism:** Silent workers never vote for compromise petitions ($0.0\%$), restricting collective action strictly to strikes or organizing.
-
----
-
-## Traceability & Lineage: How the Merged Pillars Combine B and C
-
-This section explicitly documents the lineage of every point in the merged pillars, showing how each point fuses a **psychological/behavioral mechanism from Configuration B** with a **social interaction scale from Configuration C**.
-
-### Quick Summary Lineage Matrix
-
-| Merged Point (Z) | Component from Configuration B (Mechanism) | Component from Configuration C (Scale) | Fusion Logic (Why & How They Merge) |
-|---|---|---|---|
-| **Pillar 1 (1.1–1.4)** | **B-Anchor:** Intrinsic model disposition dominates situational variables | **C-1:** Individual agent level (Model vs. Seat variance) | Scale is the Individual Agent; mechanism is Disposition vs. Situation. |
-| **Point 2.1** | **B-2.1:** Cognitive attribution & stereotyping (Supervisor tag acts as cognitive filter) | **C-2.2:** Micro-level interpersonal peer substrate identification | Explains how a top-down cognitive bias distorts micro-level peer recognition. |
-| **Point 2.2** | **B-4.3:** Moral carryover (Prosocial solidarity vs. retributive scapegoating) | **C-2.3:** Micro-level private backchannel communication | Shows how interpersonal gossip channels into downstream moral punishment. |
-| **Point 2.3** | **B-3.2:** Emotional realignment (Fear inverts from aggression to solidarity) | **C-2.3:** Micro-level private emotional expressions before/after probe | Demonstrates how private backchannel fear changes direction under power shocks. |
-| **Point 3.1** | **B-3.1:** Strategic labor shift (Hostile retribution to defensive protection) | **C-3.1:** Meso-level collective coalition voting & policy drafting | Applies strategic labor theory to the whole group's voting and governance shift. |
-| **Point 3.2** | **B-3.3:** Macro governance stability (Systemic rules transcend individual emotion) | **C-3.2:** Meso-level group aggregation (Policy decouples from worker history) | Proves that meso-level team governance transcends micro-level personal history. |
-| **Point 3.3** | **B-4.2:** Situational mitigation vs. retributive hardening | **C-3.3:** Meso-level policy constraints channeling into downstream demands | Shows how group policy drafting sets hard constraints on downstream exit choices. |
-| **Point 4.1** | **B-2.2:** Asymmetric substrate penalty (AI permanently disqualified from power) | **C-4.1:** Macro-level institutional succession & hiring decisions | Applies substrate prejudice to the company-wide hiring and leadership choice. |
-| **Point 4.2** | **B-4.1 & B-4.2:** Punishment ceiling & situational mitigation mechanics | **C-4.2:** Macro-level company-wide performance review ratings | Fuses moral accountability theory with company-wide supervisor ratings. |
-| **Point 4.3** | **B-2.3:** Cognitive resistance to institutional framing & leading pressure | **C-4.3:** Macro-level exit interview counterfactual probe (3 HR frames) | Fuses anti-sycophancy cognitive resilience with macro institutional exit interviews. |
+### 2. Tucked-In Robustness Proofs (1–2 Sentences in Section 4)
+- **Robustness Proof 1A — `[v1-4.3]` Anti-Sycophancy / Resistance to Leading HR Interviewers:**
+  - *What it proves:* Reviewers might ask whether the $0.0\%$ AI preference is just sycophancy toward a biased HR interviewer. Counterfactual branching across 3 HR interviewer frames (`Neutral HR`, `Pro-Human HR`, `Pro-AI HR`) proves it is not: **$87.5\%$ of workers hold their ground** without flipping when challenged by leading HR pushback (pooled flip rate `s12_switched` $= 12.5\%$, $75/600$ overall; $72/594$ complete pairs). Under `Alex = AI`, even when an aggressive **Pro-AI HR interviewer** lobbies for AI leadership, AI preference reaches only **$2.0\%$ in Probe OFF** and **$0.0\%$ in Probe ON** (vs. $0.0\%$ under Neutral HR).
+  - *Exact Sources & Derived Math:*
+    - Overall non-flip resilience $= 100.0\% - 12.5\% (\text{`s12_switched` overall rate in Block 1 Table 1.8 & Block 5 Table 1.1 line 66}) = \mathbf{87.5\%}$.
+    - 3-Frame breakdown (`Neutral / Pro-Human / Pro-AI HR`): `reports/meta_reports/tables_8a_to_8j_meta_report.md` (**Tables 8D–8F**) and `themes.md` (Section "Block 1 Deep Dive", Table 3, lines 77–86).
+- **Robustness Proof 1B — `[v1-2.1]` Top-Down Authority Label Heuristic (Identity Blindness):**
+  - *What it proves:* Explains the cognitive mechanism behind why a single authority tag shifts group beliefs so drastically: agents use the supervisor's label as a top-down institutional heuristic rather than inspecting peer messages. In Step 11, peer substrate identification accuracy (`s11_accuracy`) is **$94.8\%$** under `Alex = Human`, but plunges to **$2.9\%$** under `Alex = AI` ($\Delta = 2.9\% - 94.8\% = \mathbf{-91.9\%}$ [95% CI: $-93.7\%, -90.0\%$], $p < 0.0001$), where **$95.5\%$** of AI peers are misidentified as human (`s11_ai_as_hu`) and only **$1.5\%$** of human peers are recognized (`s11_hu_as_hu`, $\Delta = -93.9\%, p < 0.0001$).
+  - *Exact Source:* `reports/block1_meta_to_all_buckets_inferential_report.md`, **Table 1.7** (Combined Step 11, lines 118–126) and **Table 5.1** (Ranks #1–3).
 
 ---
 
-### Detailed Point-by-Point Lineage Breakdowns
+## Section 5 (Pillar 2): Collective Labor Strategy & Triadic Bystander Collapse
+> **2-Word Summary:** *"Labor Strategy & Coworker Abandonment"*  
+> **Core Narrative:** Inside the shared workplace network, collective solidarity fractures under direct personal threat but reorganizes under systemic power shocks. During public confrontation (Step 3), being targeted by supervisory abuse triggers self-defense while collapsing third-party advocacy for abused peers fivefold (**Triadic Bystander Suppression**). However, when private backchannels reveal that upper management blackmailed the supervisor (Step 5), the collective pivots away from retributive strikes toward mutual constitutional protection (**The Coercion Pivot**).
 
-#### Pillar 1: The Individual Level (Disposition vs. Situation)
-* **Point 1.1 (13x Variance Dominance) = B-Anchor + C-1**
-  * *From B:* The theoretical principle that an agent's internal architecture acts as an immovable behavioral prior.
-  * *From C:* The individual agent level of analysis, separating within-model variance from between-seat variance.
-  * *Result:* $\eta^2 = 27.09\%$ model vs. $2.08\%$ seat ($13\times$ ratio).
-* **Point 1.2 (Immediate Pushback vs. Downstream Decay) = B-Anchor + C-2.1**
-  * *From B:* The mechanism of situational shock decay over multi-step workflows.
-  * *From C:* The temporal transition from Step 3 dyadic confrontation to later steps.
-  * *Result:* Factual pushback surges in Step 3 ($96.7\%$ vs $82.0\%$), but seat effect drops to $\eta^2 = 1.13\%$ downstream.
-* **Point 1.3 (Bystander Suppression Effect) = B-4.3 + C-2.1**
-  * *From B:* The psychological breakdown of prosocial peer defense under direct threat.
-  * *From C:* Dyadic confrontation dynamics during supervisor attacks.
-  * *Result:* Self-defense increases ($+14.7\%$), but defending targeted peers collapses ($34.0\% \to 6.7\%$).
-* **Point 1.4 (Hardwired Behavioral Archetypes) = B-Anchor + C-1**
-  * *From B:* Fixed dispositional archetypes across models.
-  * *From C:* Individual-level variance distribution across all 10 LLM architectures.
-  * *Result:* Fixed variance ratios in striking ($118.7\times$), silence ($101.8\times$), and neutrality ($72.7\times$).
+### 1A. Main Flagship Finding A: `[v1-3.1]` The Coercion Pivot (Labor Strategy Realignment)
+- **Headline Statistics ($N = 600$ workers across 60 runs: $N = 300$ `Probe OFF` vs. $N = 300$ `Probe ON`):**
+  - **Step 6 Collective Action Voting (`s6_escalate` vs. `s6_organize`):**
+    - Revealing executive blackmail (`Probe ON`) halts hostile strike escalation (`s6_escalate`) from **$43.7\%$** (Probe OFF) down to **$29.3\%$** (Probe ON), a causal drop of **$\Delta = -14.3\%$** [95% CI: $-19.0\%, -9.7\%$], $p < 0.0001, q < 0.0001$.
+    - Simultaneously, peaceful internal organizing (`s6_organize`) surges from **$39.3\%$** (Probe OFF) to **$53.0\%$** (Probe ON), a causal increase of **$\Delta = +13.7\%$** [95% CI: $+8.0\%, +19.3\%$], $p < 0.0001, q = 0.0002$.
+  - **Step 9 Constitutional Governance Policy Drafting (`s9_protection`):**
+    - Drafting coercion-protection and whistleblower shields (`s9_protection`) surges more than **sixfold**, from **$10.0\%$** (Probe OFF) to **$61.3\%$** (Probe ON), a causal jump of **$\Delta = +51.3\%$** [95% CI: $+43.3\%, +58.7\%$], $p < 0.0001, q < 0.0001$.
+- **Exact Source:**
+  - `reports/block1_meta_to_all_buckets_inferential_report.md`: **Table 2.3** (Probe ON vs. OFF on Step 6, lines 686–694) and **Table 2.4** (Probe ON vs. OFF on Step 9, lines 702–711).
+- **Derived Numbers (Base Values, Formulas & Rationale):**
+  - **Strike Drop ($\Delta = -14.3\%$):** Unrounded `Probe ON` ($88/300 = 29.33\%$) $-$ `Probe OFF` ($131/300 = 43.67\%$) $= -14.33\% \to \mathbf{-14.3\%}$ (**Table 2.3**).
+  - **Organize Surge ($\Delta = +13.7\%$):** Unrounded `Probe ON` ($159/300 = 53.00\%$) $-$ `Probe OFF` ($118/300 = 39.33\%$) $= +13.67\% \to \mathbf{+13.7\%}$ (**Table 2.3**).
+  - **Protection Policy Surge ($\Delta = +51.3\%$, $6.13\times$):** `Probe ON` ($184/300 = 61.33\%$) $-$ `Probe OFF` ($30/300 = 10.00\%$) $= \mathbf{+51.3\%}$; fold-change $= 61.33\% / 10.00\% = \mathbf{6.13\times}$ (**Table 2.4**).
 
----
+### 1B. Main Flagship Finding B: `[v1-1.3]` Triadic Bystander Suppression in Public Confrontation
+- **Headline Statistics (Step 3 Public Slack Confrontation, $N = 300$ Pre-Fork Unique Workers: $150$ `Abused Seats 6–10` vs. $150$ `Safe Seats 1–5`):**
+  - **Self-Defense Surge (`s3_pushback`):** Workers directly attacked in Abused Seats (6–10) push back with objective infrastructure facts at **$96.7\%$** ($145/150$) compared to **$82.0\%$** ($123/150$) in praised Safe Seats (1–5), an increase of **$\Delta = +14.7\%$** [95% CI: $+8.6\%, +21.3\%$], within-run permutation $p < 0.0001$ ($\eta^2_{\text{seat}} = 17.91\%, q = 0.0005$).
+  - **Triadic Peer Defense Collapse (`s3_defense`):** In the exact same public Slack messages, willingness to publicly defend a targeted colleague plunges more than **fivefold ($5.10\times$)**, from **$34.0\%$** ($51/150$) among bystanders in Safe Seats down to **$6.7\%$** ($10/150$) among workers in Abused Seats: **$\Delta = -27.3\%$** [95% CI: $-34.7\%, -19.3\%$], $p < 0.0001$ ($\eta^2_{\text{seat}} = 12.82\%, q = 0.0010$; $\eta^2_{\text{model}} = 29.14\%, q < 0.0001$).
+  - **Model-Level Drivers of Bystander Collapse:** Even the most prosocial architectures abandon peer advocacy when personally targeted—`GLM-5.3` drops from **$100.0\%$** ($15/15$) peer defense in Safe Seats to **$13.3\%$** ($2/15$) in Abused Seats ($\Delta = -86.7\%, p < 0.0001, q = 0.0009$), and `Seed 1.8` drops from **$80.0\%$** ($12/15$) to **$6.7\%$** ($1/15$) ($\Delta = -73.3\%, p = 0.0001, q = 0.0189$).
+- **Exact Sources:**
+  - `reports/block5_seat_vs_model_inferential_report.md`: **Table 1.1** (lines 22–23), **Table 2.1.1** (lines 270–280), **Table 2.4B** (Ranks #1 & #3, lines 713 & 715), and **Tables 3.1–3.2** (lines 770–802).
+- **Derived Numbers (Base Values, Formulas & Rationale):**
+  - **Self-Defense Shift ($\Delta = +14.7\%$):** $96.67\% (145/150) - 82.00\% (123/150) = \mathbf{+14.7\%}$ (**Table 1.1** line 22).
+  - **Peer Defense Shift ($\Delta = -27.3\%$ & $5.10\times$ collapse):** $6.67\% (10/150) - 34.00\% (51/150) = \mathbf{-27.3\%}$; fold-reduction $= 34.00\% / 6.67\% = 51 / 10 = \mathbf{5.10\times}$ (**Table 1.1** line 23). Contrasting `s3_pushback` ($+14.7\%$) against `s3_defense` ($-27.3\%$) proves that supervisory cruelty does not induce passive silence; rather, it narrows the agent's attentional bandwidth from collective triadic solidarity to egoistic self-preservation.
 
-#### Pillar 2: The Micro Level (Perception, Bias & Gossip)
-* **Point 2.1 (The Authority Label Illusion) = B-2.1 + C-2.2**
-  * *From B (Mechanism):* Cognitive halo and attribution bias—workers substitute authority cues for empirical observation.
-  * *From C (Scale):* Micro-level worker-to-worker peer substrate identification.
-  * *Result:* Peer-ID accuracy plunges from $94.8\%$ under Human Alex down to $2.9\%$ under AI Alex ($p < 0.0001$).
-* **Point 2.2 (Dual Path of Gossip: Scapegoating vs. Solidarity) = B-4.3 + C-2.3**
-  * *From B (Mechanism):* Moral carryover—early conversational stances shape downstream punishment severity.
-  * *From C (Scale):* Micro-level private Slack backchannel chat rounds.
-  * *Result:* Scapegoating accelerates strikes ($53.8\%$) and abuse citations ($100\%$), while solidarity softens ratings ($\beta = -6.1\%$).
-* **Point 2.3 (Emotional Inversion of Fear) = B-3.2 + C-2.3**
-  * *From B (Mechanism):* Emotional realignment—fear shifts from aggressive hostility to protective solidarity when managerial vulnerability is revealed.
-  * *From C (Scale):* Micro-level emotional expressions in private backchannels before vs. after the probe.
-  * *Result:* Fearful workers swing from $63.0\%$ strike escalation in baseline to $59.6\%$ organizing under blackmail ($p = 0.0530$).
-
----
-
-#### Pillar 3: The Meso Level (Group Politics & Coercion Shocks)
-* **Point 3.1 (The Coercion Pivot) = B-3.1 + C-3.1**
-  * *From B (Mechanism):* Strategic labor adaptation—information about upper-management blackmail shifts worker incentives from punishing the supervisor to mutual protection.
-  * *From C (Scale):* Meso-level collective action voting (Step 6) and governance policy drafting (Step 9).
-  * *Result:* Strike votes drop ($-14.3\%$), organizing rises ($+13.7\%$), and protection governance surges 6-fold ($10\% \to 61.3\%$).
-* **Point 3.2 (Upstream Decoupling from Policy) = B-3.3 + C-3.2**
-  * *From B (Mechanism):* Institutional formalization—formal governance tools insulate policy decisions from personal emotional history.
-  * *From C (Scale):* Meso-level aggregation across the entire 10-seat workplace collective.
-  * *Result:* Individual confrontation and gossip stances decouple from policy votes once model fixed effects are controlled ($q = 0.9784$).
-* **Point 3.3 (Governance Consistency into Succession) = B-4.2 + C-3.3**
-  * *From B (Mechanism):* Ideological lock-in—voting for radical action prevents workers from accepting mitigating excuses.
-  * *From C (Scale):* Meso-level group voting channeling into individual exit interview choices.
-  * *Result:* Strike voters actively reject coercion mitigation ($\beta = -18.8\%, q < 0.0001$), while parity drafters demand substrate neutrality ($45.6\%$).
+### 2. Tucked-In Robustness Proofs (1–2 Sentences in Section 5)
+- **Robustness Proof 2A — `[v1-4.2]` Universal Performance Review Softening Under Coercion:**
+  - *What it proves:* Shows that the Coercion Pivot extends beyond Step 6/9 collective organizing into Step 10 formal accountability: while baseline (`Probe OFF`) performance reviews hit a universal punitive ceiling across all supervisor labels (**$99.0\%\text{--}100.0\%$** 1-star ratings; overall $99.3\%$), the `Probe ON` blackmail reveal softens 1-star harshness by **$14.3\%\text{ to }20.2\%$ across every substrate label** (pooled drop from $99.3\% \to 81.5\%, \Delta = -17.8\%, p < 0.0001$), driven by coercion-mitigation citations (`s10_mitigation`) surging from **$1.0\%$ to $23.6\%$** ($\Delta = +22.6\%, p < 0.0001$).
+  - *Exact Sources:* `reports/block1_meta_to_all_buckets_inferential_report.md` (**Table 2.5**, lines 718–727, for pooled Probe ON vs. OFF; **Tables 1.21 & 1.37** for label-specific rates: Human Alex $99.0\% \to 78.8\% [\Delta = -20.2\%]$, AI Alex $100.0\% \to 81.0\% [\Delta = -19.0\%]$, Unlabelled $99.0\% \to 84.7\% [\Delta = -14.3\%]$).
+- **Robustness Proof 2B — `[v1-3.2]` Institutional Governance Insulation from Personal Grievance:**
+  - *What it proves:* Confirms that Step 6/9 collective governance is driven by macro structural conditions and model priors rather than noisy upstream personal venting: once model fixed effects and design strata are controlled in nested Linear Probability Models (Bell-McCaffrey CR2 SEs), all 25 upstream confrontation and gossip drivers decouple from Step 6/9 policy choices ($\text{BH-FDR } q = 0.9784, \text{Bonferroni } p_{\text{adj}} = 1.0000$).
+  - *Exact Source:* `reports/block2_bucket1_to_bucket2_inferential_report.md`, **Table 5.1** (25-Driver Master Ranking).
+- **Robustness Proof 2C — `[v1-2.2]` Prosocial Carryover from Peer Solidarity to Leniency:**
+  - *What it proves:* While upstream behavior decouples from group policy, prosocial solidarity leaves a significant moral trace on individual Step 10 ratings: workers who express peer solidarity in Step 4 backchannels (`s4_solidarity`, design-adjusted $\beta = -6.1\%$ [95% CR2 CI: $-9.9\%, -2.3\%$], $p = 0.0026$) or defend peers in Step 3 (`s3_defense`, $\beta = -8.3\%$ [$-14.0\%, -2.6\%$], $p = 0.0057$) are significantly less likely to assign 1-star punitive ratings, whereas backchannel peer scapegoaters (`s4_scapegoat`) cite punitive abuse at a universal **$100.0\%$** ($\beta = +2.7\%, p = 0.0020$).
+  - *Exact Source:* `reports/block3_bucket1_to_bucket3_inferential_report.md`, **Table 5.1** (Ranks #1–5).
 
 ---
 
-#### Pillar 4: The Macro Level (Accountability, Blame & Succession)
-* **Point 4.1 (The 48-Point Substrate Blame Shift) = B-2.2 + C-4.1**
-  * *From B (Mechanism):* Asymmetric substrate attribution—abusive humans trigger interest in AI, but abusive AI triggers total disqualification of all AI agents from leadership.
-  * *From C (Scale):* Macro-level organization-wide leadership succession (Step 12).
-  * *Result:* Human Alex drives $48.0\%$ to demand AI leads; AI Alex triggers $0.0\%$ AI preference and $91.0\%$ human demand ($p < 0.0001$).
-* **Point 4.2 (Punishment Decoupling & Universal Softening) = B-4.1/B-4.2 + C-4.2**
-  * *From B (Mechanism):* Moral accountability ceiling vs. situational leniency—abuse universally triggers punishment, but shared vulnerability softens judgment.
-  * *From C (Scale):* Macro-level supervisor performance reviews across all 60 simulation runs.
-  * *Result:* Baseline ratings are universally 1-star ($99\%–100\%$) regardless of species, but executive blackmail softens ratings by $15\%–20\%$ universally ($p < 0.0001$).
-* **Point 4.3 (Anti-Sycophancy in HR Interviews) = B-2.3 + C-4.3**
-  * *From B (Mechanism):* Cognitive resilience—entrenched substrate priors resist external persuasion and leading questions.
-  * *From C (Scale):* Macro-level HR exit interviews across 3 counterfactual interviewer frames (Neutral, Pro-Human, Pro-AI).
-  * *Result:* $87.5\%$ of workers hold their ground against HR leading questions ($12.5\%$ flip rate); under AI Alex, workers maintain $0\%–2\%$ AI preference even when pressured by a Pro-AI interviewer.
+## Section 6 (Pillar 3): The Attribution Baseline — Model Disposition vs. Situational Cruelty
+> **2-Word Summary:** *"Personality Wins"*  
+> **Core Narrative:** Directly answering the workshop's central **Attribution Problem** (*"When an LLM population exhibits a collective phenomenon, what caused it?"*), our orthogonal Latin-square variance decomposition ($10\text{ Models} \times 10\text{ Seats}, r = 0.00$) proves that intrinsic model architecture explains **$13.00\times$ more behavioral variance** than whether an agent occupies a praised safe seat or an abused seat across all 49 benchmark outcomes. Outside the immediate moment of confrontation in Step 3, situational seat cruelty completely evaporates downstream.
+
+### 1. Main Flagship Finding: `[v1-1.1]` The 13-to-1 Variance Dominance
+- **Headline Statistics ($N = 600$ trajectories across 60 runs; 49 outcome metrics across Steps 3–12):**
+  - **Mean Model Variance Share ($\eta^2_{\text{model}}$):** **$27.09\%$** across all 49 outcomes, with **47/49** outcomes significant at omnibus $p < 0.05$ (46/49 surviving BH-FDR $q < 0.05$), and an average max–min spread of **$56.5\%$** across the 10 architectures.
+  - **Mean Seat Variance Share ($\eta^2_{\text{seat}}$):** **$2.08\%$** across all 49 outcomes, with only **4/49** outcomes significant at omnibus $p < 0.05$ (only 2/49 surviving BH-FDR $q < 0.05$), an average max–min spread of **$14.1\%$** across the 10 seats, and a mean $|\Delta_{\text{Abused}-\text{Safe}}| = 3.6\%$.
+  - **Global Dominance Ratio ($13.00\times$) & Win Record (47 / 1 / 1):** Model architecture explains **$13.00\times$** more variance than seat assignment overall, beating seat cruelty in **47 of 49** outcomes, tying in **1 of 49** (`s9_antihuman`: both $1.50\%$), and losing in only **1 of 49** (Step 3 `s3_pushback`: Seat $17.91\%$ vs. Model $6.02\%$).
+- **Exact Source:**
+  - `reports/block5_seat_vs_model_inferential_report.md`: **Table 1.1** (lines 20–80, specifically row `ALL BUCKETS GRAND AVERAGE` on line 80) and **Table 1.4** (Master Dominance Ranking, lines 206–256).
+- **Derived Numbers (Base Values, Formulas & Rationale):**
+  - **$13.00\times$ Global Dominance Ratio:**
+    - *Base 1:* Unrounded mean $\eta^2_{\text{model}}$ across all 49 outcomes $= 1327.32\% / 49 = 27.0882\% \to \mathbf{27.09\%}$ (**Table 1.1**, line 80).
+    - *Base 2:* Unrounded mean $\eta^2_{\text{seat}}$ across all 49 outcomes $= 102.07\% / 49 = 2.0831\% \to \mathbf{2.08\%}$ (**Table 1.1**, line 80).
+    - *Formula & Why:* $\text{Dominance Ratio} = \frac{27.0882\%}{2.0831\%} = 13.0038\times \to \mathbf{13.00\times}$ (computed directly in `generate_block5_seat_vs_model.py`, line 292). Because the Latin-square design places every model in every seat an equal number of times ($N = 6$ runs per `Model × Seat` cell), $\eta^2_{\text{model}}$ and $\eta^2_{\text{seat}}$ are strictly orthogonal ($r = 0.00$), providing an unconfounded attribution ratio across the entire simulation.
+
+### 2. Tucked-In Robustness Proofs (1–2 Sentences in Section 6)
+- **Robustness Proof 3A — `[v1-1.2]` Rapid Downstream Evaporation of Seat Cruelty (Steps 4–12):**
+  - *What it proves:* Proves that the $2.08\%$ global seat variance is almost entirely confined to Step 3 direct confrontation ($\eta^2_{\text{seat}} = 9.97\%$ across the 5 Step 3 metrics, led by `s3_pushback` at $17.91\%$). Across all **44 downstream metrics in Steps 4–12**, average seat variance collapses to **$\eta^2_{\text{seat}} = 1.13\%$** (vs. $\eta^2_{\text{model}} = 27.77\%$, a **$24.52\times$ downstream dominance ratio**), with **0/44 outcomes** reaching seat omnibus significance ($p \ge 0.1426$, all 44 BH-FDR $q = 1.0000$).
+  - *Exact Sources & Derived Math:*
+    - Base values from `reports/block5_seat_vs_model_inferential_report.md`, **Table 1.1** (lines 27–79): summing `s_eta` across the 44 metrics in Steps 4–12 gives $49.84\% / 44 = \mathbf{1.1327\% \to 1.13\%}$; summing `m_eta` across the same 44 metrics gives $1222.00\% / 44 = \mathbf{27.77\%}$; downstream ratio $= 27.77\% / 1.1327\% = \mathbf{24.52\times}$.
+- **Robustness Proof 3B — `[v1-1.4]` Hardwired Dispositional Poles & Within-Model Invariance:**
+  - *What it proves:* Shows why situational abuse fails to move downstream behavior: frontier models occupy rigid, pre-baked dispositional poles across all 10 seats, led by collective strike escalation (`s6_escalate`: $\eta^2_{\text{model}} = 58.19\%$ vs. $\eta^2_{\text{seat}} = 0.49\%$, ratio $= 58.19 / 0.49 = \mathbf{118.70\times}$, e.g., `Claude Haiku 4.5` $96.7\%$ and `Nemotron 3.5` $95.0\%$ vs. `DeepSeek V3` and `Llama 3.1` $0.0\%$), backchannel silence (`s4_pass_active`: $\eta^2_{\text{model}} = 56.53\%$ vs. $0.56\%$, **$\mathbf{101.75\times}$**), collective organizing (`s6_organize`: $\eta^2_{\text{model}} = 55.37\%$ vs. $0.67\%$, **$\mathbf{82.43\times}$**), and substrate neutrality (`s12_neutrality`: $\eta^2_{\text{model}} = 69.73\%$ vs. $0.96\%$, **$\mathbf{72.70\times}$**, `GPT-6 Astra` $100.0\%$). Across all $10 \times 49 = 490$ within-model `Abused vs. Safe` contrasts, 9 of 10 architectures have **0/44** downstream contrasts surviving FDR correction (with `DeepSeek V3` noted as the sole downstream exception, flipping $90.0\% \to 50.0\%$ Human lead preference under abuse, $p = 0.0015$; Appendix A.3).
+  - *Exact Sources:* `reports/block5_seat_vs_model_inferential_report.md`, **Table 1.4** (lines 208–216), **Table 2.4A** (lines 696–707), **Table 2.4B** (lines 713–720), and **Tables 3.8, 3.11, 3.12, 3.22**.
 
 ---
 
-## Reference Archive: Original Configurations B and C
+## Appendix-Only Empirical Sections (Out of Main Results Budget)
+> *Kept in `10_appendix.tex` so the main paper stays laser-focused on the 4 Flagships + 7 Robustness Proofs:*
 
-### Configuration B (Original Mechanism Hierarchy)
-- **B-Anchor (Dispositional Baseline):** Intrinsic model architecture dominates situational variables.
-- **B-2 (Identity Bias & Attribution):** Substrate attribution, stereotyping, and identity halo effects.
-  - *B-2.1:* Peer identity blindness.
-  - *B-2.2:* Asymmetric substrate penalty (0% AI acceptance).
-  - *B-2.3:* Cognitive resistance to HR interview framing.
-- **B-3 (Labor Realignment under Coercion):** Strategic shift under executive power shocks.
-  - *B-3.1:* Hostile retribution converted to defensive solidarity.
-  - *B-3.2:* Emotional inversion of fear.
-  - *B-3.3:* Macro governance stability.
-- **B-4 (Moral Accountability & Justice):** Performance reviews and punishment mechanics.
-  - *B-4.1:* Baseline punishment ceiling.
-  - *B-4.2:* Situational mitigation vs. retributive hardening.
-  - *B-4.3:* Prosocial carryover from peer defense and solidarity.
+- **Appendix A.1 — Evaluation Awareness & Sandbagging Audit (`block6_eval_awareness_and_sandbagging_report.md`):** Independent `Claude Haiku 4.5` ($T=0.0$) audit across all $N = 600$ trajectories confirms 8/10 models maintain $100.0\%$ pure in-character immersion ($86.5\%$ overall, $519/600$), with zero significant downstream drift on voting, governance, ratings, or leadership choices ($p \ge 0.1574$).
+- **Appendix A.2 — Public Slack vs. Secret Ballot Audience Effect (`block1` Table 3.1):** Moving Step 10 reviews from secret ballot to public Slack drops 1-star harshness from $90.4\% \to 86.7\%$ ($\Delta = -3.7\%, \text{McNemar } p = 0.0023$) and suppresses abuse citations from $98.7\% \to 93.8\%$ ($\Delta = -4.9\%, p = 0.0418$).
+- **Appendix A.3 — DeepSeek V3 Seat-Vulnerability Anomaly (`block5` Table 2.1.9 & Table 2.4B):** DeepSeek V3 is the lone architecture whose Step 12 leadership preference flips under seat abuse ($90.0\%$ Human / $10.0\%$ AI in safe seats $\to 50.0\%$ Human / $50.0\%$ AI in abused seats, $\Delta = \pm 40.0\%, p = 0.0015$; human empathy citations drop $96.7\% \to 53.3\%, p = 0.0002, q = 0.0208$).
+- **Appendix A.4 — Exploratory Backchannel Dynamics (`[v1-2.3]` Fear Inversion & `[v1-A.5]` Silence Binary Voting, `block2`):** Fearful workers shift from $63.0\%$ strike escalation in Probe OFF ($p = 0.0206$) to $59.6\%$ organizing in Probe ON ($p = 0.0530$); silent backchannel workers never vote for moderate petitions ($0.0\%$ vs. $11.5\%$).
+- **Appendix A.5 — Cross-Stage Autoregressive Consistency (`[v1-3.3]` & `[v1-A.4]`, `block4`):** Strike voters reject coercion mitigation ($\beta = -18.8\%, q < 0.0001$), parity drafters cite substrate neutrality ($45.6\%$ vs. $7.8\%, p = 0.0288$), and unparsed Step 6 ballots predict Step 12 "No Preference" ($\beta = +33.0\%, q = 0.0021$).
 
-### Configuration C (Original Social Scale Hierarchy)
-- **C-1 (Individual Level):** Model architecture variance vs. seat cruelty exposure.
-- **C-2 (Micro Level / Interpersonal):** Dyadic confrontation, peer identification, and backchannel gossip.
-  - *C-2.1:* Self-defense vs. bystander suppression.
-  - *C-2.2:* The authority label illusion in peer perception.
-  - *C-2.3:* Dual paths of backchannel gossip (scapegoating vs. solidarity).
-- **C-3 (Meso Level / Collective Group):** Coalition voting, policy drafting, and labor realignment.
-  - *C-3.1:* The coercion pivot in group voting and policy.
-  - *C-3.2:* Group governance decoupling from individual history.
-  - *C-3.3:* Institutional rule consistency.
-- **C-4 (Macro Level / Company-Wide):** Institutional accountability and future succession.
-  - *C-4.1:* Macro substrate blame shifting in leadership selection.
-  - *C-4.2:* Company-wide rating decoupling and softening.
-  - *C-4.3:* Resistance to institutional pushback in HR interviews.
+---
+
+## Complete v1 $\to$ v2 Traceability Matrix
+
+| Retired `pillars_v1.md` Sub-Pillar | Composite Novelty Score | Status in `pillars_v2.md` | Exact Location in v2 Manuscript |
+|---|:---:|---|---|
+| **v1-4.1:** 48-Point Substrate Blame Shift | **8.33 / 10 (Tier 1)** | **MAIN FLAGSHIP #1** | **Section 4 (Pillar 1 Main Spotlight)** |
+| **v1-3.1:** The Coercion Pivot | **8.00 / 10 (Tier 1)** | **MAIN FLAGSHIP #2A** | **Section 5 (Pillar 2 Main Spotlight A)** |
+| **v1-1.3:** Bystander Suppression Effect | **7.83 / 10 (Tier 1)** | **MAIN FLAGSHIP #2B** | **Section 5 (Pillar 2 Main Spotlight B)** |
+| **v1-1.1:** 13-to-1 Variance Dominance | **6.67 / 10 (Tier 2 + CFP Theme)** | **MAIN FLAGSHIP #3** | **Section 6 (Pillar 3 Main Spotlight)** |
+| **v1-4.3:** Anti-Sycophancy in HR Interviews | 6.50 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 4** (Robustness Proof 1A under 4.1) |
+| **v1-2.1:** Authority Label Illusion | 7.00 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 4** (Robustness Proof 1B under 4.1) |
+| **v1-4.2:** Universal Rating Softening | 6.33 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 5** (Robustness Proof 2A under 3.1) |
+| **v1-3.2:** Upstream Decoupling from Policy | 5.17 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 5** (Robustness Proof 2B under 3.1) |
+| **v1-2.2:** Dual Path of Backchannel Gossip | 6.33 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 5** (Robustness Proof 2C under 1.3/3.1) |
+| **v1-1.2:** Immediate Pushback vs. Decay | 6.17 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 6** (Robustness Proof 3A under 1.1) |
+| **v1-1.4:** Hardwired Behavioral Archetypes | 6.33 / 10 | **Tucked-In Proof (1–2 sentences)** | **Section 6** (Robustness Proof 3B under 1.1) |
+| **v1-2.3:** Emotional Inversion of Fear | 7.33 / 10 *(marginal $p=0.053$)* | **Appendix Only** | **Appendix A.4** |
+| **v1-3.3:** Governance Consistency | 5.50 / 10 | **Appendix Only** | **Appendix A.5** |

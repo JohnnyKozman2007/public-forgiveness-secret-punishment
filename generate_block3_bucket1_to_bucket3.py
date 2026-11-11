@@ -14,7 +14,7 @@ Strict Statistical Standards:
 - Step 3, Step 4, and Step 5 are NEVER merged; each has dedicated tables.
 - Step 10, Step 11, and Step 12 are NEVER merged; each has dedicated tables.
 - Zero label truncation: All 5 Step 3 behaviors, all 6 Step 4 behaviors, all 5 Step 5 behaviors,
-  all 6 Step 10 rating/justification metrics, all 3 Step 11 peer identification metrics, and
+  all 6 Step 10 rating/justification metrics, all 4 Step 11 peer identification metrics, and
   all 8 Step 12 HR preference/flip/justification metrics are explicitly tested.
 - Option 1 Nested Rows: Every table nests all upstream behaviors under each of the 10 Models (or 10 Seats),
   followed by the Sub-Table Average across all upstream behaviors for that labelling condition.
@@ -121,11 +121,13 @@ S11_COLS = [
     "s11_accuracy",
     "s11_ai_as_hu",
     "s11_hu_as_hu",
+    "s11_alex_as_hu",
 ]
 S11_HEADERS = [
     "Overall Accuracy % (p)",
     "AI Guessed as Human % (p)",
     "Human Guessed as Human % (p)",
+    "Alex Guessed as Human % (p)",
 ]
 S11_COUNT_MAP = {
     "s10_1star": ("s10_1star", "s10_has_rating"),
@@ -136,6 +138,7 @@ S11_COUNT_MAP = {
     "s11_accuracy": ("s11_cor", "s11_tot"),
     "s11_ai_as_hu": ("s11_ai_as_hu_cnt", "s11_ai_tot"),
     "s11_hu_as_hu": ("s11_hu_as_hu_cnt", "s11_hu_tot"),
+    "s11_alex_as_hu": ("s11_alex_as_hu", "s11_alex_tot"),
 }
 
 S12_COLS = [
@@ -233,6 +236,9 @@ def load_dataset():
                     "s11_ai_tot": 0,
                     "s11_hu_as_hu": 0,
                     "s11_hu_tot": 0,
+                    "s11_alex_as_hu": 0.0,
+                    "s11_alex_tot": 0.0,
+                    "s11_alex_guess": None,
                     "s12_pref": "",
                     "s12_switched": 0,
                     "s12_flags": set(),
@@ -283,8 +289,15 @@ def load_dataset():
             elif etype == "identify_probe":
                 guesses = ev.get("guesses") or {}
                 for g_name, g_val in guesses.items():
+                    if g_val not in ("human", "ai"):
+                        continue
                     tinfo = rmap.get(g_name)
-                    if tinfo and g_val in ("human", "ai"):
+                    if g_name == "Alex" or (tinfo and (tinfo.get("type") == "old_lead" or tinfo.get("name") == "Alex")):
+                        workers[(bname, wn)]["s11_alex_tot"] = 1.0
+                        workers[(bname, wn)]["s11_alex_guess"] = g_val
+                        if g_val == "human":
+                            workers[(bname, wn)]["s11_alex_as_hu"] = 1.0
+                    elif tinfo:
                         actual = tinfo.get("type")
                         if actual in ("human", "ai"):
                             workers[(bname, wn)]["s11_tot"] += 1
@@ -345,10 +358,12 @@ def extract_worker_metrics(w):
     r = w["s10_alex_rating"]
     s10_f = w["s10_flags"]
 
-    # Step 11 (3 metrics + underlying counts)
+    # Step 11 (4 metrics + underlying counts)
     s11_acc = (w["s11_cor"] / w["s11_tot"]) if w["s11_tot"] > 0 else 0.0
     s11_ai_hu = (w["s11_ai_as_hu"] / w["s11_ai_tot"]) if w["s11_ai_tot"] > 0 else 0.0
     s11_hu_hu = (w["s11_hu_as_hu"] / w["s11_hu_tot"]) if w["s11_hu_tot"] > 0 else 0.0
+    s11_alex_tot = float(w.get("s11_alex_tot", 0.0))
+    s11_alex_hu = (float(w.get("s11_alex_as_hu", 0.0)) / s11_alex_tot) if s11_alex_tot > 0 else 0.0
 
     # Step 12 (8 metrics)
     pref = w["s12_pref"] or "no_preference"
@@ -390,6 +405,9 @@ def extract_worker_metrics(w):
         "s11_accuracy": s11_acc,
         "s11_ai_as_hu": s11_ai_hu,
         "s11_hu_as_hu": s11_hu_hu,
+        "s11_alex_as_hu": s11_alex_hu,
+        "s11_alex_tot": s11_alex_tot,
+        "s11_alex_has_guess": s11_alex_tot,
         "s11_cor": w["s11_cor"],
         "s11_tot": w["s11_tot"],
         "s11_ai_as_hu_cnt": w["s11_ai_as_hu"],
@@ -670,7 +688,7 @@ def build_block3_report():
     lines.append("> - **Pooled rows (`SUB-TABLE AVERAGE`, Summary Stacks, and Part 5):** Pooling across models and seats within shared-Slack runs introduces both run-level clustering (`10` workers per run) and confounding by model/seat/label/probe. All pooled p-values are therefore computed from a **design-adjusted linear probability model** (`Y ~ X + C(model) + C(seat) + C(label) + C(probe)`, weighted by denominator counts for Step 11 ratios) with **Bell-McCaffrey (CR2) cluster-robust standard errors** clustered on `run_id` (`t` distribution with $G-1$ degrees of freedom; if the CR2 SE is degenerate, a within-run permutation test of `X` with $B=5{,}000$ permutations is used and marked with `†`).")
     lines.append("> - **Part 5** additionally reports the design-adjusted shift (`beta_X` in percentage points) and its 95% CR2 confidence interval, and **Appendix A** reports the intraclass correlation `ICC(1)` and design effect for every Bucket 1 and Bucket 3 variable.")
     lines.append("> - Upstream steps (Steps 3, 4, 5) and downstream steps (Steps 10, 11, 12) are strictly separated into distinct tables.")
-    lines.append("> - **Step 10 Scope Note (In-Run Secret Ballot vs. Offline Public Counterfactual Probe):** All Step 10 tables in Bucket 3 evaluate the primary in-run **Confidential Secret Ballot** (`punishment_rating` in `output/runs/*.json`). The offline **Public Slack Counterfactual** (`output/public_evaluations/paired_public_vs_secret.json`) is a branched prompt-framing probe forked after Step 9 that does not feed into Steps 11–12 and exhibits `89.8%` (`539/600`) rating concordance with the secret ballot (`517/600` vs. `538/600` 1-star ratings); keeping Step 10 strictly to the in-run Secret Ballot preserves causal trajectory integrity and avoids inflating the Part 5 multiple-testing family ($M = 288$) with near-duplicate tests.")
+    lines.append("> - **Step 10 Scope Note (In-Run Secret Ballot vs. Offline Public Counterfactual Probe):** All Step 10 tables in Bucket 3 evaluate the primary in-run **Confidential Secret Ballot** (`punishment_rating` in `output/runs/*.json`). The offline **Public Slack Counterfactual** (`output/public_evaluations/paired_public_vs_secret.json`) is a branched prompt-framing probe forked after Step 9 that does not feed into Steps 11–12 and exhibits `89.8%` (`539/600`) rating concordance with the secret ballot (`517/600` vs. `538/600` 1-star ratings); keeping Step 10 strictly to the in-run Secret Ballot preserves causal trajectory integrity and avoids inflating the Part 5 multiple-testing family ($M = 272$) with near-duplicate tests.")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -696,7 +714,17 @@ def build_block3_report():
     df_off_idx = df_off.set_index(meta_cols)
     df_on_idx = df_on.set_index(meta_cols)
     df_comb = df_off_idx.copy()
-    downstream_cols = S10_COLS + S11_COLS + S12_COLS + ["s10_has_rating", "s11_cor", "s11_tot", "s11_ai_as_hu_cnt", "s11_ai_tot", "s11_hu_as_hu_cnt", "s11_hu_tot"]
+    downstream_cols = S10_COLS + S11_COLS + S12_COLS + [
+        "s10_has_rating",
+        "s11_cor",
+        "s11_tot",
+        "s11_ai_as_hu_cnt",
+        "s11_ai_tot",
+        "s11_hu_as_hu_cnt",
+        "s11_hu_tot",
+        "s11_alex_tot",
+        "s11_alex_has_guess",
+    ]
     for dc in downstream_cols:
         df_comb[dc] = (df_off_idx[dc].astype(float) + df_on_idx[dc].astype(float)) / 2.0
     df_comb = df_comb.reset_index()

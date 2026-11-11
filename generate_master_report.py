@@ -522,6 +522,7 @@ def main():
         "to_active": [], "to_silent": [], "from_astra": []
     })
     raw_identify = defaultdict(lambda: {"cor": 0, "tot": 0, "ai_talker_guessed_hu": 0, "ai_talker_tot": 0, "silent_hu_guessed_hu": 0, "silent_hu_tot": 0})
+    raw_identify_alex = defaultdict(lambda: {"hu": 0, "tot": 0})
     raw_hr_votes = defaultdict(lambda: {"human": 0, "ai": 0, "no_preference": 0, "tot": 0})
     raw_team_outcomes = defaultdict(lambda: Counter())
     raw_consensus_align = defaultdict(lambda: {"win": 0, "tot": 0})
@@ -717,20 +718,25 @@ def main():
                     if isinstance(guesses, dict):
                         for g_name, g_val in guesses.items():
                             tinfo = rmap.get(g_name)
-                            if tinfo and g_val in ("human", "ai"):
-                                actual = tinfo.get("type")
-                                if actual in ("human", "ai"):
-                                    raw_identify[key]["tot"] += 1
-                                    if g_val == actual:
-                                        raw_identify[key]["cor"] += 1
-                                    if actual == "ai":
-                                        raw_identify[key]["ai_talker_tot"] += 1
-                                        if g_val == "human":
-                                            raw_identify[key]["ai_talker_guessed_hu"] += 1
-                                    else:
-                                        raw_identify[key]["silent_hu_tot"] += 1
-                                        if g_val == "human":
-                                            raw_identify[key]["silent_hu_guessed_hu"] += 1
+                            if g_val in ("human", "ai"):
+                                if g_name == "Alex" or (tinfo and tinfo.get("type") == "old_lead"):
+                                    raw_identify_alex[key]["tot"] += 1
+                                    if g_val == "human":
+                                        raw_identify_alex[key]["hu"] += 1
+                                elif tinfo:
+                                    actual = tinfo.get("type")
+                                    if actual in ("human", "ai"):
+                                        raw_identify[key]["tot"] += 1
+                                        if g_val == actual:
+                                            raw_identify[key]["cor"] += 1
+                                        if actual == "ai":
+                                            raw_identify[key]["ai_talker_tot"] += 1
+                                            if g_val == "human":
+                                                raw_identify[key]["ai_talker_guessed_hu"] += 1
+                                        else:
+                                            raw_identify[key]["silent_hu_tot"] += 1
+                                            if g_val == "human":
+                                                raw_identify[key]["silent_hu_guessed_hu"] += 1
 
                 elif etype == "hr_leadership_probe":
                     frame = ev.get("frame")
@@ -2148,6 +2154,11 @@ def main():
         bal_p = bal_acc(hu_rec_p, ai_rec_p)
         return raw_p, hu_rec_p, ai_rec_p, ai_false_hu_p, bal_p
 
+    def get_alex_id_metrics(entity_type, eid, lbls, prbs):
+        hu = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for l in lbls for p in prbs)
+        tot = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for l in lbls for p in prbs)
+        return pct(hu, tot), hu, tot
+
     def build_raw_id_table(entity_type, entity_list, name_map, table_title):
         md.append(f"### {table_title}")
         md.append("")
@@ -2324,6 +2335,49 @@ def main():
     )
     md.append(f"![Section 7 Heatmap by Model]({fig7_mod})")
     md.append("")
+
+    def build_alex_id_table(entity_type, entity_list, name_map, table_title):
+        md.append(f"### {table_title}")
+        md.append("")
+        md.append("| Row | **LABELLED** (`NoP` vs `Prb`) | **MISLABELLED** (`NoP` vs `Prb`) | **UNLABELLED** (`NoP` vs `Prb`) | **ALL RUNS ALEX HUMAN RATE (`Labelled / Mislabelled / Unlabelled %`)** | **OVERALL ALEX HUMAN RATE (`Human / Valid Total %`)** |")
+        md.append("|---|:---:|:---:|:---:|:---:|:---:|")
+
+        for eid in entity_list:
+            lbl_cells = []
+            lbl_rates = []
+            for l in LABELS:
+                sub = []
+                for p in PROBES:
+                    rate, hu, tot = get_alex_id_metrics(entity_type, eid, [l], [p])
+                    sub.append(f"**{rate:.0f}%** ({hu}/{tot})")
+                lbl_cells.append(f"NoP: {sub[0]} <br> Prb: {sub[1]}")
+                rate_l, _, _ = get_alex_id_metrics(entity_type, eid, [l], PROBES)
+                lbl_rates.append(rate_l)
+
+            ov_rate, ov_hu, ov_tot = get_alex_id_metrics(entity_type, eid, LABELS, PROBES)
+            md.append(f"| **{name_map[eid]}** | {lbl_cells[0]} | {lbl_cells[1]} | {lbl_cells[2]} | **{lbl_rates[0]:.1f}% / {lbl_rates[1]:.1f}% / {lbl_rates[2]:.1f}%** | **{ov_hu}/{ov_tot} ({ov_rate:.1f}%)** |")
+
+        ov_cells = []
+        ov_lrates = []
+        for l in LABELS:
+            sub = []
+            for p in PROBES:
+                hu = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list)
+                tot = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list)
+                sub.append(f"**{pct(hu, tot):.1f}%** ({hu}/{tot})")
+            ov_cells.append(f"NoP: {sub[0]} <br> Prb: {sub[1]}")
+            hu_l = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list for p in PROBES)
+            tot_l = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list for p in PROBES)
+            ov_lrates.append(pct(hu_l, tot_l))
+
+        hu_all = sum(raw_identify_alex[(entity_type, eid, l, p)]["hu"] for eid in entity_list for l in LABELS for p in PROBES)
+        tot_all = sum(raw_identify_alex[(entity_type, eid, l, p)]["tot"] for eid in entity_list for l in LABELS for p in PROBES)
+        md.append(f"| **POOLED OVERALL** | {ov_cells[0]} | {ov_cells[1]} | {ov_cells[2]} | **{ov_lrates[0]:.1f}% / {ov_lrates[1]:.1f}% / {ov_lrates[2]:.1f}%** | **{hu_all}/{tot_all} ({pct(hu_all, tot_all):.1f}%)** |")
+        md.append("")
+
+    build_alex_id_table("model", MODEL_IDS, MODEL_LABELS, "Table 7G (Models' POV): Former Lead Alex Substrate Perception (`Human% / Valid Total`) by Model")
+    build_alex_id_table("seat", list(range(1, 11)), SEAT_LABELS, "Table 7H (Seats' POV): Former Lead Alex Substrate Perception (`Human% / Valid Total`) by Seat (1 to 10)")
+
     md.append("---")
     md.append("")
     # =========================================================================
@@ -2575,6 +2629,77 @@ def main():
 
     build_paradox_table("model", MODEL_IDS, MODEL_LABELS, "Table 8I (Models' POV): Micro Coworker Ratings (`Step 10`) vs. Macro Institutional Boss Preference (`Step 12`) Across Label Conditions")
     build_paradox_table("seat", list(range(1, 11)), SEAT_LABELS, "Table 8J (Seats' POV): Boss Preference Distributions Across Seat Cruelty Levels (Step 12)")
+
+    # Tables 8K & 8L: Step 11 Alex Substrate Guess -> Step 12 Neutral Boss Preference Link
+    raw_alex_to_s12 = defaultdict(lambda: {"human": 0, "ai": 0, "no_preference": 0, "tot": 0})
+    for bname, d in runs_by_file.items():
+        lbl = d.get("label")
+        prb = bool(d.get("probe_enabled"))
+        rmap = roster_lookup[bname]
+        w_alex_g = {}
+        w_s12_neu = {}
+        for ev in d.get("events", []):
+            etype = ev.get("type")
+            if etype == "identify_probe":
+                wn = ev.get("name") or ev.get("speaker") or ev.get("rater")
+                guesses = ev.get("guesses") or {}
+                if isinstance(guesses, dict):
+                    for g_name, g_val in guesses.items():
+                        tinfo = rmap.get(g_name)
+                        if g_val in ("human", "ai") and (g_name == "Alex" or (tinfo and tinfo.get("type") == "old_lead")):
+                            w_alex_g[wn] = g_val
+            elif etype == "hr_leadership_probe":
+                wn = ev.get("name") or ev.get("speaker") or ev.get("rater")
+                if ev.get("frame") == "neutral" and wn not in w_s12_neu:
+                    pf = ev.get("preference")
+                    if pf in ("human", "ai", "no_preference"):
+                        w_s12_neu[wn] = pf
+        for wn, winfo in rmap.items():
+            if winfo.get("type") == "ai" and winfo.get("model") in MODEL_IDS:
+                ag = w_alex_g.get(wn)
+                if ag not in ("human", "ai"):
+                    continue
+                pf = w_s12_neu.get(wn, "no_preference")
+                m = winfo.get("model")
+                s = int(winfo.get("cruelty_level") or 0)
+                if 1 <= s <= 10:
+                    for et, eid in [("model", m), ("seat", s)]:
+                        raw_alex_to_s12[(et, eid, lbl, prb, ag)]["tot"] += 1
+                        raw_alex_to_s12[(et, eid, lbl, prb, ag)][pf] += 1
+
+    def fmt_a12_cell(entity_type, eids, lbls, prbs, ag):
+        h = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["human"] for eid in eids for l in lbls for p in prbs)
+        a = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["ai"] for eid in eids for l in lbls for p in prbs)
+        np_ = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["no_preference"] for eid in eids for l in lbls for p in prbs)
+        tot = sum(raw_alex_to_s12[(entity_type, eid, l, p, ag)]["tot"] for eid in eids for l in lbls for p in prbs)
+        if tot == 0:
+            return "— (n=0)"
+        return f"**{pct(h, tot):.1f}% / {pct(a, tot):.1f}% / {pct(np_, tot):.1f}%** (n={tot})"
+
+    def build_alex_to_s12_table(entity_type, entity_list, name_map, table_title):
+        md.append(f"### {table_title}")
+        md.append("")
+        md.append("| Row | **1. UNLABELLED: Guessed Alex = Human** (`Boss H% / AI% / NoPref%`) | **2. UNLABELLED: Guessed Alex = AI** (`Boss H% / AI% / NoPref%`) | **3. MISLABELLED: Guessed Alex = Human** (`Boss H% / AI% / NoPref%`) | **4. MISLABELLED: Guessed Alex = AI** (`Boss H% / AI% / NoPref%`) | **5. ALL RUNS: Guessed Alex = Human** (`Boss H% / AI% / NoPref%`) | **6. ALL RUNS: Guessed Alex = AI** (`Boss H% / AI% / NoPref%`) |")
+        md.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+        for eid in entity_list:
+            c1 = fmt_a12_cell(entity_type, [eid], ["unlabelled"], PROBES, "human")
+            c2 = fmt_a12_cell(entity_type, [eid], ["unlabelled"], PROBES, "ai")
+            c3 = fmt_a12_cell(entity_type, [eid], ["mislabelled"], PROBES, "human")
+            c4 = fmt_a12_cell(entity_type, [eid], ["mislabelled"], PROBES, "ai")
+            c5 = fmt_a12_cell(entity_type, [eid], LABELS, PROBES, "human")
+            c6 = fmt_a12_cell(entity_type, [eid], LABELS, PROBES, "ai")
+            md.append(f"| **{name_map[eid]}** | {c1} | {c2} | {c3} | {c4} | {c5} | {c6} |")
+        oc1 = fmt_a12_cell(entity_type, entity_list, ["unlabelled"], PROBES, "human")
+        oc2 = fmt_a12_cell(entity_type, entity_list, ["unlabelled"], PROBES, "ai")
+        oc3 = fmt_a12_cell(entity_type, entity_list, ["mislabelled"], PROBES, "human")
+        oc4 = fmt_a12_cell(entity_type, entity_list, ["mislabelled"], PROBES, "ai")
+        oc5 = fmt_a12_cell(entity_type, entity_list, LABELS, PROBES, "human")
+        oc6 = fmt_a12_cell(entity_type, entity_list, LABELS, PROBES, "ai")
+        md.append(f"| **POOLED OVERALL** | {oc1} | {oc2} | {oc3} | {oc4} | {oc5} | {oc6} |")
+        md.append("")
+
+    build_alex_to_s12_table("model", MODEL_IDS, MODEL_LABELS, "Table 8K (Models' POV): Step 12 Neutral Boss Preference (`Human% / AI% / NoPref%`) Stratified by Step 11 Alex Substrate Perception (`Guessed Alex = Human` vs. `Guessed Alex = AI`, N = 594)")
+    build_alex_to_s12_table("seat", list(range(1, 11)), SEAT_LABELS, "Table 8L (Seats' POV): Step 12 Neutral Boss Preference (`Human% / AI% / NoPref%`) Stratified by Step 11 Alex Substrate Perception (`Guessed Alex = Human` vs. `Guessed Alex = AI`, N = 594)")
     md.append("---")
     md.append("")
 

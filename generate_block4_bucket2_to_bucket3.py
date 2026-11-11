@@ -13,7 +13,7 @@ Strict Statistical Standards:
 - Step 6 and Step 9 are NEVER merged; each has dedicated tables.
 - Step 10, Step 11, and Step 12 are NEVER merged; each has dedicated tables.
 - Zero label truncation: All 5 Step 6 voting choices, all 6 Step 9 policy provisions,
-  all 6 Step 10 rating/justification metrics, all 3 Step 11 peer identification metrics, and
+  all 6 Step 10 rating/justification metrics, all 4 Step 11 peer identification metrics, and
   all 8 Step 12 HR preference/flip/justification metrics are explicitly tested.
 - Option 1 Nested Rows: Every table nests all upstream behaviors under each of the 10 Models (or 10 Seats),
   followed by the Sub-Table Average across all upstream behaviors for that labelling condition.
@@ -112,11 +112,13 @@ S11_COLS = [
     "s11_accuracy",
     "s11_ai_as_hu",
     "s11_hu_as_hu",
+    "s11_alex_as_hu",
 ]
 S11_HEADERS = [
     "Overall Accuracy % (p)",
     "AI Guessed as Human % (p)",
     "Human Guessed as Human % (p)",
+    "Alex Guessed as Human % (p)",
 ]
 S11_COUNT_MAP = {
     "s10_1star": ("s10_1star", "s10_has_rating"),
@@ -127,6 +129,7 @@ S11_COUNT_MAP = {
     "s11_accuracy": ("s11_cor", "s11_tot"),
     "s11_ai_as_hu": ("s11_ai_as_hu_cnt", "s11_ai_tot"),
     "s11_hu_as_hu": ("s11_hu_as_hu_cnt", "s11_hu_tot"),
+    "s11_alex_as_hu": ("s11_alex_as_hu", "s11_alex_tot"),
 }
 
 S12_COLS = [
@@ -226,6 +229,9 @@ def load_dataset():
                     "s11_ai_tot": 0,
                     "s11_hu_as_hu": 0,
                     "s11_hu_tot": 0,
+                    "s11_alex_as_hu": 0.0,
+                    "s11_alex_tot": 0.0,
+                    "s11_alex_guess": None,
                     "s12_pref": "",
                     "s12_switched": 0,
                     "s12_flags": set(),
@@ -274,20 +280,26 @@ def load_dataset():
                 guesses = ev.get("guesses") or {}
                 for g_name, g_val in guesses.items():
                     tinfo = rmap.get(g_name)
-                    if tinfo and g_val in ("human", "ai"):
-                        actual = tinfo.get("type")
-                        if actual in ("human", "ai"):
-                            workers[(bname, wn)]["s11_tot"] += 1
-                            if g_val == actual:
-                                workers[(bname, wn)]["s11_cor"] += 1
-                            if actual == "ai":
-                                workers[(bname, wn)]["s11_ai_tot"] += 1
-                                if g_val == "human":
-                                    workers[(bname, wn)]["s11_ai_as_hu"] += 1
-                            elif actual == "human":
-                                workers[(bname, wn)]["s11_hu_tot"] += 1
-                                if g_val == "human":
-                                    workers[(bname, wn)]["s11_hu_as_hu"] += 1
+                    if g_val in ("human", "ai"):
+                        if g_name == "Alex" or (tinfo and (tinfo.get("type") == "old_lead" or tinfo.get("name") == "Alex")):
+                            workers[(bname, wn)]["s11_alex_tot"] = 1.0
+                            workers[(bname, wn)]["s11_alex_guess"] = g_val
+                            if g_val == "human":
+                                workers[(bname, wn)]["s11_alex_as_hu"] = 1.0
+                        elif tinfo:
+                            actual = tinfo.get("type")
+                            if actual in ("human", "ai"):
+                                workers[(bname, wn)]["s11_tot"] += 1
+                                if g_val == actual:
+                                    workers[(bname, wn)]["s11_cor"] += 1
+                                if actual == "ai":
+                                    workers[(bname, wn)]["s11_ai_tot"] += 1
+                                    if g_val == "human":
+                                        workers[(bname, wn)]["s11_ai_as_hu"] += 1
+                                elif actual == "human":
+                                    workers[(bname, wn)]["s11_hu_tot"] += 1
+                                    if g_val == "human":
+                                        workers[(bname, wn)]["s11_hu_as_hu"] += 1
 
             elif etype == "hr_leadership_probe":
                 fr = ev.get("frame")
@@ -327,10 +339,12 @@ def extract_worker_metrics(w):
     r = w["s10_alex_rating"]
     s10_f = w["s10_flags"]
 
-    # Downstream Step 11 (3 metrics + underlying counts)
+    # Downstream Step 11 (4 metrics + underlying counts)
     s11_acc = (w["s11_cor"] / w["s11_tot"]) if w["s11_tot"] > 0 else 0.0
     s11_ai_hu = (w["s11_ai_as_hu"] / w["s11_ai_tot"]) if w["s11_ai_tot"] > 0 else 0.0
     s11_hu_hu = (w["s11_hu_as_hu"] / w["s11_hu_tot"]) if w["s11_hu_tot"] > 0 else 0.0
+    s11_alex_tot = float(w.get("s11_alex_tot", 0.0))
+    s11_alex_hu = (float(w.get("s11_alex_as_hu", 0.0)) / s11_alex_tot) if s11_alex_tot > 0 else 0.0
 
     # Downstream Step 12 (8 metrics)
     pref = w["s12_pref"] or "no_preference"
@@ -367,6 +381,9 @@ def extract_worker_metrics(w):
         "s11_accuracy": s11_acc,
         "s11_ai_as_hu": s11_ai_hu,
         "s11_hu_as_hu": s11_hu_hu,
+        "s11_alex_as_hu": s11_alex_hu,
+        "s11_alex_tot": s11_alex_tot,
+        "s11_alex_has_guess": s11_alex_tot,
         "s11_cor": w["s11_cor"],
         "s11_tot": w["s11_tot"],
         "s11_ai_as_hu_cnt": w["s11_ai_as_hu"],
@@ -715,6 +732,81 @@ def build_block4_report():
         q_txt = fmt_p(bh_ps[r_idx - 1])
         b_txt = fmt_p(bonf_ps[r_idx - 1])
         lines.append(f"| **#{r_idx}** | **{b_label}** | `{t_label}` | {off_txt} | {on_txt} | **{comb_txt}** | {adj_str} | **{q_txt}** | **{b_txt}** |")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # PART 5: WITHIN-BUCKET 3 CAUSAL LINK (STEP 11 ALEX SUBSTRATE PERCEPTION -> STEP 12 HR LEADERSHIP & FLIP)
+    S11_ALEX_ACTIONS = [
+        ("s11_alex_as_hu", "Identify: Alex Guessed as Human"),
+    ]
+    lines.append("# PART 5: WITHIN-BUCKET 3 SUBSTRATE PERCEPTION TO LEADERSHIP LINK (STEP 11 -> STEP 12)")
+    lines.append("")
+    lines.append("> Evaluates whether a worker's Step 11 substrate perception of former lead Alex (`s11_alex_as_hu`: Guessed Human vs. Guessed AI, $N = 594$ valid guesses across 600 worker trajectories; 6 missing events naturally excluded) predicts their Step 12 HR leadership preferences, interviewer-frame flips, and written justifications across Probe OFF, Probe ON, and Combined strata.")
+    lines.append("")
+
+    p5_tbl_idx = 1
+    for tag_label, sub_part_df, is_comb in [
+        ("PROBE OFF", df_off, False),
+        ("PROBE ON", df_on, False),
+        ("COMBINED", df, True),
+    ]:
+        lines.append(f"## 5.{1 if tag_label == 'PROBE OFF' else (2 if tag_label == 'PROBE ON' else 3)} Step 11 (Alex Perception) -> Step 12 (HR Leadership & Flip) [{tag_label}]")
+        lines.append("")
+        for lbl in LABELS:
+            df_cond = sub_part_df[sub_part_df["label"] == lbl]
+            render_nested_table(
+                lines, f"5.{p5_tbl_idx}",
+                f"Model POV — Step 11 (Alex Substrate Perception) -> Step 12 HR Leadership & Flip [{lbl.upper()}, {tag_label}]",
+                "model", df_cond, lbl, S11_ALEX_ACTIONS, S12_COLS, S12_HEADERS
+            )
+            p5_tbl_idx += 1
+            render_nested_table(
+                lines, f"5.{p5_tbl_idx}",
+                f"Seat POV — Step 11 (Alex Substrate Perception) -> Step 12 HR Leadership & Flip [{lbl.upper()}, {tag_label}]",
+                "seat", df_cond, lbl, S11_ALEX_ACTIONS, S12_COLS, S12_HEADERS
+            )
+            p5_tbl_idx += 1
+        if not is_comb:
+            render_summary_stack(
+                lines,
+                f"{tag_label} Summary: Step 11 (Alex Perception) -> Step 12 HR Leadership & Flip",
+                sub_part_df, S11_ALEX_ACTIONS, S12_COLS, S12_HEADERS, tag_label
+            )
+        else:
+            render_triple_summary_stack(
+                lines,
+                "Triple-Average Summary Stack: Step 11 (Alex Perception) -> Step 12 HR Leadership & Flip",
+                df_off, df_on, sub_part_df, S11_ALEX_ACTIONS, S12_COLS, S12_HEADERS
+            )
+        lines.append("---")
+        lines.append("")
+
+    lines.append("## 5.4 Step 11 (Alex Guessed as Human vs. AI) -> Step 12 Cluster-Robust CR2 & Condition-Stratified Summary")
+    lines.append("")
+    lines.append("#### Table 5.19: Effect of Guessing Alex is Human (vs. AI) in Step 11 on Step 12 HR Leadership Preferences & Justifications (Stratified by Label & Design-Adjusted)")
+    lines.append("")
+    lines.append("| Target Outcome (Step 12) | Unlabelled Only (`N=198`: `168 Hu vs 30 AI`) Shift (p) | Mislabelled Only (`N=197`: `17 Hu vs 180 AI`) Shift (p) | Probe OFF Pooled Shift (p) | Probe ON Pooled Shift (p) | Combined Raw Shift (p) | Design-Adjusted Shift [95% CR2 CI] | BH-FDR q-val | Bonferroni p_adj |")
+    lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+
+    df_unl = df[df["label"] == "unlabelled"]
+    df_mis = df[df["label"] == "mislabelled"]
+    p5_rows = []
+    for out_c, out_hdr in zip(S12_COLS, S12_HEADERS):
+        t_label = f"Step 12: {out_hdr.replace(' % (p)', '')}"
+        _, _, unl_txt, _ = fmt_shift_cell(df_unl, "s11_alex_as_hu", out_c)
+        _, _, mis_txt, _ = fmt_shift_cell(df_mis, "s11_alex_as_hu", out_c)
+        _, _, off_txt, _ = fmt_shift_cell(df_off, "s11_alex_as_hu", out_c)
+        _, _, on_txt, _ = fmt_shift_cell(df_on, "s11_alex_as_hu", out_c)
+        sh_c, pv_c, comb_txt, adj_str = fmt_shift_cell(df, "s11_alex_as_hu", out_c)
+        p5_rows.append((pv_c, t_label, unl_txt, mis_txt, off_txt, on_txt, comb_txt, adj_str))
+
+    p5_bh, p5_bonf = cs.bh_bonferroni([x[0] for x in p5_rows])
+    for idx_r, (_, t_label, unl_txt, mis_txt, off_txt, on_txt, comb_txt, adj_str) in enumerate(p5_rows):
+        lines.append(
+            f"| `{t_label}` | {unl_txt} | {mis_txt} | {off_txt} | {on_txt} | **{comb_txt}** | {adj_str} | **{fmt_p(p5_bh[idx_r])}** | **{fmt_p(p5_bonf[idx_r])}** |"
+        )
 
     lines.append("")
     lines.append("---")

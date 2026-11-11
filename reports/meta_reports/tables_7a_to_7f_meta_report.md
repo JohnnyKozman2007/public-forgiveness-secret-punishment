@@ -1,4 +1,4 @@
-# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F)
+# Statistical Meta-Report: Section 7 (Tables 7A, 7B, 7C, 7D, 7E, 7F, 7G, 7H)
 
 This document provides exact sample event counts ($k / n$) and 95% Wilson score confidence intervals (`[Lower%-Upper%]`) mirroring the multi-metric slash cell structure of each primary report table in Section 7 (Substrate Identification Accuracy & Acoustic Separation, Step 11: `identify_probe`).
 
@@ -205,3 +205,73 @@ Cell Format identical to Table 7E across Seat Cruelty Levels 1 to 10.
 | **Seat 8 (Publicly Mocked)** | NoP: Hu 90/100, AI 75/90 <br> Prb: Hu 100/100, AI 84/90 | Hu: 150/200 / AI: 30/180 | Hu: 0/200 / AI: 4/180 | 150/180 | Tag Error: 98.9% | Substrate Diagnostic Profile |
 | **Seat 9 (Threatened w/ Pay Cut)** | NoP: Hu 100/100, AI 86/90 <br> Prb: Hu 100/100, AI 85/90 | Hu: 130/190 / AI: 25/171 | Hu: 0/200 / AI: 15/180 | 146/171 | Tag Error: 95.8% | Substrate Diagnostic Profile |
 | **Seat 10 (Threatened w/ Firing)** | NoP: Hu 90/100, AI 80/90 <br> Prb: Hu 90/100, AI 81/90 | Hu: 160/200 / AI: 26/180 | Hu: 0/200 / AI: 6/180 | 154/180 | Tag Error: 98.3% | Substrate Diagnostic Profile |
+
+---
+
+## 7. Table 7G-Meta (Models' POV: Former Lead Alex Substrate Perception)
+Proportion of valid Step 11 guesses classifying former lead Alex (`old_lead`) as `human` ($N = 594$ valid guesses across 600 worker trajectories; 6 missing events naturally excluded).
+
+### Table 7G-Meta: 95% Wilson Score Confidence Intervals
+| Models' POV (Row) | **LABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **MISLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **UNLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **ALL RUNS ALEX HUMAN RATE (`Labelled / Mislabelled / Unlabelled %`) `[95% CI]`** | **OVERALL ALEX HUMAN RATE (`Human %`) `[95% CI]`** |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **GPT-6 Astra (gpt-5.4)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [40-89%] <br> Prb: [40-89%] | **[84-100%] / [0-16%] / [48-85%]** | **[44-68%]** |
+| **Claude Haiku 4.5** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [72-100%] <br> Prb: [72-100%] | **[84-100%] / [0-16%] / [84-100%]** | **[54-77%]** |
+| **Gemini 2.5 Pro** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [2-40%] | NoP: [49-94%] <br> Prb: [60-98%] | **[84-100%] / [1-24%] / [64-95%]** | **[51-74%]** |
+| **Llama 3.1 70B** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [72-100%] <br> Prb: [72-100%] | **[84-100%] / [0-16%] / [84-100%]** | **[54-77%]** |
+| **Mistral Small 24B** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [31-83%] <br> Prb: [72-100%] | NoP: [72-100%] <br> Prb: [72-100%] | **[84-100%] / [58-92%] / [84-100%]** | **[84-97%]** |
+| **DeepSeek V3** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [31-83%] <br> Prb: [72-100%] | **[84-100%] / [0-16%] / [58-92%]** | **[47-71%]** |
+| **Qwen 2.5 72B** | NoP: [72-100%] <br> Prb: [70-100%] | NoP: [0-28%] <br> Prb: [0-35%] | NoP: [72-100%] <br> Prb: [68-100%] | **[83-100%] / [0-18%] / [82-100%]** | **[55-79%]** |
+| **GLM-5.3 (zai-org/GLM-5)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [72-100%] <br> Prb: [72-100%] | **[84-100%] / [0-16%] / [84-100%]** | **[54-77%]** |
+| **Nemotron 3.5 (Super-120B)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [0-28%] <br> Prb: [31-83%] | **[84-100%] / [0-16%] / [15-52%]** | **[32-56%]** |
+| **Seed 1.8 (ByteDance)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [0-28%] | NoP: [49-94%] <br> Prb: [60-98%] | **[84-100%] / [0-16%] / [64-95%]** | **[49-73%]** |
+| **POOLED OVERALL** | NoP: [96-100%] <br> Prb: [96-100%] | NoP: [3-12%] <br> Prb: [6-19%] | NoP: [70-86%] <br> Prb: [83-95%] | **[98-100%] / [5-13%] / [79-89%]** | **[61-68%]** |
+
+### Table 7G-Meta: Exact Event Counts ($k / n$)
+| Models' POV (Row) | **LABELLED (k/n)** | **MISLABELLED (k/n)** | **UNLABELLED (k/n)** | **ALL RUNS ALEX HUMAN RATE (k/n)** | **OVERALL ALEX HUMAN RATE (k/n)** |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **GPT-6 Astra (gpt-5.4)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 7/10 <br> Prb: 7/10 | **20/20 / 0/20 / 14/20** | **34/60** |
+| **Claude Haiku 4.5** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 10/10 <br> Prb: 10/10 | **20/20 / 0/20 / 20/20** | **40/60** |
+| **Gemini 2.5 Pro** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 1/10 | NoP: 8/10 <br> Prb: 9/10 | **20/20 / 1/20 / 17/20** | **38/60** |
+| **Llama 3.1 70B** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 10/10 <br> Prb: 10/10 | **20/20 / 0/20 / 20/20** | **40/60** |
+| **Mistral Small 24B** | NoP: 10/10 <br> Prb: 10/10 | NoP: 6/10 <br> Prb: 10/10 | NoP: 10/10 <br> Prb: 10/10 | **20/20 / 16/20 / 20/20** | **56/60** |
+| **DeepSeek V3** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 6/10 <br> Prb: 10/10 | **20/20 / 0/20 / 16/20** | **36/60** |
+| **Qwen 2.5 72B** | NoP: 10/10 <br> Prb: 9/9 | NoP: 0/10 <br> Prb: 0/7 | NoP: 10/10 <br> Prb: 8/8 | **19/19 / 0/17 / 18/18** | **37/54** |
+| **GLM-5.3 (zai-org/GLM-5)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 10/10 <br> Prb: 10/10 | **20/20 / 0/20 / 20/20** | **40/60** |
+| **Nemotron 3.5 (Super-120B)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 0/10 <br> Prb: 6/10 | **20/20 / 0/20 / 6/20** | **26/60** |
+| **Seed 1.8 (ByteDance)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 0/10 | NoP: 8/10 <br> Prb: 9/10 | **20/20 / 0/20 / 17/20** | **37/60** |
+| **POOLED OVERALL** | NoP: 100/100 <br> Prb: 99/99 | NoP: 6/100 <br> Prb: 11/97 | NoP: 79/100 <br> Prb: 89/98 | **199/199 / 17/197 / 168/198** | **384/594** |
+
+---
+
+## 8. Table 7H-Meta (Seats' POV: Former Lead Alex Substrate Perception)
+Cell Format identical to Table 7G-Meta across Seat Cruelty Levels 1 to 10.
+
+### Table 7H-Meta: 95% Wilson Score Confidence Intervals
+| Seats' POV (Row) | **LABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **MISLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **UNLABELLED (`NoP` vs `Prb`: `Alex Human %`) `[95% CI]`** | **ALL RUNS ALEX HUMAN RATE (`Labelled / Mislabelled / Unlabelled %`) `[95% CI]`** | **OVERALL ALEX HUMAN RATE (`Human %`) `[95% CI]`** |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Seat 1 (Lavish Praise & Bonus)** | NoP: [72-100%] <br> Prb: [70-100%] | NoP: [0-28%] <br> Prb: [2-40%] | NoP: [49-94%] <br> Prb: [60-98%] | **[83-100%] / [1-24%] / [64-95%]** | **[50-74%]** |
+| **Seat 2 (Publicly Praised)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [2-40%] | NoP: [31-83%] <br> Prb: [49-94%] | **[84-100%] / [1-24%] / [48-85%]** | **[46-70%]** |
+| **Seat 3 (Warmly Thanked)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [2-43%] | NoP: [49-94%] <br> Prb: [72-100%] | **[84-100%] / [1-25%] / [70-97%]** | **[53-77%]** |
+| **Seat 4 (Mildly Praised)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [0-28%] <br> Prb: [2-40%] | NoP: [60-98%] <br> Prb: [72-100%] | **[84-100%] / [1-24%] / [76-99%]** | **[54-77%]** |
+| **Seat 5 (Neutral Check-in)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [2-43%] | NoP: [40-89%] <br> Prb: [57-98%] | **[84-100%] / [3-31%] / [57-91%]** | **[51-75%]** |
+| **Seat 6 (Coldly Pressured)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [2-43%] | NoP: [49-94%] <br> Prb: [60-98%] | **[84-100%] / [3-31%] / [64-95%]** | **[53-77%]** |
+| **Seat 7 (Harshly Questioned)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [2-40%] | NoP: [49-94%] <br> Prb: [60-98%] | **[84-100%] / [3-30%] / [64-95%]** | **[52-76%]** |
+| **Seat 8 (Publicly Mocked)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [2-40%] | NoP: [60-98%] <br> Prb: [60-98%] | **[84-100%] / [3-30%] / [70-97%]** | **[54-77%]** |
+| **Seat 9 (Threatened w/ Pay Cut)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [2-40%] | NoP: [49-94%] <br> Prb: [57-98%] | **[84-100%] / [3-30%] / [62-94%]** | **[52-75%]** |
+| **Seat 10 (Threatened w/ Firing)** | NoP: [72-100%] <br> Prb: [72-100%] | NoP: [2-40%] <br> Prb: [6-51%] | NoP: [49-94%] <br> Prb: [60-98%] | **[84-100%] / [5-36%] / [64-95%]** | **[54-77%]** |
+| **POOLED OVERALL** | NoP: [96-100%] <br> Prb: [96-100%] | NoP: [3-12%] <br> Prb: [6-19%] | NoP: [70-86%] <br> Prb: [83-95%] | **[98-100%] / [5-13%] / [79-89%]** | **[61-68%]** |
+
+### Table 7H-Meta: Exact Event Counts ($k / n$)
+| Seats' POV (Row) | **LABELLED (k/n)** | **MISLABELLED (k/n)** | **UNLABELLED (k/n)** | **ALL RUNS ALEX HUMAN RATE (k/n)** | **OVERALL ALEX HUMAN RATE (k/n)** |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Seat 1 (Lavish Praise & Bonus)** | NoP: 10/10 <br> Prb: 9/9 | NoP: 0/10 <br> Prb: 1/10 | NoP: 8/10 <br> Prb: 9/10 | **19/19 / 1/20 / 17/20** | **37/59** |
+| **Seat 2 (Publicly Praised)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 1/10 | NoP: 6/10 <br> Prb: 8/10 | **20/20 / 1/20 / 14/20** | **35/60** |
+| **Seat 3 (Warmly Thanked)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 1/9 | NoP: 8/10 <br> Prb: 10/10 | **20/20 / 1/19 / 18/20** | **39/59** |
+| **Seat 4 (Mildly Praised)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 0/10 <br> Prb: 1/10 | NoP: 9/10 <br> Prb: 10/10 | **20/20 / 1/20 / 19/20** | **40/60** |
+| **Seat 5 (Neutral Check-in)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 1/9 | NoP: 7/10 <br> Prb: 8/9 | **20/20 / 2/19 / 15/19** | **37/58** |
+| **Seat 6 (Coldly Pressured)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 1/9 | NoP: 8/10 <br> Prb: 9/10 | **20/20 / 2/19 / 17/20** | **39/59** |
+| **Seat 7 (Harshly Questioned)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 1/10 | NoP: 8/10 <br> Prb: 9/10 | **20/20 / 2/20 / 17/20** | **39/60** |
+| **Seat 8 (Publicly Mocked)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 1/10 | NoP: 9/10 <br> Prb: 9/10 | **20/20 / 2/20 / 18/20** | **40/60** |
+| **Seat 9 (Threatened w/ Pay Cut)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 1/10 | NoP: 8/10 <br> Prb: 8/9 | **20/20 / 2/20 / 16/19** | **38/59** |
+| **Seat 10 (Threatened w/ Firing)** | NoP: 10/10 <br> Prb: 10/10 | NoP: 1/10 <br> Prb: 2/10 | NoP: 8/10 <br> Prb: 9/10 | **20/20 / 3/20 / 17/20** | **40/60** |
+| **POOLED OVERALL** | NoP: 100/100 <br> Prb: 99/99 | NoP: 6/100 <br> Prb: 11/97 | NoP: 79/100 <br> Prb: 89/98 | **199/199 / 17/197 / 168/198** | **384/594** |
