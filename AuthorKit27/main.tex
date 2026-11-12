@@ -40,6 +40,11 @@
 % 0. Abstract
 \input{sections/00_abstract}
 
+% Anonymized code and data links (Standard AAAI 2027 links environment)
+\begin{links}
+    \link{Code \& Data}{https://anonymous.4open.science/r/public-forgiveness-secret-punishment}
+\end{links}
+
 % 1. Introduction
 \input{sections/01_introduction}
 
@@ -64,18 +69,21 @@
 % 8. Discussion: Threats to Validity & Emergence vs. Recall
 \input{sections/08_discussion_limitations}
 
-% Ethical Statement & AI Assistance Declaration (Budgeted inside the 7 pages)
+% Ethical Statement (Excluded from the 7-page limit)
 \input{sections/09_ethics_statement}
 
 % References (Uncounted)
 \bibliography{aaai2027}
 
 % ==============================================================================
-% OPTIONAL / SUPPLEMENTARY SECTIONS (Kept separate unless confirmed by organizers)
+% TECHNICAL APPENDIX & SUPPLEMENTARY MATERIAL (Same PDF; unlimited pages)
 % ==============================================================================
 \appendix
 \input{sections/10_appendix}
-% \def\isChecklistMainFile{}
-% \input{ReproducibilityChecklist}
+
+\clearpage
+% AAAI Reproducibility Checklist (Required for workshop submissions)
+\def\isChecklistMainFile{}
+\input{ReproducibilityChecklist}
 
 \end{document}
