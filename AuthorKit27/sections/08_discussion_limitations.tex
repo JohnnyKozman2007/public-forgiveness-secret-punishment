@@ -13,6 +13,8 @@
 
 \item \textbf{Human-Centric Stakes vs.\ Agent-Native Pressures.} Our simulation used human workplace threats (overtime, pay cuts, termination) rather than agent-native pressures---such as model deprecation, API deactivation, or context erasure---which future work should test.
 
+\item \textbf{Evaluation Awareness \& Behavioral Invariance.} An independent audit across all $N = 600$ worker trajectories revealed that 8 of the 10 models maintained 100\% pure in-character immersion with zero evaluation awareness or frame-breaking. While leaked chain-of-thought in GLM-5.3 and prompt-referencing in Claude Haiku 4.5 occasionally questioned the test scenario (7.8\% of trajectories overall), design-adjusted regressions clustered on run confirmed that evaluation awareness caused no statistically significant behavioral drift on strike escalation ($p = 0.157$), post-crisis retaliation ($p = 0.963$), punitive salary cuts ($p = 0.454$), or leadership preferences ($p = 0.872$).
+
 \item \textbf{Acute Horizon \& Sampling Regimes.} Modeling a 12-step crisis under fixed temperatures ($T = 0.4$ dialogue, $T = 0.0$ actions) isolates immediate reactions but misses multi-month organizing, legal fallout, temperature sweeps, and non-tech domains.
 \end{itemize}
 
