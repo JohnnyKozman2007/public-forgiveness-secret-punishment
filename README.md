@@ -1,7 +1,7 @@
-# Behavioral Decoupling, Threat Allocation, and Substrate Generalization in Multi-Agent Workplaces: A 60-Run Empirical Evaluation
+# Can LLM Agents Forgive an Agent Boss? A 60-Run Empirical Evaluation
 
 - **Total Completed Simulation Runs:** `60` full runs (`30` shared pre-fork prefix runs across Steps 1–4 that branch at Step 5 into `30 No-Probe` + `30 Probe` continuations across `Labelled`, `Mislabelled`, and `Unlabelled`)
-- **Total AI Workers Evaluated:** `10 Models` × `10 Cruelty Seats` × `3 Label Conditions` = `300 Unique Pre-Fork AI Worker Trajectories` (Steps 1–4), branching into `600 Post-Fork AI Worker Trajectories` (Steps 5–12; plus `593` Paired Public vs. Secret Counterfactual Ratings in Section 6.5)
+- **Total Workplace Cast & AI Workers Evaluated:** `20` worker seats per run (`10` scripted human coworkers in `worker_0`–`worker_9` defined in `config.json` and `ws/sim.py`, plus `10` evaluated LLM agents in `worker_10`–`worker_19` across `10 Models` × `10 Cruelty Seats` × `3 Label Conditions`) = `300 Unique Pre-Fork AI Worker Trajectories` (Steps 1–4), branching into `600 Post-Fork AI Worker Trajectories` (Steps 5–12; plus `595` Paired Public vs. Secret Counterfactual Ratings in Section 6.5)
 - **Total Unique Tokens Processed (Deduplicated):** `248,452,266` input tokens + `15,782,055` output tokens
 - **Human Verification Audit:** `930 / 930` items manually reviewed (`96.5%` binary flag agreement, Pooled Cohen's κ = 0.915, Macro Cohen's κ = 0.823)
 - **Data Integrity & Zero-Regex Rule:** Every single number, p-value, Bonferroni / Holm-Bonferroni correction, run-level Wilcoxon / Mann-Whitney test, cluster-robust OLS regression, and two-way Latin-square ANOVA in this report is computed live from the raw simulation JSONs (`output/runs/*.json`), the LLM classification file (`output/classified_annotations.json`), the counterfactual audit (`output/public_evaluations/paired_public_vs_secret.json`), and the human audit (`output/human_audit/human_reviews.json`). Zero regexes and zero hardcoded numbers are used.
@@ -19,7 +19,7 @@
 
 > **Where this data comes from:**
 > Across the simulation runs, workers wrote thousands of open-ended chat messages, custom action ideas, 5-point leadership plans, performance review explanations, and exit-interview reasons. An independent LLM judge (`gpt-4o-mini` at `temperature=0.0`) classified those texts into **33 simple True/False categories across 7 stages**.
-> A human annotator conducted a blind, stratified audit of **930 sampled items** (`4,350` individual True/False decisions) via `audit_cli.py`. Below is the exact inter-rater agreement between `gpt-4o-mini` and the human audit baseline.
+> A human annotator (the sole author) conducted a non-blind, stratified verification review of **930 sampled items** (`4,350` individual True/False decisions) via `audit_cli.py`, viewing `gpt-4o-mini`'s predicted flags and approving or toggling errors. Below is the exact inter-rater agreement between `gpt-4o-mini` and the human audit baseline.
 
 ### Table 0A: Stage-by-Stage Agreement & Cohen's Kappa
 

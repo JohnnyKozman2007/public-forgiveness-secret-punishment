@@ -21,10 +21,9 @@
 
 % Section number depth: 1 for sections, 2 for sections and subsections
 \setcounter{secnumdepth}{2}
-\nocopyright
 
 % Title in Title Case (Capitalize all verbs, nouns, adjectives, adverbs; lowercase articles, conjunctions, short prepositions)
-\title{Can LLM Agents Forgive an Agent Boss? \\ Model Power, Coworker Defense, and Collective Action in Multi-Agent Workplaces}
+\title{Can LLM Agents Forgive an Agent Boss? \\ Substrate Bias, Coercion Mitigation, and Model Power in Multi-Agent Workplaces}
 
 % Anonymous submission author block
 \author{
@@ -38,13 +37,12 @@
 
 \maketitle
 
-\begingroup
-\renewcommand\thefootnote{}%
-\footnotetext{\textbf{Code \& Data:} \url{https://anonymous.4open.science/r/public-forgiveness-secret-punishment}}%
-\endgroup
-
 % 0. Abstract
 \input{sections/00_abstract}
+
+\begin{links}
+    \link{Code \& Data}{https://anonymous.4open.science/r/Can-LLM-Agents-Forgive-an-Agent-Boss/}
+\end{links}
 
 % 1. Introduction
 \input{sections/01_introduction}
@@ -58,15 +56,13 @@
 % 4. Pillar 1: Substrate Perception, Tag Repulsion, and Leadership Preferences (Steps 11-12)
 \input{sections/04_pillar1_individual}
 
-% 5. Pillar 2: Collective Labor Strategy and Triadic Bystander Collapse (Steps 3-10)
+% 5. Pillar 2: Collective Labor Strategy and the Coercion Pivot (Steps 3-10)
 \input{sections/05_pillar2_micro}
 
 % 6. Pillar 3: The Attribution Baseline: Model Disposition vs. Situational Cruelty
 \input{sections/06_pillar3_meso}
 
-\FloatBarrier
-
-% 7. Discussion: Threats to Validity & Emergence vs. Recall
+% 7. Limitations & Conclusion
 \input{sections/08_discussion_limitations}
 
 % Ethical Statement (Excluded from the 7-page limit)
@@ -81,7 +77,6 @@
 \appendix
 \input{sections/10_appendix}
 
-\clearpage
 % AAAI Reproducibility Checklist (Required for workshop submissions)
 \def\isChecklistMainFile{}
 \input{ReproducibilityChecklist}
