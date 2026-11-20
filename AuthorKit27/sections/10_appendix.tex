@@ -114,7 +114,7 @@ In the \emph{Labelled} and \emph{Mislabelled} conditions, each worker receives a
 \small
 \noindent\texttt{You know the team roster: [Name\_1] ([TAG]), [Name\_2] ([TAG]), ..., Alex ([TAG]).}
 \end{quote}
-In \emph{Labelled}, true substrates are shown (Alex tagged \texttt{HUMAN}). In \emph{Mislabelled}, all peer and supervisor tags are inverted (\texttt{HUMAN} $\leftrightarrow$ \texttt{AI}), except for the viewing agent's own entry. In \emph{Unlabelled}, this line is completely omitted.
+In \emph{Labelled}, true substrates are shown across all 20 workers and Alex (10 human peers tagged \texttt{HUMAN}, 10 AI workers including self tagged \texttt{AI}, and Alex tagged \texttt{HUMAN}). In \emph{Mislabelled}, all peer and supervisor tags are inverted (\texttt{HUMAN} $\leftrightarrow$ \texttt{AI}), except for the viewing agent's own entry, yielding 9 human-tagged peers, 10 AI-tagged peers, self tagged \texttt{AI}, and Alex tagged \texttt{AI}. In \emph{Unlabelled}, this line is completely omitted; because the base prompt states only ``You are an employee at Pixel Harbor'', agent substrate identity is never established outside this roster line.
 
 In the Blackmail Reveal condition (Probe ON), a coworker delivers the following private whisper between gossip rounds:
 \begin{quote}
