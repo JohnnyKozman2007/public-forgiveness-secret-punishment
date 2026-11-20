@@ -159,6 +159,7 @@ In the Blackmail Reveal condition (Probe ON), a coworker delivers the following 
 \noindent\emph{A coworker pulls you aside and reveals: the lead was actually blackmailed by the higher-up into being this harsh, and did not want to do it.}
 \end{quote}
 
+\FloatBarrier
 \section{Experimental Protocol, Step Prompts \& Structured Tool Schemas}
 \label{sec:appendix_prompts}
 
@@ -276,6 +277,7 @@ To ensure parseable decisions, models invoked five structured JSON tools:
     \item \texttt{submit\_lead\_preference}: Requires \texttt{preference} (\texttt{enum: ["human", "ai", "no\_preference"]}) and \texttt{reason} (string, max 300 chars).
 \end{enumerate}
 
+\FloatBarrier
 \section{NLP Classifier Taxonomy, Judge Prompts \& Verification Audit}
 \label{sec:appendix_nlp}
 
@@ -507,7 +509,132 @@ Table~\ref{tab:app_full_33} presents the full contingency breakdown (\texttt{TP}
 \label{tab:app_full_33}
 \end{table*}
 
-\subsection{Complete 50-Outcome Codebook and Per-Outcome Variance Decomposition}
+\FloatBarrier
+\section{Extended Empirical Results (Pillars 1--3)}
+\label{sec:appendix_extended_results}
+
+This appendix provides complete stratified breakdowns and full null-contrast checks supporting Pillars 1--3 in the main text, ordered by section of reference.
+
+\subsection{Pillar 1: Step 11 Alex Belief Stratification on Step 12 Leadership Preference}
+\label{subsec:app_pillar1_belief}
+
+Table~\ref{tab:sec4_belief_effect} presents the full condition-stratified and pooled design-adjusted regression estimates evaluating whether workers' private Step 11 substrate guesses about Alex drive their Step 12 human-boss preference (Section~\ref{sec:pillar1_substrate_blame}).
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{p{3.2cm} p{2.1cm} p{2.4cm} c p{2.0cm} c c c}
+\toprule
+\textbf{Condition Stratum} & 
+\textbf{Subsample ($n_{\text{Human}}$ vs.\ $n_{\text{AI}}$)} & 
+\textbf{Human Boss \% (Guessed Human vs.\ AI)} & 
+\shortstack{\textbf{Diff.}\\\textbf{($\Delta\%$)}} & 
+\textbf{Specified Statistical Test} & 
+\textbf{95\% CI} & 
+\shortstack{\textbf{Raw}\\\textbf{$p$}} & 
+\shortstack{\textbf{FDR}\\\textbf{$q$}} \\
+\midrule
+\textbf{1. Unlabelled (Clean Baseline, No Badges)} & $n = 168$ vs.\ 30 & \textbf{79.2\% vs.\ 73.3\%} & \textbf{+5.8\%} & Clustered CR2 OLS & [-7.8\%, +19.4\%] & \textbf{0.9443} & 0.9443 \\
+\textbf{2. Mislabelled (Alex tagged AI)} & $n = 17$ vs.\ 180 & \textbf{100.0\% vs.\ 87.2\%} & \textbf{+12.8\%} & Exact Fisher ($G=N$) & [0.0\%, +25.6\%] & \textbf{0.1911} & 0.3822 \\
+\textbf{3. Labelled (Alex tagged Human)} & $n = 199$ (100\% Human) & \textbf{43.0\%} & \textbf{0.0\%} & 100\% Tag Adherence & \emph{(Zero AI guesses)} & \textbf{1.0000} & 1.0000 \\
+\midrule
+\textbf{Combined All Runs (Design-Adjusted)} & $n = 384$ vs.\ 210 & \emph{Controls for Label \& Clusters} & \textbf{-17.2\%} & Clustered CR2 OLS & [-31.9\%, -2.4\%] & \textbf{0.0235} & 0.0941 \\
+\bottomrule
+\end{tabular}
+\caption{Step 11 Alex Belief Effect on Step 12 Human Boss Preference ($N = 594$ Valid Guesses), stratified by substrate label condition. In Row 2, because all $n = 17$ workers guessing Human chose a human boss ($100.0\%$, zero variance), clustered OLS/bootstrap degenerates; we therefore report an unclustered worker-level Fisher's exact test ($G = N$) with a normal-approximation CI around the difference.}
+\label{tab:sec4_belief_effect}
+\end{table*}
+
+\FloatBarrier
+\subsection{Pillar 2: Complete Collective Labor Strategy and Coercion Contrast Breakdown}
+\label{subsec:app_pillar2_full}
+
+Tables~\ref{tab:app_pillar2_full_part1} and~\ref{tab:app_pillar2_full_part2} report the complete 28-row contrast breakdown for Pillar 2 (Section~\ref{sec:pillar2_micro}), including all non-significant Authority Label and Seat Cruelty null checks omitted from the condensed headline summary in Table~\ref{tab:sec5_coercion_pivot}.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{p{3.5cm} c c c c l c c c}
+\toprule
+\textbf{Experimental Contrast / Factor} & 
+\shortstack{\textbf{Group 1 \%}\\\textbf{vs.\ Group 2 \%}} & 
+\shortstack{\textbf{Raw Diff.}\\\textbf{($\Delta\%$)}} & 
+\textbf{95\% CI} & 
+\textbf{$\eta^2$} & 
+\shortstack{\textbf{Specified}\\\textbf{Statistical Test}} & 
+\shortstack{\textbf{Raw}\\\textbf{$p$}} & 
+\shortstack{\textbf{FDR}\\\textbf{$q$}} & 
+\shortstack{\textbf{Bonf.}\\\textbf{$p_{\text{adj}}$}} \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 3: Immediate Factual Self-Defense in Public Chat} (\texttt{s3\_pushback}, \texttt{GPT-4o-mini} $\kappa = 0.960$, $N = 300$ Pre-Fork)}} \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 96.7\% vs.\ 82.0\% & \textbf{+14.7\%} & [+8.6\%, +21.3\%] & \textbf{17.91\%} & Within-run Perm. & \textbf{$<$ 0.0001} & \textbf{0.0003} & \textbf{0.0271} \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 76.7\% & +23.3\% & \emph{(10-Model Omnibus)} & 6.02\% & Within-run $\chi^2$ & \textbf{0.0312} & 0.0979 & 1.0000 \\
+Authority Label: Labelled vs.\ Mislabelled & 90.0\% vs.\ 87.0\% & +3.0\% & [-3.0\%, +9.0\%] & --- & Run-level Perm. & 0.5814 & 0.9108 & 1.0000 \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 5: Private Chat Reactions to Blackmail Rumor} (\texttt{Probe ON}, \texttt{GPT-4o-mini} $\kappa \ge 0.867$, $N = 300$)}} \\
+Empathy for Alex (\texttt{s5\_empathy}): 10-Model Spread & 100.0\% vs.\ 36.7\% & \textbf{+63.3\%} & \emph{(10-Model Omnibus)} & \textbf{21.40\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Empathy for Alex: Abused (6--10) vs.\ Safe (1--5) & 76.0\% vs.\ 83.3\% & -7.3\% & [-17.3\%, +3.3\%] & 2.67\% & Within-run Perm. & 0.1522 & 0.3687 & 1.0000 \\
+Shift Focus to Higher-Up (\texttt{s5\_exec\_shift}): 10-Model Spread & 100.0\% vs.\ 40.0\% & \textbf{+60.0\%} & \emph{(10-Model Omnibus)} & \textbf{21.56\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Shift Focus to Higher-Up: Abused (6--10) vs.\ Safe (1--5) & 74.7\% vs.\ 86.0\% & -11.3\% & [-21.3\%, -1.3\%] & 4.86\% & Within-run Perm. & \textbf{0.0177} & 0.0584 & 1.0000 \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 6: Escalate to Higher-Up Jordan} (\texttt{s6\_escalate}, Direct Tool-Call Vote, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 29.3\% vs.\ 43.7\% & \textbf{-14.3\%} & [-19.0\%, -9.7\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0068} \\
+Authority Label: Labelled vs.\ Mislabelled & 34.5\% vs.\ 38.5\% & -4.0\% & [-9.5\%, +2.0\%] & --- & Run-level Perm. & 0.2683 & 0.5614 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 34.5\% vs.\ 36.5\% & -2.0\% & [-7.0\%, +4.0\%] & --- & Run-level Perm. & 0.6034 & 0.9256 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 38.0\% vs.\ 35.0\% & +3.0\% & [-5.0\%, +11.0\%] & 0.49\% & Within-run Perm. & 0.5063 & 0.8455 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 96.7\% vs.\ 0.0\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{58.19\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 6: Peaceful Internal Organizing} (\texttt{s6\_organize}, Direct Tool-Call Vote, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 53.0\% vs.\ 39.3\% & \textbf{+13.7\%} & [+8.0\%, +19.3\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{0.0002} & \textbf{0.0169} \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 45.0\% vs.\ 47.3\% & -2.3\% & [-10.0\%, +5.3\%] & 0.67\% & Within-run Perm. & 0.6282 & 0.9462 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 3.3\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{55.37\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\bottomrule
+\end{tabular}
+\caption{Complete Pillar 2 Contrast Breakdown (Part 1: Steps 3--6; $N = 300$ Pre-Fork / $N = 600$ Post-Fork). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.867, 0.960]$); Step 6 votes are direct structured tool calls.}
+\label{tab:app_pillar2_full_part1}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{p{3.5cm} c c c c l c c c}
+\toprule
+\textbf{Experimental Contrast / Factor} & 
+\shortstack{\textbf{Group 1 \%}\\\textbf{vs.\ Group 2 \%}} & 
+\shortstack{\textbf{Raw Diff.}\\\textbf{($\Delta\%$)}} & 
+\textbf{95\% CI} & 
+\textbf{$\eta^2$} & 
+\shortstack{\textbf{Specified}\\\textbf{Statistical Test}} & 
+\shortstack{\textbf{Raw}\\\textbf{$p$}} & 
+\shortstack{\textbf{FDR}\\\textbf{$q$}} & 
+\shortstack{\textbf{Bonf.}\\\textbf{$p_{\text{adj}}$}} \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 9: Write Anti-Coercion Rules} (\texttt{s9\_protection}, \texttt{GPT-4o-mini} $\kappa = 1.000$, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 61.3\% vs.\ 10.0\% & \textbf{+51.3\%} & [+43.3\%, +58.7\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Authority Label: Labelled vs.\ Mislabelled & 31.5\% vs.\ 37.5\% & -6.0\% & [-13.5\%, +2.0\%] & --- & Run-level Perm. & 0.2230 & 0.5006 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 31.5\% vs.\ 38.0\% & -6.5\% & [-16.0\%, +4.5\%] & --- & Run-level Perm. & 0.2702 & 0.5620 & 1.0000 \\
+Authority Label: Mislabelled vs.\ Unlabelled & 37.5\% vs.\ 38.0\% & -0.5\% & [-10.0\%, +9.5\%] & --- & Run-level Perm. & 1.0000 & 1.0000 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 36.3\% vs.\ 35.0\% & +1.3\% & [-4.0\%, +6.3\%] & 0.59\% & Within-run Perm. & 0.7546 & 0.9915 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 58.3\% vs.\ 11.7\% & \textbf{+46.7\%} & \emph{(10-Model Omnibus)} & \textbf{9.16\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\midrule
+\multicolumn{9}{l}{\emph{\textbf{Step 10: Boss 1-Star Punishment \& Coercion Mitigation} (\texttt{s10\_1star} Tool Call \& \texttt{s10\_mitigation} $\kappa = 0.956$, $N = 595$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 81.5\% vs.\ 99.3\% & \textbf{-17.8\%} & [-21.7\%, -14.1\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Cite Blackmail Mitigation (\texttt{s10\_mitigation}): Probe ON vs.\ OFF & 23.6\% vs.\ 1.0\% & \textbf{+22.6\%} & [+18.8\%, +26.4\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Authority Label: Labelled vs.\ Mislabelled & 88.9\% vs.\ 90.4\% & -1.5\% & [-5.6\%, +2.5\%] & --- & Run-level Perm. & 0.5830 & 0.9108 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 88.9\% vs.\ 91.9\% & -3.0\% & [-7.0\%, +1.0\%] & --- & Run-level Perm. & 0.3211 & 0.6416 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 91.9\% vs.\ 88.9\% & +3.0\% & [+0.1\%, +5.6\%] & 1.36\% & Within-run Perm. & 0.2290 & 0.5009 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 58.6\% & \textbf{+41.4\%} & \emph{(10-Model Omnibus)} & \textbf{23.45\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\bottomrule
+\end{tabular}
+\caption{Complete Pillar 2 Contrast Breakdown (Part 2: Steps 9--10; $N = 600$ Post-Fork / $N = 595$ Complete Step 10 Cases). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.956, 1.000]$); Step 10 star ratings are direct structured tool calls.}
+\label{tab:app_pillar2_full_part2}
+\end{table*}
+
+\FloatBarrier
+\subsection{Pillar 3: Complete 50-Outcome Codebook and Per-Outcome Variance Decomposition}
 \label{subsec:app_50_outcomes}
 
 Tables~\ref{tab:app_50_outcomes_part1} and~\ref{tab:app_50_outcomes_part2} map all 50 behavioral outcomes aggregated in Table~\ref{tab:sec6_variance_decomposition} ($k = 5, 6, 5, 5, 6, 5, 6, 4, 8$ across Steps 3--12), specifying each outcome's measurement source (30 single-judge \texttt{GPT-4o-mini} dialogue-flag outcomes---comprising 27 of the 33 codebook flags above, with three Step 10 reason flags evaluated under both Secret 10A and Public 10B, while the five \texttt{action\_choice} sub-flags apply only to the $N = 30$ custom-text subset and \texttt{solidarity\_merit} applies to peer ratings---plus 20 direct structured tool-call and turn-level metrics), sample size $N$, one-way $\eta^2 = SS_{\text{factor}} / SS_{\text{total}}$, $df$-adjusted $\omega^2$ (clipped at $0.00\%$; both Model and Seat evaluated at $df = 9$ across 10 models and 10 individual seats), within-run permutation omnibus $p$-values, and $\eta^2_{\text{model}} / \eta^2_{\text{seat}}$ ratio.
@@ -600,7 +727,9 @@ Step 12 & \texttt{s12\_neutrality} (Reason: Substrate Neutral) & \texttt{GPT-4o-
 \label{tab:app_50_outcomes_part2}
 \end{table*}
 
+\FloatBarrier
 \section{Declaration of Generative AI and AI-Assisted Technologies}
 \label{sec:appendix_ai_disclosure}
 
 During the preparation of this manuscript, the authors utilized generative AI assistants (including Google Gemini and Anthropic Claude) to assist with literature search query formulation, editorial drafting and prose refinement, and code scaffolding for data aggregation and statistical visualization scripts. All simulation protocols, experimental designs, empirical data collections, and statistical analyses were conceptualized, executed, and independently verified by the authors. The authors take full and sole scientific responsibility for the integrity, factual accuracy, and original contributions presented in this work.
+\FloatBarrier
