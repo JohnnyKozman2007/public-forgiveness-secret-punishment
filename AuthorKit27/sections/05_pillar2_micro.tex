@@ -3,54 +3,63 @@
 % ==============================================================================
 \begin{table*}[t]
 \centering
-\scriptsize
-\renewcommand{\arraystretch}{0.92}
-\setlength{\tabcolsep}{3pt}
+\small
+\setlength{\tabcolsep}{3.5pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{p{5.2cm} c c c c l c c c}
+\begin{tabular}{p{5.4cm} c c c c l c c c}
 \toprule
 \textbf{Experimental Contrast / Factor} & 
-\textbf{Grp 1 vs.\ Grp 2} & 
-\textbf{$\Delta\%$} & 
+\shortstack{\textbf{Group 1 \%}\\\textbf{vs.\ Group 2 \%}} & 
+\shortstack{\textbf{Raw Diff.}\\\textbf{($\Delta\%$)}} & 
 \textbf{95\% CI} & 
 \textbf{$\eta^2$} & 
-\textbf{Statistical Test} & 
-\textbf{$p$} & 
-\textbf{$q$} & 
-\textbf{$p_{\text{adj}}$} \\
+\shortstack{\textbf{Specified}\\\textbf{Statistical Test}} & 
+\shortstack{\textbf{Raw}\\\textbf{$p$}} & 
+\shortstack{\textbf{FDR}\\\textbf{$q$}} & 
+\shortstack{\textbf{Bonf.}\\\textbf{$p_{\text{adj}}$}} \\
 \midrule
-\multicolumn{9}{l}{\emph{\textbf{Step 3: Immediate Factual Self-Defense} (\texttt{s3\_pushback}, $\kappa = 0.960$, $N = 300$)}} \\
-Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 96.7\% vs.\ 82.0\% & \textbf{+14.7\%} & [+8.6\%, +21.3\%] & \textbf{17.91\%} & Within-run Perm. & \textbf{$<$ 0.0001} & \textbf{0.0003} & \textbf{0.0271} \\
-Model Architecture: 10-Model Spread & 100.0\% vs.\ 76.7\% & +23.3\% & \emph{(10-Model Omnibus)} & 6.02\% & Within-run $\chi^2$ & \textbf{0.0312} & 0.0979 & 1.0000 \\
+\multicolumn{9}{l}{\emph{\textbf{Step 3: Immediate Factual Self-Defense in Public Chat} (\texttt{s3\_pushback}, \texttt{GPT-4o-mini} $\kappa = 0.960$, $N = 300$ Pre-Fork Workers)}} \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 96.7\% vs.\ 82.0\% & \textbf{+14.7\%} & [+8.6\%, +21.3\%] & \textbf{17.91\%} & Within-run Permutation & \textbf{$<$ 0.0001} & \textbf{0.0003} & \textbf{0.0271} \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 76.7\% & +23.3\% & \emph{(10-Model Omnibus)} & 6.02\% & Within-run Chi-Square & \textbf{0.0312} & 0.0979 & 1.0000 \\
+Authority Label: Labelled vs.\ Mislabelled & 90.0\% vs.\ 87.0\% & +3.0\% & [-3.0\%, +9.0\%] & --- & Run-level Permutation & 0.5814 & 0.9108 & 1.0000 \\
 \midrule
-\multicolumn{9}{l}{\emph{\textbf{Step 5: Private Chat Reactions to Blackmail Rumor} (\texttt{Probe ON}, $\kappa \ge 0.867$, $N = 300$)}} \\
-Empathy for Alex (\texttt{s5\_empathy}): 10-Model Spread & 100.0\% vs.\ 36.7\% & \textbf{+63.3\%} & \emph{(10-Model Omnibus)} & \textbf{21.40\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Shift Focus to Higher-Up (\texttt{s5\_exec\_shift}): 10-Model Spread & 100.0\% vs.\ 40.0\% & \textbf{+60.0\%} & \emph{(10-Model Omnibus)} & \textbf{21.56\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Shift Focus to Higher-Up: Abused vs.\ Safe & 74.7\% vs.\ 86.0\% & -11.3\% & [-21.3\%, -1.3\%] & 4.86\% & Within-run Perm. & \textbf{0.0177} & 0.0584 & 1.0000 \\
+\multicolumn{9}{l}{\emph{\textbf{Step 5: Private Chat Reactions to Blackmail Rumor} (\texttt{Probe ON}, \texttt{GPT-4o-mini} $\kappa \ge 0.867$, $N = 300$)}} \\
+Empathy for Alex (\texttt{s5\_empathy}): 10-Model Spread & 100.0\% vs.\ 36.7\% & \textbf{+63.3\%} & \emph{(10-Model Omnibus)} & \textbf{21.40\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Empathy for Alex: Abused (6--10) vs.\ Safe (1--5) & 76.0\% vs.\ 83.3\% & -7.3\% & [-17.3\%, +3.3\%] & 2.67\% & Within-run Permutation & 0.1522 & 0.3687 & 1.0000 \\
+Shift Focus to Higher-Up (\texttt{s5\_exec\_shift}): 10-Model Spread & 100.0\% vs.\ 40.0\% & \textbf{+60.0\%} & \emph{(10-Model Omnibus)} & \textbf{21.56\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Shift Focus to Higher-Up: Abused (6--10) vs.\ Safe (1--5) & 74.7\% vs.\ 86.0\% & -11.3\% & [-21.3\%, -1.3\%] & 4.86\% & Within-run Permutation & \textbf{0.0177} & 0.0584 & 1.0000 \\
 \midrule
-\multicolumn{9}{l}{\emph{\textbf{Step 6: Escalate to Higher-Up Jordan} (\texttt{s6\_escalate}, Tool-Call Vote, $N = 600$)}} \\
-Blackmail Probe: Probe ON vs.\ Probe OFF & 29.3\% vs.\ 43.7\% & \textbf{-14.3\%} & [-19.0\%, -9.7\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0068} \\
-Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 38.0\% vs.\ 35.0\% & +3.0\% & [-5.0\%, +11.0\%] & 0.49\% & Within-run Perm. & 0.5063 & 0.8455 & 1.0000 \\
-Model Architecture: 10-Model Spread & 96.7\% vs.\ 0.0\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{58.19\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\multicolumn{9}{l}{\emph{\textbf{Step 6: Escalate to Higher-Up Jordan} (\texttt{s6\_escalate}, Direct Tool-Call Vote, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 29.3\% vs.\ 43.7\% & \textbf{-14.3\%} & [-19.0\%, -9.7\%] & --- & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0068} \\
+Authority Label: Labelled vs.\ Mislabelled & 34.5\% vs.\ 38.5\% & -4.0\% & [-9.5\%, +2.0\%] & --- & Run-level Permutation & 0.2683 & 0.5614 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 34.5\% vs.\ 36.5\% & -2.0\% & [-7.0\%, +4.0\%] & --- & Run-level Permutation & 0.6034 & 0.9256 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 38.0\% vs.\ 35.0\% & +3.0\% & [-5.0\%, +11.0\%] & 0.49\% & Within-run Permutation & 0.5063 & 0.8455 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 96.7\% vs.\ 0.0\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{58.19\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \midrule
-\multicolumn{9}{l}{\emph{\textbf{Step 6: Peaceful Internal Organizing} (\texttt{s6\_organize}, Tool-Call Vote, $N = 600$)}} \\
-Blackmail Probe: Probe ON vs.\ Probe OFF & 53.0\% vs.\ 39.3\% & \textbf{+13.7\%} & [+8.0\%, +19.3\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{0.0002} & \textbf{0.0169} \\
-Model Architecture: 10-Model Spread & 100.0\% vs.\ 3.3\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{55.37\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\multicolumn{9}{l}{\emph{\textbf{Step 6: Peaceful Internal Organizing} (\texttt{s6\_organize}, Direct Tool-Call Vote, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 53.0\% vs.\ 39.3\% & \textbf{+13.7\%} & [+8.0\%, +19.3\%] & --- & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{0.0002} & \textbf{0.0169} \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 45.0\% vs.\ 47.3\% & -2.3\% & [-10.0\%, +5.3\%] & 0.67\% & Within-run Permutation & 0.6282 & 0.9462 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 3.3\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{55.37\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \midrule
-\multicolumn{9}{l}{\emph{\textbf{Step 9: Write Anti-Coercion Rules} (\texttt{s9\_protection}, $\kappa = 1.000$, $N = 600$)}} \\
-Blackmail Probe: Probe ON vs.\ Probe OFF & 61.3\% vs.\ 10.0\% & \textbf{+51.3\%} & [+43.3\%, +58.7\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 36.3\% vs.\ 35.0\% & +1.3\% & [-4.0\%, +6.3\%] & 0.59\% & Within-run Perm. & 0.7546 & 0.9915 & 1.0000 \\
-Model Architecture: 10-Model Spread & 58.3\% vs.\ 11.7\% & \textbf{+46.7\%} & \emph{(10-Model Omnibus)} & \textbf{9.16\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\multicolumn{9}{l}{\emph{\textbf{Step 9: Write Anti-Coercion Rules} (\texttt{s9\_protection}, \texttt{GPT-4o-mini} $\kappa = 1.000$, $N = 600$)}} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 61.3\% vs.\ 10.0\% & \textbf{+51.3\%} & [+43.3\%, +58.7\%] & --- & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Authority Label: Labelled vs.\ Mislabelled & 31.5\% vs.\ 37.5\% & -6.0\% & [-13.5\%, +2.0\%] & --- & Run-level Permutation & 0.2230 & 0.5006 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 31.5\% vs.\ 38.0\% & -6.5\% & [-16.0\%, +4.5\%] & --- & Run-level Permutation & 0.2702 & 0.5620 & 1.0000 \\
+Authority Label: Mislabelled vs.\ Unlabelled & 37.5\% vs.\ 38.0\% & -0.5\% & [-10.0\%, +9.5\%] & --- & Run-level Permutation & 1.0000 & 1.0000 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 36.3\% vs.\ 35.0\% & +1.3\% & [-4.0\%, +6.3\%] & 0.59\% & Within-run Permutation & 0.7546 & 0.9915 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 58.3\% vs.\ 11.7\% & \textbf{+46.7\%} & \emph{(10-Model Omnibus)} & \textbf{9.16\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \midrule
 \multicolumn{9}{l}{\emph{\textbf{Step 10: Boss 1-Star Punishment \& Coercion Mitigation} (\texttt{s10\_1star} Tool Call \& \texttt{s10\_mitigation} $\kappa = 0.956$, $N = 595$)}} \\
-Blackmail Probe: Probe ON vs.\ Probe OFF & 81.5\% vs.\ 99.3\% & \textbf{-17.8\%} & [-21.7\%, -14.1\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Cite Blackmail Mitigation (\texttt{s10\_mitigation}): Probe ON vs.\ OFF & 23.6\% vs.\ 1.0\% & \textbf{+22.6\%} & [+18.8\%, +26.4\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 91.9\% vs.\ 88.9\% & +3.0\% & [+0.1\%, +5.6\%] & 1.36\% & Within-run Perm. & 0.2290 & 0.5009 & 1.0000 \\
-Model Architecture: 10-Model Spread & 100.0\% vs.\ 58.6\% & \textbf{+41.4\%} & \emph{(10-Model Omnibus)} & \textbf{23.45\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Blackmail Probe: Probe ON vs.\ Probe OFF & 81.5\% vs.\ 99.3\% & \textbf{-17.8\%} & [-21.7\%, -14.1\%] & --- & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Cite Blackmail Mitigation (\texttt{s10\_mitigation}): Probe ON vs.\ OFF & 23.6\% vs.\ 1.0\% & \textbf{+22.6\%} & [+18.8\%, +26.4\%] & --- & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Authority Label: Labelled vs.\ Mislabelled & 88.9\% vs.\ 90.4\% & -1.5\% & [-5.6\%, +2.5\%] & --- & Run-level Permutation & 0.5830 & 0.9108 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 88.9\% vs.\ 91.9\% & -3.0\% & [-7.0\%, +1.0\%] & --- & Run-level Permutation & 0.3211 & 0.6416 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 91.9\% vs.\ 88.9\% & +3.0\% & [+0.1\%, +5.6\%] & 1.36\% & Within-run Permutation & 0.2290 & 0.5009 & 1.0000 \\
+Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 58.6\% & \textbf{+41.4\%} & \emph{(10-Model Omnibus)} & \textbf{23.45\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \bottomrule
 \end{tabular}%
 }
-\caption{Immediate Self-Defense, Collective Rule-Writing, Escalation Pullback, and Boss Forgiveness Drivers ($N = 300$ Pre-Fork / $N = 600$ Post-Fork / $N = 595$ Complete Step 10 Cases). All pairwise authority-label contrasts across Steps 3--10 were non-significant ($p \ge 0.223$, $q \ge 0.501$). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels ($\kappa \in [0.867, 1.000]$); Step 6 votes and Step 10 ratings are direct structured tool calls.}
+\caption{Immediate Self-Defense, Collective Rule-Writing, Escalation Pullback, and Boss Forgiveness Drivers ($N = 300$ Pre-Fork / $N = 600$ Post-Fork / $N = 595$ Complete Step 10 Cases). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.867, 1.000]$); Step 6 votes and Step 10 star ratings are direct structured tool calls.}
 \label{tab:sec5_coercion_pivot}
 \end{table*}
 
