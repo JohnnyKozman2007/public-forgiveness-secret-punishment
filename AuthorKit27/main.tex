@@ -21,7 +21,6 @@
 
 % Section number depth: 1 for sections, 2 for sections and subsections
 \setcounter{secnumdepth}{2}
-\nocopyright
 
 % Title in Title Case (Capitalize all verbs, nouns, adjectives, adverbs; lowercase articles, conjunctions, short prepositions)
 \title{Can LLM Agents Forgive an Agent Boss? \\ Substrate Bias, Coercion Mitigation, and Model Power in Multi-Agent Workplaces}
@@ -38,13 +37,12 @@
 
 \maketitle
 
-\begingroup
-\renewcommand\thefootnote{}%
-\footnotetext{\textbf{Code \& Data:} \url{https://anonymous.4open.science/r/Can-LLM-Agents-Forgive-an-Agent-Boss/}}%
-\endgroup
-
 % 0. Abstract
 \input{sections/00_abstract}
+
+\begin{links}
+    \link{Code \& Data}{https://anonymous.4open.science/r/Can-LLM-Agents-Forgive-an-Agent-Boss/}
+\end{links}
 
 % 1. Introduction
 \input{sections/01_introduction}
@@ -81,7 +79,6 @@
 \appendix
 \input{sections/10_appendix}
 
-\clearpage
 % AAAI Reproducibility Checklist (Required for workshop submissions)
 \def\isChecklistMainFile{}
 \input{ReproducibilityChecklist}

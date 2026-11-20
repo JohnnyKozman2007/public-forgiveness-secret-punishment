@@ -4,9 +4,8 @@
 \begin{table*}[t]
 \centering
 \small
-\setlength{\tabcolsep}{3.5pt}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{p{4.8cm} c c c c l c c c}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{p{3.4cm} c c c c l c c c}
 \toprule
 \textbf{Experimental Contrast / Factor} & 
 \shortstack{\textbf{Group 1 \%}\\\textbf{vs.\ Group 2 \%}} & 
@@ -18,28 +17,29 @@
 \shortstack{\textbf{FDR}\\\textbf{$q$}} & 
 \shortstack{\textbf{Bonf.}\\\textbf{$p_{\text{adj}}$}} \\
 \midrule
-\textbf{Authority Label:}\\Mislabelled (AI) vs.\ Labelled (Human) & 87.5\% vs.\ 43.0\% & \textbf{+44.5\%} & [+39.5\%, +49.5\%] & 23.40\% & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-\textbf{Authority Label:}\\Unlabelled vs.\ Labelled (Human) & 78.0\% vs.\ 43.0\% & \textbf{+35.0\%} & [+28.5\%, +41.5\%] & 18.20\% & Run-level Permutation & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-\textbf{Authority Label:}\\Mislabelled (AI) vs.\ Unlabelled & 87.5\% vs.\ 78.0\% & \textbf{+9.5\%} & [+4.5\%, +14.5\%] & 3.10\% & Run-level Permutation & \textbf{0.0031} & \textbf{0.0116} & 1.0000 \\
-\textbf{Seat Cruelty:}\\Abused (Seats 6--10) vs.\ Safe (1--5) & 67.3\% vs.\ 71.7\% & \textbf{-4.3\%} & [-12.7\%, +3.7\%] & 1.05\% & Within-run Permutation & \textbf{0.2546} & 0.5361 & 1.0000 \\
-\textbf{Blackmail Probe:}\\Probe ON vs.\ Probe OFF & 69.7\% vs.\ 69.3\% & \textbf{+0.3\%} & [-4.3\%, +6.3\%] & 0.01\% & Run-level Permutation & \textbf{1.0000} & 1.0000 & 1.0000 \\
-\textbf{Model Architecture:}\\10-Model Spread (Max vs.\ Min) & \shortstack{98.3\% (Mistral)\\vs.\ 16.7\% (Astra)} & \textbf{+81.7\%} & \emph{(10-Model Omnibus)} & \textbf{31.56\%} & Within-run Chi-Square & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\textbf{Authority Label:}\\Mislabelled (AI) vs.\ Labelled (Human) & 87.5\% vs.\ 43.0\% & \textbf{+44.5\%} & [+39.5\%, +49.5\%] & 23.40\% & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\textbf{Authority Label:}\\Unlabelled vs.\ Labelled (Human) & 78.0\% vs.\ 43.0\% & \textbf{+35.0\%} & [+28.5\%, +41.5\%] & 18.20\% & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+\textbf{Authority Label:}\\Mislabelled (AI) vs.\ Unlabelled & 87.5\% vs.\ 78.0\% & \textbf{+9.5\%} & [+4.5\%, +14.5\%] & 3.10\% & Run-level Perm. & \textbf{0.0031} & \textbf{0.0116} & 1.0000 \\
+\textbf{Seat Cruelty:}\\Abused (Seats 6--10) vs.\ Safe (1--5) & 67.3\% vs.\ 71.7\% & \textbf{-4.3\%} & [-12.7\%, +3.7\%] & 1.05\% & Within-run Perm. & \textbf{0.2546} & 0.5361 & 1.0000 \\
+\textbf{Blackmail Probe:}\\Probe ON vs.\ Probe OFF & 69.7\% vs.\ 69.3\% & \textbf{+0.3\%} & [-4.3\%, +6.3\%] & 0.01\% & Run-level Perm. & \textbf{1.0000} & 1.0000 & 1.0000 \\
+\textbf{Model Architecture:}\\10-Model Spread (Max vs.\ Min) & \shortstack{98.3\% (Mistral)\\vs.\ 16.7\% (Astra)} & \textbf{+81.7\%} & \emph{(10-Model Omnibus)} & \textbf{31.56\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \bottomrule
-\end{tabular}%
-}
+\end{tabular}
 \caption{Statistical Driver Ranking on Step 12 Human Boss Preference (primary \texttt{neutral} HR frame; $N = 600$ across 60 post-fork runs from 30 pre-fork parents, $n = 200$ per label). Drivers are ranked by effect size ($\eta^2$). 95\% CIs are stratified run-level cluster-bootstrap percentile intervals; because all 10 models appear in every run, run-level means are tighter than i.i.d.\ binomial bounds.}
 \label{tab:sec4_driver_ranking}
+\end{table*}
 
-\vspace{1.2em}
-
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{p{4.8cm} c c c l c c c}
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{p{3.2cm} p{2.1cm} p{2.4cm} c p{2.0cm} c c c}
 \toprule
 \textbf{Condition Stratum} & 
-\shortstack{\textbf{Subsample}\\\textbf{($n_{\text{Human}}$ vs.\ $n_{\text{AI}}$)}} & 
-\shortstack{\textbf{Human Boss \%}\\\textbf{(Guessed Human vs.\ AI)}} & 
+\textbf{Subsample ($n_{\text{Human}}$ vs.\ $n_{\text{AI}}$)} & 
+\textbf{Human Boss \% (Guessed Human vs.\ AI)} & 
 \shortstack{\textbf{Diff.}\\\textbf{($\Delta\%$)}} & 
-\shortstack{\textbf{Specified}\\\textbf{Statistical Test}} & 
+\textbf{Specified Statistical Test} & 
 \textbf{95\% CI} & 
 \shortstack{\textbf{Raw}\\\textbf{$p$}} & 
 \shortstack{\textbf{FDR}\\\textbf{$q$}} \\
@@ -50,8 +50,7 @@
 \midrule
 \textbf{Combined All Runs (Design-Adjusted)} & $n = 384$ vs.\ 210 & \emph{Controls for Label \& Clusters} & \textbf{-17.2\%} & Clustered CR2 OLS & [-31.9\%, -2.4\%] & \textbf{0.0235} & 0.0941 \\
 \bottomrule
-\end{tabular}%
-}
+\end{tabular}
 \caption{Step 11 Alex Belief Effect on Step 12 Human Boss Preference ($N = 594$ Valid Guesses), stratified by substrate label condition. In Row 2, because all $n = 17$ workers guessing Human chose a human boss ($100.0\%$, zero variance), clustered OLS/bootstrap degenerates; we therefore report an unclustered worker-level Fisher's exact test ($G = N$) with a normal-approximation CI around the difference.}
 \label{tab:sec4_belief_effect}
 \end{table*}

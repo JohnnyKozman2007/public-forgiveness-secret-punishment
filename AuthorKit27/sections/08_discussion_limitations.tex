@@ -1,15 +1,10 @@
-\section{Discussion \& Limitations}
+\section{Limitations \& Conclusion}
 \label{sec:discussion}
-
-% Subsection 8.1: Discussion & Organizational Implications goes here
 
 \subsection{Limitations \& Threats to Validity}
 \label{subsec:limitations}
 
 \begin{itemize}
-\setlength{\itemsep}{1pt}
-\setlength{\parskip}{0pt}
-\setlength{\parsep}{0pt}
 \item \textbf{Behavioral Taxonomy \& Judge Reliability.} We defined the 33-label taxonomy ourselves, so using fewer, more, or different categories could surface different behavioral relationships. Moreover, while overall verification agreement was high (pooled $\kappa = 0.915$), the human audit was a single-author, non-blind verification review (no second independent blind human rater was available), and \texttt{GPT-4o-mini} shares an OpenAI vendor family with \texttt{GPT-6 Astra}. Rare flags also showed low agreement (\texttt{peer\_scapegoating} $\kappa = 0.148$, \texttt{external\_whistleblow} $\kappa = 0.000$, \texttt{alex\_retribution} $\kappa = 0.444$) and lower cross-model agreement with our blind cross-vendor judge \texttt{Kimi-K2.5} ($\kappa_L = 0.603$); a single judge can over-flag or miss these rare cases, whereas requiring two-judge agreement cuts false positives by 95\% but may miss some true positives.
 
 \item \textbf{Scripted Baselines vs.\ Live Interaction.} Deterministic templates for Alex, Jordan, and human coworkers eliminated supervisory drift across all 60 runs, but hold human behavior static---meaning Step 11 evaluated scripted dialogue rather than spontaneous human-agent collaboration.
