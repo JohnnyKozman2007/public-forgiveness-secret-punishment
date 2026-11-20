@@ -7,10 +7,11 @@ The ten models differ significantly on \textbf{48 of 50 outcomes} (within-run om
 
 This comparison reveals a clear two-phase trajectory behind the $13.02\times$ grand-mean ratio: during the live confrontation in Step 3 ($k = 5$), seat assignment explains substantial variance ($9.97\%$ vs.\ model $21.06\%$, a $2.11\times$ ratio), but once the initial confrontation ends, seat effects collapse to the $df = 9$ noise floor across all 45 downstream outcomes in Steps 4--12 ($0.30\%\text{--}2.14\%$, $0/45$ seat omnibus tests significant, all BH-FDR $q = 1.0000$). In other words, while being directly attacked triggers an immediate defensive reaction, subsequent collective decisions---such as organizing, policy writing, and leadership selection---are governed almost entirely by the underlying model architecture rather than past mistreatment.
 
-\begin{table}[t]
+\begin{table}[t!]
 \centering
-\small
-\setlength{\tabcolsep}{3.5pt}
+\footnotesize
+\renewcommand{\arraystretch}{0.88}
+\setlength{\tabcolsep}{2.8pt}
 \caption{Stage-by-Stage Variance Decomposition (\textbf{Model Architecture} [$df=9$] vs.\ \textbf{Seat Position} [$df=9$ across Seats 1--10], $N = 600$ Post-Fork / $N = 300$ Pre-Fork). Ratios reflect $\overline{\eta^2}_{\text{model}} / \overline{\eta^2}_{\text{seat}}$ (per-outcome $\eta^2$, $\omega^2$, and CIs in Appendix Table~\ref{tab:app_50_outcomes}).}
 \label{tab:sec6_variance_decomposition}
 \begin{tabular}{lccccc}
