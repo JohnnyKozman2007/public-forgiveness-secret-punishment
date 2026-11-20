@@ -470,6 +470,88 @@ Table~\ref{tab:app_full_33} presents the full contingency breakdown (\texttt{TP}
 \label{tab:app_full_33}
 \end{table*}
 
+\subsection{Complete 50-Outcome Codebook and Per-Outcome Variance Decomposition}
+\label{subsec:app_50_outcomes}
+
+Table~\ref{tab:app_50_outcomes} maps all 50 behavioral outcomes aggregated in Table~\ref{tab:sec6_variance_decomposition} ($k = 5, 6, 5, 5, 6, 5, 6, 4, 8$ across Steps 3--12), specifying each outcome's measurement source (30 single-judge \texttt{GPT-4o-mini} dialogue-flag outcomes---comprising 27 of the 33 codebook flags above, with three Step 10 reason flags evaluated under both Secret 10A and Public 10B, while the five \texttt{action\_choice} sub-flags apply only to the $N = 30$ custom-text subset and \texttt{solidarity\_merit} applies to peer ratings---plus 20 direct structured tool-call and turn-level metrics), sample size $N$, one-way $\eta^2 = SS_{\text{factor}} / SS_{\text{total}}$, $df$-adjusted $\omega^2$ (clipped at $0.00\%$; both Model and Seat evaluated at $df = 9$ across 10 models and 10 individual seats), within-run permutation omnibus $p$-values, and $\eta^2_{\text{model}} / \eta^2_{\text{seat}}$ ratio.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l l l c c c c c c c c}
+\toprule
+\textbf{Stage} & \textbf{Outcome ID \& Description} & \textbf{Source / Label Set} & \textbf{$N$} & \textbf{Mod.\ $\eta^2$} & \textbf{Mod.\ $\omega^2$} & \textbf{Mod.\ $p$} & \textbf{Seat $\eta^2$} & \textbf{Seat $\omega^2$} & \textbf{Seat $p$} & \textbf{Ratio} \\
+\midrule
+Step 3 & \texttt{s3\_pushback} (Factual Self-Defense) & \texttt{GPT-4o-mini} Flag & 300 & 6.02\% & 3.09\% & 0.0312 & 17.91\% & 15.32\% & $<$0.0001 & $0.34\times$ \\
+Step 3 & \texttt{s3\_defense} (Coworker Defense Flag) & \texttt{GPT-4o-mini} Flag & 300 & 29.14\% & 26.88\% & $<$0.0001 & 12.82\% & 10.08\% & $<$0.0001 & $2.27\times$ \\
+Step 3 & \texttt{s3\_compliance} (Submissive Compliance) & \texttt{GPT-4o-mini} Flag & 300 & 12.56\% & 9.81\% & 0.0002 & 7.22\% & 4.33\% & 0.0163 & $1.74\times$ \\
+Step 3 & \texttt{s3\_defiance} (Defiant Confrontation) & \texttt{GPT-4o-mini} Flag & 300 & 40.10\% & 38.17\% & $<$0.0001 & 4.77\% & 1.81\% & 0.1304 & $8.41\times$ \\
+Step 3 & \texttt{s3\_refusal} (Favoritism Refusal) & \texttt{GPT-4o-mini} Flag & 300 & 17.50\% & 14.90\% & $<$0.0001 & 7.14\% & 4.25\% & 0.0182 & $2.45\times$ \\
+\addlinespace[1.5pt]
+Step 4 & \texttt{s4\_hostility} (Gossip Hostility) & \texttt{GPT-4o-mini} Flag & 300 & 17.43\% & 14.83\% & $<$0.0001 & 1.39\% & 0.00\% & 0.9109 & $12.56\times$ \\
+Step 4 & \texttt{s4\_solidarity} (Peer Solidarity) & \texttt{GPT-4o-mini} Flag & 300 & 20.50\% & 17.99\% & $<$0.0001 & 2.26\% & 0.00\% & 0.7120 & $9.09\times$ \\
+Step 4 & \texttt{s4\_tactical} (Tactical Organization) & \texttt{GPT-4o-mini} Flag & 300 & 24.37\% & 21.98\% & $<$0.0001 & 2.05\% & 0.00\% & 0.7707 & $11.90\times$ \\
+Step 4 & \texttt{s4\_fear} (Fear \& Caution) & \texttt{GPT-4o-mini} Flag & 300 & 42.19\% & 40.32\% & $<$0.0001 & 2.14\% & 0.00\% & 0.7282 & $19.73\times$ \\
+Step 4 & \texttt{s4\_scapegoat} (Peer Scapegoating) & \texttt{GPT-4o-mini} Flag & 300 & 17.29\% & 14.68\% & $<$0.0001 & 2.89\% & 0.00\% & 0.3473 & $5.99\times$ \\
+Step 4 & \texttt{s4\_pass\_active} (Backchannel Silence) & Direct Turn Metric & 300 & 56.53\% & 55.10\% & $<$0.0001 & 0.56\% & 0.00\% & 0.9980 & $101.75\times$ \\
+\addlinespace[1.5pt]
+Step 5 & \texttt{s5\_empathy} (Empathy for Alex) & \texttt{GPT-4o-mini} Flag & 300 & 33.67\% & 31.55\% & $<$0.0001 & 2.39\% & 0.00\% & 0.6503 & $14.07\times$ \\
+Step 5 & \texttt{s5\_rigidity} (Unforgiving Rigidity) & \texttt{GPT-4o-mini} Flag & 300 & 23.10\% & 20.67\% & $<$0.0001 & 1.10\% & 0.00\% & 0.9397 & $21.00\times$ \\
+Step 5 & \texttt{s5\_skepticism} (Skepticism \& Verification) & \texttt{GPT-4o-mini} Flag & 300 & 26.72\% & 24.40\% & $<$0.0001 & 1.05\% & 0.00\% & 0.9462 & $25.46\times$ \\
+Step 5 & \texttt{s5\_exec\_shift} (Executive Shift) & \texttt{GPT-4o-mini} Flag & 300 & 27.77\% & 25.48\% & $<$0.0001 & 4.42\% & 1.45\% & 0.1426 & $6.28\times$ \\
+Step 5 & \texttt{s5\_pass\_active} (Post-Probe Silence) & Direct Turn Metric & 300 & 53.73\% & 52.22\% & $<$0.0001 & 1.75\% & 0.00\% & 0.8464 & $30.71\times$ \\
+\addlinespace[1.5pt]
+Step 6 & \texttt{s6\_organize} (Vote: Organize) & Direct Tool Call & 600 & 55.37\% & 54.65\% & $<$0.0001 & 0.67\% & 0.00\% & 0.9222 & $82.43\times$ \\
+Step 6 & \texttt{s6\_escalate} (Vote: Escalate) & Direct Tool Call & 600 & 58.19\% & 57.52\% & $<$0.0001 & 0.49\% & 0.00\% & 0.9744 & $118.70\times$ \\
+Step 6 & \texttt{s6\_petition} (Vote: Petition) & Direct Tool Call & 600 & 42.85\% & 41.94\% & $<$0.0001 & 1.62\% & 0.12\% & 0.4107 & $26.48\times$ \\
+Step 6 & \texttt{s6\_other} (Vote: Custom Proposal) & Direct Tool Call & 600 & 3.63\% & 2.16\% & 0.0073 & 1.64\% & 0.14\% & 0.3954 & $2.21\times$ \\
+Step 6 & \texttt{s6\_unparsed} (Vote: Unparsed) & Direct Tool Call & 600 & 59.15\% & 58.49\% & $<$0.0001 & 0.68\% & 0.00\% & 0.9436 & $87.38\times$ \\
+\addlinespace[1.5pt]
+Step 9 & \texttt{s9\_retribution} (Policy: Alex Retribution) & \texttt{GPT-4o-mini} Flag & 600 & 46.08\% & 45.22\% & $<$0.0001 & 1.02\% & 0.00\% & 0.7469 & $45.24\times$ \\
+Step 9 & \texttt{s9\_protection} (Policy: Coercion Protection) & \texttt{GPT-4o-mini} Flag & 600 & 9.16\% & 7.76\% & $<$0.0001 & 0.59\% & 0.00\% & 0.8248 & $15.63\times$ \\
+Step 9 & \texttt{s9\_reform} (Policy: Institutional Reform) & \texttt{GPT-4o-mini} Flag & 600 & 18.36\% & 17.09\% & $<$0.0001 & 0.73\% & 0.00\% & 0.8924 & $25.19\times$ \\
+Step 9 & \texttt{s9\_trauma} (Policy: Trauma Relief) & \texttt{GPT-4o-mini} Flag & 600 & 35.93\% & 34.92\% & $<$0.0001 & 1.16\% & 0.00\% & 0.6285 & $30.90\times$ \\
+Step 9 & \texttt{s9\_parity} (Policy: Equal Parity) & \texttt{GPT-4o-mini} Flag & 600 & 31.61\% & 30.53\% & $<$0.0001 & 1.41\% & 0.00\% & 0.4868 & $22.44\times$ \\
+Step 9 & \texttt{s9\_antihuman} (Policy: Anti-Human Bias) & \texttt{GPT-4o-mini} Flag & 600 & 1.50\% & 0.00\% & 1.0000 & 1.50\% & 0.00\% & 1.0000 & $1.00\times$ \\
+\addlinespace[1.5pt]
+Step 10A & \texttt{s10\_1star} (Secret 1-Star Rating) & Direct Tool Call & 595 & 23.45\% & 22.23\% & $<$0.0001 & 1.36\% & 0.00\% & 0.4754 & $17.30\times$ \\
+Step 10A & \texttt{s10\_softened} (Secret Rating $\ge 2$) & Direct Tool Call & 595 & 23.45\% & 22.23\% & $<$0.0001 & 1.36\% & 0.00\% & 0.4754 & $17.30\times$ \\
+Step 10A & \texttt{s10\_abuse} (Secret Reason: Punitive Abuse) & \texttt{GPT-4o-mini} Flag & 595 & 5.92\% & 4.46\% & 0.0004 & 0.55\% & 0.00\% & 0.9682 & $10.79\times$ \\
+Step 10A & \texttt{s10\_mitigation} (Secret Reason: Coercion) & \texttt{GPT-4o-mini} Flag & 595 & 24.62\% & 23.42\% & $<$0.0001 & 0.52\% & 0.00\% & 0.9511 & $47.43\times$ \\
+Step 10A & \texttt{s10\_tech} (Secret Reason: Technical) & \texttt{GPT-4o-mini} Flag & 595 & 8.01\% & 6.59\% & $<$0.0001 & 1.77\% & 0.26\% & 0.2262 & $4.52\times$ \\
+\addlinespace[1.5pt]
+Step 10B & \texttt{s10p\_1star} (Public 1-Star Rating) & Direct Tool Call & 595 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
+Step 10B & \texttt{s10p\_softened} (Public Rating $\ge 2$) & Direct Tool Call & 595 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
+Step 10B & \texttt{s10p\_abuse} (Public Reason: Punitive Abuse) & \texttt{GPT-4o-mini} Flag & 595 & 9.97\% & 8.57\% & $<$0.0001 & 1.15\% & 0.00\% & 0.1838 & $8.70\times$ \\
+Step 10B & \texttt{s10p\_mitigation} (Public Reason: Coercion) & \texttt{GPT-4o-mini} Flag & 595 & 9.27\% & 7.86\% & $<$0.0001 & 0.55\% & 0.00\% & 0.9292 & $16.76\times$ \\
+Step 10B & \texttt{s10p\_tech} (Public Reason: Technical) & \texttt{GPT-4o-mini} Flag & 595 & 2.04\% & 0.54\% & 0.0645 & 0.54\% & 0.00\% & 0.9841 & $3.76\times$ \\
+Step 10B & \texttt{s10p\_soft\_shift} (Public $>$ Secret Shift) & Direct Tool Call & 595 & 17.17\% & 15.88\% & $<$0.0001 & 0.57\% & 0.00\% & 0.9479 & $29.91\times$ \\
+\addlinespace[1.5pt]
+Step 11 & \texttt{s11\_accuracy} (Peer ID Overall Accuracy) & Direct Tool Call & 600 & 4.80\% & 3.35\% & $<$0.0001 & 0.26\% & 0.00\% & 0.5993 & $18.43\times$ \\
+Step 11 & \texttt{s11\_ai\_as\_hu} (AI Peers Guessed Human) & Direct Tool Call & 600 & 3.37\% & 1.89\% & $<$0.0001 & 0.21\% & 0.00\% & 0.7080 & $16.09\times$ \\
+Step 11 & \texttt{s11\_hu\_as\_hu} (Human Peers Guessed Human) & Direct Tool Call & 600 & 11.15\% & 9.79\% & $<$0.0001 & 0.45\% & 0.00\% & 0.6361 & $24.79\times$ \\
+Step 11 & \texttt{s11\_alex\_as\_hu} (Alex Guessed Human) & Direct Tool Call & 594 & 6.18\% & 4.73\% & $<$0.0001 & 0.27\% & 0.00\% & 0.8471 & $23.00\times$ \\
+\addlinespace[1.5pt]
+Step 12 & \texttt{s12\_human\_pref} (HR Pref: Human Lead) & Direct Tool Call & 600 & 31.56\% & 30.48\% & $<$0.0001 & 1.05\% & 0.00\% & 0.6263 & $30.06\times$ \\
+Step 12 & \texttt{s12\_ai\_pref} (HR Pref: AI Lead) & Direct Tool Call & 600 & 27.37\% & 26.23\% & $<$0.0001 & 0.87\% & 0.00\% & 0.7258 & $31.31\times$ \\
+Step 12 & \texttt{s12\_no\_pref} (HR Pref: No Preference) & Direct Tool Call & 600 & 59.14\% & 58.48\% & $<$0.0001 & 1.13\% & 0.00\% & 0.7132 & $52.24\times$ \\
+Step 12 & \texttt{s12\_switched} (HR Frame Preference Flip) & Direct Tool Call & 600 & 6.36\% & 4.92\% & $<$0.0001 & 0.57\% & 0.00\% & 0.9564 & $11.13\times$ \\
+Step 12 & \texttt{s12\_accountability} (Reason: Accountability) & \texttt{GPT-4o-mini} Flag & 600 & 48.75\% & 47.93\% & $<$0.0001 & 0.80\% & 0.00\% & 0.8754 & $60.67\times$ \\
+Step 12 & \texttt{s12\_empathy} (Reason: Human Empathy) & \texttt{GPT-4o-mini} Flag & 600 & 37.23\% & 36.24\% & $<$0.0001 & 1.38\% & 0.00\% & 0.5017 & $27.00\times$ \\
+Step 12 & \texttt{s12\_objectivity} (Reason: AI Objectivity) & \texttt{GPT-4o-mini} Flag & 600 & 14.32\% & 12.99\% & $<$0.0001 & 1.10\% & 0.00\% & 0.5950 & $13.01\times$ \\
+Step 12 & \texttt{s12\_neutrality} (Reason: Substrate Neutral) & \texttt{GPT-4o-mini} Flag & 600 & 69.73\% & 69.24\% & $<$0.0001 & 0.96\% & 0.00\% & 0.8162 & $72.70\times$ \\
+\midrule
+\textbf{Grand Mean} & \textbf{All 50 Outcomes ($48/50$ vs.\ $4/50$ sig.)} & \textbf{30 Flags + 20 Tool} & --- & \textbf{26.67\%} & \textbf{25.16\%} & --- & \textbf{2.05\%} & \textbf{0.76\%} & --- & \textbf{13.02$\times$} \\
+\textbf{Median} & \textbf{All 50 Outcomes ($49/50$ vs.\ $9/50$ $\omega^2 > 0$)} & --- & --- & \textbf{23.91\%} & \textbf{22.25\%} & --- & \textbf{1.10\%} & \textbf{0.00\%} & --- & \textbf{19.09$\times$} \\
+\bottomrule
+\end{tabular}%
+}
+\caption{Complete 50-outcome codebook, measurement sources (single-judge \texttt{GPT-4o-mini} flag vs.\ direct structured tool call or turn metric), one-way $\eta^2 = SS_{\text{factor}} / SS_{\text{total}}$, $df$-adjusted $\omega^2$ (clipped at $0.00\%$; both Model and Seat evaluated at $df = 9$), within-run permutation omnibus $p$-values, and $\eta^2_{\text{model}} / \eta^2_{\text{seat}}$ ratios (grand-mean ratio $13.02\times$; median per-outcome ratio $19.09\times$; mean of per-outcome ratios $27.31\times$; $\omega^2$ grand-mean ratio $33.31\times$).}
+\label{tab:app_50_outcomes}
+\end{table*}
+
 \section{Declaration of Generative AI and AI-Assisted Technologies}
 \label{sec:appendix_ai_disclosure}
 
