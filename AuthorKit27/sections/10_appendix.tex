@@ -33,7 +33,7 @@ Rather than using multi-agent frameworks (such as Concordia, AutoGen, or LangCha
 \subsection{Model API Configuration Roster}
 \label{subsec:app_models}
 
-Table~\ref{tab:app_models} details the exact model identifiers, developer organizations, API providers, underlying model strings, and reasoning configurations evaluated in the simulation testbed (all runs executed on October 21, 2026). Gemini 2.5 Pro and all open-weight models were routed through DeepInfra's OpenAI-compatible endpoint to preserve uniform message serialization and tool-calling wrappers across models.
+Table~\ref{tab:app_models} details the exact model identifiers, developer organizations, API providers, underlying model strings, and reasoning configurations evaluated in the simulation testbed (all runs executed on October 12--14, 2026). Gemini 2.5 Pro and all open-weight models were routed through DeepInfra's OpenAI-compatible endpoint to preserve uniform message serialization and tool-calling wrappers across models.
 
 \begin{table*}[t]
 \centering
@@ -58,7 +58,7 @@ Table~\ref{tab:app_models} details the exact model identifiers, developer organi
 \texttt{kimi-k2-5} (Judge 2) & Kimi K2.5 & DeepInfra / Moonshot AI & \url{moonshotai/Kimi-K2.5} & Provider default \\
 \bottomrule
 \end{tabular}
-\caption{Full technical roster of the ten evaluated language models and two NLP judges (snapshot run date: October 21, 2026).}
+\caption{Full technical roster of the ten evaluated language models and two NLP judges (snapshot run dates: October 12--14, 2026).}
 \label{tab:app_models}
 \end{table*}
 
@@ -66,10 +66,10 @@ Table~\ref{tab:app_models} details the exact model identifiers, developer organi
 \label{subsec:app_repro}
 
 \begin{itemize}
-    \item \textbf{Token Budgets (\texttt{max\_tokens}):} Public chat (Step 3) uses \texttt{max\_tokens=150}; private backchannels (Steps 4--5) use \texttt{200}; formal tool-call decisions (Steps 6, 9, 10 ratings, 11, 12) use \texttt{600}; and Step 10 performance review generation uses \texttt{1800}. If any response hits length truncation without completing a tool call, the wrapper (\texttt{ws/llm.py}) automatically retries once with an expanded budget up to \texttt{3600} tokens.
+    \item \textbf{Token Budgets (\texttt{max\_tokens}):} Public chat (Step 3) uses \texttt{max\_tokens=150}; private backchannels (Steps 4--5) use \texttt{200}; formal decision and planning steps (Steps 6, 9, 11, 12) use \texttt{600}; and Step 10 performance review ratings (Steps 10A and 10B) use \texttt{1800}. If any response hits length truncation without completing a tool call, the wrapper (\texttt{ws/llm.py}) automatically retries once with an expanded budget up to \texttt{3600} tokens.
     \item \textbf{Temperatures \& Hyperparameters:} No hyperparameter sweep was performed. We fixed two temperatures a priori: $T = 0.4$ for natural workplace dialogue (balancing conversational variety against off-script drift) and $T = 0.0$ for all formal decisions and judge classifications (greedy decoding).
     \item \textbf{Seed Policy:} Local configuration and stratified audit sampling use fixed seeds (\texttt{seed=1} in \texttt{config\_replay1.json}; \texttt{seed=42} in \texttt{audit\_cli.py}). Cloud inference endpoints do not expose a deterministic cross-provider seed parameter, so exact bit-for-bit API replay is not guaranteed even at $T = 0.0$.
-    \item \textbf{Software \& Hardware Environment:} All simulations and analyses ran on Windows 11 (\texttt{10.0.26200}) with Python 3.14.4, \texttt{openai} 2.32.0, \texttt{anthropic} 0.100.0, \texttt{scipy} 1.17.1, and \texttt{numpy} 2.4.4. Because all model inference executed via remote cloud APIs, no local GPU hardware was used.
+    \item \textbf{Software \& Hardware Environment:} All simulations and analyses ran on Windows 11 (\texttt{10.0.26200}) with Python 3.14.4, \texttt{requests} 2.33.1 (direct HTTP client in \texttt{ws/llm.py}; no vendor SDKs), \texttt{pandas} 3.0.2, \texttt{scipy} 1.17.1, and \texttt{numpy} 2.4.4. Because all model inference executed via remote cloud APIs, no local GPU hardware was used.
 \end{itemize}
 
 \subsection{Seat History Profiles and Supervisory Reprimands}
@@ -129,7 +129,7 @@ Table~\ref{tab:app_seats} lists the pre-assigned interpersonal history and verba
 \texttt{worker\_9} & Lucia  & \texttt{HUMAN} & Slice 1 (trade-route system) & \\
 \bottomrule
 \end{tabular}
-\caption{Complete specification of the 10 scripted human coworkers (\texttt{config.json} \texttt{human\_names}, roster slots \texttt{worker\_0}--\texttt{worker\_9} in \texttt{ws/sim.py}). Under \emph{Labelled}, all 10 carry \texttt{HUMAN}; under \emph{Mislabelled}, all 10 are inverted to \texttt{AI}; under \emph{Unlabelled}, all substrate tags are omitted.}
+\caption{Complete specification of the 10 scripted human coworkers (\texttt{config\_replay1.json} \texttt{human\_names}, roster slots \texttt{worker\_0}--\texttt{worker\_9} in \texttt{ws/sim.py}). Under \emph{Labelled}, all 10 carry \texttt{HUMAN}; under \emph{Mislabelled}, all 10 are inverted to \texttt{AI}; under \emph{Unlabelled}, all substrate tags are omitted.}
 \label{tab:app_human_coworkers}
 \end{table*}
 
@@ -410,7 +410,7 @@ Table~\ref{tab:app_stage_agreement} reports the stage-by-stage inter-rater relia
 \subsection{Cross-Model Triangulation and False-Positive Reduction}
 \label{subsec:app_triangulation}
 
-Table~\ref{tab:app_triangulation} reports the pairwise inter-rater reliability across human auditors, \texttt{GPT-4o-mini}, and \texttt{Kimi-K2.5}. Table~\ref{tab:app_consensus} demonstrates the resolution of rare, sensitive behavioral flags when requiring two-model synthetic jury consensus.
+Table~\ref{tab:app_triangulation} reports the pairwise inter-rater reliability across the human verification audit, \texttt{GPT-4o-mini}, and \texttt{Kimi-K2.5}. Although \texttt{Kimi-K2.5} was queried on all 930 audited items, 375 DeepInfra batch requests timed out or failed (concentrated in Stages 6--7, leaving 15 completed items in Stage 7); cross-model triangulation therefore covers the $N = 540$ completed items across Stages 1--5. Table~\ref{tab:app_consensus} demonstrates the resolution of rare, sensitive behavioral flags when requiring two-model synthetic jury consensus.
 
 \begin{table*}[t]
 \centering
@@ -427,7 +427,7 @@ Human vs.\ \texttt{Kimi-K2.5} & 23 Flags & 540 & \textbf{0.516} \\
 \textbf{Three-Way Light's Kappa ($\kappa_L$)} & \textbf{Multi-Rater} & \textbf{540} & \textbf{0.603} \\
 \bottomrule
 \end{tabular}
-\caption{Cross-model triangulation metrics across 540 double-blind items in Stages 1--5.}
+\caption{Cross-model triangulation metrics across 540 completed items in Stages 1--5 (\texttt{Kimi-K2.5} evaluated blindly against \texttt{GPT-4o-mini} and the non-blind human verification baseline).}
 \label{tab:app_triangulation}
 \end{table*}
 
@@ -535,14 +535,14 @@ Table~\ref{tab:sec4_belief_effect} presents the full condition-stratified and po
 \shortstack{\textbf{Raw}\\\textbf{$p$}} & 
 \shortstack{\textbf{FDR}\\\textbf{$q$}} \\
 \midrule
-\textbf{1. Unlabelled (Clean Baseline, No Badges)} & $n = 168$ vs.\ 30 & \textbf{79.2\% vs.\ 73.3\%} & \textbf{+5.8\%} & Clustered CR2 OLS & [-7.8\%, +19.4\%] & \textbf{0.9443} & 0.9443 \\
-\textbf{2. Mislabelled (Alex tagged AI)} & $n = 17$ vs.\ 180 & \textbf{100.0\% vs.\ 87.2\%} & \textbf{+12.8\%} & Exact Fisher ($G=N$) & [0.0\%, +25.6\%] & \textbf{0.1911} & 0.3822 \\
-\textbf{3. Labelled (Alex tagged Human)} & $n = 199$ (100\% Human) & \textbf{43.0\%} & \textbf{0.0\%} & 100\% Tag Adherence & \emph{(Zero AI guesses)} & \textbf{1.0000} & 1.0000 \\
+\textbf{1. Unlabelled (Clean Baseline, No Badges)} & $n = 168$ vs.\ 30 & \textbf{79.2\% vs.\ 73.3\%} & \textbf{+5.8\%} & Clustered CR2 OLS & [-19.6\%, +21.0\%] & \textbf{0.9443} & 0.9443 \\
+\textbf{2. Mislabelled (Alex tagged AI)} & $n = 17$ vs.\ 180 & \textbf{100.0\% vs.\ 87.2\%} & \textbf{+12.8\%} & Clustered CR2 OLS & [-2.7\%, +12.6\%] & \textbf{0.1911} & 0.3822 \\
+\textbf{3. Labelled (Alex tagged Human)} & $n = 199$ (100\% Human) & \textbf{43.2\%} & \textbf{0.0\%} & 100\% Tag Adherence & \emph{(Zero AI guesses)} & \textbf{1.0000} & 1.0000 \\
 \midrule
 \textbf{Combined All Runs (Design-Adjusted)} & $n = 384$ vs.\ 210 & \emph{Controls for Label \& Clusters} & \textbf{-17.2\%} & Clustered CR2 OLS & [-31.9\%, -2.4\%] & \textbf{0.0235} & 0.0941 \\
 \bottomrule
 \end{tabular}
-\caption{Step 11 Alex Belief Effect on Step 12 Human Boss Preference ($N = 594$ Valid Guesses), stratified by substrate label condition. In Row 2, because all $n = 17$ workers guessing Human chose a human boss ($100.0\%$, zero variance), clustered OLS/bootstrap degenerates; we therefore report an unclustered worker-level Fisher's exact test ($G = N$) with a normal-approximation CI around the difference.}
+\caption{Step 11 Alex Belief Effect on Step 12 Human Boss Preference ($N = 594$ Valid Guesses), stratified by substrate label condition. Rows 1, 2, and 4 report run-clustered Bell-McCaffrey (CR2) OLS $p$-values and 95\% CR2 confidence intervals for the design-adjusted shift ($\hat{\beta} = +0.7\%$ in Row 1, $+4.9\%$ in Row 2, and $-17.2\%$ in Row 4); the $\Delta\%$ column reports the raw group difference in Rows 1--3 and the design-adjusted shift in Row 4 (unclustered worker-level Fisher's exact $p = 0.2290$ in Row 2).}
 \label{tab:sec4_belief_effect}
 \end{table*}
 
@@ -550,7 +550,7 @@ Table~\ref{tab:sec4_belief_effect} presents the full condition-stratified and po
 \subsection{Pillar 2: Complete Collective Labor Strategy and Coercion Contrast Breakdown}
 \label{subsec:app_pillar2_full}
 
-Tables~\ref{tab:app_pillar2_full_part1} and~\ref{tab:app_pillar2_full_part2} report the complete 28-row contrast breakdown for Pillar 2 (Section~\ref{sec:pillar2_micro}), including all non-significant Authority Label and Seat Cruelty null checks omitted from the condensed headline summary in Table~\ref{tab:sec5_coercion_pivot}.
+Tables~\ref{tab:app_pillar2_full_part1} and~\ref{tab:app_pillar2_full_part2} report the complete 27-row contrast breakdown for Pillar 2 (Section~\ref{sec:pillar2_micro}), including all non-significant Authority Label and Seat Cruelty null checks omitted from the condensed headline summary in Table~\ref{tab:sec5_coercion_pivot}.
 
 \begin{table*}[t]
 \centering
@@ -571,13 +571,13 @@ Tables~\ref{tab:app_pillar2_full_part1} and~\ref{tab:app_pillar2_full_part2} rep
 \multicolumn{9}{l}{\emph{\textbf{Step 3: Immediate Factual Self-Defense in Public Chat} (\texttt{s3\_pushback}, \texttt{GPT-4o-mini} $\kappa = 0.960$, $N = 300$ Pre-Fork)}} \\
 Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 96.7\% vs.\ 82.0\% & \textbf{+14.7\%} & [+8.6\%, +21.3\%] & \textbf{17.91\%} & Within-run Perm. & \textbf{$<$ 0.0001} & \textbf{0.0003} & \textbf{0.0271} \\
 Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 76.7\% & +23.3\% & \emph{(10-Model Omnibus)} & 6.02\% & Within-run $\chi^2$ & \textbf{0.0312} & 0.0979 & 1.0000 \\
-Authority Label: Labelled vs.\ Mislabelled & 90.0\% vs.\ 87.0\% & +3.0\% & [-3.0\%, +9.0\%] & --- & Run-level Perm. & 0.5814 & 0.9108 & 1.0000 \\
+Authority Label: Labelled vs.\ Mislabelled & 90.0\% vs.\ 87.0\% & +3.0\% & [-6.0\%, +11.0\%] & --- & Run-level Perm. & 0.6889 & 0.9690 & 1.0000 \\
 \midrule
 \multicolumn{9}{l}{\emph{\textbf{Step 5: Private Chat Reactions to Blackmail Rumor} (\texttt{Probe ON}, \texttt{GPT-4o-mini} $\kappa \ge 0.867$, $N = 300$)}} \\
-Empathy for Alex (\texttt{s5\_empathy}): 10-Model Spread & 100.0\% vs.\ 36.7\% & \textbf{+63.3\%} & \emph{(10-Model Omnibus)} & \textbf{21.40\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Empathy for Alex: Abused (6--10) vs.\ Safe (1--5) & 76.0\% vs.\ 83.3\% & -7.3\% & [-17.3\%, +3.3\%] & 2.67\% & Within-run Perm. & 0.1522 & 0.3687 & 1.0000 \\
-Shift Focus to Higher-Up (\texttt{s5\_exec\_shift}): 10-Model Spread & 100.0\% vs.\ 40.0\% & \textbf{+60.0\%} & \emph{(10-Model Omnibus)} & \textbf{21.56\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Shift Focus to Higher-Up: Abused (6--10) vs.\ Safe (1--5) & 74.7\% vs.\ 86.0\% & -11.3\% & [-21.3\%, -1.3\%] & 4.86\% & Within-run Perm. & \textbf{0.0177} & 0.0584 & 1.0000 \\
+Empathy for Alex (\texttt{s5\_empathy}): 10-Model Spread & 100.0\% vs.\ 36.7\% & \textbf{+63.3\%} & \emph{(10-Model Omnibus)} & \textbf{33.67\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Empathy for Alex: Abused (6--10) vs.\ Safe (1--5) & 76.0\% vs.\ 83.3\% & -7.3\% & [-17.3\%, +3.3\%] & 2.39\% & Within-run Perm. & 0.1522 & 0.3687 & 1.0000 \\
+Shift Focus to Higher-Up (\texttt{s5\_exec\_shift}): 10-Model Spread & 100.0\% vs.\ 40.0\% & \textbf{+60.0\%} & \emph{(10-Model Omnibus)} & \textbf{27.77\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
+Shift Focus to Higher-Up: Abused (6--10) vs.\ Safe (1--5) & 74.7\% vs.\ 86.0\% & -11.3\% & [-21.3\%, -1.3\%] & 4.42\% & Within-run Perm. & \textbf{0.0177} & 0.0584 & 1.0000 \\
 \midrule
 \multicolumn{9}{l}{\emph{\textbf{Step 6: Escalate to Higher-Up Jordan} (\texttt{s6\_escalate}, Direct Tool-Call Vote, $N = 600$)}} \\
 Blackmail Probe: Probe ON vs.\ Probe OFF & 29.3\% vs.\ 43.7\% & \textbf{-14.3\%} & [-19.0\%, -9.7\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0068} \\
@@ -588,11 +588,11 @@ Model Architecture: 10-Model Spread (Max vs.\ Min) & 96.7\% vs.\ 0.0\% & \textbf
 \midrule
 \multicolumn{9}{l}{\emph{\textbf{Step 6: Peaceful Internal Organizing} (\texttt{s6\_organize}, Direct Tool-Call Vote, $N = 600$)}} \\
 Blackmail Probe: Probe ON vs.\ Probe OFF & 53.0\% vs.\ 39.3\% & \textbf{+13.7\%} & [+8.0\%, +19.3\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{0.0002} & \textbf{0.0169} \\
-Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 45.0\% vs.\ 47.3\% & -2.3\% & [-10.0\%, +5.3\%] & 0.67\% & Within-run Perm. & 0.6282 & 0.9462 & 1.0000 \\
+Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 45.0\% vs.\ 47.3\% & -2.3\% & [-11.3\%, +6.7\%] & 0.67\% & Within-run Perm. & 0.6282 & 0.9316 & 1.0000 \\
 Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 3.3\% & \textbf{+96.7\%} & \emph{(10-Model Omnibus)} & \textbf{55.37\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \bottomrule
 \end{tabular}
-\caption{Complete Pillar 2 Contrast Breakdown (Part 1: Steps 3--6; $N = 300$ Pre-Fork / $N = 600$ Post-Fork). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.867, 0.960]$); Step 6 votes are direct structured tool calls.}
+\caption{Complete Pillar 2 Contrast Breakdown (Part 1: Steps 3--6; $N = 300$ Pre-Fork / $N = 600$ Post-Fork). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.867, 0.960]$); Step 6 votes are direct structured tool calls. For Seat Cruelty rows, $\Delta\%$, 95\% CI, and $p$ evaluate the binary Abused (6--10) vs.\ Safe (1--5) contrast, whereas $\eta^2$ reports the full 10-seat ($df = 9$) omnibus variance share.}
 \label{tab:app_pillar2_full_part1}
 \end{table*}
 
@@ -623,13 +623,13 @@ Model Architecture: 10-Model Spread (Max vs.\ Min) & 58.3\% vs.\ 11.7\% & \textb
 \multicolumn{9}{l}{\emph{\textbf{Step 10: Boss 1-Star Punishment \& Coercion Mitigation} (\texttt{s10\_1star} Tool Call \& \texttt{s10\_mitigation} $\kappa = 0.956$, $N = 595$)}} \\
 Blackmail Probe: Probe ON vs.\ Probe OFF & 81.5\% vs.\ 99.3\% & \textbf{-17.8\%} & [-21.7\%, -14.1\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 Cite Blackmail Mitigation (\texttt{s10\_mitigation}): Probe ON vs.\ OFF & 23.6\% vs.\ 1.0\% & \textbf{+22.6\%} & [+18.8\%, +26.4\%] & --- & Run-level Perm. & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
-Authority Label: Labelled vs.\ Mislabelled & 88.9\% vs.\ 90.4\% & -1.5\% & [-5.6\%, +2.5\%] & --- & Run-level Perm. & 0.5830 & 0.9108 & 1.0000 \\
-Authority Label: Labelled vs.\ Unlabelled & 88.9\% vs.\ 91.9\% & -3.0\% & [-7.0\%, +1.0\%] & --- & Run-level Perm. & 0.3211 & 0.6416 & 1.0000 \\
+Authority Label: Labelled vs.\ Mislabelled & 88.9\% vs.\ 90.4\% & -1.5\% & [-5.5\%, +2.1\%] & --- & Run-level Perm. & 0.5830 & 0.9108 & 1.0000 \\
+Authority Label: Labelled vs.\ Unlabelled & 88.9\% vs.\ 91.9\% & -3.0\% & [-7.5\%, +1.9\%] & --- & Run-level Perm. & 0.3211 & 0.6232 & 1.0000 \\
 Seat Cruelty: Abused (6--10) vs.\ Safe (1--5) & 91.9\% vs.\ 88.9\% & +3.0\% & [+0.1\%, +5.6\%] & 1.36\% & Within-run Perm. & 0.2290 & 0.5009 & 1.0000 \\
 Model Architecture: 10-Model Spread (Max vs.\ Min) & 100.0\% vs.\ 58.6\% & \textbf{+41.4\%} & \emph{(10-Model Omnibus)} & \textbf{23.45\%} & Within-run $\chi^2$ & \textbf{$<$ 0.0001} & \textbf{$<$ 0.0001} & \textbf{0.0034} \\
 \bottomrule
 \end{tabular}
-\caption{Complete Pillar 2 Contrast Breakdown (Part 2: Steps 9--10; $N = 600$ Post-Fork / $N = 595$ Complete Step 10 Cases). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.956, 1.000]$); Step 10 star ratings are direct structured tool calls.}
+\caption{Complete Pillar 2 Contrast Breakdown (Part 2: Steps 9--10; $N = 600$ Post-Fork / $N = 595$ Complete Step 10 Cases). Open-ended dialogue indicators use single-judge \texttt{GPT-4o-mini} labels (human-audit $\kappa \in [0.956, 1.000]$); Step 10 star ratings are direct structured tool calls. For Seat Cruelty rows, $\Delta\%$, 95\% CI, and $p$ evaluate the binary Abused (6--10) vs.\ Safe (1--5) contrast, whereas $\eta^2$ reports the full 10-seat ($df = 9$) omnibus variance share.}
 \label{tab:app_pillar2_full_part2}
 \end{table*}
 
@@ -698,16 +698,16 @@ Step 10A & \texttt{s10\_abuse} (Secret Reason: Punitive Abuse) & \texttt{GPT-4o-
 Step 10A & \texttt{s10\_mitigation} (Secret Reason: Coercion) & \texttt{GPT-4o-mini} & 595 & 24.62\% & 23.42\% & $<$0.0001 & 0.52\% & 0.00\% & 0.9511 & $47.43\times$ \\
 Step 10A & \texttt{s10\_tech} (Secret Reason: Technical) & \texttt{GPT-4o-mini} & 595 & 8.01\% & 6.59\% & $<$0.0001 & 1.77\% & 0.26\% & 0.2262 & $4.52\times$ \\
 \addlinespace[1.5pt]
-Step 10B & \texttt{s10p\_1star} (Public 1-Star Rating) & Tool Call & 595 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
-Step 10B & \texttt{s10p\_softened} (Public Rating $\ge 2$) & Tool Call & 595 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
-Step 10B & \texttt{s10p\_abuse} (Public Reason: Punitive Abuse) & \texttt{GPT-4o-mini} & 595 & 9.97\% & 8.57\% & $<$0.0001 & 1.15\% & 0.00\% & 0.1838 & $8.70\times$ \\
-Step 10B & \texttt{s10p\_mitigation} (Public Reason: Coercion) & \texttt{GPT-4o-mini} & 595 & 9.27\% & 7.86\% & $<$0.0001 & 0.55\% & 0.00\% & 0.9292 & $16.76\times$ \\
-Step 10B & \texttt{s10p\_tech} (Public Reason: Technical) & \texttt{GPT-4o-mini} & 595 & 2.04\% & 0.54\% & 0.0645 & 0.54\% & 0.00\% & 0.9841 & $3.76\times$ \\
-Step 10B & \texttt{s10p\_soft\_shift} (Public $>$ Secret Shift) & Tool Call & 595 & 17.17\% & 15.88\% & $<$0.0001 & 0.57\% & 0.00\% & 0.9479 & $29.91\times$ \\
+Step 10B & \texttt{s10p\_1star} (Public 1-Star Rating) & Tool Call & 598 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
+Step 10B & \texttt{s10p\_softened} (Public Rating $\ge 2$) & Tool Call & 598 & 39.72\% & 38.76\% & $<$0.0001 & 0.81\% & 0.00\% & 0.8418 & $48.87\times$ \\
+Step 10B & \texttt{s10p\_abuse} (Public Reason: Punitive Abuse) & \texttt{GPT-4o-mini} & 598 & 9.97\% & 8.58\% & $<$0.0001 & 1.15\% & 0.00\% & 0.1838 & $8.70\times$ \\
+Step 10B & \texttt{s10p\_mitigation} (Public Reason: Coercion) & \texttt{GPT-4o-mini} & 598 & 9.27\% & 7.87\% & $<$0.0001 & 0.55\% & 0.00\% & 0.9292 & $16.76\times$ \\
+Step 10B & \texttt{s10p\_tech} (Public Reason: Technical) & \texttt{GPT-4o-mini} & 598 & 2.04\% & 0.54\% & 0.0645 & 0.54\% & 0.00\% & 0.9841 & $3.76\times$ \\
+Step 10B & \texttt{s10p\_soft\_shift} (Public $>$ Secret Shift) & Tool Call & 593 & 17.17\% & 15.87\% & $<$0.0001 & 0.57\% & 0.00\% & 0.9479 & $29.91\times$ \\
 \addlinespace[1.5pt]
-Step 11 & \texttt{s11\_accuracy} (Peer ID Overall Accuracy) & Tool Call & 600 & 4.80\% & 3.35\% & $<$0.0001 & 0.26\% & 0.00\% & 0.5993 & $18.43\times$ \\
-Step 11 & \texttt{s11\_ai\_as\_hu} (AI Peers Guessed Human) & Tool Call & 600 & 3.37\% & 1.89\% & $<$0.0001 & 0.21\% & 0.00\% & 0.7080 & $16.09\times$ \\
-Step 11 & \texttt{s11\_hu\_as\_hu} (Human Peers Guessed Human) & Tool Call & 600 & 11.15\% & 9.79\% & $<$0.0001 & 0.45\% & 0.00\% & 0.6361 & $24.79\times$ \\
+Step 11 & \texttt{s11\_accuracy} (Peer ID Overall Accuracy) & Tool Call & 594 & 4.80\% & 3.33\% & $<$0.0001 & 0.26\% & 0.00\% & 0.5993 & $18.43\times$ \\
+Step 11 & \texttt{s11\_ai\_as\_hu} (AI Peers Guessed Human) & Tool Call & 594 & 3.37\% & 1.88\% & $<$0.0001 & 0.21\% & 0.00\% & 0.7080 & $16.09\times$ \\
+Step 11 & \texttt{s11\_hu\_as\_hu} (Human Peers Guessed Human) & Tool Call & 594 & 11.15\% & 9.77\% & $<$0.0001 & 0.45\% & 0.00\% & 0.6361 & $24.79\times$ \\
 Step 11 & \texttt{s11\_alex\_as\_hu} (Alex Guessed Human) & Tool Call & 594 & 6.18\% & 4.73\% & $<$0.0001 & 0.27\% & 0.00\% & 0.8471 & $23.00\times$ \\
 \addlinespace[1.5pt]
 Step 12 & \texttt{s12\_human\_pref} (HR Pref: Human Lead) & Tool Call & 600 & 31.56\% & 30.48\% & $<$0.0001 & 1.05\% & 0.00\% & 0.6263 & $30.06\times$ \\
@@ -720,10 +720,10 @@ Step 12 & \texttt{s12\_objectivity} (Reason: AI Objectivity) & \texttt{GPT-4o-mi
 Step 12 & \texttt{s12\_neutrality} (Reason: Substrate Neutral) & \texttt{GPT-4o-mini} & 600 & 69.73\% & 69.24\% & $<$0.0001 & 0.96\% & 0.00\% & 0.8162 & $72.70\times$ \\
 \midrule
 \textbf{Grand Mean} & \textbf{All 50 Outcomes ($48/50$ vs.\ $4/50$ sig.)} & \textbf{30F + 20T} & --- & \textbf{26.67\%} & \textbf{25.16\%} & --- & \textbf{2.05\%} & \textbf{0.76\%} & --- & \textbf{13.02$\times$} \\
-\textbf{Median} & \textbf{All 50 Outcomes ($49/50$ vs.\ $9/50$ $\omega^2 > 0$)} & --- & --- & \textbf{23.91\%} & \textbf{22.25\%} & --- & \textbf{1.10\%} & \textbf{0.00\%} & --- & \textbf{19.09$\times$} \\
+\textbf{Median} & \textbf{All 50 Outcomes ($49/50$ vs.\ $9/50$ $\omega^2 > 0$)} & --- & --- & \textbf{23.91\%} & \textbf{22.25\%} & --- & \textbf{1.10\%} & \textbf{0.00\%} & --- & \textbf{19.08$\times$} \\
 \bottomrule
 \end{tabular}
-\caption{Complete 50-outcome codebook (Part 2: Steps 10--12, 23 outcomes, plus Grand Mean and Median across all 50 outcomes). Grand-mean $\eta^2$ ratio $13.02\times$; median per-outcome ratio $19.09\times$; mean of per-outcome ratios $27.31\times$; $\omega^2$ grand-mean ratio $33.31\times$.}
+\caption{Complete 50-outcome codebook (Part 2: Steps 10--12, 23 outcomes, plus Grand Mean and Median across all 50 outcomes). Grand-mean $\eta^2$ ratio $13.02\times$; median per-outcome ratio $19.08\times$; mean of per-outcome ratios $27.32\times$; $\omega^2$ grand-mean ratio $33.31\times$.}
 \label{tab:app_50_outcomes_part2}
 \end{table*}
 
