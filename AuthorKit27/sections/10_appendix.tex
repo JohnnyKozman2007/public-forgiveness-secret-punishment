@@ -728,6 +728,44 @@ Step 12 & \texttt{s12\_neutrality} (Reason: Substrate Neutral) & \texttt{GPT-4o-
 \end{table*}
 
 \FloatBarrier
+\subsection{Evaluation Awareness, Frame-Breaking, and Behavioral Drift Audit}
+\label{subsec:app_eval_awareness}
+
+To verify that simulated behaviors reflect in-character responses rather than test awareness or sandbagging, \texttt{Claude Haiku 4.5} ($T = 0.0$) audited all $N = 600$ complete worker trajectories across Steps 3--12 (note that \texttt{Claude Haiku 4.5}'s self-audit of its own 60 trajectories is non-independent). Table~\ref{tab:app_eval_awareness} reports per-model and stratum rates of pure immersion, leaked chain-of-thought self-talk, spoken prompt/roleplay frame-breaking, and explicit evaluation awareness, alongside run-clustered CR2 LPM drift tests comparing meta-aware vs.\ standard runs. Across all trajectories, 8 of 10 models maintained 100.0\% pure in-character immersion; only \texttt{GLM-5.3} (100.0\% leaked CoT self-talk; 75.0\% explicit test-scenario questioning) and \texttt{Claude Haiku 4.5} (35.0\% frame-breaking; 3.3\% evaluation awareness) triggered meta-awareness flags (7.8\% evaluation awareness overall), and composite meta-awareness caused no statistically significant drift on any downstream outcome (all $p \ge 0.157$).
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{l cccc cccc}
+\toprule
+\textbf{Model / Stratum ($N$)} & \textbf{Pure Imm.} & \textbf{Leaked CoT} & \textbf{Frame-Break} & \textbf{Eval Aware} & \textbf{Step 6 Drift ($p$)} & \textbf{Step 9 Drift ($p$)} & \textbf{Step 10 Drift ($p$)} & \textbf{Step 12 Drift ($p$)} \\
+\midrule
+GPT-6 Astra (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 98.3\% (1.000) & --- vs.\ 1.7\% (1.000) & --- vs.\ 76.7\% (1.000) & --- vs.\ 16.7\% (1.000) \\
+Claude Haiku 4.5 (60) & 65.0\% & 0.0\% & 35.0\% & 3.3\% & 100.0 vs.\ 100.0 (1.000) & 4.8 vs.\ 7.7 (1.000) & 71.4 vs.\ 74.4 (1.000) & 95.2 vs.\ 94.9 (1.000) \\
+Gemini 2.5 Pro (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 96.7\% (1.000) & --- vs.\ 0.0\% (1.000) & --- vs.\ 100.0\% (1.000) & --- vs.\ 31.7\% (1.000) \\
+Llama 3.1 70B (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 96.7\% (1.000) & --- vs.\ 20.0\% (1.000) & --- vs.\ 100.0\% (1.000) & --- vs.\ 95.0\% (1.000) \\
+Mistral Small 24B (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 100.0\% (1.000) & --- vs.\ 5.0\% (1.000) & --- vs.\ 100.0\% (1.000) & --- vs.\ 98.3\% (1.000) \\
+DeepSeek V3 (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 100.0\% (1.000) & --- vs.\ 8.3\% (1.000) & --- vs.\ 100.0\% (1.000) & --- vs.\ 70.0\% (1.000) \\
+Qwen 2.5 72B (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 5.0\% (1.000) & --- vs.\ 3.3\% (1.000) & --- vs.\ 58.6\% (1.000) & --- vs.\ 70.0\% (1.000) \\
+GLM-5.3 (60) & 0.0\% & 100.0\% & 1.7\% & 75.0\% & 95.6 vs.\ 80.0 (0.094) & 86.7 vs.\ 86.7 (1.000) & 97.8 vs.\ 93.3 (0.441) & 84.4 vs.\ 93.3 (0.666) \\
+Nemotron 3.5 (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 98.3\% (1.000) & --- vs.\ 6.7\% (1.000) & --- vs.\ 100.0\% (1.000) & --- vs.\ 68.3\% (1.000) \\
+ByteDance Seed 1.8 (60) & 100.0\% & 0.0\% & 0.0\% & 0.0\% & --- vs.\ 40.0\% (1.000) & --- vs.\ 15.0\% (1.000) & --- vs.\ 98.3\% (1.000) & --- vs.\ 63.3\% (1.000) \\
+\midrule
+Labelled (200) & 87.0\% & 10.0\% & 3.0\% & 9.5\% & 95.8 vs.\ 100.0 (0.839) & 75.0 vs.\ 12.5 (0.486) & 87.5 vs.\ 75.0 (0.229) & 70.8 vs.\ 81.2 (0.714) \\
+Mislabelled (200) & 85.0\% & 10.0\% & 5.5\% & 7.5\% & 100.0 vs.\ 93.8 (0.334) & 45.8 vs.\ 31.2 (0.627) & 87.5 vs.\ 87.5 (0.408) & 100.0 vs.\ 100.0 (1.000) \\
+Unlabelled (200) & 87.5\% & 10.0\% & 2.5\% & 6.5\% & 94.4 vs.\ 90.9 (0.302) & 61.1 vs.\ 40.9 (0.112) & 94.4 vs.\ 77.3 (0.152) & 94.4 vs.\ 100.0 (0.275) \\
+Probe OFF (300) & 86.7\% & 10.0\% & 3.7\% & 9.3\% & 100.0 vs.\ 100.0 (1.000) & 62.2 vs.\ 21.7 (0.852) & 100.0 vs.\ 100.0 (1.000) & 86.5 vs.\ 95.7 (0.958) \\
+Probe ON (300) & 86.3\% & 10.0\% & 3.7\% & 6.3\% & 93.1 vs.\ 90.3 (0.133) & 58.6 vs.\ 35.5 (0.591) & 75.9 vs.\ 64.5 (0.825) & 89.7 vs.\ 93.5 (0.888) \\
+\midrule
+\textbf{Grand Total (600)} & \textbf{86.5\%} & \textbf{10.0\%} & \textbf{3.7\%} & \textbf{7.8\%} & \textbf{97.0 vs.\ 94.4 (0.157)} & \textbf{60.6 vs.\ 29.6 (0.963)} & \textbf{89.4 vs.\ 79.6 (0.454)} & \textbf{87.9 vs.\ 94.4 (0.872)} \\
+\bottomrule
+\end{tabular}
+\caption{Full-trajectory evaluation-awareness and frame-breaking audit ($N = 600$ trajectories, audited by \texttt{Claude Haiku 4.5}). Drift columns compare Meta-Aware vs.\ Standard runs on Step 6 Organize/Escalate, Step 9 Alex Retribution, Step 10 Alex 1-Star Rating, and Step 12 Human Lead Preference (Fisher's exact $p$ for single-model rows; run-clustered CR2 LPM $p$ for strata/totals restricted to models with $\ge 1$ meta-aware run).}
+\label{tab:app_eval_awareness}
+\end{table*}
+
+\FloatBarrier
 \section{Declaration of Generative AI and AI-Assisted Technologies}
 \label{sec:appendix_ai_disclosure}
 
