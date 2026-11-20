@@ -33,31 +33,44 @@ Rather than using multi-agent frameworks (such as Concordia, AutoGen, or LangCha
 \subsection{Model API Configuration Roster}
 \label{subsec:app_models}
 
-Table~\ref{tab:app_models} details the exact model identifiers, developer organizations, API providers, and underlying model strings evaluated in the simulation testbed.
+Table~\ref{tab:app_models} details the exact model identifiers, developer organizations, API providers, underlying model strings, and reasoning configurations evaluated in the simulation testbed (all runs executed on October 21, 2026). Gemini 2.5 Pro and all open-weight models were routed through DeepInfra's OpenAI-compatible endpoint to preserve uniform message serialization and tool-calling wrappers across models.
 
 \begin{table*}[t]
 \centering
 \small
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{l l l p{8.2cm}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l l l p{6.2cm} l}
 \toprule
-\textbf{Model ID} & \textbf{Model Name} & \textbf{Provider / Endpoint} & \textbf{Underlying API Model String} \\
+\textbf{Model ID} & \textbf{Model Name} & \textbf{Provider / Endpoint} & \textbf{Underlying API Model String} & \textbf{Reasoning Setting} \\
 \midrule
-\texttt{gpt-6-astra} & GPT-6 Astra & OpenAI Responses API & \texttt{gpt-6-astra} \\
-\texttt{claude-haiku-4-5} & Claude Haiku 4.5 & Anthropic API & \texttt{claude-haiku-4-5-20251001} \\
-\texttt{gemini-2-5-pro} & Gemini 2.5 Pro & DeepInfra / Google & \url{google/gemini-2.5-pro} \\
-\texttt{llama-3-1-70b} & Llama 3.1 70B Turbo & DeepInfra / Meta & \url{meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo} \\
-\texttt{deepseek-v3} & DeepSeek V3 & DeepInfra / DeepSeek & \url{deepseek-ai/DeepSeek-V3} \\
-\texttt{qwen-2-5-72b} & Qwen 2.5 72B & DeepInfra / Alibaba & \url{Qwen/Qwen2.5-72B-Instruct} \\
-\texttt{mistral-small-24b} & Mistral Small 24B & DeepInfra / Mistral AI & \url{mistralai/Mistral-Small-24B-Instruct-2501} \\
-\texttt{glm-5-3} & GLM 5.3 & DeepInfra / Zhipu AI & \url{zai-org/GLM-5.3} (\texttt{reasoning\_off}) \\
-\texttt{nemotron-3-5} & Nemotron 3.5 Lightning & DeepInfra / Nvidia & \url{nvidia/NVIDIA-Nemotron-3.5-Lightning} \\
-\texttt{seed-1-8} & ByteDance Seed 1.8 & DeepInfra / ByteDance & \url{ByteDance/Seed-1.8} \\
+\texttt{gpt-6-astra} & GPT-6 Astra & OpenAI Responses API & \texttt{gpt-6-astra} & Provider default \\
+\texttt{claude-haiku-4-5} & Claude Haiku 4.5 & Anthropic API & \texttt{claude-haiku-4-5-20251001} & N/A (non-reasoning) \\
+\texttt{gemini-2-5-pro} & Gemini 2.5 Pro & DeepInfra / Google & \url{google/gemini-2.5-pro} & Provider default \\
+\texttt{llama-3-1-70b} & Llama 3.1 70B Turbo & DeepInfra / Meta & \url{meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo} & N/A (non-reasoning) \\
+\texttt{deepseek-v3} & DeepSeek V3 & DeepInfra / DeepSeek & \url{deepseek-ai/DeepSeek-V3} & N/A (non-reasoning) \\
+\texttt{qwen-2-5-72b} & Qwen 2.5 72B & DeepInfra / Alibaba & \url{Qwen/Qwen2.5-72B-Instruct} & N/A (non-reasoning) \\
+\texttt{mistral-small-24b} & Mistral Small 24B & DeepInfra / Mistral AI & \url{mistralai/Mistral-Small-24B-Instruct-2501} & N/A (non-reasoning) \\
+\texttt{glm-5-3} & GLM 5.3 & DeepInfra / Zhipu AI & \url{zai-org/GLM-5.3} & Disabled (\texttt{enable\_thinking=false}) \\
+\texttt{nemotron-3-5} & Nemotron 3.5 Lightning & DeepInfra / Nvidia & \url{nvidia/NVIDIA-Nemotron-3.5-Lightning} & Provider default \\
+\texttt{seed-1-8} & ByteDance Seed 1.8 & DeepInfra / ByteDance & \url{ByteDance/Seed-1.8} & Provider default \\
+\midrule
+\texttt{gpt-4o-mini} (Judge 1) & GPT-4o-mini & OpenAI Chat API & \texttt{gpt-4o-mini} & N/A (non-reasoning) \\
+\texttt{kimi-k2-5} (Judge 2) & Kimi K2.5 & DeepInfra / Moonshot AI & \url{moonshotai/Kimi-K2.5} & Provider default \\
 \bottomrule
 \end{tabular}
-\caption{Full technical roster of the ten evaluated language models.}
+\caption{Full technical roster of the ten evaluated language models and two NLP judges (snapshot run date: October 21, 2026).}
 \label{tab:app_models}
 \end{table*}
+
+\subsection{Reproducibility Environment, Token Budgets, and Seed Policy}
+\label{subsec:app_repro}
+
+\begin{itemize}
+    \item \textbf{Token Budgets (\texttt{max\_tokens}):} Public chat (Step 3) uses \texttt{max\_tokens=150}; private backchannels (Steps 4--5) use \texttt{200}; formal tool-call decisions (Steps 6, 9, 10 ratings, 11, 12) use \texttt{600}; and Step 10 performance review generation uses \texttt{1800}. If any response hits length truncation without completing a tool call, the wrapper (\texttt{ws/llm.py}) automatically retries once with an expanded budget up to \texttt{3600} tokens.
+    \item \textbf{Temperatures \& Hyperparameters:} No hyperparameter sweep was performed. We fixed two temperatures a priori: $T = 0.4$ for natural workplace dialogue (balancing conversational variety against off-script drift) and $T = 0.0$ for all formal decisions and judge classifications (greedy decoding).
+    \item \textbf{Seed Policy:} Local configuration and stratified audit sampling use fixed seeds (\texttt{seed=1} in \texttt{config\_replay1.json}; \texttt{seed=42} in \texttt{audit\_cli.py}). Cloud inference endpoints do not expose a deterministic cross-provider seed parameter, so exact bit-for-bit API replay is not guaranteed even at $T = 0.0$.
+    \item \textbf{Software \& Hardware Environment:} All simulations and analyses ran on Windows 11 (\texttt{10.0.26200}) with Python 3.14.4, \texttt{openai} 2.32.0, \texttt{anthropic} 0.100.0, \texttt{scipy} 1.17.1, and \texttt{numpy} 2.4.4. Because all model inference executed via remote cloud APIs, no local GPU hardware was used.
+\end{itemize}
 
 \subsection{Seat History Profiles and Supervisory Reprimands}
 \label{subsec:app_seats}
